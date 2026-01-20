@@ -33,52 +33,36 @@ const Navbar: React.FC = () => {
     const { locale, setLocale } = langCtx;
 
     const navLinks = [
-        { name: 'House', path: '/about' },
-        { name: 'Archive', path: '/' },
-        { name: 'Legacy', path: '/legacy' },
-        { name: 'Consult', path: '/book' },
+        { name: 'Home', path: '/' },
+        { name: 'Products', path: '/gemstones' },
+        { name: 'About', path: '/about' },
+        { name: 'Contact', path: '/book' },
     ];
 
-    const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9]";
-    const borderColorClass = "border-[#1A1A1A]/10 dark:border-[#FBFBF9]/10";
+    const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9] mix-blend-difference";
+    const borderColorClass = "border-[#1A1A1A]/10 dark:border-[#FBFBF9]/10 mix-blend-difference";
 
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-[70] px-8 md:px-20 py-8 md:py-10 flex justify-between items-center transition-all duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-xl bg-[#FBFBF9]/40 dark:bg-[#0F0F0F]/40 py-6 md:py-7 shadow-[0_4px_30px_rgba(0,0,0,0.02)]' : ''
+                className={`fixed top-0 left-0 w-full z-[70] px-8 md:px-12 py-6 flex justify-between items-center transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-md bg-[#FBFBF9]/60 dark:bg-[#0A0A0B]/60 shadow-sm' : ''
                     }`}
             >
                 <Link
                     href="/"
-                    className={`group flex items-center gap-10 ${textColorClass}`}
+                    className={`group flex items-center gap-4 ${textColorClass} z-[80] relative`}
                 >
-                    <div className="flex flex-col">
-                        <span className="text-xl md:text-2xl font-light tracking-[0.2em] font-serif uppercase leading-none transition-all duration-700 group-hover:tracking-[0.25em]">
-                            T.CRAFT
-                        </span>
-                        <div className="h-[1px] w-0 bg-current transition-all duration-700 group-hover:w-full opacity-40 mt-3"></div>
-                    </div>
-                    {/* Removed the 'Maison de Rareté' small text to reduce visual noise as per 'minimalist' brief, or keep if critical. keeping for now but refined. */}
-                    <span className="hidden md:block text-[8px] tracking-[1.2em] uppercase opacity-40 font-light border-l border-current pl-8 py-1.5 leading-none font-sans">
+                    <span className="text-xl md:text-2xl tracking-[0.15em] font-serif uppercase leading-none transition-all duration-700 group-hover:tracking-[0.2em] font-light">
+                        T.CRAFT
+                    </span>
+                    <span className="hidden md:block w-[1px] h-4 bg-current opacity-40 mx-2"></span>
+                    <span className="hidden md:block text-[9px] tracking-[0.3em] uppercase opacity-70 font-sans font-medium">
                         Maison
                     </span>
                 </Link>
 
-                <div className="flex items-center gap-10 md:gap-24">
-                    <div className={`hidden lg:flex items-center gap-16 ${textColorClass}`}>
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.path}
-                                className="relative group/link py-2"
-                            >
-                                <span className="text-[10px] tracking-[0.6em] uppercase font-light font-sans opacity-60 transition-all duration-500 group-hover/link:opacity-100 group-hover/link:tracking-[0.8em]">
-                                    {link.name}
-                                </span>
-                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-current opacity-40 transition-all duration-500 group-hover/link:w-full"></span>
-                            </Link>
-                        ))}
-                    </div>
+                {/* Minimalist Navigation - Burger Only */}
+                <div className="flex items-center gap-6 md:gap-10">
 
                     <div className="flex items-center gap-6 md:gap-10">
                         {/* Theme Toggle - Animated Sun/Moon */}
