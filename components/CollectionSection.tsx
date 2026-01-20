@@ -95,7 +95,7 @@ const CollectionSection: React.FC = () => {
                     {/* Section Introduction Card */}
                     <div className={`w-[85vw] md:w-[600px] flex-shrink-0 ${textColorClass}`}>
                         <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8 font-sans font-light">Selected Pieces</span>
-                        <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private Collection</h2>
+                        <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private <span className="italic">Collection</span></h2>
                         <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md font-sans">
                             A rotating selection of our most exceptional acquisitions. Available exclusively for private viewing.
                         </p>
@@ -117,7 +117,9 @@ const CollectionSection: React.FC = () => {
 
                             <div className="relative group/card overflow-hidden">
                                 <div className="h-px w-full bg-current opacity-0 group-hover:opacity-10 mb-8 transition-opacity duration-700" />
-                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-transform duration-700 group-hover:-translate-y-2 font-light">{item.name}</h3>
+                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-transform duration-700 group-hover:-translate-y-2 font-light">
+                                    {item.name.split(' ').slice(0, -1).join(' ')} <span className="italic">{item.name.split(' ').pop()}</span>
+                                </h3>
                                 {/* CRO FIX: Opacity 100 default, remove hidden CTA */}
                                 <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:tracking-[0.8em] ${item.subText} font-sans font-light`}>Inquire for price</p>
                             </div>

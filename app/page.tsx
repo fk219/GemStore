@@ -163,7 +163,7 @@ export default function Home() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/50 transition-all duration-1000" />
                             <div className="absolute bottom-12 left-12 text-white">
                                 <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium font-sans">Archive 01</p>
-                                <h3 className="text-4xl md:text-5xl serif italic drop-shadow-sm">The Azure Monolith</h3>
+                                <h3 className="text-4xl md:text-5xl serif drop-shadow-sm">The Azure <span className="italic">Monolith</span></h3>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ export default function Home() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-1000" />
                             <div className="absolute bottom-12 left-12 text-white">
                                 <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium font-sans">Process</p>
-                                <h3 className="text-3xl md:text-4xl serif italic drop-shadow-sm">Linear Mastery</h3>
+                                <h3 className="text-3xl md:text-4xl serif drop-shadow-sm">Linear <span className="italic">Mastery</span></h3>
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@ export default function Home() {
                                 <p className="text-[10px] tracking-[0.5em] uppercase opacity-90 font-medium font-sans">Focus</p>
                             </div>
                             <div className="absolute bottom-10 left-10 text-white">
-                                <h3 className="text-3xl md:text-4xl serif italic drop-shadow-sm">Inner Fire</h3>
+                                <h3 className="text-3xl md:text-4xl serif drop-shadow-sm">Inner <span className="italic">Fire</span></h3>
                             </div>
                         </div>
                     </div>
