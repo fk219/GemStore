@@ -55,13 +55,17 @@ export default function Home() {
     const secondaryBgClass = "bg-zinc-100 dark:bg-zinc-900";
     const borderColorClass = "border-zinc-200 dark:border-zinc-800";
 
+    // Alternating Backgrounds
+    const bgMain = "bg-[#FBFBF9] dark:bg-[#050505]"; // Light: White-ish | Dark: Black
+    const bgAlt = "bg-[#F2F2F0] dark:bg-[#121212]";   // Light: Warm Grey | Dark: Off-black
+
     return (
         <main className="w-full">
             <Navbar />
             <Hero />
 
-            {/* Chapter 1: The Soul of Rarity */}
-            <section className="relative min-h-screen py-48 px-6 md:px-24 flex flex-col items-center justify-center overflow-hidden">
+            {/* Chapter 1: The Soul of Rarity - BG MAIN */}
+            <section className={`relative min-h-screen py-48 px-6 md:px-24 flex flex-col items-center justify-center overflow-hidden ${bgMain}`}>
                 <div className="container mx-auto grid md:grid-cols-2 gap-24 items-center relative z-10">
                     <div className="reveal-image">
                         <div className="relative aspect-[3/4] rounded-[60px] md:rounded-[120px] overflow-hidden group">
@@ -91,14 +95,16 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Horizontal Scrolling Section: The Private Collection */}
-            <CollectionSection />
+            {/* Horizontal Scrolling Section: The Private Collection - BG ALT */}
+            <section className={bgAlt}>
+                <CollectionSection />
+            </section>
 
-            {/* Chapter 2: The Art of Refraction (The Lens) */}
-            <section className="min-h-screen py-32 bg-[#141414] text-[#FBFBF9] rounded-[80px] md:rounded-[160px] mx-4 my-24 overflow-hidden relative">
-                <div className="absolute inset-0 opacity-10">
+            {/* Chapter 2: The Art of Refraction (The Lens) - BG MAIN (Card Style) */}
+            <section className={`min-h-screen py-32 rounded-[80px] md:rounded-[160px] mx-4 my-24 overflow-hidden relative ${bgMain} ${textColorClass}`}>
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M0,50 Q25,0 50,50 T100,50" fill="none" stroke="white" strokeWidth="0.05" opacity="0.5" />
+                        <path d="M0,50 Q25,0 50,50 T100,50" fill="none" className="stroke-current" strokeWidth="0.05" opacity="0.5" />
                     </svg>
                 </div>
 
@@ -107,7 +113,8 @@ export default function Home() {
                         <span className="text-[10px] tracking-[0.8em] uppercase mb-16 opacity-30 reveal-text font-sans font-light">The Journey of Light</span>
 
                         <div className="relative mb-24 reveal-image">
-                            <div className="absolute -inset-10 bg-white/5 blur-[80px] rounded-full animate-pulse" />
+                            {/* Abstract Glow - Adaptive */}
+                            <div className="absolute -inset-10 bg-current blur-[80px] rounded-full animate-pulse opacity-10" />
                             <h2 className="text-6xl md:text-[10rem] font-light serif leading-none reveal-text">
                                 Refined
                             </h2>
@@ -136,8 +143,8 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Chapter 3: The Curated Gallery - Abstract Bento Grid */}
-            <section className="py-48 px-6 md:px-24">
+            {/* Chapter 3: The Curated Gallery - Abstract Bento Grid - BG ALT */}
+            <section className={`py-48 px-6 md:px-24 ${bgAlt}`}>
                 <div className={`flex flex-col md:flex-row justify-between items-baseline mb-32 border-b ${borderColorClass} pb-16 ${textColorClass}`}>
                     <div className="reveal-text">
                         <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 block mb-6 font-sans font-light">Contemporary Archive</span>
@@ -187,7 +194,7 @@ export default function Home() {
 
                     {/* Philosophical Statement (Bento Text Block) */}
                     <div className="md:col-span-4 md:row-span-1 reveal-text">
-                        <div className={`h-full w-full rounded-[40px] md:rounded-[60px] p-10 md:p-14 border ${borderColorClass} bg-zinc-50 dark:bg-zinc-900 flex flex-col justify-center ${textColorClass} shadow-sm`}>
+                        <div className={`h-full w-full rounded-[40px] md:rounded-[60px] p-10 md:p-14 border ${borderColorClass} bg-white dark:bg-zinc-950 flex flex-col justify-center ${textColorClass} shadow-sm`}>
                             <p className="text-xl md:text-2xl font-light italic leading-relaxed serif">
                                 &quot;Not designed to impress — designed to endure for the generations yet to come.&quot;
                             </p>
@@ -232,8 +239,8 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Chapter 4: The Epilogue */}
-            <section className="py-48 flex flex-col items-center justify-center text-center px-6">
+            {/* Chapter 4: The Epilogue - BG MAIN */}
+            <section className={`py-48 flex flex-col items-center justify-center text-center px-6 ${bgMain}`}>
                 <div className={`reveal-text ${textColorClass}`}>
                     <div className="w-px h-32 bg-zinc-200 dark:bg-zinc-800 mb-16 mx-auto" />
                     <p className="text-sm tracking-[0.6em] uppercase opacity-40 mb-12 font-sans font-light">A Legacy Unfolding</p>
