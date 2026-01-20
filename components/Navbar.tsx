@@ -53,87 +53,94 @@ const Navbar: React.FC = () => {
                     className={`group flex items-center gap-10 ${textColorClass}`}
                 >
                     <div className="flex flex-col">
-                        <span className="text-base md:text-lg font-light tracking-[0.7em] uppercase serif leading-none transition-all duration-700 group-hover:tracking-[0.8em]">
+                        <span className="text-xl md:text-2xl font-light tracking-[0.2em] font-serif uppercase leading-none transition-all duration-700 group-hover:tracking-[0.25em]">
                             T.CRAFT
                         </span>
-                        <div className="h-[1px] w-0 bg-current transition-all duration-700 group-hover:w-full opacity-25 mt-3"></div>
+                        <div className="h-[1px] w-0 bg-current transition-all duration-700 group-hover:w-full opacity-40 mt-3"></div>
                     </div>
-                    <span className="hidden md:block text-[7px] tracking-[1.4em] uppercase opacity-25 font-light border-l border-current pl-10 py-1.5 leading-none italic">
-                        Maison de Rareté
+                    {/* Removed the 'Maison de Rareté' small text to reduce visual noise as per 'minimalist' brief, or keep if critical. keeping for now but refined. */}
+                    <span className="hidden md:block text-[8px] tracking-[1.2em] uppercase opacity-40 font-light border-l border-current pl-8 py-1.5 leading-none font-sans">
+                        Maison
                     </span>
                 </Link>
 
                 <div className="flex items-center gap-10 md:gap-24">
-                    <div className={`hidden lg:flex items-center gap-16 ${textColorClass} text-[9px] tracking-[0.5em] uppercase font-medium`}>
+                    <div className={`hidden lg:flex items-center gap-16 ${textColorClass}`}>
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.path}
-                                className="opacity-40 hover:opacity-100 hover:tracking-[0.7em] transition-all duration-500 py-2"
+                                className="relative group/link py-2"
                             >
-                                {link.name}
+                                <span className="text-[10px] tracking-[0.6em] uppercase font-light font-sans opacity-60 transition-all duration-500 group-hover/link:opacity-100 group-hover/link:tracking-[0.8em]">
+                                    {link.name}
+                                </span>
+                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-current opacity-40 transition-all duration-500 group-hover/link:w-full"></span>
                             </Link>
                         ))}
                     </div>
 
                     <div className="flex items-center gap-6 md:gap-10">
+                        {/* Theme Toggle - Animated Sun/Moon */}
                         <button
                             onClick={toggleTheme}
-                            className={`relative w-12 h-12 flex items-center justify-center rounded-full border ${borderColorClass} ${textColorClass} group/theme overflow-hidden transition-all duration-700 hover:border-current hover:bg-current/[0.03]`}
+                            className={`relative w-12 h-12 flex items-center justify-center rounded-full border ${borderColorClass} ${textColorClass} group/theme overflow-hidden transition-all duration-700 hover:border-current/30 hover:bg-current/[0.03]`}
                             aria-label="Toggle Atmosphere"
                         >
+                            {/* Sun Icon: Animates down when switching to dark */}
                             <div
-                                className={`absolute inset-0 transition-transform duration-[1s] ease-[cubic-bezier(0.16,1,0.3,1)] ${theme === 'dark' ? 'translate-y-0' : '-translate-y-full'
+                                className={`absolute inset-0 flex items-center justify-center transition-transform duration-[0.8s] ease-[cubic-bezier(0.19,1,0.22,1)] ${theme === 'dark' ? 'translate-y-full opacity-0 scale-50' : 'translate-y-0 opacity-100 scale-100'
                                     }`}
                             >
-                                <div className="h-12 flex items-center justify-center">
-                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
-                                </div>
-                                <div className="h-12 flex items-center justify-center">
-                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
-                                    </svg>
-                                </div>
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+                                </svg>
+                            </div>
+                            {/* Moon Icon: Animates in from top when switching to dark */}
+                            <div
+                                className={`absolute inset-0 flex items-center justify-center transition-transform duration-[0.8s] ease-[cubic-bezier(0.19,1,0.22,1)] ${theme === 'light' ? '-translate-y-full opacity-0 scale-50' : 'translate-y-0 opacity-100 scale-100'
+                                    }`}
+                            >
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                </svg>
                             </div>
                         </button>
 
                         <button
-                            className={`group relative flex flex-col items-end justify-center gap-3 ${textColorClass} focus:outline-none h-12 w-12`}
+                            className={`group relative flex flex-col items-end justify-center gap-2.5 ${textColorClass} focus:outline-none h-12 w-12`}
                             onClick={() => setIsMenuOpen(true)}
                             aria-label="Reveal Narrative"
                         >
-                            <div className="flex flex-col items-end gap-2 overflow-hidden">
-                                <span className={`w-10 h-[1px] bg-current transition-all duration-700 group-hover:-translate-x-3`}></span>
-                                <span className={`w-5 h-[1px] bg-current transition-all duration-700 group-hover:w-10`}></span>
-                            </div>
-                            <div className="absolute inset-0 border border-current opacity-0 scale-50 rounded-full group-hover:opacity-10 group-hover:scale-100 transition-all duration-700"></div>
+                            <span className={`w-10 h-[1px] bg-current transition-all duration-700 ease-out group-hover:w-6 group-hover:translate-x-2`}></span>
+                            <span className={`w-5 h-[1px] bg-current transition-all duration-700 ease-out group-hover:w-10`}></span>
                         </button>
                     </div>
                 </div>
             </nav>
 
-            {/* Full Screen Menu */}
+            {/* Same Full Screen Menu with updated Typography and Close Button Fix */}
             <div
                 className={`fixed inset-0 z-[100] transition-all duration-[1.2s] ease-[cubic-bezier(0.85, 0, 0.15, 1)] ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-full pointer-events-none'
                     }`}
             >
+                {/* Background with Theme Context Color */}
                 <div className="absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A]"></div>
 
+                {/* Close Button Fix */}
                 <button
                     onClick={(e) => {
-                        e.stopPropagation();
+                        e.stopPropagation(); // Prevent event bubbling
                         setIsMenuOpen(false);
                     }}
-                    className={`absolute top-10 right-10 md:top-16 md:right-24 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer`}
+                    className={`absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer hover:opacity-100`}
                     aria-label="Close Menu"
                 >
                     <div className="relative w-12 h-12 flex items-center justify-center pointer-events-none">
                         <span className="absolute w-full h-[1px] bg-current rotate-45 transition-all duration-700 group-hover:rotate-[135deg]"></span>
                         <span className="absolute w-full h-[1px] bg-current -rotate-45 transition-all duration-700 group-hover:-rotate-[135deg]"></span>
                     </div>
-                    <span className="mt-5 text-[9px] tracking-[0.7em] uppercase opacity-20 font-medium transition-opacity group-hover:opacity-100 pointer-events-none">Fermer</span>
+                    <span className="mt-5 text-[8px] tracking-[0.5em] uppercase opacity-40 font-light font-sans transition-opacity group-hover:opacity-100 pointer-events-none">Fermer</span>
                 </button>
 
                 <div className={`h-full flex flex-col md:flex-row ${textColorClass} relative z-10`}>
@@ -146,7 +153,7 @@ const Navbar: React.FC = () => {
                                 className="object-cover grayscale transition-transform duration-[8s] group-hover:scale-110"
                             />
                         </div>
-                        <p className="mt-20 text-[10px] tracking-[0.9em] uppercase opacity-20 leading-relaxed italic font-light text-center">
+                        <p className="mt-20 text-[10px] tracking-[0.8em] uppercase opacity-40 leading-relaxed italic font-light text-center font-sans">
                             &quot;Rarity is a silent language spoken by time.&quot;
                         </p>
                     </div>
@@ -158,7 +165,7 @@ const Navbar: React.FC = () => {
                                     <Link
                                         href={link.path}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className={`block text-5xl md:text-[5.5rem] font-light serif italic leading-[0.9] transition-all duration-[1.4s] ease-[cubic-bezier(0.19,1,0.22,1)] hover:translate-x-16 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                                        className={`block text-6xl md:text-[6rem] font-light font-serif italic leading-[0.9] transition-all duration-[1.4s] ease-[cubic-bezier(0.19,1,0.22,1)] hover:translate-x-12 opacity-80 hover:opacity-100 ${isMenuOpen ? 'translate-y-0' : 'translate-y-full'
                                             }`}
                                         style={{ transitionDelay: `${0.4 + i * 0.15}s` }}
                                     >
