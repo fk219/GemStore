@@ -75,7 +75,7 @@ export default function Home() {
                         </div>
                         <div className={`mt-12 flex items-center gap-6 opacity-30 ${textColorClass}`}>
                             <div className="w-20 h-[1px] bg-current" />
-                            <span className="text-[10px] tracking-[0.4em] uppercase">I. The Core</span>
+                            <span className="text-[10px] tracking-[0.4em] uppercase font-sans font-light">I. The Core</span>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@ export default function Home() {
                             {t.aboutBrand}
                         </h2>
                         <div className={`w-24 h-[1px] bg-zinc-300 dark:bg-zinc-700 mb-12 story-line scale-x-100 origin-left`} />
-                        <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed italic reveal-text">
+                        <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed italic reveal-text serif">
                             {t.aboutSub}
                         </p>
                     </div>
@@ -104,7 +104,7 @@ export default function Home() {
 
                 <div className="container mx-auto px-6 relative z-10 py-24">
                     <div className="flex flex-col items-center text-center">
-                        <span className="text-[10px] tracking-[0.8em] uppercase mb-16 opacity-30 reveal-text">The Journey of Light</span>
+                        <span className="text-[10px] tracking-[0.8em] uppercase mb-16 opacity-30 reveal-text font-sans font-light">The Journey of Light</span>
 
                         <div className="relative mb-24 reveal-image">
                             <div className="absolute -inset-10 bg-white/5 blur-[80px] rounded-full animate-pulse" />
@@ -127,7 +127,7 @@ export default function Home() {
                                 { title: "Vision", desc: "Designed for the eternal." }
                             ].map((item, i) => (
                                 <div key={i} className="reveal-text">
-                                    <h3 className="text-xs tracking-[0.4em] uppercase opacity-40 mb-4">{item.title}</h3>
+                                    <h3 className="text-xs tracking-[0.4em] uppercase opacity-40 mb-4 font-sans font-light">{item.title}</h3>
                                     <p className="text-xl serif italic">{item.desc}</p>
                                 </div>
                             ))}
@@ -140,11 +140,11 @@ export default function Home() {
             <section className="py-48 px-6 md:px-24">
                 <div className={`flex flex-col md:flex-row justify-between items-baseline mb-32 border-b ${borderColorClass} pb-16 ${textColorClass}`}>
                     <div className="reveal-text">
-                        <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 block mb-6">Contemporary Archive</span>
+                        <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 block mb-6 font-sans font-light">Contemporary Archive</span>
                         <h2 className="text-5xl md:text-8xl font-light serif">{t.collectionsTitle}</h2>
                     </div>
                     <div className="max-w-xs mt-12 md:mt-0 reveal-text">
-                        <p className="text-sm tracking-[0.1em] leading-relaxed opacity-60 italic">{t.collectionsSub}</p>
+                        <p className="text-sm tracking-[0.1em] leading-relaxed opacity-60 italic font-sans">{t.collectionsSub}</p>
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@ export default function Home() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/50 transition-all duration-1000" />
                             <div className="absolute bottom-12 left-12 text-white">
-                                <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium">Archive 01</p>
+                                <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium font-sans">Archive 01</p>
                                 <h3 className="text-4xl md:text-5xl serif italic drop-shadow-sm">The Azure Monolith</h3>
                             </div>
                         </div>
@@ -179,7 +179,7 @@ export default function Home() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-1000" />
                             <div className="absolute bottom-12 left-12 text-white">
-                                <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium">Process</p>
+                                <p className="text-[10px] tracking-[0.5em] uppercase mb-4 opacity-90 font-medium font-sans">Process</p>
                                 <h3 className="text-3xl md:text-4xl serif italic drop-shadow-sm">Linear Mastery</h3>
                             </div>
                         </div>
@@ -207,7 +207,7 @@ export default function Home() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent group-hover:from-black/40 transition-all duration-1000" />
                             <div className="absolute top-10 left-10 text-white">
-                                <p className="text-[10px] tracking-[0.5em] uppercase opacity-90 font-medium">Focus</p>
+                                <p className="text-[10px] tracking-[0.5em] uppercase opacity-90 font-medium font-sans">Focus</p>
                             </div>
                             <div className="absolute bottom-10 left-10 text-white">
                                 <h3 className="text-3xl md:text-4xl serif italic drop-shadow-sm">Inner Fire</h3>
@@ -236,7 +236,7 @@ export default function Home() {
             <section className="py-48 flex flex-col items-center justify-center text-center px-6">
                 <div className={`reveal-text ${textColorClass}`}>
                     <div className="w-px h-32 bg-zinc-200 dark:bg-zinc-800 mb-16 mx-auto" />
-                    <p className="text-sm tracking-[0.6em] uppercase opacity-40 mb-12">A Legacy Unfolding</p>
+                    <p className="text-sm tracking-[0.6em] uppercase opacity-40 mb-12 font-sans font-light">A Legacy Unfolding</p>
                     <h2 className="text-4xl md:text-7xl font-light serif max-w-4xl mx-auto leading-tight italic">
                         &quot;True beauty is a quiet dialogue between nature and the eye.&quot;
                     </h2>

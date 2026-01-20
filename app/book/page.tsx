@@ -52,11 +52,11 @@ export default function BookingPage() {
             <section className="pb-40 px-6 md:px-24">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24 items-start">
                     <div className="w-full md:w-1/2 sticky top-40">
-                        <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8">Consultation</span>
+                        <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8 font-sans font-light">Consultation</span>
                         <h2 className="text-4xl md:text-7xl font-light serif mb-12 leading-tight">
                             Begin your journey.
                         </h2>
-                        <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed italic mb-12 max-w-md">
+                        <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed italic mb-12 max-w-md font-serif">
                             All meetings are handled with complete discretion and personal attention.
                         </p>
                         <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden grayscale opacity-80 mb-12 shadow-2xl">
@@ -74,7 +74,7 @@ export default function BookingPage() {
                             <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900/30 p-8 md:p-16 rounded-[60px] border border-zinc-100 dark:border-zinc-800 shadow-xl backdrop-blur-sm">
                                 <div className="space-y-12">
                                     <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Name / Identity</label>
+                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Name / Identity</label>
                                         <input
                                             type="text"
                                             placeholder="Your full name"
@@ -82,10 +82,10 @@ export default function BookingPage() {
                                             value={formData.name}
                                             onChange={e => setFormData({ ...formData, name: e.target.value })}
                                         />
-                                        {errors.name && <span className="text-red-500 text-xs mt-2">{errors.name}</span>}
+                                        {errors.name && <span className="text-red-500 text-xs mt-2 font-sans">{errors.name}</span>}
                                     </div>
                                     <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Electronic Address</label>
+                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Electronic Address</label>
                                         <input
                                             type="email"
                                             placeholder="email@example.com"
@@ -93,10 +93,10 @@ export default function BookingPage() {
                                             value={formData.email}
                                             onChange={e => setFormData({ ...formData, email: e.target.value })}
                                         />
-                                        {errors.email && <span className="text-red-500 text-xs mt-2">{errors.email}</span>}
+                                        {errors.email && <span className="text-red-500 text-xs mt-2 font-sans">{errors.email}</span>}
                                     </div>
                                     <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Intention</label>
+                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Intention</label>
                                         <select
                                             className="w-full bg-transparent outline-none text-xl md:text-2xl font-light serif italic appearance-none cursor-pointer"
                                             value={formData.service}
@@ -108,7 +108,7 @@ export default function BookingPage() {
                                         </select>
                                     </div>
                                     <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Personal Message</label>
+                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Personal Message</label>
                                         <textarea
                                             placeholder="Share your vision or specific requirements..."
                                             rows={4}
@@ -120,11 +120,11 @@ export default function BookingPage() {
 
                                     <button
                                         type="submit"
-                                        className="w-full py-7 rounded-full bg-[#1A1A1A] dark:bg-[#FBFBF9] text-[#FBFBF9] dark:text-[#1A1A1A] text-[10px] tracking-[0.5em] uppercase hover:scale-[1.02] transition-all duration-500 shadow-lg"
+                                        className="w-full py-7 rounded-full bg-[#1A1A1A] dark:bg-[#FBFBF9] text-[#FBFBF9] dark:text-[#1A1A1A] text-[10px] tracking-[0.5em] uppercase hover:scale-[1.02] transition-all duration-500 shadow-lg font-sans font-light"
                                     >
                                         Confirm Request
                                     </button>
-                                    <p className="text-[9px] text-center tracking-[0.2em] uppercase opacity-30 italic">All meetings are handled with complete discretion.</p>
+                                    <p className="text-[9px] text-center tracking-[0.2em] uppercase opacity-30 italic font-sans font-light">All meetings are handled with complete discretion.</p>
                                 </div>
                             </form>
                         ) : (
@@ -135,19 +135,19 @@ export default function BookingPage() {
                                     </svg>
                                 </div>
                                 <h2 className="text-4xl md:text-5xl font-light serif mb-8 italic">Your intention has been received.</h2>
-                                <p className="text-lg opacity-60 leading-relaxed max-w-sm mb-12">
+                                <p className="text-lg opacity-60 leading-relaxed max-w-sm mb-12 font-serif italic">
                                     A representative will reach out to you through secure channels within 24 hours.
                                 </p>
                                 <div className="flex gap-4">
                                     <button
                                         onClick={() => setStep(1)}
-                                        className="px-8 py-4 rounded-full border border-black dark:border-white text-[9px] tracking-[0.5em] uppercase hover:opacity-50 transition-all"
+                                        className="px-8 py-4 rounded-full border border-black dark:border-white text-[9px] tracking-[0.5em] uppercase hover:opacity-50 transition-all font-sans font-light"
                                     >
                                         New Request
                                     </button>
                                     <button
                                         onClick={handleReturnToCollection}
-                                        className="px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black text-[9px] tracking-[0.5em] uppercase hover:opacity-90 transition-all"
+                                        className="px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black text-[9px] tracking-[0.5em] uppercase hover:opacity-90 transition-all font-sans font-light"
                                     >
                                         Back to Collection
                                     </button>

@@ -94,9 +94,9 @@ const CollectionSection: React.FC = () => {
                 >
                     {/* Section Introduction Card */}
                     <div className={`w-[85vw] md:w-[600px] flex-shrink-0 ${textColorClass}`}>
-                        <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8">Selected Pieces</span>
+                        <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8 font-sans font-light">Selected Pieces</span>
                         <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private Collection</h2>
-                        <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md">
+                        <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md font-sans">
                             A rotating selection of our most exceptional acquisitions. Available exclusively for private viewing.
                         </p>
                         <div className="mt-20 w-32 h-[1px] bg-current opacity-20" />
@@ -109,24 +109,24 @@ const CollectionSection: React.FC = () => {
                             className={`flex-shrink-0 w-[80vw] md:w-[500px] aspect-square rounded-[40px] md:rounded-[60px] ${item.color} ${item.textColor} p-8 md:p-14 flex flex-col justify-between shadow-2xl transition-all duration-700 hover:scale-[1.03] group`}
                         >
                             <div className="flex justify-between items-start">
-                                <span className={`text-[10px] tracking-[0.4em] uppercase border ${item.badgeBorder} rounded-full px-5 py-2 backdrop-blur-sm transition-all duration-500 group-hover:px-8`}>
+                                <span className={`text-[10px] tracking-[0.4em] uppercase border ${item.badgeBorder} rounded-full px-5 py-2 backdrop-blur-sm transition-all duration-500 group-hover:px-8 font-sans font-light`}>
                                     {item.origin}
                                 </span>
-                                <span className="text-sm tracking-widest font-light opacity-80 italic transition-transform duration-500 group-hover:translate-x-2">{item.weight}</span>
+                                <span className="text-sm tracking-widest font-light opacity-80 italic transition-transform duration-500 group-hover:translate-x-2 font-sans">{item.weight}</span>
                             </div>
 
                             <div className="relative group/card overflow-hidden">
                                 <div className="h-px w-full bg-current opacity-0 group-hover:opacity-10 mb-8 transition-opacity duration-700" />
-                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-transform duration-700 group-hover:-translate-y-2">{item.name}</h3>
+                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-transform duration-700 group-hover:-translate-y-2 font-light">{item.name}</h3>
                                 {/* CRO FIX: Opacity 100 default, remove hidden CTA */}
-                                <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:tracking-[0.8em] ${item.subText}`}>Inquire for price</p>
+                                <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:tracking-[0.8em] ${item.subText} font-sans font-light`}>Inquire for price</p>
                             </div>
                         </div>
                     ))}
 
                     {/* Closing Card / Call to Action Transition */}
                     <div className={`w-[60vw] md:w-[500px] flex-shrink-0 flex flex-col items-center justify-center text-center px-12 ${textColorClass}`}>
-                        <p className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-8">End of Current Archive</p>
+                        <p className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-8 font-sans font-light">End of Current Archive</p>
                         <h3 className="text-3xl md:text-4xl serif italic mb-12 opacity-80 leading-relaxed">Each piece is a single iteration of nature’s patience.</h3>
                         <div className="w-16 h-[1px] bg-current opacity-20" />
                     </div>

@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
                             </span>
                         </h1>
                         <div ref={lineRef} className="hidden lg:block w-px h-32 bg-white/10 mb-8 origin-bottom scale-y-0" />
-                        <div ref={volumeRef} className="hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-0 mb-8">
+                        <div ref={volumeRef} className="hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-0 mb-8 font-sans font-light">
                             Volume 01 / Archive
                         </div>
                     </div>
@@ -160,7 +160,7 @@ const Hero: React.FC = () => {
                                 <div className="absolute inset-[-4.5vw] animate-[spin_40s_linear_infinite]">
                                     <svg viewBox="0 0 100 100" className="w-full h-full fill-white/10">
                                         <path id="heroCirclePath" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
-                                        <text className="text-[3px] tracking-[4px] uppercase font-medium">
+                                        <text className="text-[3px] tracking-[4px] uppercase font-medium font-sans">
                                             <textPath href="#heroCirclePath">
                                                 • TIMELESS CRAFT • THE PATIENCE OF NATURE • REFINED BY VISION • EST. MCMXC •
                                             </textPath>
@@ -178,7 +178,7 @@ const Hero: React.FC = () => {
                     <div className="flex items-start justify-between mt-[-2vh] relative">
                         <div className="hidden lg:flex flex-col gap-6 mt-12 opacity-0 translate-y-10" style={{ animation: 'none' /* Handled by GSAP if we targeted it, but leaving simple as text */ }}>
                             {/* Leaving this static or simple fade for now, or add ref if needed */}
-                            <p className="text-[10px] tracking-[0.5em] uppercase opacity-30 max-w-[190px] leading-loose">
+                            <p className="text-[10px] tracking-[0.5em] uppercase opacity-30 max-w-[190px] leading-loose font-sans">
                                 Crafted for those who understand rarity beyond brilliance.
                             </p>
                             <div className="w-10 h-px bg-[#b5a16d]/30" />
@@ -198,7 +198,7 @@ const Hero: React.FC = () => {
 
             <div ref={narrativeHintRef} className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-0">
                 <div className="w-px h-16 bg-gradient-to-b from-white/20 to-transparent" />
-                <span className="text-[8px] tracking-[1.5em] uppercase font-light">The Narrative Unfolds</span>
+                <span className="text-[8px] tracking-[1.5em] uppercase font-light font-sans">The Narrative Unfolds</span>
             </div>
 
             <div
