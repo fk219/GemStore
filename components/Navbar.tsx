@@ -39,8 +39,10 @@ const Navbar: React.FC = () => {
         { name: 'Contact', path: '/book' },
     ];
 
-    const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9] mix-blend-difference";
-    const borderColorClass = "border-[#1A1A1A]/10 dark:border-[#FBFBF9]/10 mix-blend-difference";
+    // FIX: Force text to be "white-ish" regardless of theme, relying on mix-blend-difference to invert it against light backgrounds.
+    // This solves the issue where Light Theme makes text dark, but it sits on a Dark Hero section.
+    const textColorClass = "text-[#FBFBF9] mix-blend-difference";
+    const borderColorClass = "border-[#FBFBF9]/20 mix-blend-difference";
 
     return (
         <>
