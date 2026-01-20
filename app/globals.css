@@ -3,26 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
+
+/* Global Typography Overrides */
+h1,
+h2,
+h3 {
+    @apply font-serif;
+}
+
+/* Helper class often used in components */
+.serif {
+    @apply font-serif;
+}
+
+input,
+textarea {
+    @apply font-serif;
+}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 4px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: rgba(155, 155, 155, 0.2);
     border-radius: 20px;
@@ -32,6 +52,7 @@
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
 .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -41,7 +62,8 @@
 body.custom-cursor-active {
     cursor: none;
 }
-body.custom-cursor-active a, 
+
+body.custom-cursor-active a,
 body.custom-cursor-active button,
 body.custom-cursor-active input {
     cursor: none;

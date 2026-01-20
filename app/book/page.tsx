@@ -78,7 +78,7 @@ export default function BookingPage() {
                                         <input
                                             type="text"
                                             placeholder="Your full name"
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light serif italic placeholder:opacity-20"
+                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic placeholder:opacity-20"
                                             value={formData.name}
                                             onChange={e => setFormData({ ...formData, name: e.target.value })}
                                         />
@@ -89,7 +89,7 @@ export default function BookingPage() {
                                         <input
                                             type="email"
                                             placeholder="email@example.com"
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light serif italic placeholder:opacity-20"
+                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic placeholder:opacity-20"
                                             value={formData.email}
                                             onChange={e => setFormData({ ...formData, email: e.target.value })}
                                         />
@@ -98,7 +98,7 @@ export default function BookingPage() {
                                     <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
                                         <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Intention</label>
                                         <select
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light serif italic appearance-none cursor-pointer"
+                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic appearance-none cursor-pointer"
                                             value={formData.service}
                                             onChange={e => setFormData({ ...formData, service: e.target.value })}
                                         >
@@ -112,7 +112,7 @@ export default function BookingPage() {
                                         <textarea
                                             placeholder="Share your vision or specific requirements..."
                                             rows={4}
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light serif italic resize-none placeholder:opacity-20"
+                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic resize-none placeholder:opacity-20"
                                             value={formData.message}
                                             onChange={e => setFormData({ ...formData, message: e.target.value })}
                                         />

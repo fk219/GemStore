@@ -151,7 +151,7 @@ const Navbar: React.FC = () => {
                                     <Link
                                         href={link.path}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className={`block text-6xl md:text-[6rem] font-light font-serif italic leading-[0.9] transition-all duration-[1.4s] ease-[cubic-bezier(0.19,1,0.22,1)] hover:translate-x-12 opacity-80 hover:opacity-100 ${isMenuOpen ? 'translate-y-0' : 'translate-y-full'
+                                        className={`block text-6xl md:text-[6rem] font-light font-serif uppercase leading-[0.9] transition-all duration-[1.4s] ease-[cubic-bezier(0.19,1,0.22,1)] hover:translate-x-12 opacity-80 hover:opacity-100 ${isMenuOpen ? 'translate-y-0' : 'translate-y-full'
                                             }`}
                                         style={{ transitionDelay: `${0.4 + i * 0.15}s` }}
                                     >
