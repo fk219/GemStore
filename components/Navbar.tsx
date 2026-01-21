@@ -3,6 +3,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { ThemeContext, LanguageContext } from '@/app/providers';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -16,43 +17,45 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     const langCtx = useContext(LanguageContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 30);
         };
-        handleScroll(); // Check on mount
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Prevent body scroll when menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [isMenuOpen]);
 
     if (!themeCtx || !langCtx) return null;
 
     const { theme, toggleTheme } = themeCtx;
     const { locale, setLocale } = langCtx;
 
-    // Determine effective text color
-    // If scrolled, always adapt to the blur background (usually standard text color)
-    // If not scrolled and themeOverride is set, use that.
-    // Otherwise fallback to standard theme text.
-
-    // For Home Hero (Dark), we likely pass themeOverride='dark' (meaning Dark Mode text -> White)
-    // Wait, 'dark' mode usually means White Text. 'light' means Black Text.
-
-    let effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]"; // Default auto
+    let effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]";
     let effectiveBorderColorClass = "border-zinc-900/20 dark:border-[#FBFBF9]/20";
 
     if (!isScrolled && !isMenuOpen) {
-        if (themeOverride === 'dark') { // Force "Dark Mode" style (White Text)
+        if (themeOverride === 'dark') {
             effectiveTextColorClass = "text-[#FBFBF9]";
             effectiveBorderColorClass = "border-[#FBFBF9]/20";
-        } else if (themeOverride === 'light') { // Force "Light Mode" style (Black Text)
+        } else if (themeOverride === 'light') {
             effectiveTextColorClass = "text-zinc-900";
             effectiveBorderColorClass = "border-zinc-900/20";
         }
     }
 
-    // Force "Menu Open" state colors if menu is open
     if (isMenuOpen) {
         effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]";
         effectiveBorderColorClass = "border-zinc-900/20 dark:border-[#FBFBF9]/20";
@@ -62,11 +65,35 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     const textColorClass = effectiveTextColorClass;
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Products', path: '/gemstones' },
-        { name: 'About', path: '/about' },
-        { name: 'Contact', path: '/book' },
+        {
+            name: 'Home',
+            path: '/',
+            image: "https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200",
+            desc: "The provenance of rare earth."
+        },
+        {
+            name: 'Products',
+            path: '/gemstones',
+            image: "https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=1200",
+            desc: "The Vault. Curated archives."
+        },
+        {
+            name: 'About',
+            path: '/about',
+            image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=1200",
+            desc: "The legacy of L'Éclat."
+        },
+        {
+            name: 'Contact',
+            path: '/book',
+            image: "https://images.unsplash.com/photo-1549488497-217e3350160a?auto=format&fit=crop&q=80&w=1200",
+            desc: "Private viewing & concierge."
+        },
     ];
+
+    const activeImage = hoveredLink
+        ? navLinks.find(l => l.name === hoveredLink)?.image
+        : navLinks.find(l => l.path === pathname)?.image || navLinks[0].image;
 
     // GSAP Refs for visual enhancement
     const sunRef = useRef(null);
@@ -136,19 +163,20 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                 </div>
             </nav>
 
-            {/* Same Full Screen Menu with updated Typography and Close Button Fix */}
+            {/* FULL SCREEN INTERACTIVE MENU */}
             <div
-                className={`fixed inset-0 z-[100] transition-all duration-[1.2s] ease-[cubic-bezier(0.85, 0, 0.15, 1)] ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-full pointer-events-none'
+                className={`fixed inset-0 z-[100] transition-all duration-[0.8s] ease-[cubic-bezier(0.85, 0, 0.15, 1)] ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-full pointer-events-none'
                     }`}
             >
-                {/* Background with Theme Context Color */}
+                {/* Background */}
                 <div className="absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A]"></div>
 
-                {/* Close Button Fix */}
+                {/* Close Button */}
                 <button
                     onClick={(e) => {
-                        e.stopPropagation(); // Prevent event bubbling
+                        e.stopPropagation();
                         setIsMenuOpen(false);
+                        setHoveredLink(null);
                     }}
                     className={`absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer hover:opacity-100`}
                     aria-label="Close Menu"
@@ -160,36 +188,86 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     <span className="mt-5 text-[8px] tracking-[0.5em] uppercase opacity-40 font-light font-sans transition-opacity group-hover:opacity-100 pointer-events-none">Fermer</span>
                 </button>
 
-                <div className={`h-full flex flex-col md:flex-row ${textColorClass} relative z-10`}>
-                    <div className="hidden md:flex w-2/5 h-full border-r border-zinc-100 dark:border-zinc-900/30 flex-col items-center justify-center p-24 relative overflow-hidden">
-                        <div className="overflow-hidden aspect-[3/4] w-full max-w-sm rounded-[50px] relative group">
-                            <Image
-                                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
-                                alt="Refraction Study"
-                                fill
-                                className="object-cover grayscale transition-transform duration-[8s] group-hover:scale-110"
-                            />
+                {/* Content Grid */}
+                <div className={`h-full w-full flex flex-col md:flex-row ${textColorClass} relative z-10`}>
+
+                    {/* LEFT PANEL: Brand Details & Info */}
+                    <div className="hidden md:flex flex-col justify-between w-1/4 h-full p-16 border-r border-[#646464]/10">
+                        <div className="space-y-8">
+                            <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Maison L'Éclat</span>
+                            <div className="space-y-2 text-xs font-light tracking-wide opacity-60">
+                                <p>42 Bond Street, Mayfair</p>
+                                <p>London W1S 2SB</p>
+                                <p>+44 20 7946 0123</p>
+                            </div>
                         </div>
-                        <p className="mt-20 text-[10px] tracking-[0.8em] uppercase opacity-40 leading-relaxed italic font-light text-center font-sans">
-                            &quot;Rarity is a silent language spoken by time.&quot;
-                        </p>
+
+                        <div className="space-y-4">
+                            <span className="text-[10px] tracking-[0.2em] uppercase opacity-40 block">Language</span>
+                            <div className="flex gap-4 text-xs tracking-widest uppercase">
+                                <button className="opacity-100 border-b border-current pb-1">EN</button>
+                                <button className="opacity-40 hover:opacity-100 transition-opacity">FR</button>
+                                <button className="opacity-40 hover:opacity-100 transition-opacity">JP</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-center px-12 md:px-40 py-24">
-                        <div className="flex flex-col gap-6 md:gap-10">
-                            {navLinks.map((link, i) => (
-                                <div key={`${link.name}-${i}`} className="overflow-hidden group/navitem">
-                                    <Link
-                                        href={link.path}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className={`block text-6xl md:text-[6rem] font-light font-serif uppercase leading-[0.9] transition-all duration-[1.4s] ease-[cubic-bezier(0.19,1,0.22,1)] hover:translate-x-12 opacity-80 hover:opacity-100 ${isMenuOpen ? 'translate-y-0' : 'translate-y-full'
-                                            }`}
-                                        style={{ transitionDelay: `${0.4 + i * 0.15}s` }}
+                    {/* CENTER PANEL: Navigation Links */}
+                    <div className="flex-1 flex flex-col justify-center px-12 md:px-24">
+                        <div className="flex flex-col gap-4">
+                            {navLinks.map((link, i) => {
+                                const isActive = pathname === link.path;
+                                const isHovered = hoveredLink === link.name;
+
+                                return (
+                                    <div
+                                        key={`${link.name}-${i}`}
+                                        className="relative group/navitem flex items-center gap-8"
+                                        onMouseEnter={() => setHoveredLink(link.name)}
+                                        onMouseLeave={() => setHoveredLink(null)}
                                     >
-                                        {link.name}
-                                    </Link>
-                                </div>
+                                        <div className={`w-2 h-2 rounded-full bg-amber-500 transition-all duration-300 ${isActive || isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} />
+
+                                        <Link
+                                            href={link.path}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className={`block font-serif uppercase leading-[1.1] transition-all duration-300 hover:ml-4
+                                                ${isActive ? 'opacity-100 italic' : 'opacity-70 hover:opacity-100 hover:italic'}
+                                                text-5xl md:text-[5rem] font-light
+                                            `}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* RIGHT PANEL: Dynamic Image Preview */}
+                    <div className="hidden md:flex w-1/3 h-full items-center justify-center p-16 bg-[#FBFBF9] dark:bg-[#0C0C0C] transition-colors duration-500">
+                        <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+                            {/* We use key to force unmount/mount transition or just simple CSS fade */}
+                            {navLinks.map((link) => (
+                                <Image
+                                    key={link.name}
+                                    src={link.image}
+                                    alt={link.name}
+                                    fill
+                                    className={`object-cover transition-opacity duration-500 ease-out ${activeImage === link.image ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                                        }`}
+                                />
                             ))}
+
+                            {/* Overlay Text for Image */}
+                            <div className="absolute bottom-8 left-8 z-10">
+                                <p className="text-white text-xs tracking-[0.2em] uppercase font-light mix-blend-difference">
+                                    {hoveredLink
+                                        ? navLinks.find(l => l.name === hoveredLink)?.desc
+                                        : navLinks.find(l => l.path === pathname)?.desc}
+                                </p>
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                         </div>
                     </div>
                 </div>
