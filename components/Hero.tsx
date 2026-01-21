@@ -28,12 +28,13 @@ const Hero: React.FC = () => {
         gsap.set(lineRef.current, { scaleY: 0 });
 
         // Animation Sequence
-        tl.to(visualRef.current, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 2.5, ease: "slow(0.7, 0.7, false)" })
-            .to(rareRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 1.8, ease: "power4.out" }, "-=2")
-            .to(natureRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 1.8, ease: "power4.out" }, "-=1.6")
-            .to(craftedRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 1.8, ease: "power4.out" }, "-=1.6")
-            .to(lineRef.current, { scaleY: 1, duration: 1.5, ease: "expo.inOut" }, "-=1.2")
-            .to([volumeRef.current, descRef.current], { opacity: 0.6, duration: 1.5 }, "-=1");
+        // Animation Sequence - Ethereal & Slow
+        tl.to(visualRef.current, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 3.5, ease: "power2.out" }) // Longer visual entry
+            .to(rareRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.8") // Overlap significantly
+            .to(natureRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.3")
+            .to(craftedRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.3")
+            .to(lineRef.current, { scaleY: 1, duration: 2, ease: "expo.inOut" }, "-=2")
+            .to([volumeRef.current, descRef.current], { opacity: 0.6, duration: 2 }, "-=1.5");
 
     }, { scope: containerRef });
 

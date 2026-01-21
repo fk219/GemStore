@@ -56,17 +56,27 @@ export default function About() {
             <section className="py-24 px-6 md:px-24">
                 <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center text-[#FBFBF9]">
                     {/* Image */}
-                    <div className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group">
+                    {/* Image - Interactive Hover */}
+                    <div className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group cursor-pointer">
                         <Image
                             src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                             fill
                             alt="Mine Shaft Light"
-                            className="object-cover transition-transform duration-[3s] group-hover:scale-105"
+                            className="object-cover transition-all duration-[1.5s] ease-out group-hover:scale-110 group-hover:grayscale-[0.5]"
                         />
-                        <div className="absolute inset-0 bg-black/20" />
-                        <div className="absolute bottom-8 right-8 text-right mix-blend-difference">
-                            <p className="text-[9px] uppercase tracking-[0.4em]">Elevation</p>
-                            <p className="serif text-3xl">2,400m</p>
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-700" />
+
+                        {/* Hidden Details Reveal */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                            <div className="w-[90%] h-[90%] border border-white/20 flex flex-col justify-between p-6">
+                                <span className="text-[9px] uppercase tracking-[0.3em] self-start">Grid Ref: 44.2A</span>
+                                <span className="text-[9px] uppercase tracking-[0.3em] self-end">Depth: 800m</span>
+                            </div>
+                        </div>
+
+                        <div className="absolute bottom-8 right-8 text-right mix-blend-difference transform transition-transform duration-700 group-hover:-translate-y-4">
+                            <p className="text-[9px] uppercase tracking-[0.4em] mb-2">Elevation</p>
+                            <p className="serif text-3xl font-light">2,400m</p>
                         </div>
                     </div>
 

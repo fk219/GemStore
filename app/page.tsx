@@ -26,15 +26,15 @@ export default function Home() {
         // Reveal Observer via GSAP Batch or Intersection Observer
         // We'll use GSAP ScrollTrigger batching for smoother "reveal-text" effect
         const ctx = gsap.context(() => {
+            // Standard Reveals
             const reveals = document.querySelectorAll('.reveal-text, .reveal-image');
-
             reveals.forEach(el => {
                 gsap.fromTo(el,
                     { y: 50, opacity: 0 },
                     {
                         y: 0,
                         opacity: 1,
-                        duration: 1.2,
+                        duration: 1.5, // Slower, more elegant
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: el,
@@ -43,6 +43,24 @@ export default function Home() {
                         }
                     }
                 );
+            });
+
+            // Parallax Effects
+            const parallaxEls = document.querySelectorAll("[data-speed]");
+            parallaxEls.forEach(el => {
+                const speed = parseFloat(el.getAttribute("data-speed") || "1");
+                gsap.to(el, {
+                    y: (i, target) => {
+                        return (1 - speed) * ScrollTrigger.maxScroll(window) * 0.1; // Subtle shift based on speed
+                    },
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 0
+                    }
+                });
             });
         });
 
@@ -67,14 +85,15 @@ export default function Home() {
 
             {/* Chapter 1: The Soul of Rarity - Editorial Overlay Layout */}
             <section className={`relative min-h-screen py-32 md:py-48 px-6 md:px-24 flex flex-col justify-center overflow-hidden ${bgMain} ${textColorClass}`}>
-                {/* Decorative Background Elements */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-zinc-200/50 to-transparent rounded-full blur-[100px] opacity-20 pointer-events-none mix-blend-multiply dark:mix-blend-overlay" />
+                {/* Decorative Background Elements - Parallax */}
+                <div data-speed="0.2" className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-zinc-200/50 to-transparent rounded-full blur-[100px] opacity-20 pointer-events-none mix-blend-multiply dark:mix-blend-overlay" />
+                <div data-speed="0.4" className="absolute bottom-0 left-[-10%] w-[800px] h-[800px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
 
                 <div className="container mx-auto relative z-10">
                     <div className="flex flex-col md:flex-row items-center gap-16 md:gap-32">
                         {/* Image Composition */}
                         <div className="w-full md:w-1/2 relative reveal-image">
-                            <div className="relative aspect-[4/5] md:aspect-[3/4] rounded-sm overflow-hidden group">
+                            <div data-speed="1.1" className="relative aspect-[4/5] md:aspect-[3/4] rounded-sm overflow-hidden group">
                                 <Image
                                     src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                                     alt="Raw Emerald Formation"
@@ -83,8 +102,8 @@ export default function Home() {
                                 />
                                 <div className="absolute inset-0 bg-[#0A0A0A]/10 mix-blend-multiply" />
                             </div>
-                            {/* Floating Detail Overlay */}
-                            <div className="absolute -bottom-10 -right-10 w-2/3 aspect-square bg-[#141414] text-[#FBFBF9] p-8 hidden md:flex flex-col justify-between z-20 shadow-2xl">
+                            {/* Floating Detail Overlay - Foreground Parallax */}
+                            <div data-speed="1.3" className="absolute -bottom-10 -right-10 w-2/3 aspect-square bg-[#141414] text-[#FBFBF9] p-8 hidden md:flex flex-col justify-between z-20 shadow-2xl">
                                 <span className="text-[10px] tracking-[0.4em] uppercase opacity-50">Origin</span>
                                 <p className="font-serif italic text-2xl">Muzo, Colombia</p>
                                 <div className="w-full h-px bg-white/20" />
