@@ -76,7 +76,7 @@ export default function Home() {
                         <div className="w-full md:w-1/2 relative reveal-image">
                             <div className="relative aspect-[4/5] md:aspect-[3/4] rounded-sm overflow-hidden group">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
+                                    src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                                     alt="Raw Emerald Formation"
                                     fill
                                     className="object-cover grayscale transition-transform duration-[3s] group-hover:scale-105"
@@ -193,7 +193,7 @@ export default function Home() {
                     {/* 1. Large Feature (Sapphire) - 'Azure Monolith' */}
                     <div className="col-span-2 md:col-span-6 row-span-4 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1605218427306-022ba95b90c5?auto=format&fit=crop&q=80&w=1400"
+                            src="https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=1400"
                             fill
                             className="object-cover transition-all duration-[3s] group-hover:scale-105"
                             alt="Royal Blue Sapphire"
@@ -230,7 +230,7 @@ export default function Home() {
                     {/* 4. Tall Vertical (Ruby) */}
                     <div className="col-span-1 md:col-span-3 row-span-3 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800"
+                            src="https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=800"
                             fill
                             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s]"
                             alt="Ruby Detail"
@@ -263,7 +263,7 @@ export default function Home() {
                     {/* 7. Wide Panoramic (Landscape/Mine) */}
                     <div className="col-span-2 md:col-span-6 row-span-2 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1531633590533-333cbd2c0c77?auto=format&fit=crop&q=80&w=1600"
+                            src="https://images.unsplash.com/photo-1587588354456-ae376af71a25?auto=format&fit=crop&q=80&w=1600"
                             fill
                             className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-1000"
                             alt="Sri Lanka landscape"

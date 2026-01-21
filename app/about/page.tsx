@@ -58,7 +58,7 @@ export default function About() {
                     {/* Image */}
                     <div className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group">
                         <Image
-                            src="https://images.unsplash.com/photo-1610052327572-132d7dd9375e?auto=format&fit=crop&q=80&w=1200"
+                            src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                             fill
                             alt="Mine Shaft Light"
                             className="object-cover transition-transform duration-[3s] group-hover:scale-105"
