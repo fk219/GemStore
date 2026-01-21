@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import gsap from 'gsap';
 
+import ContactHero from '@/components/ContactHero';
+
 export default function BookingPage() {
     const langCtx = useContext(LanguageContext);
     const [step, setStep] = useState(1);
@@ -39,9 +41,10 @@ export default function BookingPage() {
 
     return (
         <main className="min-h-screen bg-[#FBFBF9] dark:bg-[#050505] text-[#1A1A1A] dark:text-[#FBFBF9] transition-colors duration-1000 overflow-hidden">
-            <Navbar />
+            <Navbar themeOverride="dark" />
+            <ContactHero />
 
-            <section className="pt-32 pb-12 px-6 md:px-24 flex flex-col md:flex-row min-h-screen items-center">
+            <section className="py-24 px-6 md:px-24 flex flex-col md:flex-row min-h-[50vh] items-center">
 
                 {/* Left: Contact Info - Minimal */}
                 <div ref={infoRef} className="w-full md:w-1/2 flex flex-col justify-center mb-16 md:mb-0 md:pr-24 relative z-10">

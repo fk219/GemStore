@@ -185,7 +185,7 @@ export default function Home() {
                 {/* HIGH COMPLEXITY BENTO GRID */}
                 <div className="max-w-[1800px] mx-auto grid grid-cols-2 md:grid-cols-12 auto-rows-[150px] md:auto-rows-[180px] gap-3 md:gap-4">
 
-                    {/* 1. Large Feature (Sapphire) */}
+                    {/* 1. Large Feature (Sapphire) - 'Azure Monolith' */}
                     <div className="col-span-2 md:col-span-6 row-span-4 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
                             src="https://images.unsplash.com/photo-1597813589938-98e3768b556f?auto=format&fit=crop&q=80&w=1400"
@@ -193,30 +193,33 @@ export default function Home() {
                             className="object-cover transition-all duration-[3s] group-hover:scale-105"
                             alt="Royal Blue Sapphire"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
-                        <div className="absolute bottom-10 left-10 text-white z-10">
-                            <h3 className="text-5xl md:text-7xl serif font-light italic">Azure</h3>
-                            <p className="text-xs tracking-[0.4em] uppercase opacity-80 mt-2 font-sans">Kashmir Origin / 8.42 CT</p>
+                        {/* Stronger Gradient for Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
+                        <div className="absolute bottom-12 left-10 text-white z-10">
+                            <h3 className="text-6xl md:text-8xl serif font-light italic mb-4">The Azure <br /> Monolith</h3>
+                            <p className="text-xs tracking-[0.4em] uppercase opacity-80 font-sans border-l border-white/40 pl-4 py-1">Kashmir Origin / 8.42 CT</p>
                         </div>
                     </div>
 
-                    {/* 2. Abstract Texture (Dark Mode) */}
-                    <div className="col-span-1 md:col-span-3 row-span-2 reveal-image group relative rounded-sm overflow-hidden border border-white/5">
+                    {/* 2. Abstract Texture (Dark Mode) - High Contrast */}
+                    <div className="col-span-1 md:col-span-3 row-span-2 reveal-image group relative rounded-sm overflow-hidden border border-white/5 bg-[#050505]">
                         <Image
                             src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=800"
                             fill
-                            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                            className="object-cover opacity-60 group-hover:opacity-100 transition-opacity mix-blend-luminosity"
                             alt="Dark Texture"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-[10px] tracking-[0.6em] uppercase text-white mix-blend-difference">Refraction</span>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span className="text-[10px] tracking-[0.6em] uppercase text-white font-light bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">Refraction</span>
                         </div>
                     </div>
 
-                    {/* 3. Text Block Quote */}
-                    <div className={`col-span-1 md:col-span-3 row-span-2 reveal-text flex flex-col justify-center p-8 bg-white dark:bg-[#141414] rounded-sm ${textColorClass}`}>
-                        <svg className="w-6 h-6 mb-4 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.0171 16H11.9829C10.8784 16 9.98291 16.8954 9.98291 18L9.98291 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                        <p className="font-serif italic text-lg leading-relaxed opacity-80">&quot;To hold a gem is to hold a frozen piece of time.&quot;</p>
+                    {/* 3. Text Block Quote - Linear Mastery */}
+                    <div className={`col-span-1 md:col-span-3 row-span-2 reveal-text flex flex-col justify-center p-8 bg-white dark:bg-[#141414] rounded-sm ${textColorClass} border border-zinc-100 dark:border-zinc-800`}>
+                        <h4 className="text-2xl font-serif italic mb-4">Linear Mastery</h4>
+                        <p className="font-sans text-xs opacity-60 leading-relaxed uppercase tracking-widest line-clamp-3">
+                            "Geometry is the skeleton of light. We do not cut shapes; we reveal the hidden architecture."
+                        </p>
                     </div>
 
                     {/* 4. Tall Vertical (Ruby) */}
@@ -227,11 +230,12 @@ export default function Home() {
                             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s]"
                             alt="Ruby Detail"
                         />
-                        <div className="absolute top-4 left-4">
-                            <span className="bg-white/10 backdrop-blur-md text-white text-[9px] px-2 py-1 rounded-full uppercase tracking-widest">Sold</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-60" />
+                        <div className="absolute top-4 left-4 z-10">
+                            <span className="bg-white/10 backdrop-blur-md text-white text-[9px] px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Sold</span>
                         </div>
-                        <div className="absolute bottom-4 left-4 text-white">
-                            <p className="font-serif text-2xl">Pigeon's Blood</p>
+                        <div className="absolute bottom-6 left-6 text-white z-10">
+                            <p className="font-serif text-3xl italic">Crimson <br /> Silence</p>
                         </div>
                     </div>
 
@@ -246,23 +250,23 @@ export default function Home() {
                     </div>
 
                     {/* 6. Interaction / Link Block */}
-                    <div className={`col-span-2 md:col-span-3 row-span-1 reveal-text flex items-center justify-between px-8 bg-[#1A1A1A] text-[#FBFBF9] rounded-sm group hover:bg-[#b5a16d] transition-colors cursor-pointer`}>
+                    <Link href="/gemstones" className={`col-span-2 md:col-span-3 row-span-1 reveal-text flex items-center justify-between px-8 bg-[#1A1A1A] text-[#FBFBF9] rounded-sm group hover:bg-[#c5b38d] hover:text-white transition-all duration-500 cursor-pointer`}>
                         <span className="text-[10px] tracking-[0.4em] uppercase font-sans">View Full Archive</span>
-                        <span className="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                    </div>
+                        <span className="text-2xl group-hover:translate-x-4 transition-transform duration-300">→</span>
+                    </Link>
 
                     {/* 7. Wide Panoramic (Landscape/Mine) */}
                     <div className="col-span-2 md:col-span-6 row-span-2 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1548504769-900b70ed122e?auto=format&fit=crop&q=80&w=1600"
+                            src="https://images.unsplash.com/photo-1531633590533-333cbd2c0c77?auto=format&fit=crop&q=80&w=1600"
                             fill
                             className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-1000"
                             alt="Sri Lanka landscape"
                         />
-                        <div className="absolute inset-0 bg-black/40" />
+                        <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-8 text-center">
-                            <p className="text-[10px] tracking-[0.6em] uppercase mb-4">Provenance</p>
-                            <h3 className="text-3xl md:text-5xl font-light serif italic">&quot;From the Earth, to the Hand.&quot;</h3>
+                            <p className="text-[10px] tracking-[0.6em] uppercase mb-6 opacity-60">Provenance</p>
+                            <h3 className="text-4xl md:text-6xl font-light serif italic max-w-2xl text-shadow-lg">&quot;From the Earth, to the Hand.&quot;</h3>
                         </div>
                     </div>
                 </div>
