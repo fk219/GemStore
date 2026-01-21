@@ -52,11 +52,14 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
         }
     }
 
-    // Force "Menu Open" state colors if menu is open (usually contrast against menu bg)
+    // Force "Menu Open" state colors if menu is open
     if (isMenuOpen) {
         effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]";
         effectiveBorderColorClass = "border-zinc-900/20 dark:border-[#FBFBF9]/20";
     }
+
+    // Helper for Full Screen Menu Text Color
+    const textColorClass = effectiveTextColorClass;
 
     const navLinks = [
         { name: 'Home', path: '/' },

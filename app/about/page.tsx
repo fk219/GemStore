@@ -90,7 +90,7 @@ export default function About() {
             <section className="py-32 relative overflow-hidden bg-[#101010] text-[#FBFBF9]">
                 <div className="absolute inset-0 opacity-20">
                     <Image
-                        src="https://images.unsplash.com/photo-1549488497-217e3350160a?auto=format&fit=crop&q=80&w=2000"
+                        src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=2000"
                         fill
                         className="object-cover grayscale"
                         alt="Background Texture"
