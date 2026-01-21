@@ -20,7 +20,7 @@ const ARCHIVE_ITEMS = [
         carat: "8.42 CT",
         origin: "Kashmir, India",
         price: "Price upon Request",
-        image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200", // Sapphire-ish
+        image: "https://images.unsplash.com/photo-1605218427306-022ba95b90c5?auto=format&fit=crop&q=80&w=1200", // Sapphire
         type: "Sapphire",
         status: "Available"
     },
@@ -30,7 +30,7 @@ const ARCHIVE_ITEMS = [
         carat: "5.12 CT",
         origin: "Mogok, Burma",
         price: "Sold",
-        image: "https://images.unsplash.com/photo-1549488497-217e3350160a?auto=format&fit=crop&q=80&w=1200", // Ruby-ish
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200", // Ruby
         type: "Ruby",
         status: "Archived"
     },
@@ -40,7 +40,7 @@ const ARCHIVE_ITEMS = [
         carat: "12.05 CT",
         origin: "Muzo, Colombia",
         price: "Reserved",
-        image: "https://images.unsplash.com/photo-1610052327572-132d7dd9375e?auto=format&fit=crop&q=80&w=1200", // Emerald-ish
+        image: "https://images.unsplash.com/photo-1606709849506-69eb8b5f903e?auto=format&fit=crop&q=80&w=1200", // Emerald
         type: "Emerald",
         status: "Reserved"
     },
@@ -60,7 +60,7 @@ const ARCHIVE_ITEMS = [
         carat: "4.20 CT",
         origin: "Lightning Ridge, Australia",
         price: "Available",
-        image: "https://images.unsplash.com/photo-1597813589938-98e3768b556f?auto=format&fit=crop&q=80&w=1200",
+        image: "https://images.unsplash.com/photo-1594913785162-e6785e6dd9c7?auto=format&fit=crop&q=80&w=1200", // Opal substitute
         type: "Opal",
         status: "Available"
     }

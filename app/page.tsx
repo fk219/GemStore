@@ -117,9 +117,9 @@ export default function Home() {
                 <CollectionSection />
             </section>
 
-            {/* Chapter 2: The Art of Refraction (The Lens) - BG MAIN (Card Style) */}
-            <section className={`min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative ${bgMain} ${textColorClass} shadow-2xl`}>
-                <div className="absolute inset-0 opacity-5 pointer-events-none">
+            {/* Chapter 2: The Art of Refraction (Refined Patience) - INVERTED THEME */}
+            <section className="min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative bg-[#141414] text-[#FBFBF9] dark:bg-[#FBFBF9] dark:text-[#141414] shadow-2xl transition-colors duration-1000">
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <path d="M0,50 C20,40 40,60 60,50 S80,40 100,50" fill="none" className="stroke-current" strokeWidth="0.05" />
                         <path d="M0,60 C30,70 50,40 70,60 S90,50 100,60" fill="none" className="stroke-current" strokeWidth="0.05" opacity="0.5" />
@@ -128,18 +128,22 @@ export default function Home() {
 
                 <div className="container mx-auto px-6 relative z-10 py-12 md:py-24">
                     <div className="flex flex-col items-center text-center">
-                        <span className="text-[10px] tracking-[0.8em] uppercase mb-12 opacity-30 reveal-text font-sans font-light border px-4 py-2 rounded-full border-current">The Philosophy</span>
+                        <span className="text-[10px] tracking-[0.8em] uppercase mb-12 opacity-30 reveal-text font-sans font-light border px-4 py-2 rounded-full border-current">The Journey of Light</span>
 
                         <div className="relative mb-24 reveal-image">
                             {/* Abstract Glow - Adaptive */}
                             <div className="absolute -inset-20 bg-current blur-[100px] rounded-full animate-pulse opacity-5" />
-                            <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] reveal-text mix-blend-difference">
-                                Precision
+                            <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] reveal-text">
+                                Refined
                             </h2>
-                            <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text text-zinc-400 dark:text-zinc-600">
-                                &amp; Mystery
+                            <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text opacity-50">
+                                Patience
                             </h2>
                         </div>
+
+                        <p className="text-2xl md:text-4xl font-light opacity-80 max-w-4xl leading-relaxed serif italic reveal-text">
+                            "Every stone passes through a journey of patience, mastery, and quiet perfection."
+                        </p>
 
                         <div className="mt-12 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16 w-full max-w-6xl text-left border-t border-current/10 pt-16">
                             {[
@@ -160,7 +164,7 @@ export default function Home() {
                                 }
                             ].map((item, i) => (
                                 <div key={i} className="reveal-text group">
-                                    <h3 className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-6 font-sans font-light group-hover:text-amber-600 transition-colors">{item.label}</h3>
+                                    <h3 className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-6 font-sans font-light group-hover:text-amber-500 transition-colors">{item.label}</h3>
                                     <p className="text-3xl serif mb-4 italic">{item.head}</p>
                                     <p className="text-sm opacity-60 leading-relaxed font-sans max-w-xs">{item.text}</p>
                                 </div>
@@ -188,7 +192,7 @@ export default function Home() {
                     {/* 1. Large Feature (Sapphire) - 'Azure Monolith' */}
                     <div className="col-span-2 md:col-span-6 row-span-4 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1597813589938-98e3768b556f?auto=format&fit=crop&q=80&w=1400"
+                            src="https://images.unsplash.com/photo-1605218427306-022ba95b90c5?auto=format&fit=crop&q=80&w=1400"
                             fill
                             className="object-cover transition-all duration-[3s] group-hover:scale-105"
                             alt="Royal Blue Sapphire"
@@ -225,7 +229,7 @@ export default function Home() {
                     {/* 4. Tall Vertical (Ruby) */}
                     <div className="col-span-1 md:col-span-3 row-span-3 reveal-image group relative rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1549488497-217e3350160a?auto=format&fit=crop&q=80&w=800"
+                            src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800"
                             fill
                             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s]"
                             alt="Ruby Detail"
