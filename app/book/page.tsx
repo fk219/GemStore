@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { LanguageContext } from '@/app/providers';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import ConsultHero from '@/components/ConsultHero';
+import gsap from 'gsap';
 
 export default function BookingPage() {
     const langCtx = useContext(LanguageContext);
@@ -13,151 +13,144 @@ export default function BookingPage() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        service: 'Private Viewing',
+        interest: 'Acquisition',
         message: ''
     });
 
-    // Basic validation state
-    const [errors, setErrors] = useState<Record<string, string>>({});
+    // Refs for animation
+    const infoRef = useRef(null);
+    const formRef = useRef(null);
 
-    if (!langCtx) return null;
-
-    const validate = () => {
-        const newErrors: Record<string, string> = {};
-        if (!formData.name.trim()) newErrors.name = "Name is required";
-        if (!formData.email.trim()) newErrors.email = "Email is required";
-        else if (!/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = "Invalid email";
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(infoRef.current, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 1.5, ease: "power3.out", delay: 0.2 });
+            gsap.fromTo(formRef.current, { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 1.5, ease: "power3.out", delay: 0.4 });
+        });
+        return () => ctx.revert();
+    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (validate()) {
-            // Simulate API call
-            setTimeout(() => setStep(2), 500);
-        }
+        // Simulate "Concierge" processing
+        setTimeout(() => setStep(2), 800);
     };
 
-    const handleReturnToCollection = () => {
-        window.location.href = '/'; // Or router.push('/') if imported
-    };
+    if (!langCtx) return null;
 
     return (
-        <main className="w-full bg-[#FBFBF9] dark:bg-[#0F0F0F]">
+        <main className="min-h-screen bg-[#FBFBF9] dark:bg-[#050505] text-[#1A1A1A] dark:text-[#FBFBF9] transition-colors duration-1000 overflow-hidden">
             <Navbar />
-            <ConsultHero />
 
-            <section className="pb-40 px-6 md:px-24">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24 items-start">
-                    <div className="w-full md:w-1/2 sticky top-40">
-                        <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8 font-sans font-light">Consultation</span>
-                        <h2 className="text-4xl md:text-7xl font-light serif mb-12 leading-tight">
-                            Begin your journey.
-                        </h2>
-                        <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed italic mb-12 max-w-md font-serif">
-                            All meetings are handled with complete discretion and personal attention.
-                        </p>
-                        <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden grayscale opacity-80 mb-12 shadow-2xl">
-                            <Image
-                                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
-                                alt="Private Lounge"
-                                fill
-                                className="object-cover"
-                            />
+            <section className="pt-32 pb-12 px-6 md:px-24 flex flex-col md:flex-row min-h-screen items-center">
+
+                {/* Left: Contact Info - Minimal */}
+                <div ref={infoRef} className="w-full md:w-1/2 flex flex-col justify-center mb-16 md:mb-0 md:pr-24 relative z-10">
+                    <span className="text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8 border-l border-current pl-4">Concierge</span>
+                    <h1 className="text-5xl md:text-8xl font-light serif leading-[0.9] mb-12">
+                        Private <br /> <span className="italic opacity-50">Viewing</span>
+                    </h1>
+                    <p className="text-lg md:text-xl opacity-60 font-light font-serif italic max-w-md mb-12">
+                        &quot;For those who understand that acquiring a rare stone is not a transaction, but an initiation.&quot;
+                    </p>
+
+                    <div className="space-y-8 opacity-70 font-sans font-light tracking-wide text-sm hidden md:block">
+                        <div>
+                            <p className="uppercase text-[10px] tracking-[0.4em] opacity-50 mb-2">Genèva</p>
+                            <p>Quai des Bergues 33</p>
+                            <p>+41 22 731 29 00</p>
+                        </div>
+                        <div>
+                            <p className="uppercase text-[10px] tracking-[0.4em] opacity-50 mb-2">Email</p>
+                            <p className="border-b border-current inline-block pb-1">concierge@t-craft.com</p>
                         </div>
                     </div>
+                </div>
 
-                    <div className="w-full md:w-1/2 pt-12 md:pt-0">
-                        {step === 1 ? (
-                            <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900/30 p-8 md:p-16 rounded-[60px] border border-zinc-100 dark:border-zinc-800 shadow-xl backdrop-blur-sm">
-                                <div className="space-y-12">
-                                    <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Name / Identity</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Your full name"
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic placeholder:opacity-20"
-                                            value={formData.name}
-                                            onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                        />
-                                        {errors.name && <span className="text-red-500 text-xs mt-2 font-sans">{errors.name}</span>}
-                                    </div>
-                                    <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Electronic Address</label>
-                                        <input
-                                            type="email"
-                                            placeholder="email@example.com"
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic placeholder:opacity-20"
-                                            value={formData.email}
-                                            onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                        {errors.email && <span className="text-red-500 text-xs mt-2 font-sans">{errors.email}</span>}
-                                    </div>
-                                    <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Intention</label>
-                                        <select
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic appearance-none cursor-pointer"
-                                            value={formData.service}
-                                            onChange={e => setFormData({ ...formData, service: e.target.value })}
-                                        >
-                                            <option className="bg-[#FBFBF9] dark:bg-[#0F0F0F]">Private Viewing</option>
-                                            <option className="bg-[#FBFBF9] dark:bg-[#0F0F0F]">Bespoke Commission</option>
-                                            <option className="bg-[#FBFBF9] dark:bg-[#0F0F0F]">Gemological Inquiry</option>
-                                        </select>
-                                    </div>
-                                    <div className="group border-b border-zinc-200 dark:border-zinc-800 pb-4 transition-all focus-within:border-black dark:focus-within:border-white">
-                                        <label className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2 font-sans font-light">Personal Message</label>
-                                        <textarea
-                                            placeholder="Share your vision or specific requirements..."
-                                            rows={4}
-                                            className="w-full bg-transparent outline-none text-xl md:text-2xl font-light font-serif italic resize-none placeholder:opacity-20"
-                                            value={formData.message}
-                                            onChange={e => setFormData({ ...formData, message: e.target.value })}
-                                        />
-                                    </div>
+                {/* Right: The Form - Handwritten Style */}
+                <div ref={formRef} className="w-full md:w-1/2 relative">
+                    {/* Abstract Glow */}
+                    <div className="absolute -inset-20 bg-gradient-to-tr from-zinc-200/40 to-transparent dark:from-zinc-900/40 rounded-[40px] blur-3xl -z-10 animate-pulse pointer-events-none" />
 
-                                    <button
-                                        type="submit"
-                                        className="w-full py-7 rounded-full bg-[#1A1A1A] dark:bg-[#FBFBF9] text-[#FBFBF9] dark:text-[#1A1A1A] text-[10px] tracking-[0.5em] uppercase hover:scale-[1.02] transition-all duration-500 shadow-lg font-sans font-light"
+                    {step === 1 ? (
+                        <form onSubmit={handleSubmit} className="space-y-12 p-8 md:p-16 border border-zinc-200 dark:border-zinc-800 rounded-[2px] bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-lg">
+                            <div className="space-y-2 group">
+                                <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Name / Identity</label>
+                                <input
+                                    type="text"
+                                    required
+                                    placeholder="Your full name"
+                                    className="w-full bg-transparent outline-none text-xl md:text-3xl font-light font-serif italic placeholder:opacity-20 border-b border-current/20 pb-4 focus:border-current transition-colors"
+                                    value={formData.name}
+                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                />
+                            </div>
+
+                            <div className="space-y-2 group">
+                                <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Electronic Contact</label>
+                                <input
+                                    type="email"
+                                    required
+                                    placeholder="Email address"
+                                    className="w-full bg-transparent outline-none text-xl md:text-3xl font-light font-serif italic placeholder:opacity-20 border-b border-current/20 pb-4 focus:border-current transition-colors"
+                                    value={formData.email}
+                                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                />
+                            </div>
+
+                            <div className="space-y-2 group">
+                                <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Nature of Inquiry</label>
+                                <div className="relative">
+                                    <select
+                                        className="w-full bg-transparent outline-none text-xl md:text-3xl font-light font-serif italic border-b border-current/20 pb-4 appearance-none cursor-pointer focus:border-current transition-colors"
+                                        value={formData.interest}
+                                        onChange={e => setFormData({ ...formData, interest: e.target.value })}
                                     >
-                                        Confirm Request
-                                    </button>
-                                    <p className="text-[9px] text-center tracking-[0.2em] uppercase opacity-30 italic font-sans font-light">All meetings are handled with complete discretion.</p>
-                                </div>
-                            </form>
-                        ) : (
-                            <div className="h-full flex flex-col items-center justify-center text-center py-24 bg-white dark:bg-zinc-900/50 rounded-[60px] border border-zinc-100 dark:border-zinc-800 shadow-xl px-12 backdrop-blur-sm">
-                                <div className="w-24 h-24 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center mb-12">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#b5a16d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <h2 className="text-4xl md:text-5xl font-light serif mb-8 italic">Your intention has been received.</h2>
-                                <p className="text-lg opacity-60 leading-relaxed max-w-sm mb-12 font-serif italic">
-                                    A representative will reach out to you through secure channels within 24 hours.
-                                </p>
-                                <div className="flex gap-4">
-                                    <button
-                                        onClick={() => setStep(1)}
-                                        className="px-8 py-4 rounded-full border border-black dark:border-white text-[9px] tracking-[0.5em] uppercase hover:opacity-50 transition-all font-sans font-light"
-                                    >
-                                        New Request
-                                    </button>
-                                    <button
-                                        onClick={handleReturnToCollection}
-                                        className="px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black text-[9px] tracking-[0.5em] uppercase hover:opacity-90 transition-all font-sans font-light"
-                                    >
-                                        Back to Collection
-                                    </button>
+                                        <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Acquisition</option>
+                                        <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Private Commission</option>
+                                        <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Appraisal</option>
+                                        <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Press Inquiry</option>
+                                    </select>
+                                    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-xs opacity-40 pointer-events-none">▼</span>
                                 </div>
                             </div>
-                        )}
-                    </div>
+
+                            <div className="space-y-2 group">
+                                <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Vision</label>
+                                <textarea
+                                    placeholder="Tell us about what you are looking for..."
+                                    rows={1}
+                                    className="w-full bg-transparent outline-none text-xl md:text-3xl font-light font-serif italic placeholder:opacity-20 border-b border-current/20 pb-4 resize-none focus:border-current transition-colors"
+                                    value={formData.message}
+                                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                                />
+                            </div>
+
+                            <div className="pt-12 text-right">
+                                <button
+                                    type="submit"
+                                    className="text-[10px] tracking-[0.4em] uppercase border border-current px-12 py-4 hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-[#FBFBF9] dark:hover:text-black transition-all duration-500"
+                                >
+                                    Request Access
+                                </button>
+                            </div>
+                        </form>
+                    ) : (
+                        <div className="h-full flex flex-col items-center justify-center text-center p-16 border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm animate-pulse-slow">
+                            <span className="text-6xl mb-8">✦</span>
+                            <h2 className="text-3xl md:text-5xl font-light serif mb-8 italic">Request Received.</h2>
+                            <p className="text-lg opacity-60 leading-relaxed max-w-xs mb-12 font-serif">
+                                &quot;We will review your inquiry with discretion.&quot;
+                            </p>
+                            <button
+                                onClick={() => setStep(1)}
+                                className="text-[9px] tracking-[0.4em] uppercase border-b border-zinc-500 pb-1 hover:text-amber-600 transition-colors"
+                            >
+                                Return
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
-            <Footer />
         </main>
     );
 }
