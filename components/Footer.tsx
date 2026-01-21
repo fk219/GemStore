@@ -19,15 +19,11 @@ const Footer: React.FC = () => {
                         href="/book"
                         className="group relative inline-flex items-center gap-6 px-10 py-5 rounded-full border border-black dark:border-white overflow-hidden transition-all duration-500 hover:gap-10"
                     >
-                        <span className="relative z-10 text-sm tracking-[0.2em] uppercase">{t.ctaButton}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span className="relative z-10 text-sm tracking-[0.2em] uppercase text-black dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors duration-500">{t.ctaButton}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 relative z-10 text-black dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                         <div className="absolute inset-0 bg-black dark:bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                        <style jsx>{`
-                .group:hover span, .group:hover svg { color: white !important; } 
-                .dark .group:hover span, .dark .group:hover svg { color: black !important; }
-            `}</style>
                     </Link>
                 </div>
 

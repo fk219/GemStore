@@ -5,7 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeContext, LanguageContext } from '@/app/providers';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+    themeOverride?: 'light' | 'dark' | 'auto';
+}
+
+const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     const themeCtx = useContext(ThemeContext);
     const langCtx = useContext(LanguageContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,22 +19,42 @@ const Navbar: React.FC = () => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 30);
         };
+        handleScroll(); // Check on mount
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    }, [isMenuOpen]);
 
     if (!themeCtx || !langCtx) return null;
 
     const { theme, toggleTheme } = themeCtx;
     const { locale, setLocale } = langCtx;
+
+    // Determine effective text color
+    // If scrolled, always adapt to the blur background (usually standard text color)
+    // If not scrolled and themeOverride is set, use that.
+    // Otherwise fallback to standard theme text.
+
+    // For Home Hero (Dark), we likely pass themeOverride='dark' (meaning Dark Mode text -> White)
+    // Wait, 'dark' mode usually means White Text. 'light' means Black Text.
+
+    let effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]"; // Default auto
+    let effectiveBorderColorClass = "border-zinc-900/20 dark:border-[#FBFBF9]/20";
+
+    if (!isScrolled && !isMenuOpen) {
+        if (themeOverride === 'dark') { // Force "Dark Mode" style (White Text)
+            effectiveTextColorClass = "text-[#FBFBF9]";
+            effectiveBorderColorClass = "border-[#FBFBF9]/20";
+        } else if (themeOverride === 'light') { // Force "Light Mode" style (Black Text)
+            effectiveTextColorClass = "text-zinc-900";
+            effectiveBorderColorClass = "border-zinc-900/20";
+        }
+    }
+
+    // Force "Menu Open" state colors if menu is open (usually contrast against menu bg)
+    if (isMenuOpen) {
+        effectiveTextColorClass = "text-zinc-900 dark:text-[#FBFBF9]";
+        effectiveBorderColorClass = "border-zinc-900/20 dark:border-[#FBFBF9]/20";
+    }
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -39,20 +63,15 @@ const Navbar: React.FC = () => {
         { name: 'Contact', path: '/book' },
     ];
 
-    // FIX: Force text to be "white-ish" regardless of theme, relying on mix-blend-difference to invert it against light backgrounds.
-    // This solves the issue where Light Theme makes text dark, but it sits on a Dark Hero section.
-    const textColorClass = "text-[#FBFBF9] mix-blend-difference";
-    const borderColorClass = "border-[#FBFBF9]/20 mix-blend-difference";
-
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-[70] px-8 md:px-12 py-6 flex justify-between items-center transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-md bg-[#FBFBF9]/60 dark:bg-[#0A0A0B]/60 shadow-sm' : ''
+                className={`fixed top-0 left-0 w-full z-[70] px-8 md:px-12 py-6 flex justify-between items-center transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-md bg-[#FBFBF9]/80 dark:bg-[#0A0A0B]/80 shadow-sm py-4' : ''
                     }`}
             >
                 <Link
                     href="/"
-                    className={`group flex items-center gap-4 ${textColorClass} z-[80] relative`}
+                    className={`group flex items-center gap-4 ${effectiveTextColorClass} z-[80] relative transition-colors duration-500`}
                 >
                     <span className="text-xl md:text-2xl tracking-[0.15em] font-serif uppercase leading-none transition-all duration-700 group-hover:tracking-[0.2em] font-light">
                         T.CRAFT
@@ -70,7 +89,7 @@ const Navbar: React.FC = () => {
                         {/* Theme Toggle - Animated Sun/Moon */}
                         <button
                             onClick={toggleTheme}
-                            className={`relative w-12 h-12 flex items-center justify-center rounded-full border ${borderColorClass} ${textColorClass} group/theme overflow-hidden transition-all duration-700 hover:border-current/30 hover:bg-current/[0.03]`}
+                            className={`relative w-12 h-12 flex items-center justify-center rounded-full border ${effectiveBorderColorClass} ${effectiveTextColorClass} group/theme overflow-hidden transition-all duration-700 hover:border-current/30 hover:bg-current/[0.03]`}
                             aria-label="Toggle Atmosphere"
                         >
                             {/* Sun Icon: Animates down when switching to dark */}
@@ -94,7 +113,7 @@ const Navbar: React.FC = () => {
                         </button>
 
                         <button
-                            className={`group relative flex flex-col items-end justify-center gap-2.5 ${textColorClass} focus:outline-none h-12 w-12`}
+                            className={`group relative flex flex-col items-end justify-center gap-2.5 ${effectiveTextColorClass} focus:outline-none h-12 w-12 transition-colors duration-500`}
                             onClick={() => setIsMenuOpen(true)}
                             aria-label="Reveal Narrative"
                         >

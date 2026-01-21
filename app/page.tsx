@@ -61,7 +61,7 @@ export default function Home() {
 
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
-            <Navbar />
+            <Navbar themeOverride="dark" />
             <Hero />
 
             {/* Chapter 1: The Soul of Rarity - Editorial Overlay Layout */}
