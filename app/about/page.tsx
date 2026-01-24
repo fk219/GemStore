@@ -3,6 +3,7 @@
 import React, { useContext, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import AboutHero from '@/components/AboutHero';
+import Timeline from '@/components/Timeline';
 import Footer from '@/components/Footer';
 import { ThemeContext } from '@/app/providers';
 import Image from 'next/image';
@@ -46,7 +47,7 @@ export default function About() {
                 <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center text-[#FBFBF9]">
                     {/* Image */}
                     {/* Image - Interactive Hover */}
-                    <div className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group cursor-pointer">
+                    <div data-speed="0.8" className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group cursor-pointer">
                         <Image
                             src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                             fill
@@ -116,6 +117,9 @@ export default function About() {
                     </div>
                 </div>
             </section>
+
+            {/* New Timeline Section */}
+            <Timeline />
 
             {/* Signoff */}
             <section className="py-48 px-6 md:px-24 flex justify-end">
