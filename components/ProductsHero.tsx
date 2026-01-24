@@ -1,67 +1,112 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
-import Image from 'next/image';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const ProductsHero: React.FC = () => {
-    const containerRef = useRef(null);
-    const titleRef = useRef(null);
-    const subtitleRef = useRef(null);
-    const gridRef = useRef(null);
-    const circleRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const leftCurtainRef = useRef<HTMLDivElement>(null);
+    const rightCurtainRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "+=150%", // Pin for longer to allow curtain to open
+                pin: true,
+                scrub: 1,
+            }
+        });
 
-        // Initial States
-        gsap.set(titleRef.current, { y: 100, opacity: 0, rotateX: 20 });
-        gsap.set(subtitleRef.current, { y: 20, opacity: 0 });
-        gsap.set(gridRef.current, { opacity: 0, scale: 1.1 });
-        gsap.set(circleRef.current, { scale: 0, opacity: 0 });
+        // 1. Title fades out slightly
+        tl.to(titleRef.current, { opacity: 0, scale: 0.8, duration: 1 });
 
-        // Sequence
-        tl.to(gridRef.current, { opacity: 0.4, scale: 1, duration: 2.5, ease: "power2.out" })
-            .to(circleRef.current, { scale: 1, opacity: 1, duration: 2, ease: "expo.out" }, "-=2")
-            .to(titleRef.current, { y: 0, opacity: 1, rotateX: 0, duration: 1.5 }, "-=1.5")
-            .to(subtitleRef.current, { y: 0, opacity: 1, duration: 1 }, "-=1.2");
+        // 2. Curtains Open
+        tl.to(leftCurtainRef.current, { xPercent: -100, duration: 3, ease: "power2.inOut" }, "-=0.5")
+            .to(rightCurtainRef.current, { xPercent: 100, duration: 3, ease: "power2.inOut" }, "<");
 
-        // Continuous rotation for circle
-        gsap.to(circleRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
+        // 3. Content Flies in from Z-Axis
+        tl.fromTo(contentRef.current,
+            { scale: 0.5, opacity: 0, z: -500 },
+            { scale: 1, opacity: 1, z: 0, duration: 2.5, ease: "expo.out" },
+            "-=2.5"
+        );
 
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative h-[80vh] w-full overflow-hidden bg-[#0A0A0A] text-[#FBFBF9] flex items-center justify-center perspective-[1000px]">
+        <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] text-[#FBFBF9] perspective-[1000px]">
 
-            {/* Background Grid - Abstract Vault Feel */}
-            <div ref={gridRef} className="absolute inset-0 opacity-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none" />
-
-            {/* Abstract Orb/Gradient */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
-
-            {/* Rotating Technical Ring */}
-            <div ref={circleRef} className="absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px] border border-white/5 rounded-full flex items-center justify-center opacity-0">
-                <div className="absolute w-full h-full border border-white/5 rounded-full scale-110 border-dashed" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-white/20 rounded-full" />
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-white/20 rounded-full" />
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white/20 rounded-full" />
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white/20 rounded-full" />
-            </div>
-
-            {/* Content Content */}
-            <div className="relative z-10 text-center px-6">
-                <div ref={subtitleRef} className="flex items-center justify-center gap-4 mb-8 opacity-0">
-                    <span className="w-12 h-px bg-white/30" />
-                    <span className="text-[10px] tracking-[0.6em] uppercase font-sans font-light">Inventory Level 1</span>
-                    <span className="w-12 h-px bg-white/30" />
+            {/* The Content Revealed Behind Curtains */}
+            <div ref={contentRef} className="absolute inset-0 flex items-center justify-center pt-24">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl px-8 opacity-0">
+                    {/* Pseudo Gem Cards for Effect */}
+                    {[1, 2, 3, 4].map(i => (
+                        <div key={i} className="aspect-[3/4] bg-white/5 border border-white/10 rounded-sm relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+                            <div className="absolute bottom-4 left-4 z-20">
+                                <div className="h-2 w-16 bg-white/20 mb-2 shimmer"></div>
+                                <div className="h-4 w-32 bg-white/40 shimmer"></div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-
-                <h1 ref={titleRef} className="text-7xl md:text-[10vw] font-light serif leading-[0.8] mix-blend-difference transform-gpu">
-                    The Vault
-                </h1>
             </div>
+
+            {/* Curtains */}
+            <div className="absolute inset-0 flex pointer-events-none z-20">
+                <div ref={leftCurtainRef} className="w-1/2 h-full bg-[#050505] flex items-center justify-end border-r border-white/10 relative">
+                    <div className="absolute right-0 top-0 h-full w-[100px] bg-gradient-to-r from-transparent to-black/50" />
+                </div>
+                <div ref={rightCurtainRef} className="w-1/2 h-full bg-[#050505] flex items-center justify-start border-l border-white/10 relative">
+                    <div className="absolute left-0 top-0 h-full w-[100px] bg-gradient-to-l from-transparent to-black/50" />
+                </div>
+            </div>
+
+            {/* Initial Title Layer on top of curtains */}
+            <div ref={titleRef} className="absolute inset-0 z-30 flex flex-col items-center justify-center mix-blend-difference pointer-events-none">
+                <span className="text-[10px] tracking-[0.8em] uppercase text-white/50 mb-8">Restricted Access</span>
+                <h1 className="text-6xl md:text-9xl font-light serif text-white">The Vault</h1>
+                <div className="mt-12 animate-bounce opacity-30">↓</div>
+            </div>
+
+            <style jsx>{`
+                .shimmer {
+                    position: relative;
+                    overflow: hidden;
+                }
+                .shimmer::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    transform: translateX(-100%);
+                    background-image: linear-gradient(
+                        90deg,
+                        rgba(255, 255, 255, 0) 0,
+                        rgba(255, 255, 255, 0.2) 20%,
+                        rgba(255, 255, 255, 0.5) 60%,
+                        rgba(255, 255, 255, 0)
+                    );
+                    animation: shimmer 2s infinite;
+                }
+                @keyframes shimmer {
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+            `}</style>
         </section>
     );
 };

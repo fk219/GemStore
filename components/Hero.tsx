@@ -4,134 +4,119 @@ import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const Hero: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const rareRef = useRef<HTMLHeadingElement>(null);
-    const natureRef = useRef<HTMLHeadingElement>(null);
-    const craftedRef = useRef<HTMLHeadingElement>(null);
-    const visualRef = useRef<HTMLDivElement>(null);
-    const volumeRef = useRef<HTMLDivElement>(null);
-    const descRef = useRef<HTMLDivElement>(null);
-    const lineRef = useRef<HTMLDivElement>(null);
+    const gemRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
 
-    // Mouse parallax state
-    const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+    // Mouse parallax
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            setMousePos({ x, y });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
     useGSAP(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1, // Smooth scrubbing
+                pin: true, // Pin the section
+            }
+        });
 
-        // Initial Set
-        gsap.set([rareRef.current, natureRef.current, craftedRef.current], { opacity: 0, y: 100, rotateX: 10 });
-        gsap.set(visualRef.current, { scale: 0.8, opacity: 0, filter: "blur(20px)" });
-        gsap.set([volumeRef.current, descRef.current], { opacity: 0 });
-        gsap.set(lineRef.current, { scaleY: 0 });
+        // Initial State Setups
+        gsap.set(textRef.current, { scale: 0.5, opacity: 0, z: -1000 });
+        gsap.set(gemRef.current, { scale: 0.8, filter: "blur(0px)" });
 
-        // Animation Sequence
-        // Animation Sequence - Ethereal & Slow
-        tl.to(visualRef.current, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 3.5, ease: "power2.out" }) // Longer visual entry
-            .to(rareRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.8") // Overlap significantly
-            .to(natureRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.3")
-            .to(craftedRef.current, { opacity: 1, y: 0, rotateX: 0, duration: 2.5, ease: "power3.out" }, "-=2.3")
-            .to(lineRef.current, { scaleY: 1, duration: 2, ease: "expo.inOut" }, "-=2")
-            .to([volumeRef.current, descRef.current], { opacity: 0.6, duration: 2 }, "-=1.5");
+        // Scrollytelling Sequence
+        // 1. Gemstone expands and blurs (Lens effect)
+        tl.to(gemRef.current, {
+            scale: 25, // Massive expansion to "enter" the stone
+            filter: "blur(20px)",
+            opacity: 0,
+            duration: 5,
+            ease: "power2.inOut"
+        });
+
+        // 2. Text emerges FROM the background as gem clears
+        tl.to(textRef.current, {
+            scale: 1,
+            opacity: 1,
+            z: 0,
+            duration: 3,
+            ease: "power2.out"
+        }, "-=3.5"); // Overlap with gem expansion
+
+        // 3. Overlay fades out to reveal clear text
+        tl.to(overlayRef.current, {
+            opacity: 0,
+            duration: 2
+        }, "-=2");
 
     }, { scope: containerRef });
 
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#0A0A0A] text-[#FBFBF9] perspective-[1000px]"
+            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#050505] perspective-[1000px]"
         >
-            {/* Background Gradient/Noise layer */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div
-                    className="absolute inset-0 opacity-30 transition-opacity duration-1000"
-                    style={{
-                        background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, #2A2A2C 0%, #000000 70%)`
-                    }}
+            {/* Background Stars/Particles with Parallax */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
+                    transition: 'transform 0.2s ease-out'
+                }}
+            >
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+                <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-40 shadow-[0_0_10px_white]" />
+                <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-amber-100 rounded-full opacity-30 shadow-[0_0_15px_amber-500]" />
+            </div>
+
+            {/* The Gemstone (Lens) */}
+            <div ref={gemRef} className="relative z-20 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full overflow-hidden shadow-2xl origin-center">
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-10" />
+                <Image
+                    src="https://images.unsplash.com/photo-1601156226066-88a24564c7ee?auto=format&fit=crop&q=80&w=1600" // Macro Gem
+                    alt="The Lens"
+                    fill
+                    className="object-cover"
+                    priority
                 />
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 contrast-150 brightness-100 mix-blend-overlay"></div>
             </div>
 
-            {/* Grid / Layout Container */}
-            <div className="relative z-10 w-full h-full max-w-[1800px] px-6 md:px-12 flex flex-col justify-center min-h-screen py-24">
-
-                {/* Top Row: RARE (Left) + Volume (Right) */}
-                <div className="flex justify-between items-start mb-12 md:mb-0 relative">
-                    <h1 ref={rareRef} className="text-[17vw] md:text-[14vw] font-serif leading-[0.75] tracking-tight mix-blend-exclusion z-20 origin-bottom transform-gpu">
-                        <span className="text-[#FBFBF9]">RA</span>
-                        <span className="text-[#c5b38d] italic font-light">RE</span>
-                    </h1>
-
-                    <div ref={volumeRef} className="hidden md:block absolute top-8 right-0 text-[9px] tracking-[0.8em] uppercase font-sans font-extralight opacity-0 text-white/70">
-                        Volume 01 — Archive
-                    </div>
-                </div>
-
-                {/* Middle Layer: Visual + NATURE (Centered) */}
-                <div className="relative w-full flex items-center justify-center -mt-[6vw] md:-mt-[9vw] mb-[2vw]">
-                    {/* Circle Image Wrapper */}
-                    <div ref={visualRef} className="relative w-[50vw] h-[50vw] md:w-[28vw] md:h-[28vw] rounded-full overflow-hidden border border-white/5 z-10 opacity-0 group shadow-2xl shadow-indigo-500/10">
-                        <div className="absolute inset-0 bg-black/10 z-10" />
-                        <Image
-                            src="https://images.unsplash.com/photo-1601156226066-88a24564c7ee?auto=format&fit=crop&q=80&w=1200" // Abstract Gem Maco
-                            alt="Abstraction"
-                            fill
-                            className="object-cover contrast-110 saturate-0 hover:saturate-50 transition-all duration-[5s] ease-out group-hover:scale-110"
-                            priority
-                        />
-                        {/* Spinning Text Ring (SVG) */}
-                        <div className="absolute inset-2 animate-[spin_80s_linear_infinite] z-20 opacity-40 mix-blend-overlay">
-                            <svg viewBox="0 0 100 100" className="w-full h-full fill-white">
-                                <path id="circlePath" d="M 50, 50 m -44, 0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" fill="transparent" />
-                                <text className="text-[2px] tracking-[2.5px] uppercase font-light font-sans">
-                                    <textPath href="#circlePath">
-                                        • Refined by Nature • Crafted by Time • Timeless Elegance •
-                                    </textPath>
-                                </text>
-                            </svg>
-                        </div>
-                    </div>
-
-                    {/* NATURE Text Overlapping */}
-                    <h1 ref={natureRef} className="absolute text-[15vw] md:text-[12vw] font-serif uppercase tracking-normal z-20 text-white/90 pointer-events-none select-none mix-blend-difference italic font-thin origin-center transform-gpu">
-                        Nature
-                    </h1>
-                </div>
-
-                {/* Bottom Row: Description (Left) + CRAFTED (Right/Center) */}
-                <div className="flex flex-col md:flex-row items-end justify-between relative -mt-[3vw]">
-
-                    {/* Bottom Left Details */}
-                    <div ref={descRef} className="hidden md:flex flex-col gap-8 mb-8 max-w-xs opacity-0">
-                        <div ref={lineRef} className="w-full h-px bg-white/20 origin-left" />
-                        <p className="text-[9px] tracking-[0.3em] uppercase leading-loose font-sans font-light text-white/50">
-                            Crafted for those <br />
-                            who understand <br />
-                            rarity beyond <br />
-                            brilliance.
-                        </p>
-                    </div>
-
-                    {/* CRAFTED Text */}
-                    <h1 ref={craftedRef} className="w-full text-center md:text-right text-[17vw] md:text-[14vw] font-serif leading-[0.75] tracking-tight text-[#FBFBF9] opacity-0 whitespace-nowrap z-20 origin-top transform-gpu">
-                        CRAFTED
-                    </h1>
-
-                    {/* Narrative Hint (Bottom Centered Absolute) */}
-                    <div className="absolute bottom-[-5rem] left-1/2 -translate-x-1/2 hidden md:block opacity-30 animate-bounce delay-1000">
-                        <span className="text-[8px] tracking-[1em] uppercase font-sans">Scroll</span>
-                    </div>
-                </div>
+            {/* The Reveal Text */}
+            <div ref={textRef} className="absolute z-10 text-center mix-blend-difference pointer-events-none">
+                <span className="block text-[10px] tracking-[0.8em] uppercase text-white/60 mb-8">Est. 1982</span>
+                <h1 className="text-[15vw] leading-[0.8] font-serif text-white opacity-90 italic">
+                    L&apos;Éclat
+                </h1>
+                <span className="block text-sm tracking-[0.4em] uppercase text-white/60 mt-8 font-sans font-light">
+                    Legacy of Light
+                </span>
             </div>
 
-            <style jsx>{`
-                @keyframes spin {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-            `}</style>
+            <div ref={overlayRef} className="absolute inset-0 bg-black/40 pointer-events-none z-30" />
+
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/30 text-[9px] tracking-[0.4em] uppercase animate-pulse z-40">
+                explore
+            </div>
         </section>
     );
 };
