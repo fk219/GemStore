@@ -12,110 +12,117 @@ if (typeof window !== "undefined") {
 
 const Hero: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const gemRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLDivElement>(null);
-    const overlayRef = useRef<HTMLDivElement>(null);
+    const rareRef = useRef<HTMLHeadingElement>(null);
+    const refinedRef = useRef<HTMLDivElement>(null);
+    const craftedRef = useRef<HTMLHeadingElement>(null);
+    const lensRef = useRef<HTMLDivElement>(null);
 
-    // Mouse parallax
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
-            const y = (e.clientY / window.innerHeight - 0.5) * 2;
-            setMousePos({ x, y });
+            setMousePos({
+                x: (e.clientX / window.innerWidth - 0.5),
+                y: (e.clientY / window.innerHeight - 0.5)
+            });
         };
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
     useGSAP(() => {
-        const tl = gsap.timeline({
+        const tl = gsap.timeline();
+
+        // Initial Setup
+        gsap.set([rareRef.current, craftedRef.current], { y: 100, opacity: 0 });
+        gsap.set(refinedRef.current, { scale: 0.8, opacity: 0 });
+        gsap.set(lensRef.current, { scale: 0, opacity: 0 });
+
+        // Intro Animation
+        tl.to(lensRef.current, { scale: 1, opacity: 1, duration: 2, ease: "expo.out" })
+            .to(refinedRef.current, { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" }, "-=1.5")
+            .to(rareRef.current, { y: 0, opacity: 1, duration: 2, ease: "power3.out" }, "-=1.2")
+            .to(craftedRef.current, { y: 0, opacity: 1, duration: 2, ease: "power3.out" }, "-=1.8");
+
+        // Scroll Parallax
+        gsap.to(lensRef.current, {
+            y: 100,
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
                 end: "bottom top",
-                scrub: 1, // Smooth scrubbing
-                pin: true, // Pin the section
+                scrub: 1
             }
         });
-
-        // Initial State Setups
-        gsap.set(textRef.current, { scale: 0.5, opacity: 0, z: -1000 });
-        gsap.set(gemRef.current, { scale: 0.8, filter: "blur(0px)" });
-
-        // Scrollytelling Sequence
-        // 1. Gemstone expands and blurs (Lens effect)
-        tl.to(gemRef.current, {
-            scale: 25, // Massive expansion to "enter" the stone
-            filter: "blur(20px)",
-            opacity: 0,
-            duration: 5,
-            ease: "power2.inOut"
-        });
-
-        // 2. Text emerges FROM the background as gem clears
-        tl.to(textRef.current, {
-            scale: 1,
-            opacity: 1,
-            z: 0,
-            duration: 3,
-            ease: "power2.out"
-        }, "-=3.5"); // Overlap with gem expansion
-
-        // 3. Overlay fades out to reveal clear text
-        tl.to(overlayRef.current, {
-            opacity: 0,
-            duration: 2
-        }, "-=2");
 
     }, { scope: containerRef });
 
     return (
-        <section
-            ref={containerRef}
-            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#050505] perspective-[1000px]"
-        >
-            {/* Background Stars/Particles with Parallax */}
-            <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                    transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
-                    transition: 'transform 0.2s ease-out'
-                }}
-            >
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
-                <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-40 shadow-[0_0_10px_white]" />
-                <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-amber-100 rounded-full opacity-30 shadow-[0_0_15px_amber-500]" />
+        <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#020202] text-[#EAEAEA] flex items-center justify-center">
+
+            {/* Background Texture - Dark "Old Money" Grain */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-overlay">
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
             </div>
 
-            {/* The Gemstone (Lens) */}
-            <div ref={gemRef} className="relative z-20 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full overflow-hidden shadow-2xl origin-center">
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-10" />
-                <Image
-                    src="https://images.unsplash.com/photo-1601156226066-88a24564c7ee?auto=format&fit=crop&q=80&w=1600" // Macro Gem
-                    alt="The Lens"
-                    fill
-                    className="object-cover"
-                    priority
-                />
+            {/* Mouse Parallax Background Elements */}
+            <div className="absolute inset-0 z-0 opacity-10" style={{ transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)` }}>
+                <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[10%] right-[20%] w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[120px]" />
             </div>
 
-            {/* The Reveal Text */}
-            <div ref={textRef} className="absolute z-10 text-center mix-blend-difference pointer-events-none">
-                <span className="block text-[10px] tracking-[0.8em] uppercase text-white/60 mb-8">Est. 1982</span>
-                <h1 className="text-[15vw] leading-[0.8] font-serif text-white opacity-90 italic">
-                    L&apos;Éclat
-                </h1>
-                <span className="block text-sm tracking-[0.4em] uppercase text-white/60 mt-8 font-sans font-light">
-                    Legacy of Light
-                </span>
-            </div>
+            <div className="relative z-10 w-full max-w-[1920px] px-6 md:px-24 h-full flex flex-col justify-center">
 
-            <div ref={overlayRef} className="absolute inset-0 bg-black/40 pointer-events-none z-30" />
+                {/* 1. RARE - Top Left */}
+                <div className="absolute top-[15%] left-[5%] md:left-[8%] z-20">
+                    <h1 ref={rareRef} className="text-[18vw] md:text-[16vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion text-white">
+                        RARE
+                    </h1>
+                </div>
 
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/30 text-[9px] tracking-[0.4em] uppercase animate-pulse z-40">
-                explore
+                {/* 2. REFINED / LENS - Center */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                    {/* The Lens / Ring */}
+                    <div ref={lensRef} className="relative w-[50vw] h-[50vw] md:w-[35vw] md:h-[35vw] rounded-full border border-white/10 flex items-center justify-center backdrop-blur-sm shadow-2xl">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent rounded-full" />
+                        {/* Decorative Rings */}
+                        <div className="absolute w-[110%] h-[110%] border border-white/5 rounded-full animate-[spin_60s_linear_infinite]" />
+                        <div className="absolute w-[90%] h-[90%] border border-white/5 rounded-full" />
+
+                        {/* Centered Image inside Lens - The "Necklace/Gem" */}
+                        <div className="w-[70%] h-[70%] relative rounded-full overflow-hidden mix-blend-overlay opacity-80">
+                            <Image
+                                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
+                                alt="Refined Gem"
+                                fill
+                                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-125"
+                            />
+                        </div>
+                    </div>
+
+                    {/* REFINED Text Overlaying the Lens */}
+                    <div ref={refinedRef} className="absolute z-30 mix-blend-difference pointer-events-none">
+                        <h2 className="text-[12vw] md:text-[10vw] font-serif italic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-white/50 to-white/20">
+                            REFINED
+                        </h2>
+                    </div>
+                </div>
+
+                {/* 3. CRAFTED - Bottom Right */}
+                <div className="absolute bottom-[10%] right-[5%] md:right-[8%] z-20">
+                    <h1 ref={craftedRef} className="text-[18vw] md:text-[16vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion text-white">
+                        CRAFTED
+                    </h1>
+                </div>
+
+                {/* Meta Details */}
+                <div className="absolute bottom-12 left-12 text-[9px] tracking-[0.4em] uppercase opacity-30 hidden md:block">
+                    Maison de Haute Joaillerie
+                </div>
+                <div className="absolute top-12 right-12 text-[9px] tracking-[0.4em] uppercase opacity-30 hidden md:block">
+                    Archive No. 001
+                </div>
+
             </div>
         </section>
     );
