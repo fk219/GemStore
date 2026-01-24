@@ -98,8 +98,10 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     // GSAP Refs for visual enhancement
     const sunRef = useRef(null);
     const moonRef = useRef(null);
+    const menuRef = useRef(null);
 
     useGSAP(() => {
+        // Theme Toggle Animation
         if (theme === 'dark') {
             gsap.to(sunRef.current, { y: 20, opacity: 0, scale: 0.5, duration: 0.5, ease: "power2.in" });
             gsap.fromTo(moonRef.current, { y: -20, opacity: 0, scale: 0.5 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", delay: 0.2 });
@@ -108,6 +110,28 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             gsap.fromTo(sunRef.current, { y: 20, opacity: 0, scale: 0.5 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", delay: 0.2 });
         }
     }, [theme]);
+
+    useGSAP(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+
+        if (isMenuOpen) {
+            // OPEN Sequence
+            gsap.set(menuRef.current, { pointerEvents: "auto", opacity: 1 });
+
+            tl.to(".menu-bg", { y: "0%", duration: 0.8, ease: "power4.inOut" })
+                .to(".menu-panel", { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, "-=0.3")
+                .to(".menu-link", { y: 0, opacity: 1, duration: 0.5, stagger: 0.05 }, "-=0.4")
+                .to(".menu-close", { opacity: 1, duration: 0.5 }, "-=0.5");
+        } else {
+            // CLOSE Sequence
+            tl.to(".menu-close", { opacity: 0, duration: 0.3 })
+                .to(".menu-link", { y: 10, opacity: 0, duration: 0.3, stagger: 0.02 }, "-=0.2")
+                .to(".menu-panel", { y: 20, opacity: 0, duration: 0.4, stagger: 0.05 }, "-=0.2")
+                .to(".menu-bg", { y: "100%", duration: 0.6, ease: "power4.inOut" })
+                .set(menuRef.current, { pointerEvents: "none", opacity: 0 }); // Hide container after anim
+        }
+
+    }, [isMenuOpen]);
 
     return (
         <>
@@ -165,34 +189,34 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
 
             {/* FULL SCREEN INTERACTIVE MENU */}
             <div
-                className={`fixed inset-0 z-[100] transition-all duration-[0.8s] ease-[cubic-bezier(0.85, 0, 0.15, 1)] ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-full pointer-events-none'
-                    }`}
+                ref={menuRef} // Using GSAP ref control
+                className={`fixed inset-0 z-[100] pointer-events-none opacity-0`} // Default hidden, GSAP controls visibility
             >
                 {/* Background */}
-                <div className="absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A]"></div>
+                <div className="menu-bg absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A] translate-y-full"></div>
 
                 {/* Close Button */}
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
+                        // Trigger close animation via state change effect (handled below)
                         setIsMenuOpen(false);
                         setHoveredLink(null);
                     }}
-                    className={`absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer hover:opacity-100`}
+                    className={`menu-close absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer hover:opacity-100 opacity-0`}
                     aria-label="Close Menu"
                 >
                     <div className="relative w-12 h-12 flex items-center justify-center pointer-events-none">
                         <span className="absolute w-full h-[1px] bg-current rotate-45 transition-all duration-700 group-hover:rotate-[135deg]"></span>
                         <span className="absolute w-full h-[1px] bg-current -rotate-45 transition-all duration-700 group-hover:-rotate-[135deg]"></span>
                     </div>
-                    <span className="mt-5 text-[8px] tracking-[0.5em] uppercase opacity-40 font-light font-sans transition-opacity group-hover:opacity-100 pointer-events-none">Fermer</span>
                 </button>
 
                 {/* Content Grid */}
                 <div className={`h-full w-full flex flex-col md:flex-row ${textColorClass} relative z-10`}>
 
                     {/* LEFT PANEL: Brand Details & Info */}
-                    <div className="hidden md:flex flex-col justify-between w-1/4 h-full p-16 border-r border-[#646464]/10">
+                    <div className="menu-panel hidden md:flex flex-col justify-between w-1/4 h-full p-16 border-r border-[#646464]/10 opacity-0 translate-y-20">
                         <div className="space-y-8">
                             <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Maison L'Éclat</span>
                             <div className="space-y-2 text-xs font-light tracking-wide opacity-60">
@@ -222,7 +246,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 return (
                                     <div
                                         key={`${link.name}-${i}`}
-                                        className="relative group/navitem flex items-center gap-8"
+                                        className="relative group/navitem flex items-center gap-8 menu-link opacity-0 translate-y-10" // Stagger target
                                         onMouseEnter={() => setHoveredLink(link.name)}
                                         onMouseLeave={() => setHoveredLink(null)}
                                     >
@@ -245,7 +269,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     </div>
 
                     {/* RIGHT PANEL: Dynamic Image Preview */}
-                    <div className="hidden md:flex w-1/3 h-full items-center justify-center p-16 bg-[#FBFBF9] dark:bg-[#0C0C0C] transition-colors duration-500">
+                    <div className="menu-panel hidden md:flex w-1/3 h-full items-center justify-center p-16 bg-[#FBFBF9] dark:bg-[#0C0C0C] transition-colors duration-500 opacity-0 translate-y-20">
                         <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
                             {/* We use key to force unmount/mount transition or just simple CSS fade */}
                             {navLinks.map((link) => (
