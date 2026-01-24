@@ -19,6 +19,7 @@ export default function About() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Reveal Elements
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
                 gsap.fromTo(el,
@@ -29,6 +30,31 @@ export default function About() {
                     }
                 );
             });
+
+            // Sophisticated Parallax for Backgrounds
+            gsap.to(".parallax-bg", {
+                yPercent: 20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".atelier-section",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+
+            // Foreground Text Parallax relative to Image
+            gsap.to(".parallax-text", {
+                y: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".chapter-1",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+
         });
         return () => ctx.revert();
     }, []);
@@ -43,7 +69,7 @@ export default function About() {
             <AboutHero />
 
             {/* Chapter 1: The Origin - Split Layout */}
-            <section className="py-24 px-6 md:px-24">
+            <section className="chapter-1 py-24 px-6 md:px-24">
                 <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center text-[#FBFBF9]">
                     {/* Image */}
                     {/* Image - Interactive Hover */}
@@ -71,7 +97,7 @@ export default function About() {
                     </div>
 
                     {/* Text content - Reversing text color since this might need its own background if we want contrast, but keeping minimal for now */}
-                    <div className={`flex flex-col justify-center ${textColorClass}`}>
+                    <div className={`parallax-text flex flex-col justify-center ${textColorClass}`}>
                         <span className="text-xs uppercase tracking-[0.3em] opacity-40 mb-8">01. The Source</span>
                         <h2 className="text-4xl md:text-6xl serif font-light mb-8">Chaos & <br /><span className="italic">Time</span></h2>
                         <p className="text-lg opacity-70 leading-relaxed font-light mb-8 font-serif">
@@ -87,12 +113,12 @@ export default function About() {
             </section>
 
             {/* Chapter 2: The Atelier - Full Width */}
-            <section className="py-32 relative overflow-hidden bg-[#101010] text-[#FBFBF9]">
+            <section className="atelier-section py-32 relative overflow-hidden bg-[#101010] text-[#FBFBF9]">
                 <div className="absolute inset-0 opacity-20">
                     <Image
                         src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=2000"
                         fill
-                        className="object-cover grayscale"
+                        className="parallax-bg object-cover grayscale"
                         alt="Background Texture"
                     />
                 </div>

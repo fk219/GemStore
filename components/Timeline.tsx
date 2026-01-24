@@ -64,10 +64,17 @@ const Timeline: React.FC = () => {
                         >
                             {/* Visual Abstract Shape */}
                             <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-                                <div className={`relative w-32 h-32 md:w-48 md:h-48 border border-current/10 rounded-full flex items-center justify-center group ${i % 2 !== 0 ? 'md:justify-start' : ''}`}>
-                                    <div className="absolute inset-4 border border-current/20 rounded-full group-hover:scale-90 transition-transform duration-1000" />
-                                    <div className="w-2 h-2 bg-[#D4AF37] rounded-full" />
-                                    <span className="absolute -top-6 text-[10px] tracking-[0.4em] opacity-40">{item.year}</span>
+                                <div className={`relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center group ${i % 2 !== 0 ? 'md:justify-start' : ''}`}>
+                                    {/* Rotating Outer Ring */}
+                                    <div className="absolute inset-0 border border-current/10 rounded-full animate-[spin_20s_linear_infinite]" />
+
+                                    {/* Counter-Rotating Inner Square */}
+                                    <div className="absolute inset-8 border border-current/20 rotate-45 group-hover:rotate-0 transition-transform duration-[1.5s] ease-expo" />
+
+                                    {/* Center Marker */}
+                                    <div className="w-2 h-2 bg-[#D4AF37] rotate-45 group-hover:scale-150 transition-transform duration-500" />
+
+                                    <span className="absolute -top-8 text-[10px] tracking-[0.4em] opacity-40">{item.year}</span>
                                 </div>
                             </div>
 
