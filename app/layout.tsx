@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
+import IntroSequence from "@/components/IntroSequence";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -35,6 +36,7 @@ export default function RootLayout({
                 >
                     <SmoothScroll />
                     <CustomCursor />
+                    <IntroSequence />
                     {children}
                 </body>
             </Providers>
