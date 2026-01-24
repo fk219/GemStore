@@ -82,21 +82,39 @@ const Hero: React.FC = () => {
                     </svg>
                 </div>
 
-                {/* Shimmering Micro-Particles (Diamond Dust) */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(16)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute w-[2px] h-[2px] bg-white/40 rounded-full animate-pulse opacity-0"
-                            style={{
-                                top: `${Math.random() * 80 + 10}%`,
-                                left: `${Math.random() * 80 + 10}%`,
-                                animation: `glintParticle ${5 + Math.random() * 5}s infinite ${Math.random() * 5}s`,
-                                transform: `translate3d(${(smoothMousePos.x - 0.5) * (20 + i)}px, ${(smoothMousePos.y - 0.5) * (20 + i)}px, 0)`
-                            }}
-                        />
-                    ))}
-                </div>
+                const [particles, setParticles] = useState<Array<{ top: string, left: string, delay: string, duration: string, xFactor: number, yFactor: number }>>([]);
+
+    useEffect(() => {
+                        setParticles([...Array(16)].map((_, i) => ({
+                            top: `${Math.random() * 80 + 10}%`,
+                            left: `${Math.random() * 80 + 10}%`,
+                            delay: `${Math.random() * 5}s`,
+                            duration: `${5 + Math.random() * 5}s`,
+                            xFactor: 20 + i,
+                            yFactor: 20 + i
+                        })));
+    }, []);
+
+                    // ... (rest of render)
+
+                    {/* 1. DYNAMIC ATMOSPHERIC LAYERS */}
+                    {/* ... */}
+
+                    {/* Shimmering Micro-Particles (Diamond Dust) */}
+                    <div className="absolute inset-0 pointer-events-none">
+                        {particles.map((p, i) => (
+                            <div
+                                key={i}
+                                className="absolute w-[2px] h-[2px] bg-white/40 rounded-full animate-pulse opacity-0"
+                                style={{
+                                    top: p.top,
+                                    left: p.left,
+                                    animation: `glintParticle ${p.duration} infinite ${p.delay}`,
+                                    transform: `translate3d(${(smoothMousePos.x - 0.5) * p.xFactor}px, ${(smoothMousePos.y - 0.5) * p.yFactor}px, 0)`
+                                }}
+                            />
+                        ))}
+                    </div>
             </div>
 
             {/* 2. ARCHITECTURAL PRISMS - Refined Geometry */}

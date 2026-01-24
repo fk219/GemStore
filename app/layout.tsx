@@ -31,17 +31,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${playfair.variable} ${jakarta.variable}`}>
-            <Providers>
-                <body
-                    className="antialiased font-sans transition-colors duration-700"
-                >
+            <body
+                className="antialiased font-sans transition-colors duration-700"
+            >
+                <Providers>
                     <SmoothScroll />
                     <CustomCursor />
                     <IntroSequence />
                     <Marquee />
                     {children}
-                </body>
-            </Providers>
+                </Providers>
+            </body>
         </html>
     );
 }
