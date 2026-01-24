@@ -154,6 +154,8 @@ export default function BookingPage() {
                     )}
                 </div>
             </section>
+
+            <Footer />
         </main>
     );
 }

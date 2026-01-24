@@ -33,6 +33,12 @@ const ContactHero = () => {
                 <h1 ref={titleRef} className="text-[12vw] leading-[0.8] font-serif font-light tracking-tight italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
                     ATELIER
                 </h1>
+
+                {/* Floating Letters or Shapes */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <span className="absolute top-[20%] left-[10%] text-[8rem] serif italic opacity-5 text-white animate-[float_10s_ease-in-out_infinite]">A</span>
+                    <span className="absolute bottom-[20%] right-[10%] text-[6rem] serif italic opacity-5 text-white animate-[float_12s_ease-in-out_infinite_reverse]">V</span>
+                </div>
             </div>
         </section>
     );

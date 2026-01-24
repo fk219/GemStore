@@ -59,6 +59,12 @@ const ProductsHero: React.FC = () => {
                 <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#FBFBF9] to-[#999]">
                     VAULT
                 </h1>
+
+                {/* Floating Abstract Elements */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                    <div className="absolute top-0 right-20 w-32 h-32 border border-white/10 rounded-full animate-[spin_20s_linear_infinite]" />
+                    <div className="absolute bottom-10 left-20 w-48 h-48 border border-white/5 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
+                </div>
             </div>
 
             {/* Reveal Overlay Curtain */}
