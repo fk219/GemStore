@@ -40,12 +40,11 @@ export function Providers({ children }: { children: ReactNode }) {
     };
 
     // Prevent hydration mismatch by returning null or consistent initial state
-    // Prevent hydration mismatch by returning null or consistent initial state
     if (!mounted) {
         return (
-            <>
+            <body className="bg-[#FBFBF9] text-[#1A1A1A]">
                 {children}
-            </>
+            </body>
         );
     }
 

@@ -5,7 +5,6 @@ import { Providers } from "./providers";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import IntroSequence from "@/components/IntroSequence";
-import Marquee from "@/components/Marquee";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -31,17 +30,16 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${playfair.variable} ${jakarta.variable}`}>
-            <body
-                className="antialiased font-sans transition-colors duration-700"
-            >
-                <Providers>
+            <Providers>
+                <body
+                    className="antialiased font-sans transition-colors duration-700"
+                >
                     <SmoothScroll />
                     <CustomCursor />
                     <IntroSequence />
-                    <Marquee />
                     {children}
-                </Providers>
-            </body>
+                </body>
+            </Providers>
         </html>
     );
 }

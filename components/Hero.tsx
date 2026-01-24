@@ -1,24 +1,11 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import NextImage from 'next/image';
 
 const Hero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
     const [smoothMousePos, setSmoothMousePos] = useState({ x: 0.5, y: 0.5 });
-    const [particles, setParticles] = useState<Array<{ top: string, left: string, delay: string, duration: string, xFactor: number, yFactor: number }>>([]);
-
-    useEffect(() => {
-        setParticles([...Array(16)].map((_, i) => ({
-            top: `${Math.random() * 80 + 10}%`,
-            left: `${Math.random() * 80 + 10}%`,
-            delay: `${Math.random() * 5}s`,
-            duration: `${5 + Math.random() * 5}s`,
-            xFactor: 20 + i,
-            yFactor: 20 + i
-        })));
-    }, []);
 
     useEffect(() => {
         setMounted(true);
@@ -70,146 +57,159 @@ const Hero: React.FC = () => {
         >
             {/* 1. DYNAMIC ATMOSPHERIC LAYERS */}
             <div
-                className="absolute inset-0 z-0 transition-transform duration-[1.5s] ease-out will-change-transform"
+                className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
                 style={{
-                    transform: `perspective(1000px) rotateX(${(smoothMousePos.y - 0.5) * -2}deg) rotateY(${(smoothMousePos.x - 0.5) * 2}deg) scale(1.02)`
+                    transform: `rotateX(${(smoothMousePos.y - 0.5) * -5}deg) rotateY(${(smoothMousePos.x - 0.5) * 5}deg) scale(1.05)`
                 }}
             >
-                {/* The Obsidian Core Gradient - Smoother Interaction */}
+                {/* The Obsidian Core Gradient */}
                 <div
-                    className="absolute inset-0 opacity-80"
+                    className="absolute inset-0 opacity-90"
                     style={{
-                        background: `radial-gradient(120% 120% at ${50 + (smoothMousePos.x - 0.5) * 20}% ${50 + (smoothMousePos.y - 0.5) * 20}%, #1E1E20 0%, #050505 60%, #000000 100%)`
+                        background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, #1E1E20 0%, #0A0A0B 80%)`
                     }}
                 />
 
-                {/* Dynamic Light Caustics (Refracted Light Patterns) - Slowed Down */}
-                <div className="absolute inset-0 opacity-[0.05] mix-blend-screen pointer-events-none">
+                {/* Dynamic Light Caustics (Refracted Light Patterns) */}
+                <div className="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none">
                     <svg width="100%" height="100%">
                         <filter id="caustics">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" stitchTiles="stitch" />
-                            <feDisplacementMap in="SourceGraphic" scale="30" />
+                            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" stitchTiles="stitch" />
+                            <feDisplacementMap in="SourceGraphic" scale="20" />
                         </filter>
-                        <rect width="100%" height="100%" filter="url(#caustics)" className="animate-[causticMove_90s_infinite_linear]" />
+                        <rect width="100%" height="100%" filter="url(#caustics)" className="animate-[causticMove_60s_infinite_linear]" />
                     </svg>
                 </div>
 
-
-
-                    // ... (rest of render)
-
-                {/* 1. DYNAMIC ATMOSPHERIC LAYERS */}
-                {/* ... */}
-
                 {/* Shimmering Micro-Particles (Diamond Dust) */}
                 <div className="absolute inset-0 pointer-events-none">
-                    {particles.map((p, i) => (
+                    {[...Array(24)].map((_, i) => (
                         <div
                             key={i}
-                            className="absolute w-[2px] h-[2px] bg-white/40 rounded-full animate-pulse opacity-0"
+                            className="absolute w-[1px] h-[1px] bg-white rounded-full animate-pulse opacity-0"
                             style={{
-                                top: p.top,
-                                left: p.left,
-                                animation: `glintParticle ${p.duration} infinite ${p.delay}`,
-                                transform: `translate3d(${(smoothMousePos.x - 0.5) * p.xFactor}px, ${(smoothMousePos.y - 0.5) * p.yFactor}px, 0)`
+                                top: `${Math.random() * 100}%`,
+                                left: `${Math.random() * 100}%`,
+                                animation: `glintParticle ${3 + Math.random() * 5}s infinite ${Math.random() * 5}s`,
+                                transform: `translate3d(${(smoothMousePos.x - 0.5) * (10 + i)}px, ${(smoothMousePos.y - 0.5) * (10 + i)}px, 0)`
                             }}
                         />
                     ))}
                 </div>
             </div>
 
-            {/* 2. ARCHITECTURAL PRISMS - Refined Geometry */}
+            {/* 2. ARCHITECTURAL PRISMS */}
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
                 {/* Floating Facet Alpha */}
                 <div
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55vw] h-[55vw] border border-white/[0.04] rounded-[45%_55%_65%_35%/45%_45%_55%_55%] animate-[morph_40s_infinite_linear] transition-all duration-[3s] ease-out ${mounted ? 'opacity-30 scale-100 blur-[1px]' : 'opacity-0 scale-110 blur-[10px]'}`}
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] border border-white/[0.03] rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_30s_infinite_linear] transition-all duration-[3s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-110'}`}
                     style={{
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -40}px, ${(smoothMousePos.y - 0.5) * -40}px, 0) rotate(${(smoothMousePos.x - 0.5) * 10}deg)`
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -60}px, ${(smoothMousePos.y - 0.5) * -60}px, 0) rotate(${(smoothMousePos.x - 0.5) * 20}deg)`
                     }}
                 >
-                    <div className="absolute inset-16 border border-white/[0.02] rounded-inherit backdrop-blur-[0px]" />
+                    <div className="absolute inset-12 border border-white/[0.02] rounded-inherit backdrop-blur-[2px]" />
                 </div>
 
                 {/* Golden Refraction Arc */}
                 <div
-                    className={`absolute top-[40%] left-[40%] w-[30vw] h-[30vw] border-l border-t border-[#b5a16d]/15 rounded-[60%_40%_40%_60%/60%_60%_40%_40%] animate-[morph_30s_infinite_linear_reverse] transition-all duration-[3s] delay-300 ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-90'}`}
+                    className={`absolute top-1/3 left-1/3 w-[35vw] h-[35vw] border-l border-t border-[#b5a16d]/10 rounded-[70%_30%_30%_70%/70%_70%_30%_30%] animate-[morph_20s_infinite_linear_reverse] transition-all duration-[3s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
                     style={{
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 30}px, ${(smoothMousePos.y - 0.5) * 30}px, 0)`
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 40}px, ${(smoothMousePos.y - 0.5) * 40}px, 0) scale(1.1)`
                     }}
                 />
             </div>
 
-            {/* 3. CORE TYPOGRAPHY & MUSEUM VISUAL - High Contrast */}
-            <div className="relative z-20 w-full max-w-[1800px] px-12 md:px-32 pointer-events-none text-[#F2F2F2]">
+            {/* 3. CORE TYPOGRAPHY & MUSEUM VISUAL */}
+            <div className="relative z-20 w-full max-w-[1800px] px-12 md:px-32 pointer-events-none">
                 <div className="flex flex-col gap-0 select-none">
 
                     {/* TOP ROW: PRESTIGE LABELING */}
-                    <div className="flex items-end justify-between mb-[-3vh] relative">
-                        <h1 className="text-[14vw] md:text-[13vw] font-light serif leading-[0.7] tracking-tight uppercase flex items-baseline mix-blend-normal">
-                            <SplitText text="RARE" delay={0.8} />
-                            <span className="text-[8vw] md:text-[6vw] italic text-[#b5a16d]/90 ml-6 lowercase tracking-normal">
-                                <SplitText text="by nature" delay={1.4} />
+                    <div className="flex items-end justify-between mb-[-4vh] relative">
+                        <h1 className="text-[16vw] md:text-[14vw] font-light serif leading-[0.65] tracking-tight uppercase flex items-baseline">
+                            <SplitText text="RARE" delay={0.6} className="text-white" />
+                            <span className="text-[9vw] md:text-[7vw] italic text-[#b5a16d]/70 ml-6 lowercase">
+                                <SplitText text="by nature" delay={1.1} />
                             </span>
                         </h1>
 
-                        <div className={`hidden lg:flex flex-col items-end gap-6 mb-16 transition-all duration-[2s] delay-1000 ${mounted ? 'opacity-60 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-                            <div className="w-[1px] h-24 bg-gradient-to-t from-white/40 to-transparent" />
-                            <div className="text-[10px] tracking-[0.8em] uppercase font-medium">Archive 001</div>
+                        <div className="hidden lg:flex flex-col items-end gap-8 mb-20">
+                            <div className={`w-[1px] h-32 bg-gradient-to-t from-white/20 to-transparent origin-bottom transition-all duration-[2.5s] delay-700 ${mounted ? 'scale-y-100 opacity-40' : 'scale-y-0 opacity-0'}`} />
+                            <div className={`text-[9px] tracking-[1.2em] uppercase opacity-20 font-medium transition-all duration-[2s] delay-[1.5s] ${mounted ? 'opacity-20 translate-x-0' : 'opacity-0 translate-x-12'}`}>
+                                Archive No. 001
+                            </div>
                         </div>
                     </div>
 
                     {/* CENTER ROW: THE LENS */}
-                    <div className="relative flex items-center justify-center py-6">
+                    <div className="relative flex items-center justify-center py-8">
                         <div
                             className="absolute inset-0 flex items-center justify-center"
-                            style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 15}px, ${(smoothMousePos.y - 0.5) * 15}px, 0)` }}
+                            style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 25}px, ${(smoothMousePos.y - 0.5) * 25}px, 0)` }}
                         >
                             <div
-                                className={`w-[28vw] aspect-square rounded-full border border-white/[0.1] flex items-center justify-center transition-all duration-[2.5s] ease-out ${mounted ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+                                className={`w-[32vw] aspect-square rounded-full border border-white/[0.08] flex items-center justify-center transition-all duration-[3s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
                                 {/* Outer Orbiting Facets */}
-                                <div className="absolute inset-[-15px] rounded-full border border-white/[0.05] animate-[spin_90s_linear_infinite]" />
+                                <div className="absolute inset-[-20px] rounded-full border border-white/[0.03] animate-[spin_80s_linear_infinite]" />
+                                <div className="absolute inset-[-40px] rounded-full border border-white/[0.01] animate-[spin_100s_linear_infinite_reverse]" />
 
                                 {/* Main Artifact Frame */}
-                                <div className="w-[88%] h-[88%] rounded-full overflow-hidden relative grayscale group shadow-[0_20px_100px_rgba(0,0,0,0.8)] border border-white/5">
-                                    <NextImage
+                                <div className="w-[86%] h-[86%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_120px_rgba(0,0,0,0.9)]">
+                                    <img
                                         src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
-                                        className="w-full h-full object-cover transition-transform duration-[15s] ease-linear group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-105"
                                         alt="Refraction Focus"
-                                        fill
-                                        priority
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-[#b5a16d]/20 mix-blend-overlay" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0B]/90 via-transparent to-[#b5a16d]/30 mix-blend-overlay" />
 
                                     {/* Refraction Caustic Sweep */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[sweep_8s_infinite_ease-in-out_2s]" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[sweep_12s_infinite_ease-in-out]" />
+
+                                    {/* Static Grain Texture inside the gem */}
+                                    <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+                                </div>
+
+                                {/* Circular Narrative */}
+                                <div className="absolute inset-[-6vw] animate-[spin_70s_linear_infinite]">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-white/[0.07]">
+                                        <path id="heroOrbitPath" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
+                                        <text className="text-[2.5px] tracking-[6px] uppercase font-light italic">
+                                            <textPath href="#heroOrbitPath">
+                                                • Rarity Beyond Brilliance • The Architecture of Time • Refined by Silence •
+                                            </textPath>
+                                        </text>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
 
-                        <h2 className={`text-[11vw] md:text-[9vw] font-light serif uppercase tracking-[-0.04em] mix-blend-exclusion text-white/90 transition-all duration-[2.5s] delay-700 ${mounted ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-md'}`}>
+                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-[-0.05em] mix-blend-difference transition-all duration-[2.5s] delay-700 ${mounted ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-md'}`}>
                             Refined
                         </h2>
                     </div>
 
                     {/* BOTTOM ROW: CRAFTED IDENTITY */}
-                    <div className="flex items-start justify-between mt-[-3vh] relative">
-                        <div className={`hidden lg:flex flex-col gap-8 mt-20 transition-all duration-[2s] delay-[1.8s] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-[1px] bg-[#b5a16d]/60" />
-                                <span className="text-[9px] tracking-[0.6em] uppercase opacity-50">Maison de Rareté</span>
+                    <div className="flex items-start justify-between mt-[-4vh] relative">
+                        <div className={`hidden lg:flex flex-col gap-10 mt-24 transition-all duration-[2s] delay-[1.8s] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+                            <div className="flex items-center gap-6">
+                                <div className="w-14 h-[1px] bg-[#b5a16d]/40" />
+                                <span className="text-[8px] tracking-[0.8em] uppercase opacity-30">Maison de Rareté</span>
                             </div>
+                            <p className="text-[11px] tracking-[0.5em] uppercase opacity-20 max-w-[220px] leading-[2.4] font-light">
+                                A silent conversation between nature’s hand and human vision.
+                            </p>
                         </div>
 
-                        <h1 className="text-[14vw] md:text-[13vw] font-light serif leading-[0.7] tracking-tight uppercase text-right mix-blend-normal">
-                            <span className="italic mr-4 text-white/80">
-                                <SplitText text="Craf" delay={1.8} />
+                        <h1 className="text-[16vw] md:text-[15vw] font-light serif leading-[0.65] tracking-tight uppercase text-right">
+                            <span className="italic mr-2">
+                                <SplitText text="Craf" delay={1.4} />
                             </span>
-                            <SplitText text="ted" delay={2.2} />
+                            <SplitText text="ted" delay={1.8} />
                         </h1>
                     </div>
                 </div>
             </div>
+
             {/* 4. REFINED ACCENTS */}
             {/* Scroll Architecture */}
             <div className={`absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 transition-all duration-[2s] delay-[2.8s] ${mounted ? 'opacity-30' : 'opacity-0'}`}>
