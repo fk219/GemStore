@@ -2,6 +2,7 @@
 
 import React, { useContext, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import AboutHero from '@/components/AboutHero';
 import Footer from '@/components/Footer';
 import { ThemeContext } from '@/app/providers';
 import Image from 'next/image';
@@ -38,19 +39,7 @@ export default function About() {
         <main className={`min-h-screen ${bgClass} ${textColorClass} selection:bg-[#b5a16d] selection:text-white`}>
             <Navbar />
 
-            {/* Hero - Editorial Header */}
-            <section className="pt-48 pb-24 px-6 md:px-24 container mx-auto relative">
-                <div className="flex flex-col items-start max-w-5xl">
-                    <span className="text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8 border-l border-current pl-4">Est. 1982 — Geneva / Colombo</span>
-                    <h1 className="text-6xl md:text-9xl font-light serif leading-[0.9] reveal mb-12">
-                        The <span className="italic opacity-50">Eye</span> <br />
-                        of the Curator.
-                    </h1>
-                    <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed max-w-2xl reveal font-serif italic pl-12 border-l border-zinc-200 dark:border-zinc-800">
-                        &quot;We do not hunt for stones. We wait for them. To acquire a gem of true significance is to inherit a responsibility.&quot;
-                    </p>
-                </div>
-            </section>
+            <AboutHero />
 
             {/* Chapter 1: The Origin - Split Layout */}
             <section className="py-24 px-6 md:px-24">

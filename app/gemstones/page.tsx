@@ -7,6 +7,7 @@ import { ThemeContext, LanguageContext } from '@/app/providers';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ProductsHero from '@/components/ProductsHero';
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -111,18 +112,12 @@ export default function Gemstones() {
         <main className={`min-h-screen ${bgClass} ${textColorClass} selection:bg-[#b5a16d] selection:text-white`}>
             <Navbar />
 
-            {/* Header */}
-            <section ref={headerRef} className="pt-48 pb-24 px-6 md:px-12 flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8 border px-4 py-2 rounded-full border-current">Inventory</span>
-                <h1 className="text-6xl md:text-[10vw] font-light serif leading-[0.8] mb-12">
-                    The Vault
-                </h1>
-                <p className="text-xl font-light opacity-60 font-serif italic max-w-2xl">
-                    &quot;A curated selection of the world&apos;s most significant geological artifacts.&quot;
-                </p>
+            {/* Hero Section */}
+            <ProductsHero />
 
-                {/* Minimal Filter */}
-                <div className="flex gap-8 mt-24 text-xs tracking-[0.2em] uppercase opacity-70 overflow-x-auto max-w-full pb-4 scrollbar-hide justify-center">
+            {/* Filter Section - Restored */}
+            <section className="py-12 flex justify-center sticky top-0 bg-[#FBFBF9]/80 dark:bg-[#050505]/80 backdrop-blur-md z-40 border-b border-white/5">
+                <div className="flex gap-8 text-xs tracking-[0.2em] uppercase opacity-70 overflow-x-auto max-w-full pb-4 scrollbar-hide justify-center">
                     {["All", "Sapphire", "Ruby", "Emerald", "Diamond"].map(f => (
                         <button
                             key={f}
