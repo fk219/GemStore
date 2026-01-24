@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import IntroSequence from "@/components/IntroSequence";
+import Marquee from "@/components/Marquee";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -37,6 +38,7 @@ export default function RootLayout({
                     <SmoothScroll />
                     <CustomCursor />
                     <IntroSequence />
+                    <Marquee />
                     {children}
                 </body>
             </Providers>

@@ -136,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-[900] px-8 md:px-12 py-8 flex justify-between items-center transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-[20px] bg-white/70 dark:bg-black/70 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-4' : ''
+                className={`fixed top-8 left-0 w-full z-[900] px-8 md:px-12 py-8 flex justify-between items-center transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isScrolled ? 'backdrop-blur-[20px] bg-white/70 dark:bg-black/70 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-4' : ''
                     }`}
             >
                 <Link
