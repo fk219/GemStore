@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
+import NextImage from 'next/image';
 
 const Hero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
@@ -152,7 +153,7 @@ const Hero: React.FC = () => {
 
                                 {/* Main Artifact Frame */}
                                 <div className="w-[88%] h-[88%] rounded-full overflow-hidden relative grayscale group shadow-[0_20px_100px_rgba(0,0,0,0.8)] border border-white/5">
-                                    <Image
+                                    <NextImage
                                         src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
                                         className="w-full h-full object-cover transition-transform duration-[15s] ease-linear group-hover:scale-110"
                                         alt="Refraction Focus"

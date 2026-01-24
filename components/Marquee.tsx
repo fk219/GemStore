@@ -11,8 +11,8 @@ const Marquee = () => {
     ];
 
     return (
-        <div className="absolute top-0 left-0 w-full h-8 z-[800] bg-[#0A0A0A] text-[#b5a16d] flex items-center overflow-hidden border-b border-[#b5a16d]/20">
-            <div className="flex animate-[marquee_50s_linear_infinite] whitespace-nowrap">
+        <div className="relative top-0 left-0 w-full h-8 z-[800] bg-[#0A0A0A] text-[#b5a16d] flex items-center overflow-hidden border-b border-[#b5a16d]/20">
+            <div className="flex animate-[marquee_60s_linear_infinite] whitespace-nowrap">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className="flex items-center gap-16 px-8">
                         {messages.map((msg, idx) => (
