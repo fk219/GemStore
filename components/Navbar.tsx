@@ -156,21 +156,21 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                 <div className="flex items-center gap-8 md:gap-12">
 
                     <div className="flex items-center gap-6 md:gap-8">
-                        {/* Theme Toggle - Animated Sun/Moon */}
+                        {/* Theme Toggle - Abstract Eclipse */}
                         <button
                             onClick={toggleTheme}
                             className={`relative w-10 h-10 flex items-center justify-center rounded-full border ${effectiveBorderColorClass} ${effectiveTextColorClass} group/theme overflow-hidden transition-all duration-700 hover:border-current/40 hover:scale-105`}
                             aria-label="Toggle Atmosphere"
                         >
                             <div className="absolute inset-0 flex items-center justify-center" ref={sunRef}>
-                                <svg className="h-4 w-4 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
-                                </svg>
+                                {/* Abstract Sun: Solid Circle with Ring */}
+                                <div className="w-2 h-2 bg-current rounded-full shadow-[0_0_10px_currentColor] opacity-80" />
+                                <div className="absolute w-5 h-5 border border-current opacity-20 rounded-full scale-0 group-hover/theme:scale-100 transition-transform duration-500" />
                             </div>
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 transform translate-y-[-20px]" ref={moonRef}>
-                                <svg className="h-4 w-4 stroke-[1.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                </svg>
+                                {/* Abstract Moon: Eclipse Ring */}
+                                <div className="w-3 h-3 border border-current rounded-full" />
+                                <div className="w-1 h-1 bg-current rounded-full absolute -top-1 right-0 opacity-50" />
                             </div>
                         </button>
 
@@ -190,10 +190,15 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             {/* FULL SCREEN INTERACTIVE MENU */}
             <div
                 ref={menuRef} // Using GSAP ref control
-                className={`fixed inset-0 z-[100] pointer-events-none opacity-0`} // Default hidden, GSAP controls visibility
+                className={`fixed inset-0 z-[1000] pointer-events-none opacity-0`} // Raised Z-Index to cover Marquee (800) and Navbar (900)
             >
                 {/* Background */}
-                <div className="menu-bg absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A] translate-y-full"></div>
+                <div className="menu-bg absolute inset-0 bg-[#FBFBF9] dark:bg-[#0A0A0A] translate-y-full overflow-hidden">
+                    {/* Abstract Floating Elements for Menu */}
+                    <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-indigo-900/5 rounded-full blur-[120px] pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border border-white/5 opacity-20 pointer-events-none scale-[0.9]" />
+                </div>
 
                 {/* Close Button */}
                 <button
@@ -203,7 +208,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                         setIsMenuOpen(false);
                         setHoveredLink(null);
                     }}
-                    className={`menu-close absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[120] cursor-pointer hover:opacity-100 opacity-0`}
+                    className={`menu-close absolute top-10 right-8 md:top-14 md:right-20 group w-24 h-24 flex flex-col items-center justify-center ${textColorClass} z-[1050] cursor-pointer hover:opacity-100 opacity-0`}
                     aria-label="Close Menu"
                 >
                     <div className="relative w-12 h-12 flex items-center justify-center pointer-events-none">

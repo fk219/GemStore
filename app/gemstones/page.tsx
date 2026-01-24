@@ -110,7 +110,7 @@ export default function Gemstones() {
 
     return (
         <main className={`min-h-screen ${bgClass} ${textColorClass} selection:bg-[#b5a16d] selection:text-white`}>
-            <Navbar />
+            <Navbar themeOverride="dark" />
 
             {/* Hero Section */}
             <ProductsHero />
