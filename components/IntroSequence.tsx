@@ -55,7 +55,7 @@ const IntroSequence = () => {
 
         // 4. Light Flash Reveal
         tl.to(".intro-flash", { opacity: 1, duration: 0.1, ease: "power4.in" }) // Flash White
-            .to(containerRef.current, { opacity: 0, duration: 1, ease: "power2.out" }, "+=0.1"); // Fade out container
+            .to(containerRef.current, { opacity: 0, duration: 1, ease: "power2.out", pointerEvents: "none" }, "+=0.1"); // Fade out container
 
     }, { scope: containerRef, dependencies: [showIntro] });
 
