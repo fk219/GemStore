@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
         { name: 'Gemstones', path: '/gemstones', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=800' },
         { name: 'Origins', path: '/origins', img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800' },
         { name: 'About', path: '/about', img: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800' },
-        { name: 'Contact', path: '/book', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' }
+        { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' }
     ];
 
     const accentColor = '#b5a16d';
@@ -89,12 +89,12 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             {/* MAIN NAVBAR - Improved visibility & sizing */}
             <nav className="fixed top-0 left-0 w-full z-[60] pointer-events-none">
                 <div className={`mx-auto transition-all duration-700 pointer-events-auto ${isScrolled
-                        ? 'mt-3 px-4 max-w-5xl'
-                        : 'mt-4 px-6 max-w-7xl'
+                    ? 'mt-3 px-4 max-w-5xl'
+                    : 'mt-4 px-6 max-w-7xl'
                     }`}>
                     <div className={`flex items-center justify-between transition-all duration-700 ${isScrolled
-                            ? 'py-2.5 px-6 bg-[#1A1A1A]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl shadow-black/20'
-                            : 'py-3 px-0'
+                        ? 'py-2.5 px-6 bg-[#1A1A1A]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl shadow-black/20'
+                        : 'py-3 px-0'
                         }`}>
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-3 group">
@@ -119,8 +119,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                         key={item.path}
                                         href={item.path}
                                         className={`relative px-4 py-2 text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-500 ${isActivePage(item.path)
-                                                ? 'text-[#b5a16d]'
-                                                : 'text-white/60 hover:text-white'
+                                            ? 'text-[#b5a16d]'
+                                            : 'text-white/60 hover:text-white'
                                             }`}
                                     >
                                         {item.name}
@@ -217,8 +217,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
 
                                             {/* Link Name */}
                                             <h2 className={`font-serif text-4xl md:text-5xl lg:text-6xl font-light leading-none uppercase tracking-tight transition-all duration-500 ${isActivePage(item.path)
-                                                    ? 'text-[#b5a16d]'
-                                                    : 'text-white/50 group-hover:text-white group-hover:translate-x-4'
+                                                ? 'text-[#b5a16d]'
+                                                : 'text-white/50 group-hover:text-white group-hover:translate-x-4'
                                                 }`}>
                                                 {item.name}
                                             </h2>
