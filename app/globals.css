@@ -14,6 +14,9 @@
     --accent-gold-dim: #997B28;
     --accent-gold-light: #F3E5AB;
 
+    --background-gold-light: #F4ECD8;
+    /* Light Gold for alternating sections */
+
     --foreground-rgb: 26, 26, 26;
     --background-start-rgb: 249, 248, 244;
     --background-end-rgb: 249, 248, 244;
