@@ -51,7 +51,7 @@ const BentoGrid: React.FC = () => {
             <div className="max-w-[1800px] mx-auto grid grid-cols-4 md:grid-cols-12 auto-rows-[180px] md:auto-rows-[220px] gap-3 md:gap-4">
                 <div data-bento-row className="contents">
                     <div data-bento-tile className="col-span-4 md:col-span-7 row-span-3">
-                        <div className="relative w-full h-full rounded-[var(--radius-xl)] overflow-hidden">
+                        <div className="relative w-full h-full rounded-xl overflow-hidden">
                             <Image
                                 src="https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=1400"
                                 alt="Royal Blue Sapphire"
@@ -67,7 +67,7 @@ const BentoGrid: React.FC = () => {
                     </div>
 
                     <div data-bento-tile className="col-span-4 md:col-span-5 row-span-2">
-                        <div className="flex flex-col justify-center p-10 bg-white dark:bg-[#141414] rounded-[var(--radius-xl)] text-[#1A1A1A] dark:text-[#FBFBF9] border border-zinc-200 dark:border-zinc-800">
+                        <div className="flex flex-col justify-center p-10 bg-white dark:bg-[#141414] rounded-xl text-[#1A1A1A] dark:text-[#FBFBF9] border border-zinc-200 dark:border-zinc-800">
                             <h4 className="text-3xl md:text-4xl font-serif italic mb-6 leading-tight">Linear Mastery</h4>
                             <p className="font-sans text-sm opacity-70 leading-relaxed tracking-wide">
                                 Geometry is the skeleton of light. We reveal the hidden architecture within stone.
@@ -78,7 +78,7 @@ const BentoGrid: React.FC = () => {
 
                 <div data-bento-row className="contents">
                     <div data-bento-tile className="col-span-2 md:col-span-4 row-span-3">
-                        <div className="relative w-full h-full rounded-[var(--radius-lg)] overflow-hidden">
+                        <div className="relative w-full h-full rounded-lg overflow-hidden">
                             <Image
                                 src="https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=800"
                                 alt="Ruby Detail"
@@ -95,7 +95,7 @@ const BentoGrid: React.FC = () => {
                         </div>
                     </div>
                     <div data-bento-tile className="col-span-2 md:col-span-3 row-span-2">
-                        <div className="relative w-full h-full rounded-[var(--radius-lg)] overflow-hidden border border-white/5 bg-[#050505]">
+                        <div className="relative w-full h-full rounded-lg overflow-hidden border border-white/5 bg-[#050505]">
                             <Image
                                 src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=800"
                                 alt="Dark Texture"
@@ -108,7 +108,7 @@ const BentoGrid: React.FC = () => {
                         </div>
                     </div>
                     <div data-bento-tile className="col-span-2 md:col-span-3 row-span-2">
-                        <div className="relative w-full h-full rounded-[var(--radius-lg)] overflow-hidden">
+                        <div className="relative w-full h-full rounded-lg overflow-hidden">
                             <Image
                                 src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=800"
                                 alt="Diamond Facet"
@@ -118,7 +118,7 @@ const BentoGrid: React.FC = () => {
                         </div>
                     </div>
                     <div data-bento-tile className="col-span-4 md:col-span-6 row-span-1">
-                        <a href="/gemstones" className="flex items-center justify-between px-10 bg-[#1A1A1A] text-[#FBFBF9] rounded-[var(--radius-md)] hover:opacity-80 transition-opacity">
+                        <a href="/gemstones" className="flex items-center justify-between px-10 bg-[#1A1A1A] text-[#FBFBF9] rounded-md hover:opacity-80 transition-opacity">
                             <span className="text-xs tracking-[0.4em] uppercase font-sans">View Full Archive</span>
                             <span className="text-3xl">→</span>
                         </a>

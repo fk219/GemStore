@@ -94,7 +94,7 @@ export default function Home() {
                     <div className="flex flex-col md:flex-row items-center gap-16 md:gap-32">
                         {/* Image Composition */}
                         <div className="w-full md:w-1/2 relative reveal-image">
-                            <div data-speed="1.1" className="relative aspect-[4/5] md:aspect-[3/4] rounded-sm overflow-hidden group">
+                            <div data-speed="1.1" className="relative aspect-[4/5] md:aspect-[3/4] rounded-md overflow-hidden group">
                                 <Image
                                     src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                                     alt="Raw Emerald Formation"
@@ -104,7 +104,7 @@ export default function Home() {
                                 <div className="absolute inset-0 bg-[#0A0A0A]/10 mix-blend-multiply" />
                             </div>
                             {/* Floating Detail Overlay - Foreground Parallax */}
-                            <div data-speed="1.3" className="absolute -bottom-10 -right-10 w-2/3 aspect-square bg-[#141414] text-[#FBFBF9] p-8 hidden md:flex flex-col justify-between z-20 shadow-2xl">
+                            <div data-speed="1.3" className="absolute -bottom-10 -right-10 w-2/3 aspect-square bg-[#141414] text-[#FBFBF9] p-8 hidden md:flex flex-col justify-between z-20 shadow-2xl rounded-lg">
                                 <span className="text-[10px] tracking-[0.4em] uppercase opacity-50">Origin</span>
                                 <p className="font-serif italic text-2xl">Muzo, Colombia</p>
                                 <div className="w-full h-px bg-white/20" />

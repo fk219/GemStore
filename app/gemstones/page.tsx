@@ -117,7 +117,7 @@ export default function Gemstones() {
 
             {/* Filter Section - Restored */}
             <section className="py-12 flex justify-center sticky top-0 bg-[#FBFBF9]/80 dark:bg-[#050505]/80 backdrop-blur-md z-40 border-b border-white/5">
-                <div className="flex gap-8 text-xs tracking-[0.2em] uppercase opacity-70 overflow-x-auto max-w-full pb-4 scrollbar-hide justify-center">
+                        <div className="flex gap-8 text-eyebrow opacity-70 overflow-x-auto max-w-full pb-4 scrollbar-hide justify-center">
                     {["All", "Sapphire", "Ruby", "Emerald", "Diamond"].map(f => (
                         <button
                             key={f}
@@ -156,7 +156,7 @@ export default function Gemstones() {
                                 />
                             </div>
 
-                            <a href={`/book?gem=${item.name}`} className="relative z-10 grid md:grid-cols-12 items-center py-8 md:py-12 cursor-pointer transition-all hover:bg-zinc-50/0 dark:hover:bg-zinc-900/0">
+                            <a href={`/book?gem=${item.name}`} className="relative z-10 grid md:grid-cols-12 items-center py-8 md:py-12 cursor-pointer transition-all duration-500 ease-[var(--easing-standard)] hover:bg-zinc-50/5 dark:hover:bg-zinc-900/40">
                                 <div className="col-span-1 text-xs opacity-30 font-sans tracking-widest">#{item.id}</div>
                                 <div className="col-span-11 md:col-span-4 flex items-center gap-6">
                                     <div className="w-16 h-16 relative overflow-hidden rounded-sm md:hidden shrink-0">
@@ -165,9 +165,9 @@ export default function Gemstones() {
                                     <h3 className="text-2xl md:text-4xl serif font-light italic group-hover:translate-x-4 transition-transform duration-500">{item.name}</h3>
                                 </div>
                                 <div className="hidden md:block col-span-2 text-sm opacity-60 font-sans tracking-wide">{item.origin}</div>
-                                <div className="hidden md:block col-span-2 serif text-xl">{item.carat}</div>
+                                <div className="hidden md:block col-span-2 serif text-title">{item.carat}</div>
                                 <div className="hidden md:block col-span-2 text-right">
-                                    <span className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${item.status === 'Available' ? 'border-green-900/20 text-green-700 dark:text-green-400' : 'border-zinc-500/20 opacity-50'}`}>
+                                    <span className={`text-eyebrow px-3 py-1 rounded-full border ${item.status === 'Available' ? 'border-amber-500/40 text-amber-500 dark:text-amber-300' : 'border-zinc-500/30 opacity-50'}`}>
                                         {item.status}
                                     </span>
                                 </div>

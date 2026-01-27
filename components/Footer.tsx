@@ -52,10 +52,10 @@ const Footer: React.FC = () => {
                     <div className="md:col-span-2 flex flex-col gap-12">
                         <div className="flex flex-col gap-6">
                             <span className="text-[10px] tracking-[0.2em] uppercase text-[#D4AF37] opacity-60">Navigation</span>
-                            <Link href="/" className="text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">Home</Link>
-                            <Link href="/gemstones" className="text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">Collections</Link>
-                            <Link href="/about" className="text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">About</Link>
-                            <Link href="/book" className="text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">Contact</Link>
+                            <Link href="/" className="text-eyebrow hover:text-[#D4AF37] transition-colors duration-300 ease-[var(--easing-standard)]">Home</Link>
+                            <Link href="/gemstones" className="text-eyebrow hover:text-[#D4AF37] transition-colors duration-300 ease-[var(--easing-standard)]">Collections</Link>
+                            <Link href="/about" className="text-eyebrow hover:text-[#D4AF37] transition-colors duration-300 ease-[var(--easing-standard)]">About</Link>
+                            <Link href="/book" className="text-eyebrow hover:text-[#D4AF37] transition-colors duration-300 ease-[var(--easing-standard)]">Contact</Link>
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col gap-4 relative z-10 w-full md:w-auto">
-                        <div className="flex gap-8 text-[9px] tracking-[0.2em] uppercase opacity-40">
+                        <div className="flex gap-8 text-eyebrow opacity-40">
                             <a href="#" className="hover:text-[#D4AF37]">Terms & Conditions</a>
                             <a href="#" className="hover:text-[#D4AF37]">Privacy & Cookie Policy</a>
                             <a href="#" className="hover:text-[#D4AF37]">Shipping & Returns</a>

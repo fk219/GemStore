@@ -48,11 +48,11 @@ export default function BookingPage() {
 
                 {/* Left: Contact Info - Minimal */}
                 <div ref={infoRef} className="w-full md:w-1/2 flex flex-col justify-center mb-16 md:mb-0 md:pr-24 relative z-10">
-                    <span className="text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8 border-l border-current pl-4">Concierge</span>
-                    <h1 className="text-5xl md:text-8xl font-light serif leading-[0.9] mb-12">
+                    <span className="text-eyebrow opacity-40 mb-8 border-l border-current pl-4">Concierge</span>
+                    <h1 className="text-display-2 md:text-display-1 font-light serif leading-[0.9] mb-12">
                         Private <br /> <span className="italic opacity-50">Viewing</span>
                     </h1>
-                    <p className="text-lg md:text-xl opacity-60 font-light font-serif italic max-w-md mb-12">
+                    <p className="text-body md:text-title opacity-60 font-light font-serif italic max-w-md mb-12">
                         &quot;For those who understand that acquiring a rare stone is not a transaction, but an initiation.&quot;
                     </p>
 
@@ -72,10 +72,10 @@ export default function BookingPage() {
                 {/* Right: The Form - Handwritten Style */}
                 <div ref={formRef} className="w-full md:w-1/2 relative">
                     {/* Abstract Glow */}
-                    <div className="absolute -inset-20 bg-gradient-to-tr from-zinc-200/40 to-transparent dark:from-zinc-900/40 rounded-[40px] blur-3xl -z-10 animate-pulse pointer-events-none" />
+                    <div className="absolute -inset-20 bg-gradient-to-tr from-zinc-200/40 to-transparent dark:from-zinc-900/40 rounded-xl blur-3xl -z-10 animate-pulse pointer-events-none" />
 
                     {step === 1 ? (
-                        <form onSubmit={handleSubmit} className="space-y-12 p-8 md:p-16 border border-zinc-200 dark:border-zinc-800 rounded-[2px] bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-lg">
+                        <form onSubmit={handleSubmit} className="space-y-12 p-8 md:p-16 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-lg">
                             <div className="space-y-2 group">
                                 <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Name / Identity</label>
                                 <input
@@ -131,7 +131,7 @@ export default function BookingPage() {
                             <div className="pt-12 text-right">
                                 <button
                                     type="submit"
-                                    className="text-[10px] tracking-[0.4em] uppercase border border-current px-12 py-4 hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-[#FBFBF9] dark:hover:text-black transition-all duration-500"
+                                    className="text-eyebrow border border-current px-12 py-4 hover:bg-[#1A1A1A] hover:text-white dark:hover:bg-[#FBFBF9] dark:hover:text-black transition-all duration-500 ease-[var(--easing-standard)]"
                                 >
                                     Request Access
                                 </button>
@@ -146,7 +146,7 @@ export default function BookingPage() {
                             </p>
                             <button
                                 onClick={() => setStep(1)}
-                                className="text-[9px] tracking-[0.4em] uppercase border-b border-zinc-500 pb-1 hover:text-amber-600 transition-colors"
+                                className="text-eyebrow border-b border-zinc-500 pb-1 hover:text-amber-600 transition-colors duration-300 ease-[var(--easing-standard)]"
                             >
                                 Return
                             </button>

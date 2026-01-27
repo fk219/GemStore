@@ -112,41 +112,100 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
 
     // Menu Open/Close Animation
     useGSAP(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+        if (!menuRef.current || !navContentRef.current) return;
 
         if (isMenuOpen) {
-            // 1. Hide Navbar Content
-            gsap.to(navContentRef.current, { y: -100, opacity: 0, duration: 0.5 });
+            gsap.set(menuRef.current, { pointerEvents: "auto" });
 
-            // 2. Menu Reveal Sequence
-            gsap.set(menuRef.current, { pointerEvents: "auto", opacity: 1 });
+            gsap.to(navContentRef.current, {
+                y: -24,
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.out",
+            });
 
-            // Background curtains (Split reveal)
-            tl.to(".menu-curtain-left", { scaleY: 1, duration: 0.8, ease: "expo.inOut" })
-                .to(".menu-curtain-right", { scaleY: 1, duration: 0.8, ease: "expo.inOut" }, "<")
+            gsap.fromTo(
+                menuRef.current,
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power2.out",
+                }
+            );
 
-                // Image/Content Fade In
-                .fromTo(".menu-bg-image", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 0.4, duration: 1.5 }, "-=0.4")
-                .to(".menu-content-stagger", { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 }, "-=1")
+            gsap.fromTo(
+                ".menu-bg-image",
+                { opacity: 0, scale: 1.02 },
+                {
+                    opacity: 0.35,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power2.out",
+                    stagger: 0.05,
+                }
+            );
 
-                // Close Button Reveal
-                .to(".menu-close-btn", { scale: 1, opacity: 1, rotate: 0, duration: 0.5 }, "-=0.5");
+            gsap.fromTo(
+                ".menu-content-stagger",
+                { y: 24, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.7,
+                    ease: "power2.out",
+                    stagger: 0.08,
+                    delay: 0.1,
+                }
+            );
 
+            gsap.fromTo(
+                ".menu-close-btn",
+                { opacity: 0, scale: 0.9, rotate: 4 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 0,
+                    duration: 0.35,
+                    ease: "power2.out",
+                    delay: 0.1,
+                }
+            );
         } else {
-            // Close Sequence
-            tl.to(".menu-close-btn", { scale: 0, rotate: 90, duration: 0.4 })
-                .to(".menu-content-stagger", { y: 50, opacity: 0, duration: 0.4, stagger: 0.05 }, "-=0.2")
-                .to(".menu-bg-image", { opacity: 0, duration: 0.5 }, "-=0.4")
+            gsap.to(".menu-content-stagger", {
+                y: 16,
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.inOut",
+                stagger: 0.06,
+            });
 
-                .to(".menu-curtain-left", { scaleY: 0, duration: 0.8, ease: "expo.inOut" }, "-=0.2")
-                .to(".menu-curtain-right", { scaleY: 0, duration: 0.8, ease: "expo.inOut" }, "<")
+            gsap.to(".menu-close-btn", {
+                opacity: 0,
+                scale: 0.9,
+                rotate: -4,
+                duration: 0.3,
+                ease: "power2.inOut",
+            });
 
-                .set(menuRef.current, { pointerEvents: "none", opacity: 0 })
+            gsap.to(menuRef.current, {
+                opacity: 0,
+                duration: 0.45,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    gsap.set(menuRef.current, { pointerEvents: "none" });
+                },
+            });
 
-                // Bring back Navbar Content
-                .to(navContentRef.current, { y: 0, opacity: 1, duration: 0.5, clearProps: "all" }, "-=0.5");
+            gsap.to(navContentRef.current, {
+                y: 0,
+                opacity: 1,
+                duration: 0.4,
+                ease: "power2.out",
+                clearProps: "all",
+                delay: 0.05,
+            });
         }
-
     }, [isMenuOpen]);
 
     return (
@@ -216,20 +275,9 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                 ref={menuRef}
                 className="fixed inset-0 z-[1000] pointer-events-none opacity-0 overflow-hidden"
             >
-                {/* 1. Backdrop Curtains (Top/Bottom or Left/Right split) */}
-                <div className="absolute inset-0 flex">
-                    {/* Left Curtain */}
-                    <div className="menu-curtain-left w-1/2 h-full bg-[#050505] origin-bottom transform scale-y-0 relative z-10 border-r border-white/5"></div>
-                    {/* Right Curtain */}
-                    <div className="menu-curtain-right w-1/2 h-full bg-[#050505] origin-bottom transform scale-y-0 relative z-10"></div>
-                </div>
+                <div className="absolute inset-0 bg-[#050505]/95 backdrop-blur-md" />
 
-                {/* 2. Dynamic Background Image Layer (Behind content, In front of curtains?) 
-                    Wait, if curtains are z-10, this should be z-20? No, we want curtains to REVEAL this.
-                    Actually, let's make curtains backdrop color, and this image sits ON TOP but fades in?
-                    Or, curtains are the background. Image fades in over them.
-                */}
-                <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
                     {navLinks.map((link) => (
                         <Image
                             key={link.name}
@@ -240,13 +288,13 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 }`}
                         />
                     ))}
-                    <div className="absolute inset-0 bg-black/60" /> {/* Darken overlay */}
+                    <div className="absolute inset-0 bg-black/60" />
                 </div>
 
                 {/* 3. CLOSE BUTTON */}
                 <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="menu-close-btn absolute top-8 right-8 md:top-12 md:right-12 z-[1200] w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors opacity-0 scale-0"
+                    className="menu-close-btn absolute top-8 right-8 md:top-12 md:right-12 z-[1200] w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 hover:text-white transition-all duration-300 ease-[var(--easing-standard)] opacity-0 scale-100"
                 >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5 stroke-[1.5]">
                         <path d="M18 6L6 18M6 6l12 12" />
@@ -260,14 +308,14 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     <div className="hidden md:flex flex-col justify-end w-1/4 pb-10">
                         <div className="menu-content-stagger space-y-8 opacity-0 translate-y-8">
                             <div>
-                                <span className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Connect</span>
-                                <p className="text-sm font-light opacity-80">concierge@tcraft.com</p>
+                                <span className="block text-eyebrow opacity-40 mb-2">Connect</span>
+                                <p className="text-body font-light opacity-80">concierge@tcraft.com</p>
                             </div>
                             <div>
-                                <span className="block text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Social</span>
-                                <div className="flex gap-4 text-sm font-light opacity-80">
-                                    <span className="hover:text-amber-400 cursor-pointer transition-colors">Instagram</span>
-                                    <span className="hover:text-amber-400 cursor-pointer transition-colors">Twitter</span>
+                                <span className="block text-eyebrow opacity-40 mb-2">Social</span>
+                                <div className="flex gap-4 text-body font-light opacity-80">
+                                    <span className="hover:text-amber-400 cursor-pointer transition-colors duration-300 ease-[var(--easing-standard)]">Instagram</span>
+                                    <span className="hover:text-amber-400 cursor-pointer transition-colors duration-300 ease-[var(--easing-standard)]">Twitter</span>
                                 </div>
                             </div>
                         </div>

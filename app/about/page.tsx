@@ -73,7 +73,7 @@ export default function About() {
                 <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center text-[#FBFBF9]">
                     {/* Image */}
                     {/* Image - Interactive Hover */}
-                    <div data-speed="0.8" className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-sm group cursor-pointer">
+                    <div data-speed="0.8" className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-md group cursor-pointer">
                         <Image
                             src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                             fill
@@ -98,9 +98,9 @@ export default function About() {
 
                     {/* Text content - Reversing text color since this might need its own background if we want contrast, but keeping minimal for now */}
                     <div className={`parallax-text flex flex-col justify-center ${textColorClass}`}>
-                        <span className="text-xs uppercase tracking-[0.3em] opacity-40 mb-8">01. The Source</span>
-                        <h2 className="text-4xl md:text-6xl serif font-light mb-8">Chaos & <br /><span className="italic">Time</span></h2>
-                        <p className="text-lg opacity-70 leading-relaxed font-light mb-8 font-serif">
+                        <span className="text-eyebrow opacity-40 mb-8">01. The Source</span>
+                        <h2 className="text-display-2 md:text-display-1 serif font-light mb-8">Chaos & <br /><span className="italic">Time</span></h2>
+                        <p className="text-body opacity-70 leading-relaxed font-light mb-8 font-serif">
                             Deep beneath the crust, where pressure turns carbon into eternity. Our geologists map veins that have remained untouched for millennia. We trace the lineage of every crystal, ensuring that its journey from the earth to your hand is as pure as the light it holds.
                         </p>
                         <ul className="space-y-4 border-t border-current/10 pt-8 opacity-60 font-sans text-sm tracking-wide">
@@ -125,8 +125,8 @@ export default function About() {
 
                 <div className="container mx-auto px-6 md:px-24 relative z-10 flex flex-col items-center text-center">
                     <div className="w-px h-24 bg-white/20 mb-12" />
-                    <h2 className="text-5xl md:text-8xl serif font-light mb-12 reveal">The Atelier</h2>
-                    <p className="text-xl md:text-3xl font-light italic opacity-70 max-w-4xl leading-relaxed reveal font-serif">
+                    <h2 className="text-display-2 md:text-display-1 serif font-light mb-12 reveal">The Atelier</h2>
+                    <p className="text-body md:text-title font-light italic opacity-70 max-w-4xl leading-relaxed reveal font-serif">
                         Where science meets sculpture. Our cutters do not follow trends; they follow the stone's internal logic.
                     </p>
                     <div className="mt-24 w-full grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
@@ -135,9 +135,9 @@ export default function About() {
                             { year: "2005", text: "Acquisition of the legendary 'Sun's Eye' Diamond." },
                             { year: "2024", text: "Launch of the Private Archive." }
                         ].map((item, i) => (
-                            <div key={i} className="p-12 bg-[#101010] hover:bg-[#151515] transition-colors group reveal">
-                                <span className="block text-4xl serif italic mb-4 opacity-50 group-hover:opacity-100 transition-opacity">{item.year}</span>
-                                <p className="text-sm tracking-widest uppercase opacity-60">{item.text}</p>
+                            <div key={i} className="p-12 bg-[#101010] hover:bg-[#151515] transition-colors duration-500 ease-[var(--easing-standard)] group reveal">
+                                <span className="block text-display-2 serif italic mb-4 opacity-50 group-hover:opacity-100 transition-opacity duration-500 ease-[var(--easing-standard)]">{item.year}</span>
+                                <p className="text-body tracking-widest uppercase opacity-60">{item.text}</p>
                             </div>
                         ))}
                     </div>
