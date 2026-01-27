@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const SoulOfRarity: React.FC = () => {
     return (
-        <section className="relative min-h-screen py-32 md:py-48 px-6 md:px-24 flex flex-col justify-center overflow-hidden bg-[#FBFBF9] dark:bg-[#050505] text-[#1A1A1A] dark:text-[#FBFBF9]">
+        <section className="relative min-h-screen py-32 md:py-48 px-6 md:px-24 flex flex-col justify-center overflow-hidden bg-[#F4ECD8] dark:bg-[#0A0908] text-[#1A1A1A] dark:text-[#FBFBF9]">
             {/* Decorative Background Elements - Parallax */}
             <div data-speed="0.2" className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-zinc-200/50 to-transparent rounded-full blur-[100px] opacity-20 pointer-events-none mix-blend-multiply dark:mix-blend-overlay" />
             <div data-speed="0.4" className="absolute bottom-0 left-[-10%] w-[800px] h-[800px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />

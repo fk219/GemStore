@@ -61,7 +61,7 @@ const BentoGrid: React.FC = () => {
     }, []);
 
     return (
-        <section className="py-24 md:py-32 px-4 md:px-8 lg:px-12 bg-[#F8F6F3] dark:bg-[#0A0A0B]">
+        <section className="py-24 md:py-32 px-4 md:px-8 lg:px-12 bg-[#F4ECD8] dark:bg-[#0A0908]">
             <div ref={containerRef} className="max-w-[1600px] mx-auto">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
