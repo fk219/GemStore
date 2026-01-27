@@ -74,7 +74,7 @@ const CollectionSection: React.FC = () => {
                     trigger: triggerRef.current,
                     start: "top top",
                     end: () => `+=${totalWidth}`,
-                    scrub: 1,
+                    scrub: 1.5, // Increased from 1 for smoother, more weighted feel
                     pin: true,
                     invalidateOnRefresh: true,
                     anticipatePin: 1,
@@ -102,26 +102,25 @@ const CollectionSection: React.FC = () => {
                         <div className="mt-20 w-32 h-[1px] bg-current opacity-20" />
                     </div>
 
-                    {/* Collection Items */}
+                    {/* Collection Items - Luxury Hover Effects */}
                     {collectionItems.map((item) => (
                         <div
                             key={item.id}
-                            className={`flex-shrink-0 w-[80vw] md:w-[500px] aspect-square rounded-[40px] md:rounded-[60px] ${item.color} ${item.textColor} p-8 md:p-14 flex flex-col justify-between shadow-2xl transition-all duration-700 hover:scale-[1.03] group`}
+                            className={`flex-shrink-0 w-[80vw] md:w-[500px] aspect-square rounded-xl ${item.color} ${item.textColor} p-8 md:p-14 flex flex-col justify-between shadow-xl transition-all duration-1000 hover:scale-[1.01] hover:shadow-2xl group`}
                         >
                             <div className="flex justify-between items-start">
-                                <span className={`text-[10px] tracking-[0.4em] uppercase border ${item.badgeBorder} rounded-full px-5 py-2 backdrop-blur-sm transition-all duration-500 group-hover:px-8 font-sans font-light`}>
+                                <span className={`text-[10px] tracking-[0.4em] uppercase border ${item.badgeBorder} rounded-full px-5 py-2 backdrop-blur-sm transition-all duration-700 group-hover:px-6 font-sans font-light`}>
                                     {item.origin}
                                 </span>
-                                <span className="text-sm tracking-widest font-light opacity-80 italic transition-transform duration-500 group-hover:translate-x-2 font-sans">{item.weight}</span>
+                                <span className="text-sm tracking-widest font-light opacity-80 italic transition-opacity duration-700 group-hover:opacity-100 font-sans">{item.weight}</span>
                             </div>
 
                             <div className="relative group/card overflow-hidden">
-                                <div className="h-px w-full bg-current opacity-0 group-hover:opacity-10 mb-8 transition-opacity duration-700" />
-                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-transform duration-700 group-hover:-translate-y-2 font-light">
+                                <div className="h-px w-full bg-current opacity-0 group-hover:opacity-10 mb-8 transition-opacity duration-1000" />
+                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-opacity duration-700 font-light">
                                     {item.name.split(' ').slice(0, -1).join(' ')} <span className="italic">{item.name.split(' ').pop()}</span>
                                 </h3>
-                                {/* CRO FIX: Opacity 100 default, remove hidden CTA */}
-                                <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:tracking-[0.8em] ${item.subText} font-sans font-light`}>Inquire for price</p>
+                                <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-1000 opacity-80 group-hover:opacity-100 ${item.subText} font-sans font-light`}>Inquire for price</p>
                             </div>
                         </div>
                     ))}

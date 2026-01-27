@@ -35,14 +35,14 @@ const Hero: React.FC = () => {
         };
     }, []);
 
-    // Split text helper for architectural reveal
+    // Split text helper for architectural reveal - LUXURY TIMING
     const SplitText = ({ text, delay = 0, className = "" }: { text: string, delay?: number, className?: string }) => (
         <span className={`inline-block ${className}`}>
             {text.split('').map((char, i) => (
                 <span
                     key={i}
-                    className={`inline-block transition-all duration-[2.2s] cubic-bezier(0.16, 1, 0.3, 1) ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
-                    style={{ transitionDelay: `${delay + (i * 0.04)}s` }}
+                    className={`inline-block transition-all duration-[3s] cubic-bezier(0.16, 1, 0.3, 1) ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
+                    style={{ transitionDelay: `${delay + (i * 0.08)}s` }} // Doubled from 0.04s for slower reveal
                 >
                     {char === ' ' ? '\u00A0' : char}
                 </span>
@@ -81,30 +81,30 @@ const Hero: React.FC = () => {
                     </svg>
                 </div>
 
-                {/* Shimmering Micro-Particles (Diamond Dust) */}
+                {/* Refined Micro-Particles - Reduced Count for Restraint */}
                 <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(24)].map((_, i) => (
+                    {[...Array(8)].map((_, i) => ( // Reduced from 24 to 8 particles
                         <div
                             key={i}
                             className="absolute w-[1px] h-[1px] bg-white rounded-full animate-pulse opacity-0"
                             style={{
                                 top: `${Math.random() * 100}%`,
                                 left: `${Math.random() * 100}%`,
-                                animation: `glintParticle ${3 + Math.random() * 5}s infinite ${Math.random() * 5}s`,
-                                transform: `translate3d(${(smoothMousePos.x - 0.5) * (10 + i)}px, ${(smoothMousePos.y - 0.5) * (10 + i)}px, 0)`
+                                animation: `glintParticle ${4 + Math.random() * 6}s infinite ${Math.random() * 5}s`, // Slower animation
+                                transform: `translate3d(${(smoothMousePos.x - 0.5) * (5 + i * 0.5)}px, ${(smoothMousePos.y - 0.5) * (5 + i * 0.5)}px, 0)` // Reduced intensity
                             }}
                         />
                     ))}
                 </div>
             </div>
 
-            {/* 2. ARCHITECTURAL PRISMS */}
+            {/* 2. ARCHITECTURAL PRISMS - Reduced Intensity */}
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
                 {/* Floating Facet Alpha */}
                 <div
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] border border-white/[0.03] rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_30s_infinite_linear] transition-all duration-[3s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-110'}`}
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] border border-white/[0.03] rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_45s_infinite_linear] transition-all duration-[4s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-110'}`}
                     style={{
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -60}px, ${(smoothMousePos.y - 0.5) * -60}px, 0) rotate(${(smoothMousePos.x - 0.5) * 20}deg)`
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -30}px, ${(smoothMousePos.y - 0.5) * -30}px, 0) rotate(${(smoothMousePos.x - 0.5) * 10}deg)` // Reduced by 50%
                     }}
                 >
                     <div className="absolute inset-12 border border-white/[0.02] rounded-inherit backdrop-blur-[2px]" />
@@ -112,9 +112,9 @@ const Hero: React.FC = () => {
 
                 {/* Golden Refraction Arc */}
                 <div
-                    className={`absolute top-1/3 left-1/3 w-[35vw] h-[35vw] border-l border-t border-[#b5a16d]/10 rounded-[70%_30%_30%_70%/70%_70%_30%_30%] animate-[morph_20s_infinite_linear_reverse] transition-all duration-[3s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
+                    className={`absolute top-1/3 left-1/3 w-[35vw] h-[35vw] border-l border-t border-[#b5a16d]/10 rounded-[70%_30%_30%_70%/70%_70%_30%_30%] animate-[morph_30s_infinite_linear_reverse] transition-all duration-[4s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
                     style={{
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 40}px, ${(smoothMousePos.y - 0.5) * 40}px, 0) scale(1.1)`
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0) scale(1.1)` // Reduced by 50%
                     }}
                 />
             </div>

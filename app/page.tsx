@@ -24,19 +24,18 @@ export default function Home() {
     const revealRefs = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
-        // Reveal Observer via GSAP Batch or Intersection Observer
-        // We'll use GSAP ScrollTrigger batching for smoother "reveal-text" effect
+        // Luxury Reveal Animations - Slow, Intentional, Weighted
         const ctx = gsap.context(() => {
-            // Standard Reveals
+            // Standard Reveals with Luxury Timing
             const reveals = document.querySelectorAll('.reveal-text, .reveal-image');
             reveals.forEach(el => {
                 gsap.fromTo(el,
-                    { y: 50, opacity: 0 },
+                    { y: 12, opacity: 0 }, // Reduced from 50 to 12 for subtlety
                     {
                         y: 0,
                         opacity: 1,
-                        duration: 1.5, // Slower, more elegant
-                        ease: "power2.out",
+                        duration: 2.5, // Increased from 1.5s for luxury pacing
+                        ease: 'cubic-bezier(0.16, 1, 0.3, 1)', // Custom elegant easing
                         scrollTrigger: {
                             trigger: el,
                             start: "top 85%",
@@ -46,20 +45,21 @@ export default function Home() {
                 );
             });
 
-            // Parallax Effects
+            // Refined Parallax - Reduced Intensity
             const parallaxEls = document.querySelectorAll("[data-speed]");
             parallaxEls.forEach(el => {
                 const speed = parseFloat(el.getAttribute("data-speed") || "1");
                 gsap.to(el, {
                     y: (i, target) => {
-                        return (1 - speed) * ScrollTrigger.maxScroll(window) * 0.1; // Subtle shift based on speed
+                        // Reduced intensity by 50% for more subtle effect
+                        return (1 - speed) * ScrollTrigger.maxScroll(window) * 0.05;
                     },
                     ease: "none",
                     scrollTrigger: {
                         trigger: el,
                         start: "top bottom",
                         end: "bottom top",
-                        scrub: 0
+                        scrub: 0.5 // Slight scrub for smoother feel
                     }
                 });
             });
@@ -94,7 +94,7 @@ export default function Home() {
                     <div className="flex flex-col md:flex-row items-center gap-16 md:gap-32">
                         {/* Image Composition */}
                         <div className="w-full md:w-1/2 relative reveal-image">
-                            <div data-speed="1.1" className="relative aspect-[4/5] md:aspect-[3/4] rounded-md overflow-hidden group">
+                            <div data-speed="1.1" className="relative aspect-[4/5] md:aspect-[3/4] rounded-lg overflow-hidden group">
                                 <Image
                                     src="https://images.unsplash.com/photo-1620218151276-8575084934e6?auto=format&fit=crop&q=80&w=1200"
                                     alt="Raw Emerald Formation"

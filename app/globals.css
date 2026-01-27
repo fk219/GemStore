@@ -56,15 +56,19 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition-duration: 0ms !important;
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.15s !important;
         scroll-behavior: auto !important;
     }
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,8 +76,13 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(155, 155, 155, 0.2);
-    border-radius: 20px;
+    background: rgba(155, 155, 155, 0.15);
+    border-radius: 12px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(155, 155, 155, 0.25);
 }
 
 .no-scrollbar::-webkit-scrollbar {
