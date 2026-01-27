@@ -1,289 +1,211 @@
-"use client";
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-
-// REDUCED PARTICLE COUNT for Minimalism
-const PARTICLE_POSITIONS = [
-    { top: 20, left: 15, size: 2, delay: 0 },
-    { top: 50, left: 75, size: 2, delay: 1 },
-    { top: 80, left: 25, size: 3, delay: 2 },
-    { top: 30, left: 85, size: 2, delay: 3 },
-    { top: 15, left: 55, size: 2, delay: 4 },
-];
+import React, { useEffect, useState, useRef } from 'react';
 
 const Hero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-    const cursorRef = useRef<HTMLDivElement>(null);
-    const cursorDotRef = useRef<HTMLDivElement>(null);
     const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
     const [smoothMousePos, setSmoothMousePos] = useState({ x: 0.5, y: 0.5 });
-    const [scrollOpacity, setScrollOpacity] = useState(1);
-    const [cursorVariant, setCursorVariant] = useState('default');
-    const [isHoveringText, setIsHoveringText] = useState(false);
-    const [magneticPos, setMagneticPos] = useState({ x: 0, y: 0 });
-    const [activeParticle, setActiveParticle] = useState<number | null>(null);
-
-    // Cursor trail positions
-    const [cursorTrail, setCursorTrail] = useState<Array<{ x: number; y: number; opacity: number }>>([]);
 
     useEffect(() => {
         setMounted(true);
         let rafId: number;
         const targetPos = { x: 0.5, y: 0.5 };
         const currentPos = { x: 0.5, y: 0.5 };
-        let trailPositions: Array<{ x: number; y: number; timestamp: number }> = [];
 
         const handleMouseMove = (e: MouseEvent) => {
             targetPos.x = e.clientX / window.innerWidth;
             targetPos.y = e.clientY / window.innerHeight;
             setMousePos({ x: targetPos.x, y: targetPos.y });
-
-            if (cursorRef.current) {
-                cursorRef.current.style.left = `${e.clientX}px`;
-                cursorRef.current.style.top = `${e.clientY}px`;
-            }
-            if (cursorDotRef.current) {
-                cursorDotRef.current.style.left = `${e.clientX}px`;
-                cursorDotRef.current.style.top = `${e.clientY}px`;
-            }
-
-            trailPositions.push({ x: e.clientX, y: e.clientY, timestamp: Date.now() });
-            if (trailPositions.length > 5) trailPositions.shift();
-
-            setCursorTrail(trailPositions.map((pos, i) => ({
-                x: pos.x,
-                y: pos.y,
-                opacity: (i + 1) / trailPositions.length * 0.2
-            })));
-        };
-
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            const opacity = Math.max(0, 1 - scrollY / 600);
-            setScrollOpacity(opacity);
         };
 
         const updateSmoothPos = () => {
-            currentPos.x += (targetPos.x - currentPos.x) * 0.03;
-            currentPos.y += (targetPos.y - currentPos.y) * 0.03;
+            // Create a lagging, silky smooth movement effect
+            currentPos.x += (targetPos.x - currentPos.x) * 0.05;
+            currentPos.y += (targetPos.y - currentPos.y) * 0.05;
             setSmoothMousePos({ x: currentPos.x, y: currentPos.y });
             rafId = requestAnimationFrame(updateSmoothPos);
         };
 
         window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('scroll', handleScroll, { passive: true });
         updateSmoothPos();
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('scroll', handleScroll);
             cancelAnimationFrame(rafId);
         };
     }, []);
 
-    const handleMagneticMove = useCallback((e: React.MouseEvent<HTMLElement>, strength: number = 0.3) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = (e.clientX - centerX) * strength;
-        const deltaY = (e.clientY - centerY) * strength;
-        setMagneticPos({ x: deltaX, y: deltaY });
-    }, []);
-
-    const SplitText = ({ text, delay = 0, className = "", hoverable = false }: { text: string, delay?: number, className?: string, hoverable?: boolean }) => (
-        <span className={`inline-block ${className}`}>
-            {text.split('').map((char, i) => (
-                <span
-                    key={i}
-                    className={`inline-block transition-all duration-[2.5s] cubic-bezier(0.16, 1, 0.3, 1) 
-                        ${mounted ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-12 opacity-0 blur-sm'}
-                        ${hoverable ? 'hover:text-[#D4AF37] hover:scale-110 hover:-translate-y-2 cursor-default' : ''}
-                        group-hover:animate-[letterFloat_0.6s_ease-out]`}
-                    style={{
-                        transitionDelay: `${delay + (i * 0.05)}s`,
-                        animationDelay: hoverable ? `${i * 0.02}s` : '0s'
-                    }}
-                    onMouseEnter={() => hoverable && setIsHoveringText(true)}
-                    onMouseLeave={() => hoverable && setIsHoveringText(false)}
-                >
-                    {char === ' ' ? '\u00A0' : char}
-                </span>
-            ))}
-        </span>
-    );
-
     return (
         <section
             ref={containerRef}
-            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#F9F8F4] text-[#1A1A1A] perspective-[1200px] cursor-none"
-            style={{ opacity: scrollOpacity }}
+            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#0A0A0B] text-[#FBFBF9]"
         >
-            {/* Custom Cursor System */}
-            <div
-                ref={cursorRef}
-                className={`fixed pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out mix-blend-darken ${cursorVariant === 'text' ? 'w-20 h-20 opacity-50' : 'w-6 h-6 opacity-100'
-                    }`}
-            >
-                <div className={`w-full h-full rounded-full border-[0.5px] transition-all duration-500 ${cursorVariant === 'text'
-                    ? 'border-[#D4AF37] bg-[#D4AF37]/5 scale-100'
-                    : 'border-[#1A1A1A]/40 bg-transparent scale-100'
-                    }`} />
-            </div>
-            <div
-                ref={cursorDotRef}
-                className="fixed w-[2px] h-[2px] bg-[#1A1A1A] rounded-full pointer-events-none z-[101] -translate-x-1/2 -translate-y-1/2"
-            />
-
-            {/* ATMOSPHERIC BACKGROUND - Cream & Gold */}
+            {/* The Refractive Void - Multi-layered Dynamic Background */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-[#F9F8F4]" />
+                {/* Layer 1: Deep Base Orbit */}
                 <div
-                    className="absolute inset-0 transition-transform duration-[2s] ease-out"
+                    className="absolute inset-0 opacity-60 transition-opacity duration-1000"
                     style={{
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -10}px, ${(smoothMousePos.y - 0.5) * -10}px, 0)`
+                        background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, #1a1a1c 0%, #0A0A0B 80%)`
                     }}
-                >
-                    {/* Subtle Radial Gradient - Warm Center */}
-                    <div
-                        className="absolute inset-0 opacity-60 transition-opacity duration-1000"
-                        style={{
-                            background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, rgba(255, 255, 255, 1) 0%, rgba(249, 248, 244, 0) 50%)`
-                        }}
-                    />
-                    {/* Minimal Particles - Gold */}
-                    <div className="absolute inset-0 pointer-events-none">
-                        {PARTICLE_POSITIONS.map((particle, i) => (
-                            <div
-                                key={i}
-                                className={`absolute rounded-full transition-all duration-[2s]
-                                    ${activeParticle === i ? 'bg-[#D4AF37] scale-125' : 'bg-[#D4AF37]/30'}
-                                    animate-[particleFloat_${12 + i * 4}s_infinite_ease-in-out]`}
-                                style={{
-                                    top: `${particle.top}%`,
-                                    left: `${particle.left}%`,
-                                    width: particle.size,
-                                    height: particle.size,
-                                    opacity: mounted ? 0.6 : 0,
-                                }}
-                            />
-                        ))}
-                    </div>
+                />
+                {/* Layer 2: Subtle Golden Shift (Refraction) */}
+                <div
+                    className="absolute inset-0 opacity-[0.03] mix-blend-screen"
+                    style={{
+                        background: `radial-gradient(circle at ${(1 - smoothMousePos.x) * 100}% ${(1 - smoothMousePos.y) * 100}%, #b5a16d 0%, transparent 50%)`
+                    }}
+                />
+
+                {/* Shimmering Grain Overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
+                    <svg width="100%" height="100%">
+                        <filter id="heroNoise">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
+                            <feColorMatrix type="saturate" values="0" />
+                        </filter>
+                        <rect width="100%" height="100%" filter="url(#heroNoise)" />
+                    </svg>
                 </div>
             </div>
 
-            {/* GEOMETRIC ARCHITECTURE */}
+            {/* Floating Refraction Prisms - Enhanced with Parallax and Secondary Layers */}
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+                {/* Prism Alpha */}
                 <div
-                    className={`absolute top-[15%] left-[20%] w-[40vw] h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent rotate-[-35deg] transition-all duration-[5s] ${mounted ? 'opacity-30' : 'opacity-0'}`}
-                />
+                    className={`absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[2s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-95'}`}
+                    style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * -30}px, ${(smoothMousePos.y - 0.5) * -30}px, 0)` }}
+                >
+                    {/* Inner ghost glow */}
+                    <div className="absolute inset-4 border border-white/2 rounded-inherit blur-sm" />
+                </div>
+
+                {/* Prism Beta (Golden) */}
+                <div
+                    className={`absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-[#b5a16d]/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[2.5s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
+                    style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 50}px, ${(smoothMousePos.y - 0.5) * 50}px, 0)` }}
+                >
+                    {/* Inner refraction line */}
+                    <div className="absolute inset-0 border-l border-t border-[#b5a16d]/5 rounded-inherit animate-pulse" />
+                </div>
             </div>
 
-            {/* CINEMATIC TYPOGRAPHY */}
-            <div className="relative z-20 w-full max-w-[1900px] px-8 md:px-24 pointer-events-none">
+            {/* Architectural Typography - The Core Narrative */}
+            <div className="relative z-20 w-full max-w-[1600px] px-10 md:px-24">
                 <div className="flex flex-col gap-0 select-none">
 
-                    {/* TOP ROW */}
-                    <div className="flex items-end justify-between mb-[-4vh] relative">
-                        <h1
-                            className="text-[10vw] md:text-[9vw] font-light serif leading-[0.8] tracking-[-0.03em] uppercase pointer-events-auto group text-[#1A1A1A]"
-                            onMouseEnter={() => setCursorVariant('text')}
-                            onMouseLeave={() => setCursorVariant('default')}
-                            onMouseMove={(e) => handleMagneticMove(e, 0.1)}
-                        >
-                            <span style={{ transform: `translate(${magneticPos.x}px, ${magneticPos.y}px)`, display: 'inline-block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}>
-                                <SplitText text="RARE" delay={0.5} className="drop-shadow-sm" hoverable />
+                    {/* Row 1: Rarity Concept */}
+                    <div className="flex items-end justify-between mb-[-2vh] relative">
+                        <h1 className="text-[14vw] md:text-[12vw] font-light serif leading-[0.75] tracking-tight uppercase flex items-baseline">
+                            <span className={`transition-all duration-[2s] cubic-bezier(0.19,1,0.22,1) ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
+                                Ra
+                            </span>
+                            <span className={`italic text-[#b5a16d] transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-100 ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+                                re
                             </span>
                         </h1>
-
-                        <div className="flex flex-col items-end gap-6 mb-4">
-                            <span
-                                className="text-[3vw] md:text-[2.5vw] italic text-[#D4AF37] lowercase tracking-wide font-light pointer-events-auto"
-                            >
-                                <SplitText text="by nature" delay={1.0} className="opacity-90" />
-                            </span>
-                            <div className={`hidden lg:block text-[9px] tracking-[0.4em] uppercase text-[#1A1A1A]/40 font-sans transition-all duration-[2s] delay-[1.5s] ${mounted ? 'opacity-100' : 'opacity-0'}`}>
-                                Edition 001 / Archive
-                            </div>
+                        <div className={`hidden lg:block w-px h-32 bg-white/10 mb-8 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
+                        <div className={`hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-20 mb-8 transition-opacity duration-[2s] delay-700 ${mounted ? 'opacity-20' : 'opacity-0'}`}>
+                            Volume 01 / Archive
                         </div>
                     </div>
 
-                    {/* CENTER ROW: THE CRYSTAL LENS - LIGHT THEME */}
-                    <div className="relative flex items-center justify-center py-24 md:py-32">
+                    {/* Row 2: The Vision */}
+                    <div className="relative flex items-center justify-center py-6">
+                        {/* Central Bespoke Visual - Abstract Gemstone Focus */}
                         <div
-                            className="absolute inset-0 flex items-center justify-center"
-                            style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 30}px, ${(smoothMousePos.y - 0.5) * 30}px, 0)` }}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                            style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0)` }}
                         >
                             <div
-                                className={`w-[32vw] aspect-square rounded-full border border-[#D4AF37]/20 flex items-center justify-center transition-all duration-[3s] cubic-bezier(0.19, 1, 0.22, 1) pointer-events-auto group/lens hover:border-[#D4AF37]/40 ${mounted ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
-                                onMouseEnter={() => setCursorVariant('text')}
-                                onMouseLeave={() => setCursorVariant('default')}
+                                className={`w-[26vw] aspect-square rounded-full border border-white/10 flex items-center justify-center transition-all duration-[2.5s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
-                                <div className="absolute inset-[-30px] rounded-full border border-[#D4AF37]/10 animate-[spin_160s_linear_infinite]" />
-
-                                <div className="w-[92%] h-[92%] rounded-full overflow-hidden relative grayscale group shadow-xl transition-all duration-[1.5s]">
-                                    {/* Overlay for light mode: darkens image slightly */}
-                                    <div className="absolute inset-0 bg-[#F9F8F4]/10 z-10 group-hover/lens:bg-transparent transition-colors duration-700" />
+                                <div className="w-[82%] h-[82%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_80px_rgba(0,0,0,0.5)]">
                                     <img
                                         src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
-                                        className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover/lens:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-[12s] group-hover:scale-110"
                                         alt="Refraction Focus"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#D4AF37]/30 to-transparent opacity-0 group-hover/lens:opacity-100 transition-opacity duration-1000 mix-blend-overlay" />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0A0B]/80 via-transparent to-[#b5a16d]/20 mix-blend-overlay" />
+                                    {/* Dynamic Light sweep */}
+                                    <div
+                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[sweep_8s_infinite_ease-in-out]"
+                                    />
+                                </div>
+                                {/* Rotating Micro-Text */}
+                                <div className="absolute inset-[-4.5vw] animate-[spin_40s_linear_infinite]">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-white/10">
+                                        <path id="heroCirclePath" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
+                                        <text className="text-[3px] tracking-[4px] uppercase font-medium">
+                                            <textPath href="#heroCirclePath">
+                                                • TIMELESS CRAFT • THE PATIENCE OF NATURE • REFINED BY VISION • EST. MCMXC •
+                                            </textPath>
+                                        </text>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="absolute z-[-1] pointer-events-none mix-blend-multiply opacity-5">
-                            <h2
-                                className={`text-[12vw] font-serif uppercase tracking-[-0.05em] text-[#1A1A1A] ${mounted ? 'opacity-100 blur-0' : 'opacity-0 blur-xl'} transition-all duration-[2s]`}
-                            >
-                                Refined
-                            </h2>
-                        </div>
+                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-difference transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                            Nature
+                        </h2>
                     </div>
 
-                    {/* BOTTOM ROW: CRAFTED SIGNATURE */}
-                    <div className="flex items-start justify-between mt-[-4vh] relative">
-                        <div className={`hidden lg:flex flex-col gap-8 mt-24 transition-all duration-[2s] delay-[1.5s] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-                            <div className="w-12 h-[1px] bg-[#1A1A1A]/20" />
-                            <p className="text-[10px] tracking-[0.4em] uppercase opacity-50 max-w-[200px] leading-relaxed font-sans text-[#1A1A1A]">
-                                Silence in the stone
+                    {/* Row 3: The Statement */}
+                    <div className="flex items-start justify-between mt-[-2vh] relative">
+                        <div className={`hidden lg:flex flex-col gap-6 mt-12 transition-all duration-[2s] delay-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                            <p className="text-[10px] tracking-[0.5em] uppercase opacity-30 max-w-[190px] leading-loose">
+                                Crafted for those who understand rarity beyond brilliance.
                             </p>
+                            <div className="w-10 h-px bg-[#b5a16d]/30" />
                         </div>
 
-                        <h1
-                            className="text-[10vw] md:text-[9vw] font-light serif leading-[0.8] tracking-[-0.03em] uppercase text-right pointer-events-auto text-[#1A1A1A]"
-                            onMouseEnter={() => setCursorVariant('text')}
-                            onMouseLeave={() => setCursorVariant('default')}
-                        >
-                            <span className="italic mr-4 text-[#D4AF37] opacity-90 transition-opacity duration-500">
-                                <SplitText text="Craf" delay={1.5} hoverable />
+                        <h1 className="text-[14vw] md:text-[13vw] font-light serif leading-[0.75] tracking-tight uppercase text-right">
+                            <span className={`transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-200 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+                                Craf
                             </span>
-                            <SplitText text="ted" delay={1.8} className="text-[#1A1A1A]" hoverable />
+                            <span className={`italic transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-400 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+                                ted
+                            </span>
                         </h1>
                     </div>
                 </div>
             </div>
 
-            {/* MINIMAL NAVIGATION LINES */}
-            <div className={`absolute bottom-0 left-0 w-full h-px bg-[#1A1A1A]/5 ${mounted ? 'scale-x-100' : 'scale-x-0'} transition-transform duration-[2s] origin-left`} />
+            {/* Dynamic Interaction Hint */}
+            <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 transition-all duration-1000 delay-[2s] ${mounted ? 'opacity-40' : 'opacity-0'}`}>
+                <div className="w-px h-16 bg-gradient-to-b from-white/20 to-transparent" />
+                <span className="text-[8px] tracking-[1.5em] uppercase font-light">The Narrative Unfolds</span>
+            </div>
+
+            {/* Decorative Floating Glyph - Enhanced responsive depth */}
+            <div
+                className={`absolute top-1/2 right-12 md:right-24 -translate-y-1/2 hidden md:block transition-all duration-[2.5s] delay-1000 ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-50'}`}
+                style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * -70}px, ${(smoothMousePos.y - 0.5) * -70}px, 0)` }}
+            >
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-[pulse_4s_infinite_ease-in-out]">
+                    <path d="M20 0L22.5 17.5L40 20L22.5 22.5L20 40L17.5 22.5L0 20L17.5 17.5L20 0Z" fill="currentColor" />
+                </svg>
+            </div>
 
             <style>{`
-                @keyframes spin {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                @keyframes particleFloat {
-                    0%, 100% { transform: translateY(0) translateX(0); }
-                    50% { transform: translateY(-10px) translateX(5px); }
-                }
-                @keyframes letterFloat {
-                    0% { transform: translateY(0); }
-                    50% { transform: translateY(-5px); }
-                    100% { transform: translateY(0); }
-                }
-            `}</style>
+        @keyframes morph {
+          0%, 100% { border-radius: 35% 65% 70% 30% / 30% 30% 70% 70%; }
+          25% { border-radius: 50% 50% 30% 70% / 70% 30% 70% 30%; }
+          50% { border-radius: 65% 35% 30% 70% / 70% 70% 30% 30%; }
+          75% { border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%; }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes sweep {
+          0% { transform: translateX(-150%) skewX(-25deg); }
+          50% { transform: translateX(150%) skewX(-25deg); }
+          100% { transform: translateX(150%) skewX(-25deg); }
+        }
+      `}</style>
         </section>
     );
 };
