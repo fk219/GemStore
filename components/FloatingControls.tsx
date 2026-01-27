@@ -6,9 +6,13 @@ import { useGSAP } from '@gsap/react';
 
 const FloatingControls = () => {
     const [showScroll, setShowScroll] = useState(false);
-    const [progress, setProgress] = useState(0);
     const scrollBtnRef = useRef<HTMLButtonElement>(null);
     const whatsappRef = useRef<HTMLAnchorElement>(null);
+    const progressCircleRef = useRef<SVGCircleElement>(null);
+    const showScrollRef = useRef(false);
+
+    const radius = 48;
+    const circumference = 2 * Math.PI * radius;
 
     // Initial Intro Animation - Faster entry
     useGSAP(() => {
@@ -22,17 +26,41 @@ const FloatingControls = () => {
     }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const totalScroll = document.documentElement.scrollTop;
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollProgress = totalScroll / windowHeight;
+        let rafId = 0;
 
-            setProgress(scrollProgress);
-            setShowScroll(totalScroll > 500);
+        const computeAndSync = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+            const scrollable = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = scrollable > 0 ? Math.min(1, Math.max(0, scrollTop / scrollable)) : 0;
+
+            if (progressCircleRef.current) {
+                progressCircleRef.current.style.strokeDashoffset = String(circumference * (1 - progress));
+            }
+
+            const nextShowScroll = scrollTop > 500;
+            if (nextShowScroll !== showScrollRef.current) {
+                showScrollRef.current = nextShowScroll;
+                setShowScroll(nextShowScroll);
+            }
         };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        const scheduleSync = () => {
+            if (rafId) return;
+            rafId = window.requestAnimationFrame(() => {
+                rafId = 0;
+                computeAndSync();
+            });
+        };
+
+        computeAndSync();
+        window.addEventListener("scroll", scheduleSync, { passive: true });
+        window.addEventListener("resize", scheduleSync);
+
+        return () => {
+            window.removeEventListener("scroll", scheduleSync);
+            window.removeEventListener("resize", scheduleSync);
+            if (rafId) window.cancelAnimationFrame(rafId);
+        };
     }, []);
 
     const scrollToTop = () => {
@@ -40,7 +68,13 @@ const FloatingControls = () => {
     };
 
     return (
-        <div className="fixed bottom-8 right-8 z-[900] flex items-center gap-4 pointer-events-none">
+        <div
+            className="fixed z-[900] flex flex-nowrap items-center gap-3 pointer-events-none"
+            style={{
+                right: "calc(env(safe-area-inset-right) + clamp(12px, 2vw, 24px))",
+                bottom: "calc(env(safe-area-inset-bottom) + clamp(12px, 2vw, 24px))",
+            }}
+        >
 
             {/* 1. Scroll To Top - Magnetic & Progress Ring */}
             <button
@@ -57,9 +91,10 @@ const FloatingControls = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        strokeDasharray="301.59"
-                        strokeDashoffset={301.59 * (1 - progress)}
-                        className="text-amber-500 transition-all duration-100 ease-linear"
+                        ref={progressCircleRef}
+                        strokeDasharray={circumference}
+                        strokeDashoffset={circumference}
+                        className="text-amber-500"
                     />
                 </svg>
 
