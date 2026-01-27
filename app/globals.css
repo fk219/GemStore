@@ -3,43 +3,58 @@
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+    /* Base Colors - LIGHT LUXURY THEME */
+    --background-hex: #F9F8F4;
+    /* Cream / Off-White */
+    --foreground-hex: #1A1A1A;
+    /* Deep Charcoal */
+
+    --accent-gold: #D4AF37;
+    /* Metallic Gold */
+    --accent-gold-dim: #997B28;
+    --accent-gold-light: #F3E5AB;
+
+    --foreground-rgb: 26, 26, 26;
+    --background-start-rgb: 249, 248, 244;
+    --background-end-rgb: 249, 248, 244;
+
+    /* Metrics */
     --radius-xs: 8px;
     --radius-sm: 14px;
     --radius-md: 24px;
     --radius-lg: 35px;
     --radius-xl: 50px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-6: 24px;
-    --space-8: 32px;
-    --space-12: 48px;
-    --space-16: 64px;
-    --space-24: 96px;
+
+    /* Animation */
     --easing-standard: cubic-bezier(0.16, 1, 0.3, 1);
     --easing-slow: cubic-bezier(0.22, 1, 0.36, 1);
     --duration-slow: 1200ms;
-    --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.06);
-    --shadow-depth: 0 8px 40px rgba(0, 0, 0, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
+
+    /* Optional: We are ENFORCING the light theme for now based on user request "background should be offwhite" 
+       but keeping these if they toggle mode manually, though user wants offwhite dominance. 
+       Let's map Dark Mode to a "Night Luxury" (Deep Gold/Black) if used.
+    */
     :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+        --foreground-rgb: 251, 251, 249;
+        --background-start-rgb: 5, 5, 5;
+        --background-end-rgb: 5, 5, 5;
     }
 }
 
-h1,
-h2,
-h3 {
-    @apply font-serif;
+body {
+    background-color: var(--background-hex);
+    color: var(--foreground-hex);
+    overflow-x: hidden;
 }
 
+/* Typography Basics */
+h1,
+h2,
+h3,
+h4,
 .serif {
     @apply font-serif;
 }
@@ -51,22 +66,10 @@ textarea {
 
 :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(181, 161, 109, 0.25);
-    border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 1px var(--accent-gold);
 }
 
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.15s !important;
-        scroll-behavior: auto !important;
-    }
-}
-
+/* Scrollbar - Gold/Minimal */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -76,13 +79,13 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(155, 155, 155, 0.15);
+    background: rgba(212, 175, 55, 0.3);
     border-radius: 12px;
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(155, 155, 155, 0.25);
+    background: rgba(212, 175, 55, 0.6);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -92,14 +95,4 @@ textarea {
 .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
-}
-
-body.custom-cursor-active {
-    cursor: none;
-}
-
-body.custom-cursor-active a,
-body.custom-cursor-active button,
-body.custom-cursor-active input {
-    cursor: none;
 }
