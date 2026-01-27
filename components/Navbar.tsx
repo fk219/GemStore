@@ -93,8 +93,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
         <>
             <nav className="fixed top-8 left-0 w-full z-[60] pointer-events-none">
                 <div className={`mx-auto px-6 py-6 transition-all duration-1000 flex items-center justify-between pointer-events-auto ${isScrolled
-                        ? `mt-4 max-w-4xl ${bgColor} backdrop-blur-xl ${borderColor} border rounded-full py-3 px-8 shadow-2xl`
-                        : 'max-w-7xl pt-8'
+                    ? `mt-4 max-w-4xl ${bgColor} backdrop-blur-xl ${borderColor} border rounded-full py-3 px-8 shadow-2xl`
+                    : 'max-w-7xl pt-8'
                     }`}>
                     <Link href="/" className="flex items-center gap-2 group">
                         <Diamond
@@ -105,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             className={`font-serif tracking-[0.3em] uppercase transition-all duration-1000 ${isScrolled ? 'text-sm' : 'text-2xl'}`}
                             style={{ color: accentColor }}
                         >
-                            Timeless Craft
+                            Maihan Group
                         </span>
                     </Link>
 
@@ -173,7 +173,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 <Link href="/" className="flex items-center gap-2">
                                     <Diamond className="w-6 h-6" style={{ color: accentColor }} />
                                     <span className="font-serif text-xl tracking-[0.3em] uppercase" style={{ color: accentColor }}>
-                                        Timeless Craft
+                                        Maihan Group
                                     </span>
                                 </Link>
                                 <button

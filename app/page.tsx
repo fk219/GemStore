@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LanguageContext, ThemeContext } from '@/app/providers';
-import HeroCalm from '@/components/HeroCalm';
+import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import CollectionSection from '@/components/CollectionSection';
@@ -82,7 +82,7 @@ export default function Home() {
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
             <Navbar themeOverride="dark" />
-            <HeroCalm />
+            <Hero />
 
             {/* Chapter 1: The Soul of Rarity - Editorial Overlay Layout */}
             <section className={`relative min-h-screen py-32 md:py-48 px-6 md:px-24 flex flex-col justify-center overflow-hidden ${bgMain} ${textColorClass}`}>
