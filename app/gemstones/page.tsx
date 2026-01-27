@@ -1,188 +1,118 @@
-"use client";
+'use client';
 
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ThemeContext, LanguageContext } from '@/app/providers';
-import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ProductsHero from '@/components/ProductsHero';
+import { Diamond } from 'lucide-react';
 
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
-
-// Mock Data - The Vault
-const ARCHIVE_ITEMS = [
-    {
-        id: "001",
-        name: "The Royal Kashmir",
-        carat: "8.42 CT",
-        origin: "Kashmir, India",
-        price: "Price upon Request",
-        image: "https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=1200", // Sapphire
-        type: "Sapphire",
-        status: "Available"
-    },
-    {
-        id: "002",
-        name: "Crimson Star",
-        carat: "5.12 CT",
-        origin: "Mogok, Burma",
-        price: "Sold",
-        image: "https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=1200", // Ruby
-        type: "Ruby",
-        status: "Archived"
-    },
-    {
-        id: "003",
-        name: "Verdant Prism",
-        carat: "12.05 CT",
-        origin: "Muzo, Colombia",
-        price: "Reserved",
-        image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200", // Emerald
-        type: "Emerald",
-        status: "Reserved"
-    },
-    {
-        id: "004",
-        name: "Light of Sierra",
-        carat: "15.00 CT",
-        origin: "Sierra Leone",
-        price: "Price upon Request",
-        image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=1200",
-        type: "Diamond",
-        status: "Available"
-    },
-    {
-        id: "005",
-        name: "The Midnight Eye",
-        carat: "4.20 CT",
-        origin: "Lightning Ridge, Australia",
-        price: "Available",
-        image: "https://images.unsplash.com/photo-1587588354456-ae376af71a25?auto=format&fit=crop&q=80&w=1200", // Opal substitute
-        type: "Opal",
-        status: "Available"
-    }
+const gemstones = [
+    { name: 'Ruby', color: '#E0115F', description: 'The king of precious stones, symbolizing passion and vitality' },
+    { name: 'Sapphire', color: '#0F52BA', description: 'Celestial blue gemstone of wisdom and royalty' },
+    { name: 'Emerald', color: '#50C878', description: 'Verdant treasure representing renewal and prosperity' },
+    { name: 'Diamond', color: '#B9F2FF', description: 'Eternal brilliance, the ultimate symbol of luxury' },
+    { name: 'Amethyst', color: '#9966CC', description: 'Purple majesty, stone of clarity and calm' },
+    { name: 'Aquamarine', color: '#7FFFD4', description: 'Ocean-inspired serenity in crystalline form' },
+    { name: 'Mandarin Garnet', color: '#FF8C00', description: 'Rare sunset hues of exceptional fire' },
+    { name: 'Morganite', color: '#FFB6C1', description: 'Blush-toned elegance and gentle sophistication' },
+    { name: 'Padparadscha', color: '#FF6E4A', description: 'Lotus blossom sapphire of unparalleled rarity' },
+    { name: 'Paraiba Tourmaline', color: '#00CED1', description: 'Electric neon brilliance from Brazilian depths' },
+    { name: 'Peridot', color: '#E5E4A6', description: 'Olive-green luminescence born of volcanic fire' },
+    { name: 'Rubellite', color: '#D10056', description: 'Pink to red tourmaline of exceptional depth' },
+    { name: 'Spinel', color: '#FF073A', description: 'Underrated gem of royal heritage' },
+    { name: 'Tanzanite', color: '#5D3FD3', description: 'Violet-blue rarity found only in Tanzania' },
+    { name: 'Tourmaline', color: '#00A86B', description: 'Rainbow spectrum in a single stone' }
 ];
 
-export default function Gemstones() {
-    const themeCtx = useContext(ThemeContext);
-    const langCtx = useContext(LanguageContext);
-
-    // State for filtering
-    const [filter, setFilter] = useState("All");
-
-    // Refs for animation
-    const headerRef = useRef(null);
-    const gridRef = useRef(null);
+export default function GemstonesPage() {
+    const [mounted, setMounted] = useState(false);
+    const [hoveredGem, setHoveredGem] = useState<string | null>(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.fromTo(headerRef.current,
-                { y: 50, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" }
-            );
-
-            // Wait a tick for DOM to settle if needed, but here simple stagger works
-            gsap.fromTo(".archive-row",
-                { y: 30, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    stagger: 0.1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: gridRef.current,
-                        start: "top 90%"
-                    }
-                }
-            );
-        });
-        return () => ctx.revert();
-    }, [filter]); // Re-run anim when filter changes if we wanted, though React might unmount rows.
-
-    const filteredItems = filter === "All" ? ARCHIVE_ITEMS : ARCHIVE_ITEMS.filter(item => item.type === filter);
-    const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9]";
-    const bgClass = "bg-[#FBFBF9] dark:bg-[#050505]";
+        setMounted(true);
+    }, []);
 
     return (
-        <main className={`min-h-screen ${bgClass} ${textColorClass} selection:bg-[#b5a16d] selection:text-white`}>
+        <main className="min-h-screen bg-[#0A0A0B] text-[#FBFBF9]">
             <Navbar themeOverride="dark" />
 
             {/* Hero Section */}
-            <ProductsHero />
+            <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#0A0A0B] to-[#0A0A0B] opacity-90" />
 
-            {/* Filter Section - Restored */}
-            <section className="py-12 flex justify-center sticky top-0 bg-[#FBFBF9]/80 dark:bg-[#050505]/80 backdrop-blur-md z-40 border-b border-white/5">
-                        <div className="flex gap-8 text-eyebrow opacity-70 overflow-x-auto max-w-full pb-4 scrollbar-hide justify-center">
-                    {["All", "Sapphire", "Ruby", "Emerald", "Diamond"].map(f => (
-                        <button
-                            key={f}
-                            onClick={() => setFilter(f)}
-                            className={`pb-2 border-b transition-all ${filter === f ? 'border-current opacity-100' : 'border-transparent opacity-40 hover:opacity-100'}`}
-                        >
-                            {f}
-                        </button>
-                    ))}
+                <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
+                    <div className={`transition-all duration-[2.5s] ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                        <Diamond className="w-12 h-12 mx-auto mb-8 text-[#b5a16d]/60" strokeWidth={0.5} />
+                        <h1 className="font-serif text-[12vw] md:text-[8vw] lg:text-[6vw] font-light leading-[0.9] tracking-tight mb-6">
+                            <span className="block">Gemstones</span>
+                        </h1>
+                        <p className="text-[11px] md:text-[13px] tracking-[0.6em] uppercase opacity-40 font-light">
+                            Nature's Masterpieces
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Archive List View */}
-            <section ref={gridRef} className="pb-48 px-4 md:px-12 max-w-[1800px] mx-auto min-h-[50vh]">
-                <div className="w-full">
-                    {/* Header Row */}
-                    <div className="hidden md:grid grid-cols-12 pb-6 border-b border-zinc-200 dark:border-zinc-800 opacity-40 text-[10px] uppercase tracking-[0.3em]">
-                        <div className="col-span-1">Ref</div>
-                        <div className="col-span-4">Designation</div>
-                        <div className="col-span-2">Origin</div>
-                        <div className="col-span-2">Weight</div>
-                        <div className="col-span-2 text-right">Status</div>
-                        <div className="col-span-1 text-right">Action</div>
-                    </div>
-
-                    {/* Rows */}
-                    {filteredItems.map((item, index) => (
-                        <div key={item.id} className="archive-row group relative border-b border-zinc-100 dark:border-zinc-900 overflow-hidden">
-                            {/* Hover Reveal Image Background */}
-                            <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none mix-blend-multiply dark:mix-blend-overlay">
-                                <Image
-                                    src={item.image}
-                                    fill
-                                    alt={item.name}
-                                    className="object-cover grayscale opacity-20"
-                                />
-                            </div>
-
-                            <a href={`/book?gem=${item.name}`} className="relative z-10 grid md:grid-cols-12 items-center py-8 md:py-12 cursor-pointer transition-all duration-500 ease-[var(--easing-standard)] hover:bg-zinc-50/5 dark:hover:bg-zinc-900/40">
-                                <div className="col-span-1 text-xs opacity-30 font-sans tracking-widest">#{item.id}</div>
-                                <div className="col-span-11 md:col-span-4 flex items-center gap-6">
-                                    <div className="w-16 h-16 relative overflow-hidden rounded-sm md:hidden shrink-0">
-                                        <Image src={item.image} fill className="object-cover" alt={item.name} />
+            {/* Gemstones Grid */}
+            <section className="relative py-20 px-8 md:px-16 lg:px-32">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {gemstones.map((gem, index) => (
+                            <Link
+                                key={gem.name}
+                                href={`/gemstones/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                className="group relative"
+                                onMouseEnter={() => setHoveredGem(gem.name)}
+                                onMouseLeave={() => setHoveredGem(null)}
+                            >
+                                <div
+                                    className={`relative p-12 rounded-xl border border-white/5 bg-gradient-to-br from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-white/10 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                                    style={{
+                                        transitionDelay: `${index * 0.08}s`,
+                                        boxShadow: hoveredGem === gem.name ? `0 0 60px ${gem.color}15` : 'none'
+                                    }}
+                                >
+                                    {/* Gem Icon */}
+                                    <div className="flex items-center justify-center mb-8">
+                                        <div
+                                            className="w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-700 group-hover:scale-110 group-hover:rotate-45"
+                                            style={{
+                                                borderColor: `${gem.color}40`,
+                                                backgroundColor: `${gem.color}08`
+                                            }}
+                                        >
+                                            <Diamond
+                                                className="w-6 h-6 transition-all duration-700"
+                                                style={{ color: gem.color }}
+                                                strokeWidth={1}
+                                            />
+                                        </div>
                                     </div>
-                                    <h3 className="text-2xl md:text-4xl serif font-light italic group-hover:translate-x-4 transition-transform duration-500">{item.name}</h3>
-                                </div>
-                                <div className="hidden md:block col-span-2 text-sm opacity-60 font-sans tracking-wide">{item.origin}</div>
-                                <div className="hidden md:block col-span-2 serif text-title">{item.carat}</div>
-                                <div className="hidden md:block col-span-2 text-right">
-                                    <span className={`text-eyebrow px-3 py-1 rounded-full border ${item.status === 'Available' ? 'border-amber-500/40 text-amber-500 dark:text-amber-300' : 'border-zinc-500/30 opacity-50'}`}>
-                                        {item.status}
-                                    </span>
-                                </div>
-                                <div className="hidden md:col-span-1 text-right md:flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span className="text-2xl font-serif italic flex items-center gap-2">Inquire <span className="not-italic text-sm">→</span></span>
-                                </div>
-                            </a>
-                        </div>
-                    ))}
 
-                    {filteredItems.length === 0 && (
-                        <div className="py-32 text-center opacity-40 uppercase tracking-widest text-xs">
-                            No artifacts found in this category.
-                        </div>
-                    )}
+                                    {/* Gem Name */}
+                                    <h3
+                                        className="font-serif text-3xl md:text-4xl font-light text-center mb-4 transition-all duration-700 group-hover:tracking-wider"
+                                        style={{
+                                            color: hoveredGem === gem.name ? gem.color : '#FBFBF9'
+                                        }}
+                                    >
+                                        {gem.name}
+                                    </h3>
+
+                                    {/* Description */}
+                                    <p className="text-[11px] tracking-[0.3em] uppercase text-center opacity-40 leading-relaxed font-light transition-opacity duration-700 group-hover:opacity-60">
+                                        {gem.description}
+                                    </p>
+
+                                    {/* Hover Accent Line */}
+                                    <div
+                                        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px w-0 group-hover:w-3/4 transition-all duration-700"
+                                        style={{ backgroundColor: gem.color }}
+                                    />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </section>
 

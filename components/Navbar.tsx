@@ -79,6 +79,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
     const navItems = [
         { name: 'Home', path: '/', img: 'https://images.unsplash.com/photo-1615111784767-4d7c02783103?auto=format&fit=crop&q=80&w=800' },
         { name: 'Gemstones', path: '/gemstones', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Gemstone Origins', path: '/origins', img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800' },
         { name: 'About', path: '/about', img: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800' },
         { name: 'Contact', path: '/book', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' }
     ];
