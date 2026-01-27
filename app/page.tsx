@@ -9,6 +9,8 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import CollectionSection from '@/components/CollectionSection';
 import BentoGrid from '@/components/BentoGrid';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import ScrollToTop from '@/components/ScrollToTop';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -214,6 +216,10 @@ export default function Home() {
             </section>
 
             <Footer />
+
+            {/* Floating Action Buttons - Fixed Position */}
+            <WhatsAppButton />
+            <ScrollToTop />
         </main>
     );
 }

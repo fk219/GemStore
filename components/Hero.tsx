@@ -132,9 +132,9 @@ const Hero: React.FC = () => {
 
                     {/* TOP ROW */}
                     <div className="flex items-end justify-between mb-[-6vh] relative">
-                        <h1 className="text-[17vw] md:text-[15vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase flex items-baseline">
+                        <h1 className="text-[12vw] md:text-[10vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase flex items-baseline">
                             <SplitText text="RARE" delay={0.8} className="text-white drop-shadow-[0_0_50px_rgba(255,255,255,0.08)]" />
-                            <span className="text-[8vw] md:text-[6vw] italic text-[#b5a16d]/60 ml-10 lowercase tracking-normal font-light">
+                            <span className="text-[5vw] md:text-[4vw] italic text-[#b5a16d]/60 ml-8 lowercase tracking-normal font-light">
                                 <SplitText text="by nature" delay={1.4} />
                             </span>
                         </h1>
@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
 
-                        <h2 className={`text-[14vw] md:text-[11vw] font-light serif uppercase tracking-[-0.07em] mix-blend-difference text-white transition-all duration-[3s] delay-[1.2s] ${mounted ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-20 blur-2xl'}`}>
+                        <h2 className={`text-[9vw] md:text-[7vw] font-light serif uppercase tracking-[-0.07em] mix-blend-difference text-white transition-all duration-[3s] delay-[1.2s] ${mounted ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-20 blur-2xl'}`}>
                             Refined
                         </h2>
                     </div>
@@ -204,7 +204,7 @@ const Hero: React.FC = () => {
                             </p>
                         </div>
 
-                        <h1 className="text-[17vw] md:text-[16vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase text-right">
+                        <h1 className="text-[11vw] md:text-[10vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase text-right">
                             <span className="italic mr-6 text-[#b5a16d] opacity-90 drop-shadow-[0_0_50px_rgba(181,161,109,0.15)]">
                                 <SplitText text="Craf" delay={2.0} />
                             </span>
