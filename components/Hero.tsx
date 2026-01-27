@@ -105,6 +105,59 @@ const Hero: React.FC = () => {
 
                 {/* Crystalline Grain Layer */}
                 <div className="absolute inset-0 pointer-events-none opacity-[0.12] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+                {/* ABSTRACT FLOATING TYPOGRAPHY - Bespoke Editorial Feel */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    {/* Top Left - Vertical Text */}
+                    <div className={`absolute top-[15%] left-[8%] transition-all duration-[4s] delay-[1.5s] ${mounted ? 'opacity-25' : 'opacity-0'}`}>
+                        <span className="text-[9px] tracking-[1.5em] uppercase text-white/40 font-extralight writing-mode-vertical rotate-180" style={{ writingMode: 'vertical-rl' }}>
+                            Curated Excellence
+                        </span>
+                    </div>
+
+                    {/* Top Right - Scattered Numbers */}
+                    <div className={`absolute top-[12%] right-[12%] transition-all duration-[4s] delay-[2s] ${mounted ? 'opacity-20' : 'opacity-0'}`}>
+                        <span className="text-[72px] font-serif font-extralight italic text-white/10">
+                            III
+                        </span>
+                    </div>
+
+                    {/* Mid Left - Floating Word */}
+                    <div className={`absolute top-[45%] left-[5%] transition-all duration-[4s] delay-[2.5s] ${mounted ? 'opacity-15' : 'opacity-0'}`}>
+                        <span className="text-[11px] tracking-[2em] uppercase text-[#b5a16d]/30 font-light">
+                            Legacy
+                        </span>
+                    </div>
+
+                    {/* Bottom Right - Diagonal Text */}
+                    <div className={`absolute bottom-[25%] right-[8%] transition-all duration-[4s] delay-[3s] ${mounted ? 'opacity-20' : 'opacity-0'}`}>
+                        <span className="text-[10px] tracking-[1.2em] uppercase text-white/30 font-extralight -rotate-90 block">
+                            Est. 1892
+                        </span>
+                    </div>
+
+                    {/* Center Top - Abstract Phrase */}
+                    <div className={`absolute top-[8%] left-1/2 -translate-x-1/2 transition-all duration-[4s] delay-[1s] ${mounted ? 'opacity-15' : 'opacity-0'}`}>
+                        <span className="text-[8px] tracking-[3em] uppercase text-white/25 font-light whitespace-nowrap">
+                            The Eternal Pursuit
+                        </span>
+                    </div>
+
+                    {/* Bottom Left - Large Faded Letter */}
+                    <div className={`absolute bottom-[15%] left-[15%] transition-all duration-[4s] delay-[3.5s] ${mounted ? 'opacity-10' : 'opacity-0'}`}>
+                        <span className="text-[180px] font-serif font-thin italic text-white/5 leading-none select-none">
+                            G
+                        </span>
+                    </div>
+
+                    {/* Mid Right - Coordinates */}
+                    <div className={`absolute top-[60%] right-[6%] transition-all duration-[4s] delay-[2.8s] ${mounted ? 'opacity-20' : 'opacity-0'}`}>
+                        <div className="flex flex-col items-end gap-1">
+                            <span className="text-[8px] tracking-[0.5em] font-mono text-white/25">51.5074 N</span>
+                            <span className="text-[8px] tracking-[0.5em] font-mono text-white/25">0.1278 W</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* 2. GEOMETRIC PRISM ARCHITECTURE - Organic and Soft */}
@@ -132,17 +185,19 @@ const Hero: React.FC = () => {
 
                     {/* TOP ROW */}
                     <div className="flex items-end justify-between mb-[-6vh] relative">
-                        <h1 className="text-[12vw] md:text-[10vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase flex items-baseline">
+                        <h1 className="text-[12vw] md:text-[10vw] font-light serif leading-[0.6] tracking-[-0.04em] uppercase">
                             <SplitText text="RARE" delay={0.8} className="text-white drop-shadow-[0_0_50px_rgba(255,255,255,0.08)]" />
-                            <span className="text-[5vw] md:text-[4vw] italic text-[#b5a16d]/60 ml-8 lowercase tracking-normal font-light">
-                                <SplitText text="by nature" delay={1.4} />
-                            </span>
                         </h1>
 
-                        <div className="hidden lg:flex flex-col items-end gap-12 mb-32">
-                            <div className={`w-[1px] h-48 bg-gradient-to-t from-[#b5a16d]/50 to-transparent origin-bottom transition-all duration-[3.5s] delay-1000 ${mounted ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`} />
-                            <div className={`text-[8px] tracking-[1.8em] uppercase opacity-30 font-medium transition-all duration-[2.5s] delay-[2s] ${mounted ? 'opacity-30 translate-x-0' : 'opacity-0 translate-x-16'}`}>
-                                Private Archive / Edition 001
+                        <div className="flex flex-col items-end gap-6">
+                            <span className="text-[5vw] md:text-[4vw] italic text-[#b5a16d]/60 lowercase tracking-normal font-light">
+                                <SplitText text="by nature" delay={1.4} />
+                            </span>
+                            <div className="hidden lg:flex flex-col items-end gap-6">
+                                <div className={`w-[1px] h-32 bg-gradient-to-t from-[#b5a16d]/50 to-transparent origin-bottom transition-all duration-[3.5s] delay-1000 ${mounted ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`} />
+                                <div className={`text-[8px] tracking-[1.8em] uppercase opacity-30 font-medium transition-all duration-[2.5s] delay-[2s] ${mounted ? 'opacity-30 translate-x-0' : 'opacity-0 translate-x-16'}`}>
+                                    Private Archive / Edition 001
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -156,9 +211,9 @@ const Hero: React.FC = () => {
                             <div
                                 className={`w-[36vw] aspect-square rounded-full border border-white/[0.1] flex items-center justify-center transition-all duration-[3.5s] cubic-bezier(0.19, 1, 0.22, 1) ${mounted ? 'scale-100 opacity-100' : 'scale-60 opacity-0'}`}
                             >
-                                {/* Rotating Orbital Frames */}
-                                <div className="absolute inset-[-40px] rounded-full border border-white/[0.04] animate-[spin_120s_linear_infinite]" />
-                                <div className="absolute inset-[-80px] rounded-full border border-[#b5a16d]/[0.08] animate-[spin_180s_linear_infinite_reverse]" />
+                                {/* Rotating Orbital Frames - More visible */}
+                                <div className="absolute inset-[-40px] rounded-full border border-white/[0.08] animate-[spin_120s_linear_infinite]" />
+                                <div className="absolute inset-[-80px] rounded-full border border-[#b5a16d]/[0.15] animate-[spin_180s_linear_infinite_reverse]" />
 
                                 {/* Main Gemstone Visual */}
                                 <div className="w-[88%] h-[88%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_180px_rgba(0,0,0,0.98)]">
@@ -173,13 +228,25 @@ const Hero: React.FC = () => {
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full animate-[highSweep_10s_infinite_ease-in-out]" />
                                 </div>
 
-                                {/* Circular Typographic Mantle - Significantly slower speed */}
+                                {/* Circular Typographic Mantle - MORE VISIBLE */}
                                 <div className="absolute inset-[-10vw] animate-[spin_160s_linear_infinite]">
-                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-white/[0.08]">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-white/[0.35]">
                                         <path id="mantlePathHero" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
-                                        <text className="text-[2.1px] tracking-[8px] uppercase font-light italic">
+                                        <text className="text-[2.4px] tracking-[6px] uppercase font-light">
                                             <textPath href="#mantlePathHero">
-                                                • Exclusive Gemstone House • Three Centuries of Discretion • Rarity Beyond Brilliance •
+                                                ◆ Exclusive Gemstone House ◆ Three Centuries of Discretion ◆ Rarity Beyond Brilliance ◆
+                                            </textPath>
+                                        </text>
+                                    </svg>
+                                </div>
+
+                                {/* Second Rotating Text Ring - Opposite Direction */}
+                                <div className="absolute inset-[-14vw] animate-[spin_200s_linear_infinite_reverse]">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-[#b5a16d]/[0.25]">
+                                        <path id="mantlePathHero2" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
+                                        <text className="text-[1.8px] tracking-[10px] uppercase font-extralight italic">
+                                            <textPath href="#mantlePathHero2">
+                                                • London • Geneva • Dubai • Hong Kong • New York • Mumbai • Tokyo • Paris •
                                             </textPath>
                                         </text>
                                     </svg>
