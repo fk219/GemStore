@@ -282,13 +282,19 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                         href={link.path}
                                         onClick={() => setIsMenuOpen(false)}
                                         onMouseEnter={() => setHoveredLink(link.name)}
-                                        className={`block text-5xl md:text-[8vw] leading-[0.9] font-serif font-light tracking-tight transition-all duration-500
-                                            ${pathname === link.path ? 'italic text-white' : 'text-white/40 hover:text-white hover:italic'}
+                                        className={`block leading-[0.9] font-serif font-light tracking-tight transition-all duration-500
+                                            ${pathname === link.path
+                                                ? 'italic text-white scale-110 translate-x-4'
+                                                : 'text-white/40 hover:text-white hover:italic hover:scale-105 hover:translate-x-2'
+                                            }
+                                            text-5xl md:text-[8vw]
                                         `}
                                     >
                                         {link.name}
                                     </Link>
-                                    <span className="block text-[10px] tracking-[0.6em] uppercase opacity-30 mt-2 font-sans">{link.desc}</span>
+                                    <span className={`block text-[10px] tracking-[0.6em] uppercase mt-2 font-sans transition-opacity duration-500 ${pathname === link.path ? 'opacity-100 text-amber-400' : 'opacity-30'}`}>
+                                        {link.desc}
+                                    </span>
                                 </li>
                             ))}
                         </ul>

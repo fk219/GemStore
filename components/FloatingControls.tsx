@@ -10,13 +10,13 @@ const FloatingControls = () => {
     const scrollBtnRef = useRef<HTMLButtonElement>(null);
     const whatsappRef = useRef<HTMLAnchorElement>(null);
 
-    // Initial Intro Animation
+    // Initial Intro Animation - Faster entry
     useGSAP(() => {
         gsap.from(whatsappRef.current, {
-            y: 100,
+            y: 50,
             opacity: 0,
             duration: 1,
-            delay: 2, // Wait for intro sequence
+            delay: 0.5, // Reduced delay
             ease: "power3.out"
         });
     }, []);
