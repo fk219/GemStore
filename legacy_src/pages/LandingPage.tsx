@@ -170,7 +170,7 @@ const LandingPage: React.FC = () => {
           {/* Section Introduction Card */}
           <div className={`w-[85vw] md:w-[600px] flex-shrink-0 ${textColorClass}`}>
             <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8">Selected Pieces</span>
-            <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private Collection</h2>
+            <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Maihan Collection</h2>
             <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md">
               A rotating selection of our most exceptional acquisitions. Available exclusively for private viewing.
             </p>

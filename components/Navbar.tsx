@@ -222,7 +222,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     {/* Brand */}
                     <Link href="/" className={`group flex items-center gap-6 ${effectiveTextColorClass} transition-colors duration-500`}>
                         <span className="text-2xl md:text-3xl tracking-[0.05em] font-serif uppercase leading-none transition-all duration-700 group-hover:tracking-[0.1em] font-light italic text-shadow-sm">
-                            T.Craft
+                            Maihan Group
                         </span>
                         <div className="hidden md:flex flex-col gap-[2px]">
                             <span className="w-1 h-1 rounded-full bg-current opacity-40"></span>

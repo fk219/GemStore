@@ -22,11 +22,11 @@ const Footer: React.FC = () => {
                     {/* Brand / Contact - Left */}
                     <div className="md:col-span-4 flex flex-col gap-12">
                         <div className="flex items-center gap-4">
-                            <span className="text-2xl font-serif text-[#D4AF37] tracking-widest uppercase">L&apos;Éclat</span>
+                            <span className="text-2xl font-serif text-[#D4AF37] tracking-widest uppercase">Maihan Group</span>
                         </div>
 
                         <div className="text-sm font-sans font-light opacity-60 leading-relaxed tracking-wide space-y-1">
-                            <p>Maison L&apos;Éclat Studio, 42 Bond Street,</p>
+                            <p>Maihan Group, 42 Bond Street,</p>
                             <p>Mayfair, London W1S 2SB, UK</p>
                         </div>
 
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
 
                     {/* Abstract Large Watermark */}
                     <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03]">
-                        <h1 className="text-[15vw] leading-[0.8] font-serif text-center uppercase whitespace-nowrap">L&apos;Éclat</h1>
+                        <h1 className="text-[15vw] leading-[0.8] font-serif text-center uppercase whitespace-nowrap">Maihan Group</h1>
                     </div>
 
                     <div className="flex flex-col gap-4 relative z-10 w-full md:w-auto">

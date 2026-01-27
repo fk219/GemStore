@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
         >
           <div className="flex flex-col">
             <span className="text-base md:text-lg font-light tracking-[0.7em] uppercase serif leading-none transition-all duration-700 group-hover:tracking-[0.8em]">
-              T.CRAFT
+              Maihan Group
             </span>
             <div className="h-[1px] w-0 bg-current transition-all duration-700 group-hover:w-full opacity-25 mt-3"></div>
           </div>

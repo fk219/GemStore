@@ -87,7 +87,7 @@ const IntroSequence = () => {
                 {/* Brand Text Fading In */}
                 <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 whitespace-nowrap overflow-hidden">
                     <h1 className="animate-[fadeIn_3s_ease-out_1s_forwards] opacity-0 text-xl font-serif tracking-[0.4em] uppercase">
-                        Maison L&apos;Éclat
+                        Maihan Group
                     </h1>
                 </div>
             </div>
