@@ -3,7 +3,6 @@ import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import SmoothScroll from "@/components/SmoothScroll";
-import FloatingControls from "@/components/FloatingControls";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -34,7 +33,6 @@ export default function RootLayout({
                     className="antialiased font-sans transition-colors duration-700"
                 >
                     <SmoothScroll />
-                    <FloatingControls />
                     {children}
                 </body>
             </Providers>
