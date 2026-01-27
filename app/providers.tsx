@@ -21,12 +21,9 @@ export function Providers({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
-        if (mounted) {
-            document.body.className = theme === 'dark'
-                ? 'bg-[#0F0F0F] text-[#FBFBF9] dark'
-                : 'bg-[#FBFBF9] text-[#1A1A1A]';
-        }
-    }, [theme, mounted]);
+        const cls = theme === 'dark' ? 'bg-[#0F0F0F] text-[#FBFBF9] dark' : 'bg-[#FBFBF9] text-[#1A1A1A]';
+        document.body.className = cls;
+    }, [theme]);
 
     const valueLanguage = {
         locale,
@@ -38,15 +35,6 @@ export function Providers({ children }: { children: ReactNode }) {
         theme,
         toggleTheme
     };
-
-    // Prevent hydration mismatch by returning null or consistent initial state
-    if (!mounted) {
-        return (
-            <body className="bg-[#FBFBF9] text-[#1A1A1A]">
-                {children}
-            </body>
-        );
-    }
 
     return (
         <ThemeContext.Provider value={valueTheme}>

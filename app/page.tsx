@@ -4,10 +4,11 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LanguageContext, ThemeContext } from '@/app/providers';
-import Hero from '@/components/Hero';
+import HeroCalm from '@/components/HeroCalm';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import CollectionSection from '@/components/CollectionSection';
+import BentoGrid from '@/components/BentoGrid';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -81,7 +82,7 @@ export default function Home() {
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
             <Navbar themeOverride="dark" />
-            <Hero />
+            <HeroCalm />
 
             {/* Chapter 1: The Soul of Rarity - Editorial Overlay Layout */}
             <section className={`relative min-h-screen py-32 md:py-48 px-6 md:px-24 flex flex-col justify-center overflow-hidden ${bgMain} ${textColorClass}`}>
@@ -194,97 +195,8 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Chapter 3: The Curated Gallery - COMPLEX BENTO GRID - BG ALT */}
-            <section className={`py-40 px-4 md:px-12 ${bgAlt}`}>
-                <div className={`max-w-[1800px] mx-auto mb-32 flex flex-col md:flex-row justify-between items-end border-b ${borderColorClass} pb-8 ${textColorClass}`}>
-                    <div className="reveal-text opacity-0 translate-y-20 transition-all duration-1000">
-                        <span className="text-[10px] tracking-[0.6em] uppercase opacity-40 block mb-4 font-sans font-light">The Vault</span>
-                        <h2 className="text-6xl md:text-9xl font-light serif">Archive</h2>
-                    </div>
-                    <div className="mb-4 reveal-text opacity-0 translate-y-20 transition-all duration-1000">
-                        <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-sans opacity-60">Selection [ 2024 / 2025 ]</span>
-                    </div>
-                </div>
-
-                <div className="max-w-[1800px] mx-auto grid grid-cols-4 md:grid-cols-12 auto-rows-[180px] md:auto-rows-[200px] gap-3 md:gap-4">
-
-                    {/* 1. Large Feature - Azure Monolith */}
-                    <div className="col-span-4 md:col-span-7 row-span-3 reveal-image opacity-0 scale-95 transition-all duration-1000 group">
-                        <div className="relative w-full h-full rounded-[50px] overflow-hidden">
-                            <Image
-                                src="https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=1400"
-                                className="w-full h-full object-cover transition-all duration-[3s] group-hover:scale-105"
-                                alt="Royal Blue Sapphire"
-                                fill
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
-                            <div className="absolute bottom-12 left-10 text-white z-10">
-                                <h3 className="text-5xl md:text-7xl serif font-light italic mb-4 leading-tight">The Azure <br /> Monolith</h3>
-                                <p className="text-xs tracking-[0.4em] uppercase opacity-80 font-sans border-l border-white/40 pl-4 py-1">Kashmir Origin / 8.42 CT</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 2. Text Block */}
-                    <div className={`col-span-4 md:col-span-5 row-span-2 reveal-text opacity-0 scale-95 transition-all duration-1000 flex flex-col justify-center p-10 bg-white dark:bg-[#141414] rounded-[50px] ${textColorClass} border ${borderColorClass}`}>
-                        <h4 className="text-3xl md:text-4xl font-serif italic mb-6 leading-tight">Linear Mastery</h4>
-                        <p className="font-sans text-sm opacity-60 leading-relaxed tracking-wide">
-                            Geometry is the skeleton of light. We do not cut shapes; we reveal the hidden architecture within stone.
-                        </p>
-                    </div>
-
-                    {/* 3. Ruby - Tall */}
-                    <div className="col-span-2 md:col-span-4 row-span-3 reveal-image opacity-0 scale-95 transition-all duration-1000 delay-100 group">
-                        <div className="relative w-full h-full rounded-[45px] overflow-hidden">
-                            <Image
-                                src="https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=800"
-                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s]"
-                                alt="Ruby Detail"
-                                fill
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-60" />
-                            <div className="absolute top-4 left-4 z-10">
-                                <span className="bg-white/10 backdrop-blur-md text-white text-[9px] px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Sold</span>
-                            </div>
-                            <div className="absolute bottom-6 left-6 text-white z-10">
-                                <p className="font-serif text-3xl italic leading-tight">Crimson <br /> Silence</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 4. Abstract Texture */}
-                    <div className="col-span-2 md:col-span-3 row-span-2 reveal-image opacity-0 scale-95 transition-all duration-1000 delay-200 group">
-                        <div className="relative w-full h-full rounded-[40px] overflow-hidden border border-white/5 bg-[#050505]">
-                            <Image
-                                src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=800"
-                                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity mix-blend-luminosity"
-                                alt="Dark Texture"
-                                fill
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <span className="text-[10px] tracking-[0.6em] uppercase text-white font-light bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">Refraction</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 5. Diamond Detail */}
-                    <div className="col-span-2 md:col-span-3 row-span-2 reveal-image opacity-0 scale-95 transition-all duration-1000 delay-300 group">
-                        <div className="relative w-full h-full rounded-[40px] overflow-hidden">
-                            <Image
-                                src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=800"
-                                className="w-full h-full object-cover contrast-125 group-hover:scale-110 transition-transform duration-[3s]"
-                                alt="Diamond Facet"
-                                fill
-                            />
-                        </div>
-                    </div>
-
-                    {/* 6. CTA Link */}
-                    <Link href="/gemstones" className={`col-span-4 md:col-span-6 row-span-1 reveal-text opacity-0 scale-95 transition-all duration-1000 delay-400 flex items-center justify-between px-10 bg-[#1A1A1A] text-[#FBFBF9] rounded-[35px] group hover:bg-[#b5a16d] hover:text-white transition-all duration-500 cursor-pointer`}>
-                        <span className="text-xs tracking-[0.4em] uppercase font-sans">View Full Archive</span>
-                        <span className="text-3xl group-hover:translate-x-4 transition-transform duration-300">→</span>
-                    </Link>
-                </div>
+            <section className={bgAlt}>
+                <BentoGrid />
             </section>
 
             {/* Chapter 4: The Epilogue - BG MAIN */}
