@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 
+import React, { useEffect, useState, useRef } from 'react';
+
 const Hero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +41,7 @@ const Hero: React.FC = () => {
     return (
         <section
             ref={containerRef}
-            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#0A0A0B] text-[#FBFBF9]"
+            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9]"
         >
             {/* The Refractive Void - Multi-layered Dynamic Background */}
             <div className="absolute inset-0 z-0">
@@ -47,7 +49,7 @@ const Hero: React.FC = () => {
                 <div
                     className="absolute inset-0 opacity-60 transition-opacity duration-1000"
                     style={{
-                        background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, #1a1a1c 0%, #0A0A0B 80%)`
+                        background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, var(--hero-gradient-1-start) 0%, var(--hero-gradient-1-end) 80%)`
                     }}
                 />
                 {/* Layer 2: Subtle Golden Shift (Refraction) */}
@@ -74,11 +76,11 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
                 {/* Prism Alpha */}
                 <div
-                    className={`absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[2s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-95'}`}
+                    className={`absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-black/5 dark:border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[2s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-95'}`}
                     style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * -30}px, ${(smoothMousePos.y - 0.5) * -30}px, 0)` }}
                 >
                     {/* Inner ghost glow */}
-                    <div className="absolute inset-4 border border-white/2 rounded-inherit blur-sm" />
+                    <div className="absolute inset-4 border border-black/5 dark:border-white/2 rounded-inherit blur-sm" />
                 </div>
 
                 {/* Prism Beta (Golden) */}
@@ -105,7 +107,7 @@ const Hero: React.FC = () => {
                                 re
                             </span>
                         </h1>
-                        <div className={`hidden lg:block w-px h-32 bg-white/10 mb-8 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
+                        <div className={`hidden lg:block w-px h-32 bg-current opacity-10 mb-8 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
                         <div className={`hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-20 mb-8 transition-opacity duration-[2s] delay-700 ${mounted ? 'opacity-20' : 'opacity-0'}`}>
                             Volume 01 / Archive
                         </div>
@@ -119,7 +121,7 @@ const Hero: React.FC = () => {
                             style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0)` }}
                         >
                             <div
-                                className={`w-[26vw] aspect-square rounded-full border border-white/10 flex items-center justify-center transition-all duration-[2.5s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
+                                className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
                                 <div className="w-[82%] h-[82%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_80px_rgba(0,0,0,0.5)]">
                                     <img
@@ -135,7 +137,7 @@ const Hero: React.FC = () => {
                                 </div>
                                 {/* Rotating Micro-Text */}
                                 <div className="absolute inset-[-4.5vw] animate-[spin_40s_linear_infinite]">
-                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-white/10">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full fill-black/10 dark:fill-white/10">
                                         <path id="heroCirclePath" d="M 50, 50 m -48, 0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" fill="transparent" />
                                         <text className="text-[3px] tracking-[4px] uppercase font-medium">
                                             <textPath href="#heroCirclePath">
@@ -147,7 +149,7 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
 
-                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-difference transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                             Nature
                         </h2>
                     </div>
@@ -175,7 +177,7 @@ const Hero: React.FC = () => {
 
             {/* Dynamic Interaction Hint */}
             <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 transition-all duration-1000 delay-[2s] ${mounted ? 'opacity-40' : 'opacity-0'}`}>
-                <div className="w-px h-16 bg-gradient-to-b from-white/20 to-transparent" />
+                <div className="w-px h-16 bg-gradient-to-b from-current to-transparent" />
                 <span className="text-[8px] tracking-[1.5em] uppercase font-light">The Narrative Unfolds</span>
             </div>
 
@@ -204,6 +206,16 @@ const Hero: React.FC = () => {
           0% { transform: translateX(-150%) skewX(-25deg); }
           50% { transform: translateX(150%) skewX(-25deg); }
           100% { transform: translateX(150%) skewX(-25deg); }
+        }
+        
+        /* Theme Variables */
+        :root {
+            --hero-gradient-1-start: #E5E5E5;
+            --hero-gradient-1-end: #F9F8F4;
+        }
+        .dark {
+            --hero-gradient-1-start: #1a1a1c;
+            --hero-gradient-1-end: #0A0A0B;
         }
       `}</style>
         </section>
