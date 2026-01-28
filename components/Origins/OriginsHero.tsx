@@ -43,7 +43,7 @@ const OriginsHero: React.FC = () => {
             </div>
 
             {/* Background Elements (CTA Clone) */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none z-[1]">
+            <div className="absolute inset-0 opacity-20 pointer-events-none z-[1]">
                 <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
                 <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
             </div>
