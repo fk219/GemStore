@@ -171,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             <div ref={menuRef} className="fixed inset-0 z-[100] hidden">
                 <div
                     ref={menuBgRef}
-                    className="absolute inset-0 bg-[#F4ECD8] dark:bg-[#0A0A0B]"
+                    className="absolute inset-0 bg-secondary dark:bg-[#0A0A0B]"
                     style={{ clipPath: 'circle(0% at 100% 0%)' }}
                 >
                     <div className="relative w-full h-screen flex flex-col lg:flex-row overflow-hidden">
