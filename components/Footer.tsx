@@ -26,8 +26,8 @@ const Footer: React.FC = () => {
             title: 'MAISON',
             links: [
                 { label: 'Heritage', href: '/about' },
-                { label: 'Craftsmanship', href: '/craftsmanship' },
-                { label: 'Archive', href: '/archive' },
+                { label: 'Journal', href: '/blog' },
+                { label: 'Archive', href: '/gemstones' },
             ]
         },
         contact: {

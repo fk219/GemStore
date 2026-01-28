@@ -77,6 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
         { name: 'Home', path: '/', img: 'https://images.unsplash.com/photo-1615111784767-4d7c02783103?auto=format&fit=crop&q=80&w=800' },
         { name: 'Gemstones', path: '/gemstones', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=800' },
         { name: 'Origins', path: '/origins', img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Journal', path: '/blog', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
         { name: 'About', path: '/about', img: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800' },
         { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' }
     ];
@@ -89,8 +90,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             {/* MAIN NAVBAR - Improved visibility & sizing */}
             <nav className="fixed top-0 left-0 w-full z-[60] pointer-events-none">
                 <div className={`mx-auto transition-all duration-700 pointer-events-auto ${isScrolled
-                    ? 'mt-3 px-4 max-w-5xl'
-                    : 'mt-4 px-6 max-w-7xl'
+                    ? 'mt-3 px-4 max-w-6xl'
+                    : 'mt-4 px-6 max-w-[1600px]'
                     }`}>
                     <div className={`flex items-center justify-between transition-all duration-700 ${isScrolled
                         ? 'py-2.5 px-6 bg-[#F9F8F4]/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-full shadow-2xl shadow-black/5 dark:shadow-black/20'
@@ -114,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                         <div className="hidden lg:flex items-center gap-6">
                             {/* Quick Nav Links */}
                             <div className="flex items-center gap-1 mr-4">
-                                {navItems.slice(0, 3).map((item) => (
+                                {navItems.slice(0, 4).map((item) => (
                                     <Link
                                         key={item.path}
                                         href={item.path}
@@ -132,6 +133,14 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             </div>
 
                             <div className="w-px h-4 bg-black/10 dark:bg-white/10" />
+
+                            {/* Private Viewing CTA - Sticky */}
+                            <Link
+                                href="/contact"
+                                className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-full border border-[#b5a16d]/30 bg-[#b5a16d]/5 hover:bg-[#b5a16d] hover:text-[#1A1A1A] text-[#b5a16d] transition-all duration-500 group"
+                            >
+                                <span className="text-[9px] tracking-[0.2em] uppercase font-medium">Private Viewing</span>
+                            </Link>
 
                             {/* Theme Toggle */}
                             <button

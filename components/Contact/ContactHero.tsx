@@ -30,8 +30,8 @@ const ContactHero = () => {
                 <span ref={subRef} className="block text-[10px] tracking-[0.8em] uppercase opacity-0 mb-4 text-[#D4AF37]">
                     Concierge Services
                 </span>
-                <h1 ref={titleRef} className="text-[12vw] leading-[0.8] font-serif font-light tracking-tight italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
-                    ATELIER
+                <h1 ref={titleRef} className="text-[10vw] leading-[0.8] font-serif font-light tracking-tight italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
+                    Begin Your Journey
                 </h1>
 
                 {/* Floating Letters or Shapes */}

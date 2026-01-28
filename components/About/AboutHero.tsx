@@ -53,8 +53,8 @@ const AboutHero: React.FC = () => {
 
             <div className="relative z-10 text-center px-6">
                 <span className="block text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8">Est. 1982 — Geneva</span>
-                <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion dark:text-white">
-                    ORIGIN
+                <h1 ref={titleRef} className="text-[10vw] leading-[0.9] font-serif tracking-tighter mix-blend-exclusion dark:text-white uppercase">
+                    Guardians<br />of Brilliance
                 </h1>
 
                 {/* Floating Organic Shapes */}

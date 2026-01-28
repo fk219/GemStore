@@ -15,9 +15,12 @@ const ContactInfo = forwardRef<HTMLDivElement>((props, ref) => {
 
             <div className="space-y-8 opacity-70 font-sans font-light tracking-wide text-sm hidden md:block">
                 <div>
+                    <p className="uppercase text-[10px] tracking-[0.4em] opacity-50 mb-2">Private Line (WhatsApp)</p>
+                    <p>+41 79 123 45 67</p>
+                </div>
+                <div>
                     <p className="uppercase text-[10px] tracking-[0.4em] opacity-50 mb-2">Genèva</p>
                     <p>Quai des Bergues 33</p>
-                    <p>+41 22 731 29 00</p>
                 </div>
                 <div>
                     <p className="uppercase text-[10px] tracking-[0.4em] opacity-50 mb-2">Email</p>

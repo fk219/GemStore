@@ -12,6 +12,8 @@ import AboutHero from '@/components/About/AboutHero';
 import OriginSection from '@/components/About/OriginSection';
 import AtelierSection from '@/components/About/AtelierSection';
 import Timeline from '@/components/About/Timeline';
+import ProcessSteps from '@/components/About/ProcessSteps';
+import TeamSection from '@/components/About/TeamSection';
 import FounderSignoff from '@/components/About/FounderSignoff';
 import CTA from '@/components/CTA';
 
@@ -78,6 +80,10 @@ export default function About() {
             <AtelierSection />
 
             <Timeline />
+
+            <ProcessSteps />
+
+            <TeamSection />
 
             <FounderSignoff />
 
