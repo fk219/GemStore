@@ -37,7 +37,7 @@ const AboutHero: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#FBFBF9] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
+        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
 
             {/* Background Image - Subtle & Dark */}
             <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40">

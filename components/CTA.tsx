@@ -64,7 +64,7 @@ const CTA: React.FC<CTAProps> = ({
     return (
         <section
             ref={sectionRef}
-            className="relative py-32 md:py-48 px-6 overflow-hidden bg-[#1A1A1A] text-[#F9F8F4] flex flex-col items-center justify-center text-center"
+            className="relative py-32 md:py-48 px-6 overflow-hidden bg-secondary dark:bg-[#1A1A1A] text-[#1A1A1A] dark:text-[#F9F8F4] flex flex-col items-center justify-center text-center"
         >
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-20 pointer-events-none">

@@ -65,7 +65,7 @@ export default function About() {
     }, []);
 
     const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9]";
-    const bgClass = "bg-[#FBFBF9] dark:bg-[#050505]";
+    const bgClass = "bg-[#F9F8F4] dark:bg-[#0A0A0B]";
 
     return (
         <main className={`min-h-screen ${bgClass} ${textColorClass} selection:bg-[#b5a16d] selection:text-white`}>

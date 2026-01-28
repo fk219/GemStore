@@ -71,7 +71,7 @@ export default function Home() {
     if (!langCtx || !themeCtx) return null;
 
     // Background constants for sections that need them wrapping
-    const bgAlt = "bg-[#F2F2F0] dark:bg-[#0C0C0C]";
+    const bgAlt = "bg-secondary dark:bg-[#0C0C0C]";
 
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">

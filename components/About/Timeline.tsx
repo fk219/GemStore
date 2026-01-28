@@ -49,7 +49,7 @@ const Timeline: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-32 relative overflow-hidden bg-[#FBFBF9] dark:bg-[#050505] text-[#1A1A1A] dark:text-[#FBFBF9]">
+        <section ref={containerRef} className="py-32 relative overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9]">
 
             {/* Center Line */}
             <div ref={lineRef} className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-current opacity-20 origin-top" />
