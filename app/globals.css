@@ -9,13 +9,13 @@
     /* Deep Charcoal */
     --accent-gold: #b5a16d;
     /* Muted Luxury Gold */
-    --background-secondary-hex: #EAE8E3;
-    /* Bone/Ivory */
+    --background-secondary-hex: #F9F8F4;
+    /* Unified to Main Background */
 }
 
 @layer base {
     body {
-        @apply bg-[#F9F8F4] text-[#1A1A1A] antialiased selection:bg-[#b5a16d] selection:text-white dark:bg-[#050505] dark:text-[#FBFBF9];
+        @apply bg-[#F9F8F4] text-[#1A1A1A] antialiased selection:bg-[#b5a16d] selection:text-white dark:bg-[#0A0A0B] dark:text-[#FBFBF9];
     }
 }
 
