@@ -1,10 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const Hero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
     const [smoothMousePos, setSmoothMousePos] = useState({ x: 0.5, y: 0.5 });
+
+    useGSAP(() => {
+        // Background parallax effect (From CTA)
+        gsap.to(".bg-parallax", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    }, { scope: containerRef });
 
     useEffect(() => {
         setMounted(true);
@@ -49,6 +70,13 @@ const Hero: React.FC = () => {
                         background: `radial-gradient(circle at ${smoothMousePos.x * 100}% ${smoothMousePos.y * 100}%, var(--hero-gradient-1-start) 0%, var(--hero-gradient-1-end) 80%)`
                     }}
                 />
+
+                {/* Golden Blob Parallax (CTA Clone) */}
+                <div className="absolute inset-0 opacity-20 pointer-events-none">
+                    <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
+                    <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+                </div>
+
                 {/* Layer 2: Subtle Golden Shift (Refraction) */}
                 <div
                     className="absolute inset-0 opacity-[0.03] mix-blend-screen"
