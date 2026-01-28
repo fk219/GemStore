@@ -64,28 +64,28 @@ const CTA: React.FC<CTAProps> = ({
     return (
         <section
             ref={sectionRef}
-            className="relative py-32 md:py-48 px-6 overflow-hidden bg-[#1A1A1A] text-[#F9F8F4] flex flex-col items-center justify-center text-center"
+            className="relative py-32 md:py-48 px-6 overflow-hidden bg-main text-foreground flex flex-col items-center justify-center text-center"
         >
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-20 pointer-events-none">
-                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
-                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-primary rounded-full blur-[120px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] mix-blend-soft-light" />
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-10">
 
                 <div ref={textRef} className="flex flex-col items-center gap-6">
                     <div className="flex items-center gap-4 opacity-60">
-                        <div className="w-12 h-px bg-[#D4AF37]" />
-                        <span className="font-sans text-xs tracking-[0.3em] uppercase text-[#D4AF37]">
+                        <div className="w-12 h-px bg-primary" />
+                        <span className="font-sans text-xs tracking-[0.3em] uppercase text-primary">
                             {subtitle}
                         </span>
-                        <div className="w-12 h-px bg-[#D4AF37]" />
+                        <div className="w-12 h-px bg-primary" />
                     </div>
 
                     <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl italic leading-none">
                         {title}
-                        <Diamond className="inline-block w-8 h-8 md:w-12 md:h-12 ml-4 text-[#D4AF37] opacity-80" strokeWidth={1} />
+                        <Diamond className="inline-block w-8 h-8 md:w-12 md:h-12 ml-4 text-primary opacity-80" strokeWidth={1} />
                     </h2>
                 </div>
 
@@ -106,8 +106,8 @@ const CTA: React.FC<CTAProps> = ({
             </div>
 
             {/* Border Lines */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         </section>
     );
 };

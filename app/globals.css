@@ -3,23 +3,25 @@
 @tailwind utilities;
 
 :root {
-    /* Base Colors - LIGHT LUXURY THEME */
-    --background-hex: #F9F8F4;
-    /* Cream / Off-White */
-    --foreground-hex: #1A1A1A;
-    /* Deep Charcoal */
+    /* STRICT BRAND PALETTE - LIGHT THEME */
+    --background-1: #F4F0E6;
+    --background-2: #FDFAF5;
 
-    --accent-gold: #D4AF37;
-    /* Metallic Gold */
-    --accent-gold-dim: #997B28;
-    --accent-gold-light: #F3E5AB;
+    --primary: #eac82e;
+    --secondary: #ecd67e;
+    --accent: #f0d147;
 
-    --background-gold-light: #F4ECD8;
-    /* Light Gold for alternating sections */
+    --foreground: #1A1816;
+    /* Derived from Dark BG 2 for harmony */
 
-    --foreground-rgb: 26, 26, 26;
-    --background-start-rgb: 249, 248, 244;
-    --background-end-rgb: 249, 248, 244;
+    /* Legacy/Compat mappings - Redirecting to new system */
+    --background-hex: var(--background-1);
+    --foreground-hex: var(--foreground);
+    --accent-gold: var(--primary);
+    --accent-gold-dim: var(--secondary);
+    --accent-gold-light: var(--accent);
+    --background-gold-light: var(--background-2);
+    --background-secondary-hex: var(--background-2);
 
     /* Metrics */
     --radius-xs: 8px;
@@ -35,21 +37,32 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
-    /* Optional: We are ENFORCING the light theme for now based on user request "background should be offwhite" 
-       but keeping these if they toggle mode manually, though user wants offwhite dominance. 
-       Let's map Dark Mode to a "Night Luxury" (Deep Gold/Black) if used.
-    */
     :root {
-        --foreground-rgb: 251, 251, 249;
-        --background-start-rgb: 5, 5, 5;
-        --background-end-rgb: 5, 5, 5;
+        /* STRICT BRAND PALETTE - DARK THEME */
+        --background-1: #0A0908;
+        --background-2: #1A1816;
+
+        --primary: #bba12a;
+        --secondary: #816b13;
+        --accent: #b8990f;
+
+        --foreground: #F4F0E6;
+        /* Derived from Light BG 1 for harmony */
+
+        /* Legacy/Compat mappings */
+        --background-hex: var(--background-1);
+        --foreground-hex: var(--foreground);
+        --accent-gold: var(--primary);
+        --accent-gold-dim: var(--secondary);
+        --accent-gold-light: var(--accent);
+        --background-gold-light: var(--background-2);
+        --background-secondary-hex: var(--background-2);
     }
 }
 
 body {
-    background-color: var(--background-hex);
-    color: var(--foreground-hex);
+    background-color: var(--background-1);
+    color: var(--foreground);
     overflow-x: hidden;
 }
 
@@ -69,7 +82,7 @@ textarea {
 
 :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 1px var(--accent-gold);
+    box-shadow: 0 0 0 1px var(--primary);
 }
 
 /* Scrollbar - Gold/Minimal */
@@ -82,13 +95,14 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.3);
+    background: rgba(234, 200, 46, 0.3);
+    /* Primary color low opacity */
     border-radius: 12px;
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.6);
+    background: rgba(234, 200, 46, 0.6);
 }
 
 .no-scrollbar::-webkit-scrollbar {
