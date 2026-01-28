@@ -81,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
         { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' }
     ];
 
-    const accentColor = 'var(--primary)';
+    const accentColor = '#b5a16d';
     const isActivePage = (path: string) => pathname === path;
 
     return (
@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     : 'mt-4 px-6 max-w-7xl'
                     }`}>
                     <div className={`flex items-center justify-between transition-all duration-700 ${isScrolled
-                        ? 'py-2.5 px-6 bg-main/95 backdrop-blur-xl border border-foreground/10 rounded-full shadow-2xl shadow-black/20'
+                        ? 'py-2.5 px-6 bg-[#1A1A1A]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl shadow-black/20'
                         : 'py-3 px-0'
                         }`}>
                         {/* Logo */}
@@ -104,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 strokeWidth={1.5}
                             />
                             <span
-                                className={`font-serif tracking-[0.25em] uppercase transition-all duration-700 text-foreground font-light ${isScrolled ? 'text-sm' : 'text-lg'}`}
+                                className={`font-serif tracking-[0.25em] uppercase transition-all duration-700 text-white font-light ${isScrolled ? 'text-sm' : 'text-lg'}`}
                             >
                                 Maihan Group
                             </span>
@@ -119,46 +119,46 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                         key={item.path}
                                         href={item.path}
                                         className={`relative px-4 py-2 text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-500 ${isActivePage(item.path)
-                                            ? 'text-primary'
-                                            : 'text-foreground/60 hover:text-foreground'
+                                            ? 'text-[#b5a16d]'
+                                            : 'text-white/60 hover:text-white'
                                             }`}
                                     >
                                         {item.name}
                                         {isActivePage(item.path) && (
-                                            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                                            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#b5a16d]" />
                                         )}
                                     </Link>
                                 ))}
                             </div>
 
-                            <div className="w-px h-4 bg-foreground/10" />
+                            <div className="w-px h-4 bg-white/10" />
 
                             {/* Theme Toggle */}
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 text-foreground/60 hover:text-foreground transition-all duration-500"
+                                className="p-2 text-white/60 hover:text-white transition-all duration-500"
                             >
                                 {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
                             </button>
 
                             {/* Menu Button - Premium Style */}
                             <button
-                                className="group flex items-center gap-3 py-2 px-5 border border-primary/30 rounded-full bg-primary/5 hover:bg-primary hover:border-primary transition-all duration-500"
+                                className="group flex items-center gap-3 py-2 px-5 border border-[#b5a16d]/30 rounded-full bg-[#b5a16d]/5 hover:bg-[#b5a16d] hover:border-[#b5a16d] transition-all duration-500"
                                 onClick={() => setIsMenuOpen(true)}
                             >
-                                <span className="text-[10px] uppercase tracking-[0.15em] font-semibold text-primary group-hover:text-main transition-colors duration-500">
+                                <span className="text-[10px] uppercase tracking-[0.15em] font-semibold text-[#b5a16d] group-hover:text-[#1A1A1A] transition-colors duration-500">
                                     Menu
                                 </span>
                                 <div className="flex flex-col gap-[3px] w-4">
-                                    <div className="h-[1.5px] w-full bg-primary group-hover:bg-main transition-colors duration-500" />
-                                    <div className="h-[1.5px] w-2/3 ml-auto bg-primary group-hover:bg-main transition-colors duration-500" />
+                                    <div className="h-[1.5px] w-full bg-[#b5a16d] group-hover:bg-[#1A1A1A] transition-colors duration-500" />
+                                    <div className="h-[1.5px] w-2/3 ml-auto bg-[#b5a16d] group-hover:bg-[#1A1A1A] transition-colors duration-500" />
                                 </div>
                             </button>
                         </div>
 
                         {/* Mobile Menu Button */}
                         <button
-                            className="lg:hidden flex items-center gap-2 p-2.5 rounded-full bg-primary text-main"
+                            className="lg:hidden flex items-center gap-2 p-2.5 rounded-full bg-[#b5a16d] text-[#1A1A1A]"
                             onClick={() => setIsMenuOpen(true)}
                         >
                             <Menu size={18} strokeWidth={2} />
@@ -171,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             <div ref={menuRef} className="fixed inset-0 z-[100] hidden">
                 <div
                     ref={menuBgRef}
-                    className="absolute inset-0 bg-main"
+                    className="absolute inset-0 bg-[#0A0A0B]"
                     style={{ clipPath: 'circle(0% at 100% 0%)' }}
                 >
                     <div className="relative w-full h-screen flex flex-col lg:flex-row overflow-hidden">
@@ -183,17 +183,17 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             <div className="flex justify-between items-center">
                                 <Link href="/" className="flex items-center gap-3">
                                     <Diamond className="w-5 h-5" style={{ color: accentColor }} strokeWidth={1.5} />
-                                    <span className="font-serif text-base tracking-[0.25em] uppercase text-foreground font-light">
+                                    <span className="font-serif text-base tracking-[0.25em] uppercase text-white font-light">
                                         Maihan Group
                                     </span>
                                 </Link>
 
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="group flex items-center gap-3 text-foreground/60 hover:text-foreground transition-all duration-500"
+                                    className="group flex items-center gap-3 text-white/60 hover:text-white transition-all duration-500"
                                 >
                                     <span className="text-[9px] uppercase tracking-[0.2em] font-medium">Close</span>
-                                    <div className="w-8 h-8 flex items-center justify-center border border-foreground/20 rounded-full group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500">
+                                    <div className="w-8 h-8 flex items-center justify-center border border-white/20 rounded-full group-hover:border-[#b5a16d] group-hover:bg-[#b5a16d]/10 transition-all duration-500">
                                         <X size={14} />
                                     </div>
                                 </button>
@@ -211,14 +211,14 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                             onMouseLeave={() => setHoveredLink(null)}
                                         >
                                             {/* Number */}
-                                            <span className="font-serif text-sm italic text-primary/40 w-8">
+                                            <span className="font-serif text-sm italic text-[#b5a16d]/40 w-8">
                                                 0{index + 1}
                                             </span>
 
                                             {/* Link Name */}
                                             <h2 className={`font-serif text-4xl md:text-5xl lg:text-6xl font-light leading-none uppercase tracking-tight transition-all duration-500 ${isActivePage(item.path)
-                                                ? 'text-primary'
-                                                : 'text-foreground/50 group-hover:text-foreground group-hover:translate-x-4'
+                                                ? 'text-[#b5a16d]'
+                                                : 'text-white/50 group-hover:text-white group-hover:translate-x-4'
                                                 }`}>
                                                 {item.name}
                                             </h2>
@@ -226,8 +226,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                             {/* Active Indicator */}
                                             {isActivePage(item.path) && (
                                                 <div className="flex items-center gap-2 ml-auto">
-                                                    <span className="text-[8px] uppercase tracking-[0.3em] text-primary/60">Current</span>
-                                                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                                                    <span className="text-[8px] uppercase tracking-[0.3em] text-[#b5a16d]/60">Current</span>
+                                                    <div className="w-2 h-2 rounded-full bg-[#b5a16d] animate-pulse" />
                                                 </div>
                                             )}
                                         </Link>
@@ -236,25 +236,25 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             </div>
 
                             {/* Footer Row - Compact */}
-                            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-foreground/5">
+                            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
                                 <div className="flex items-center gap-6">
                                     <button
                                         onClick={() => setLocale(locale === 'EN' ? 'FR' : 'EN')}
-                                        className="flex items-center gap-2 text-[9px] font-medium text-foreground/40 hover:text-primary uppercase tracking-[0.15em] transition-all duration-500"
+                                        className="flex items-center gap-2 text-[9px] font-medium text-white/40 hover:text-[#b5a16d] uppercase tracking-[0.15em] transition-all duration-500"
                                     >
                                         <Languages size={12} /> {locale}
                                     </button>
-                                    <span className="text-foreground/20">|</span>
-                                    <span className="text-[9px] text-foreground/30 tracking-[0.1em]">rare@maihangroup.com</span>
+                                    <span className="text-white/20">|</span>
+                                    <span className="text-[9px] text-white/30 tracking-[0.1em]">rare@maihangroup.com</span>
                                 </div>
-                                <div className="text-[8px] text-foreground/20 tracking-[0.2em] uppercase">
+                                <div className="text-[8px] text-white/20 tracking-[0.2em] uppercase">
                                     Est. 2001 • London
                                 </div>
                             </div>
                         </div>
 
                         {/* RIGHT SIDE - Dynamic Image */}
-                        <div className="hidden lg:flex w-2/5 h-full items-center justify-center p-10 border-l border-foreground/5 bg-black/30">
+                        <div className="hidden lg:flex w-2/5 h-full items-center justify-center p-10 border-l border-white/5 bg-black/30">
                             <div className="relative w-full h-[70vh] max-h-[600px] overflow-hidden rounded-2xl">
                                 {/* Base Image */}
                                 <img
@@ -279,8 +279,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
 
                                 {/* Center Icon */}
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 border border-primary/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                                        <Diamond className="w-8 h-8 text-primary/60" strokeWidth={0.5} />
+                                    <div className="w-20 h-20 border border-[#b5a16d]/30 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                        <Diamond className="w-8 h-8 text-[#b5a16d]/60" strokeWidth={0.5} />
                                     </div>
                                 </div>
 

@@ -37,7 +37,7 @@ const AboutHero: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-main text-foreground">
+        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#FBFBF9] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
 
             {/* Background Image - Subtle & Dark */}
             <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40">
@@ -53,14 +53,14 @@ const AboutHero: React.FC = () => {
 
             <div className="relative z-10 text-center px-6">
                 <span className="block text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8">Est. 1982 — Geneva</span>
-                <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion text-white">
+                <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion dark:text-white">
                     ORIGIN
                 </h1>
 
                 {/* Floating Organic Shapes */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[20vw] pointer-events-none opacity-20 z-[-1]">
-                    <div className="absolute top-0 left-0 w-24 h-24 bg-foreground/10 rounded-full blur-2xl animate-pulse" />
-                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse delay-1000" />
+                    <div className="absolute top-0 left-0 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-pulse" />
+                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
                 </div>
 
                 <div className="mt-12 w-px h-24 bg-current mx-auto opacity-20" />

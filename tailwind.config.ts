@@ -27,12 +27,7 @@ const config: Config = {
                 xl: "var(--radius-xl)",
             },
             colors: {
-                main: "var(--background-1)",
-                alt: "var(--background-2)",
-                primary: "var(--primary)",
-                secondary: "var(--secondary)",
-                accent: "var(--accent)",
-                foreground: "var(--foreground)",
+                secondary: "var(--background-secondary-hex)",
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

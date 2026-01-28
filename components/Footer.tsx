@@ -50,16 +50,16 @@ const Footer: React.FC = () => {
 
     return (
         <footer
-            // Theme: Adaptive Background
-            className="relative bg-main text-foreground overflow-hidden"
+            // Theme: Deep Dark Charcoal/Black for contrast against the Off-White body
+            className="relative bg-[#080808] text-[#F9F8F4] overflow-hidden"
             onMouseMove={handleMouseMove}
         >
             {/* Ambient Background Effects - REFACTORED COLORS */}
             <div className="absolute inset-0 pointer-events-none">
                 {/* Gold Glow */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary opacity-[0.05] blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37] opacity-[0.05] blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
                 {/* Deep Warmth - Darker Gold */}
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary opacity-[0.1] blur-[120px] rounded-full -translate-x-1/3 translate-y-1/3" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#997B28] opacity-[0.1] blur-[120px] rounded-full -translate-x-1/3 translate-y-1/3" />
 
                 <div className="absolute inset-0 opacity-[0.03]"
                     style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
@@ -77,36 +77,36 @@ const Footer: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, ease: 'easeOut' }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-[1.1] mb-16 tracking-tight text-foreground"
+                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-[1.1] mb-16 tracking-tight text-[#F9F8F4]"
                         >
                             A private <br />
                             conversation <br />
                             begins with <br />
-                            <span className="italic text-primary">intention.</span>
+                            <span className="italic text-[#D4AF37]">intention.</span>
                         </motion.h2>
 
                         <div className="flex items-center gap-8">
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="group relative px-12 py-6 rounded-full border border-foreground/20 hover:border-primary transition-colors duration-500 overflow-hidden"
+                                className="group relative px-12 py-6 rounded-full border border-[#F9F8F4]/20 hover:border-[#D4AF37] transition-colors duration-500 overflow-hidden"
                             >
                                 <div className="relative flex items-center gap-4 z-10">
-                                    <span className="text-xs tracking-[0.2em] uppercase text-foreground group-hover:text-primary transition-colors duration-500">
+                                    <span className="text-xs tracking-[0.2em] uppercase text-[#F9F8F4] group-hover:text-[#D4AF37] transition-colors duration-500">
                                         Request a Private Meeting
                                     </span>
-                                    <span className="text-foreground/50 group-hover:translate-x-1 group-hover:text-primary transition-all duration-500">→</span>
+                                    <span className="text-[#F9F8F4]/50 group-hover:translate-x-1 group-hover:text-[#D4AF37] transition-all duration-500">→</span>
                                 </div>
-                                <div className="absolute inset-0 bg-foreground/[0.03] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+                                <div className="absolute inset-0 bg-[#F9F8F4]/[0.03] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
                             </motion.button>
 
                             {/* Decorative Dot Button */}
                             <motion.div
                                 whileHover={{ rotate: 180 }}
                                 transition={{ duration: 0.8, ease: "anticipate" }}
-                                className="w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center cursor-pointer hover:border-primary transition-colors duration-500"
+                                className="w-12 h-12 rounded-full border border-[#F9F8F4]/20 flex items-center justify-center cursor-pointer hover:border-[#D4AF37] transition-colors duration-500"
                             >
-                                <div className="w-1.5 h-1.5 rounded-full bg-foreground group-hover:bg-primary transition-colors" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#F9F8F4] group-hover:bg-[#D4AF37] transition-colors" />
                             </motion.div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-12 md:gap-8">
                             {Object.values(footerLinks).map((section, idx) => (
                                 <div key={idx} className="space-y-10">
-                                    <h4 className="text-[10px] tracking-[0.3em] uppercase text-foreground/40">
+                                    <h4 className="text-[10px] tracking-[0.3em] uppercase text-[#F9F8F4]/40">
                                         {section.title.replace('GLOBAL LOCATIONS', 'GLOBAL\nLOCATIONS')}
                                     </h4>
                                     <ul className="space-y-6">
@@ -124,7 +124,7 @@ const Footer: React.FC = () => {
                                             <li key={linkIdx}>
                                                 <Link
                                                     href={link.href}
-                                                    className="group block text-sm font-light text-foreground/80 hover:text-primary transition-colors duration-300"
+                                                    className="group block text-sm font-light text-[#F9F8F4]/80 hover:text-[#D4AF37] transition-colors duration-300"
                                                 >
                                                     {link.label}
                                                 </Link>
@@ -139,8 +139,8 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Large Brand Watermark */}
-            <div className="relative border-t border-foreground/5 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-30" />
+            <div className="relative border-t border-[#F9F8F4]/5 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 to-transparent opacity-30" />
 
                 <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12">
                     <div className="relative flex justify-center py-12 md:py-24 overflow-hidden">
@@ -150,8 +150,8 @@ const Footer: React.FC = () => {
                             transition={{ duration: 1.5, ease: "easeOut" }}
                             className="text-[16vw] font-serif font-light tracking-[-0.04em] leading-none text-transparent select-none whitespace-nowrap"
                             style={{
-                                WebkitTextStroke: '1px var(--primary)',
-                                backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent)',
+                                WebkitTextStroke: '1px rgba(212, 175, 55, 0.2)', // Refined Gold opacity
+                                backgroundImage: 'linear-gradient(to bottom, rgba(249, 248, 244, 0.1), transparent)',
                                 WebkitBackgroundClip: 'text',
                             }}
                         >
@@ -168,24 +168,24 @@ const Footer: React.FC = () => {
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/10 to-transparent skew-x-12 pointer-events-none"
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F9F8F4]/10 to-transparent skew-x-12 pointer-events-none"
                         />
                     </div>
 
                     {/* Centered Credits */}
-                    <div className="flex flex-col items-center justify-center pt-8 gap-4 border-t border-foreground/5 relative z-10 text-center">
-                        <p className="text-[10px] text-foreground/30 tracking-widest uppercase">
+                    <div className="flex flex-col items-center justify-center pt-8 gap-4 border-t border-[#F9F8F4]/5 relative z-10 text-center">
+                        <p className="text-[10px] text-[#F9F8F4]/30 tracking-widest uppercase">
                             Designed and Developed by{' '}
                             <a
                                 href="https://www.fkodelabs.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-primary/80 hover:text-primary transition-colors border-b border-primary/20 hover:border-primary pb-0.5"
+                                className="text-[#D4AF37]/80 hover:text-[#D4AF37] transition-colors border-b border-[#D4AF37]/20 hover:border-[#D4AF37] pb-0.5"
                             >
                                 fkodelabs
                             </a>
                         </p>
-                        <p className="text-[10px] tracking-[0.2em] uppercase text-foreground/20">
+                        <p className="text-[10px] tracking-[0.2em] uppercase text-[#F9F8F4]/20">
                             © 2025 Maihan Group. All rights reserved.
                         </p>
                     </div>

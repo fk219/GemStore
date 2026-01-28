@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
     return (
         <section
             ref={containerRef}
-            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-main text-foreground"
+            className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9]"
         >
             {/* The Refractive Void - Multi-layered Dynamic Background */}
             <div className="absolute inset-0 z-0">
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
                 <div
                     className="absolute inset-0 opacity-[0.03] mix-blend-screen"
                     style={{
-                        background: `radial-gradient(circle at ${(1 - smoothMousePos.x) * 100}% ${(1 - smoothMousePos.y) * 100}%, var(--primary) 0%, transparent 50%)`
+                        background: `radial-gradient(circle at ${(1 - smoothMousePos.x) * 100}% ${(1 - smoothMousePos.y) * 100}%, #b5a16d 0%, transparent 50%)`
                     }}
                 />
 
@@ -82,11 +82,11 @@ const Hero: React.FC = () => {
 
                 {/* Prism Beta (Golden) */}
                 <div
-                    className={`absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-primary/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[2.5s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
+                    className={`absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-[#b5a16d]/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[2.5s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
                     style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 50}px, ${(smoothMousePos.y - 0.5) * 50}px, 0)` }}
                 >
                     {/* Inner refraction line */}
-                    <div className="absolute inset-0 border-l border-t border-primary/5 rounded-inherit animate-pulse" />
+                    <div className="absolute inset-0 border-l border-t border-[#b5a16d]/5 rounded-inherit animate-pulse" />
                 </div>
             </div>
 
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
                             <span className={`transition-all duration-[2s] cubic-bezier(0.19,1,0.22,1) ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
                                 Ra
                             </span>
-                            <span className={`italic text-primary transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-100 ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+                            <span className={`italic text-[#b5a16d] transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-100 ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
                                 re
                             </span>
                         </h1>
@@ -126,7 +126,7 @@ const Hero: React.FC = () => {
                                         className="w-full h-full object-cover transition-transform duration-[12s] group-hover:scale-110"
                                         alt="Refraction Focus"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-main/80 via-transparent to-primary/20 mix-blend-overlay" />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0A0B]/80 via-transparent to-[#b5a16d]/20 mix-blend-overlay" />
                                     {/* Dynamic Light sweep */}
                                     <div
                                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[sweep_8s_infinite_ease-in-out]"
@@ -146,7 +146,7 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
 
-                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-white dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                             Nature
                         </h2>
                     </div>
@@ -157,7 +157,7 @@ const Hero: React.FC = () => {
                             <p className="text-[10px] tracking-[0.5em] uppercase opacity-30 max-w-[190px] leading-loose">
                                 Crafted for those who understand rarity beyond brilliance.
                             </p>
-                            <div className="w-10 h-px bg-primary/30" />
+                            <div className="w-10 h-px bg-[#b5a16d]/30" />
                         </div>
 
                         <h1 className="text-[14vw] md:text-[13vw] font-light serif leading-[0.75] tracking-tight uppercase text-right">
@@ -205,14 +205,14 @@ const Hero: React.FC = () => {
           100% { transform: translateX(150%) skewX(-25deg); }
         }
         
-        /* Theme Variables using new tokens */
+        /* Theme Variables */
         :root {
-            --hero-gradient-1-start: var(--background-2);
-            --hero-gradient-1-end: var(--background-1);
+            --hero-gradient-1-start: #E5E5E5;
+            --hero-gradient-1-end: #F9F8F4;
         }
         .dark {
-            --hero-gradient-1-start: var(--background-2);
-            --hero-gradient-1-end: var(--background-1);
+            --hero-gradient-1-start: #1a1a1c;
+            --hero-gradient-1-end: #0A0A0B;
         }
       `}</style>
         </section>
