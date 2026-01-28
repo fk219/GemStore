@@ -3,79 +3,23 @@
 @tailwind utilities;
 
 :root {
-    /* Base Colors - LIGHT LUXURY THEME */
     --background-hex: #F9F8F4;
-    /* Cream / Off-White */
+    /* Cream/Off-White */
     --foreground-hex: #1A1A1A;
     /* Deep Charcoal */
-
-    --accent-gold: #D4AF37;
-    /* Metallic Gold */
-    --accent-gold-dim: #997B28;
-    --accent-gold-light: #F3E5AB;
-
-    --background-gold-light: #EAE8E3;
-    /* Replaced Light Gold with Bone/Ivory as requested */
-
+    --accent-gold: #b5a16d;
+    /* Muted Luxury Gold */
     --background-secondary-hex: #EAE8E3;
-    /* Bone/Ivory - Subtle Luxury Alternate */
-
-    --foreground-rgb: 26, 26, 26;
-    --background-start-rgb: 249, 248, 244;
-    --background-end-rgb: 249, 248, 244;
-
-    /* Metrics */
-    --radius-xs: 8px;
-    --radius-sm: 14px;
-    --radius-md: 24px;
-    --radius-lg: 35px;
-    --radius-xl: 50px;
-
-    /* Animation */
-    --easing-standard: cubic-bezier(0.16, 1, 0.3, 1);
-    --easing-slow: cubic-bezier(0.22, 1, 0.36, 1);
-    --duration-slow: 1200ms;
+    /* Bone/Ivory */
 }
 
-@media (prefers-color-scheme: dark) {
-
-    /* Optional: We are ENFORCING the light theme for now based on user request "background should be offwhite" 
-       but keeping these if they toggle mode manually, though user wants offwhite dominance. 
-       Let's map Dark Mode to a "Night Luxury" (Deep Gold/Black) if used.
-    */
-    :root {
-        --foreground-rgb: 251, 251, 249;
-        --background-start-rgb: 5, 5, 5;
-        --background-end-rgb: 5, 5, 5;
+@layer base {
+    body {
+        @apply bg-[#F9F8F4] text-[#1A1A1A] antialiased selection:bg-[#b5a16d] selection:text-white dark:bg-[#050505] dark:text-[#FBFBF9];
     }
 }
 
-body {
-    background-color: var(--background-hex);
-    color: var(--foreground-hex);
-    overflow-x: hidden;
-}
-
-/* Typography Basics */
-h1,
-h2,
-h3,
-h4,
-.serif {
-    @apply font-serif;
-}
-
-input,
-textarea {
-    @apply font-serif;
-}
-
-:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 1px var(--accent-gold);
-}
-
-/* Scrollbar - Gold/Minimal */
+/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -85,20 +29,11 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
+    background: rgba(181, 161, 109, 0.3);
+    border-radius: 10px;
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.6);
-}
-
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    background: rgba(181, 161, 109, 0.8);
 }

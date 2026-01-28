@@ -48,20 +48,22 @@ const BookingForm = forwardRef<HTMLDivElement>((props, ref) => {
                         />
                     </div>
 
-                    <div className="space-y-2 group">
-                        <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block group-focus-within:text-amber-600 transition-colors">Nature of Inquiry</label>
-                        <div className="relative">
-                            <select
-                                className="w-full bg-transparent outline-none text-xl md:text-3xl font-light font-serif italic border-b border-current/20 pb-4 appearance-none cursor-pointer focus:border-current transition-colors"
-                                value={formData.interest}
-                                onChange={e => setFormData({ ...formData, interest: e.target.value })}
-                            >
-                                <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Acquisition</option>
-                                <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Private Commission</option>
-                                <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Appraisal</option>
-                                <option className="bg-zinc-100 dark:bg-zinc-900 text-base not-italic">Press Inquiry</option>
-                            </select>
-                            <span className="absolute right-0 top-1/2 -translate-y-1/2 text-xs opacity-40 pointer-events-none">▼</span>
+                    <div className="space-y-4 group">
+                        <label className="text-[10px] uppercase tracking-[0.3em] opacity-40 block transition-colors">Nature of Inquiry</label>
+                        <div className="grid grid-cols-2 gap-4">
+                            {['Acquisition', 'Private Commission', 'Appraisal', 'Press Inquiry'].map((option) => (
+                                <button
+                                    key={option}
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, interest: option })}
+                                    className={`text-left px-4 py-3 text-sm font-serif italic border transition-all duration-300 ${formData.interest === option
+                                            ? "border-[#b5a16d] text-[#b5a16d] bg-[#b5a16d]/5"
+                                            : "border-current/20 hover:border-current/40 opacity-60 hover:opacity-100"
+                                        }`}
+                                >
+                                    {option}
+                                </button>
+                            ))}
                         </div>
                     </div>
 

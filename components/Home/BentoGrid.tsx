@@ -61,7 +61,7 @@ const BentoGrid: React.FC = () => {
     }, []);
 
     return (
-        <section className="py-24 md:py-32 px-4 md:px-8 lg:px-12 bg-secondary dark:bg-[#0A0908]">
+        <section className="py-24 md:py-32 px-4 md:px-8 lg:px-12 bg-[#EAE8E3] dark:bg-[#0A0908]">
             <div ref={containerRef} className="max-w-[1600px] mx-auto">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
@@ -88,7 +88,7 @@ const BentoGrid: React.FC = () => {
                         onMouseEnter={() => setHoveredCard('typography')}
                         onMouseLeave={() => setHoveredCard(null)}
                     >
-                        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#EDE9E3] dark:bg-[#1A1A1A] p-8 md:p-12 flex flex-col justify-between group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-[#b5a16d]/10">
+                        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#EDE9E3] dark:bg-[#1A1A1A] p-8 md:p-12 flex flex-col justify-between group cursor-pointer transition-all duration-700 hover:shadow-2xl hover:shadow-[#b5a16d]/20 hover:-translate-y-1">
                             {/* Background Pattern */}
                             <div className="absolute inset-0 opacity-[0.03]">
                                 <svg width="100%" height="100%" className="absolute inset-0">
