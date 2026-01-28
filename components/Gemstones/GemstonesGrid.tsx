@@ -1,95 +1,82 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Diamond } from 'lucide-react';
-
-const gemstones = [
-    { name: 'Ruby', color: '#E0115F', description: 'The king of precious stones, symbolizing passion and vitality' },
-    { name: 'Sapphire', color: '#0F52BA', description: 'Celestial blue gemstone of wisdom and royalty' },
-    { name: 'Emerald', color: '#50C878', description: 'Verdant treasure representing renewal and prosperity' },
-    { name: 'Diamond', color: '#B9F2FF', description: 'Eternal brilliance, the ultimate symbol of luxury' },
-    { name: 'Amethyst', color: '#9966CC', description: 'Purple majesty, stone of clarity and calm' },
-    { name: 'Aquamarine', color: '#7FFFD4', description: 'Ocean-inspired serenity in crystalline form' },
-    { name: 'Mandarin Garnet', color: '#FF8C00', description: 'Rare sunset hues of exceptional fire' },
-    { name: 'Morganite', color: '#FFB6C1', description: 'Blush-toned elegance and gentle sophistication' },
-    { name: 'Padparadscha', color: '#FF6E4A', description: 'Lotus blossom sapphire of unparalleled rarity' },
-    { name: 'Paraiba Tourmaline', color: '#00CED1', description: 'Electric neon brilliance from Brazilian depths' },
-    { name: 'Peridot', color: '#E5E4A6', description: 'Olive-green luminescence born of volcanic fire' },
-    { name: 'Rubellite', color: '#D10056', description: 'Pink to red tourmaline of exceptional depth' },
-    { name: 'Spinel', color: '#FF073A', description: 'Underrated gem of royal heritage' },
-    { name: 'Tanzanite', color: '#5D3FD3', description: 'Violet-blue rarity found only in Tanzania' },
-    { name: 'Tourmaline', color: '#00A86B', description: 'Rainbow spectrum in a single stone' }
-];
+import { gemstones } from '@/lib/data';
 
 const GemstonesGrid: React.FC = () => {
     const [mounted, setMounted] = useState(false);
-    const [hoveredGem, setHoveredGem] = useState<string | null>(null);
+    const [filter, setFilter] = useState('All');
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
+    const filters = ['All', 'Precious', 'Rare', 'Sapphire', 'Ruby', 'Emerald'];
+
+    const filteredGems = filter === 'All'
+        ? gemstones
+        : gemstones.filter(g => g.details.color?.includes(filter) || g.title.includes(filter) || (filter === 'Precious' && ['Ruby', 'Sapphire', 'Emerald'].includes(g.title)));
+
     return (
-        <section className="relative py-20 px-8 md:px-16 lg:px-32">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {gemstones.map((gem, index) => (
-                        <Link
-                            key={gem.name}
-                            href={`/gemstones/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="group relative"
-                            onMouseEnter={() => setHoveredGem(gem.name)}
-                            onMouseLeave={() => setHoveredGem(null)}
-                        >
-                            <div
-                                className={`relative p-12 rounded-xl border border-black/5 dark:border-white/5 bg-gradient-to-br from-black/[0.02] dark:from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-black/10 dark:hover:border-white/10 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                                style={{
-                                    transitionDelay: `${index * 0.08}s`,
-                                    boxShadow: hoveredGem === gem.name ? `0 0 60px ${gem.color}15` : 'none'
-                                }}
-                            >
-                                {/* Gem Icon */}
-                                <div className="flex items-center justify-center mb-8">
-                                    <div
-                                        className="w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-700 group-hover:scale-110 group-hover:rotate-45"
-                                        style={{
-                                            borderColor: `${gem.color}40`,
-                                            backgroundColor: `${gem.color}08`
-                                        }}
-                                    >
-                                        <Diamond
-                                            className="w-6 h-6 transition-all duration-700"
-                                            style={{ color: gem.color }}
-                                            strokeWidth={1}
-                                        />
-                                    </div>
-                                </div>
+        <section className="py-20 px-4 md:px-8 bg-[#F9F8F4] dark:bg-[#0A0A0B]">
 
-                                {/* Gem Name */}
-                                <h3
-                                    className={`font-serif text-3xl md:text-4xl font-light text-center mb-4 transition-all duration-700 group-hover:tracking-wider ${hoveredGem === gem.name ? '' : 'text-[#1A1A1A] dark:text-[#FBFBF9]'}`}
-                                    style={{
-                                        color: hoveredGem === gem.name ? gem.color : undefined
-                                    }}
-                                >
-                                    {gem.name}
+            {/* Filter Bar */}
+            <div className={`flex flex-wrap justify-center gap-6 mb-16 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                {filters.map((f) => (
+                    <button
+                        key={f}
+                        onClick={() => setFilter(f)}
+                        className={`text-xs uppercase tracking-[0.2em] transition-all duration-500 ${filter === f
+                                ? 'text-[#b5a16d] scale-110'
+                                : 'opacity-40 hover:opacity-100 hover:text-[#b5a16d]'
+                            }`}
+                    >
+                        {f}
+                    </button>
+                ))}
+            </div>
+
+            {/* Masonry-style Grid */}
+            <div className="max-w-[1800px] mx-auto columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                {filteredGems.map((gem, index) => (
+                    <Link
+                        href={`/gemstones/${gem.slug}`}
+                        key={gem.slug}
+                        className={`group block break-inside-avoid relative overflow-hidden rounded-sm transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+                        style={{ transitionDelay: `${index * 0.1}s` }}
+                    >
+                        <div className="relative aspect-[3/4] w-full overflow-hidden">
+                            <Image
+                                src={gem.images[0]}
+                                alt={gem.title}
+                                fill
+                                className="object-cover transition-transform duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0"
+                            />
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+
+                            {/* Overlay Content */}
+                            <div className="absolute inset-0 p-8 flex flex-col justify-end text-white opacity-0 md:opacity-100 md:group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                                <span className="text-[9px] tracking-[0.3em] uppercase opacity-70 mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-[#b5a16d]">
+                                    {gem.details.origin.split(',')[0]}
+                                </span>
+                                <h3 className="font-serif text-3xl mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                                    {gem.title}
                                 </h3>
-
-                                {/* Description */}
-                                <p className="text-[11px] tracking-[0.3em] uppercase text-center opacity-40 leading-relaxed font-light transition-opacity duration-700 group-hover:opacity-60">
-                                    {gem.description}
+                                <p className="text-xs font-light tracking-wide opacity-80 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                                    {gem.subtitle}
                                 </p>
-
-                                {/* Hover Accent Line */}
-                                <div
-                                    className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px w-0 group-hover:w-3/4 transition-all duration-700"
-                                    style={{ backgroundColor: gem.color }}
-                                />
                             </div>
-                        </Link>
-                    ))}
-                </div>
+                        </div>
+
+                        {/* Mobile Visible Title (Outside Image) */}
+                        <div className="md:hidden mt-4 text-center">
+                            <h3 className="font-serif text-2xl text-[#1A1A1A] dark:text-[#FBFBF9]">{gem.title}</h3>
+                            <p className="text-xs uppercase tracking-widest text-[#b5a16d]">{gem.subtitle}</p>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </section>
     );
