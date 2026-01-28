@@ -275,7 +275,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 {/* Hover Images */}
                                 {navItems.map((item) => (
                                     <img
-                                        key={item.img}
+                                        key={item.name}
                                         src={item.img}
                                         className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${hoveredLink === item.img ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
                                             }`}
