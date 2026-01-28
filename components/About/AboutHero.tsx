@@ -34,13 +34,31 @@ const AboutHero: React.FC = () => {
             }
         });
 
+        // Background parallax effect (From CTA)
+        gsap.to(".bg-parallax", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
     }, { scope: containerRef });
 
     return (
         <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
 
+            {/* Background Elements (CTA Clone) */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+            </div>
+
             {/* Background Image - Subtle & Dark */}
-            <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40">
+            <div className="absolute inset-0 z-0 opacity-10 dark:opacity-30">
                 <Image
                     ref={imageRef}
                     src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=2000"

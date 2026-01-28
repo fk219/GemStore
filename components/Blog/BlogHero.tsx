@@ -4,6 +4,11 @@ import React, { useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const BlogHero: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -16,10 +21,27 @@ const BlogHero: React.FC = () => {
             delay: 0.2,
             ease: "power3.out"
         });
+
+        // Background parallax effect (From CTA)
+        gsap.to(".bg-parallax", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative w-full h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-[#EAE8E3] dark:bg-[#111]">
+        <section ref={containerRef} className="relative w-full h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9]">
+            {/* Background Elements (CTA Clone) */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+            </div>
 
             {/* Editorial Flat Lay Background */}
             <div className="absolute inset-0 opacity-20 dark:opacity-40">

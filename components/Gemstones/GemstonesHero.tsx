@@ -1,17 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Diamond } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const GemstonesHero: React.FC = () => {
     const [mounted, setMounted] = useState(false);
+    const containerRef = useRef<HTMLElement>(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         setMounted(true);
-    }, []);
+
+        // Background parallax effect
+        gsap.to(".bg-parallax", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    }, { scope: containerRef });
 
     return (
-        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
+        <section ref={containerRef} className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
+            {/* Background Elements (CTA Clone) */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
+                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+            </div>
+
             {/* Background Image - Macro Texture */}
             <div className="absolute inset-0 z-0">
                 <img
