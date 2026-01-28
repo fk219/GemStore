@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Epilogue: React.FC = () => {
     return (
-        <section className="py-48 flex flex-col items-center justify-center text-center px-6 bg-[#F4ECD8] dark:bg-[#0A0908] text-[#1A1A1A] dark:text-[#FBFBF9]">
+        <section className="py-48 flex flex-col items-center justify-center text-center px-6 bg-secondary dark:bg-[#0A0908] text-[#1A1A1A] dark:text-[#FBFBF9]">
             <div className="reveal-text">
                 <div className="w-px h-24 bg-current opacity-20 mb-12 mx-auto" />
                 <p className="text-xs tracking-[0.8em] uppercase opacity-40 mb-16 font-sans font-light">The Invitation</p>
