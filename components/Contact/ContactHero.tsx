@@ -38,7 +38,7 @@ const ContactHero = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] text-[#FBFBF9] flex items-center justify-center">
+        <section ref={containerRef} className="relative h-[70vh] w-full overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9] flex items-center justify-center">
 
             {/* Background Elements (CTA Clone) */}
             <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
@@ -50,14 +50,14 @@ const ContactHero = () => {
                 <span ref={subRef} className="block text-[10px] tracking-[0.8em] uppercase opacity-0 mb-4 text-[#D4AF37]">
                     Concierge Services
                 </span>
-                <h1 ref={titleRef} className="text-[10vw] leading-[0.8] font-serif font-light tracking-tight italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
+                <h1 ref={titleRef} className="text-[10vw] leading-[0.8] font-serif font-light tracking-tight italic text-[#1A1A1A] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-white/40">
                     Begin Your Journey
                 </h1>
 
                 {/* Floating Letters or Shapes */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <span className="absolute top-[20%] left-[10%] text-[8rem] serif italic opacity-5 text-white animate-[float_10s_ease-in-out_infinite]">A</span>
-                    <span className="absolute bottom-[20%] right-[10%] text-[6rem] serif italic opacity-5 text-white animate-[float_12s_ease-in-out_infinite_reverse]">V</span>
+                <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-exclusion dark:mix-blend-normal">
+                    <span className="absolute top-[20%] left-[10%] text-[8rem] serif italic opacity-5 text-current animate-[float_10s_ease-in-out_infinite]">A</span>
+                    <span className="absolute bottom-[20%] right-[10%] text-[6rem] serif italic opacity-5 text-current animate-[float_12s_ease-in-out_infinite_reverse]">V</span>
                 </div>
             </div>
         </section>

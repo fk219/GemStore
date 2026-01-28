@@ -32,12 +32,6 @@ const OriginsHero: React.FC = () => {
 
     return (
         <section ref={containerRef} className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20 bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9]">
-            {/* Background Elements (CTA Clone) */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
-                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
-                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
-            </div>
-
             {/* Background Image - Drone Shot */}
             <div className="absolute inset-0 z-0">
                 <img
@@ -46,6 +40,12 @@ const OriginsHero: React.FC = () => {
                     className="w-full h-full object-cover opacity-60 dark:opacity-40 grayscale"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-[#F9F8F4]/80 via-[#F9F8F4]/50 to-[#F9F8F4] dark:from-[#0A0A0B]/80 dark:via-[#0A0A0B]/50 dark:to-[#0A0A0B]" />
+            </div>
+
+            {/* Background Elements (CTA Clone) */}
+            <div className="absolute inset-0 opacity-40 pointer-events-none z-[1]">
+                <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
+                <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
             </div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
