@@ -174,7 +174,7 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
 
-                        <h2 className={`text-[12vw] md:text-[10vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className={`text-[12vw] md:text-[15vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                             Nature
                         </h2>
                     </div>
@@ -203,7 +203,7 @@ const Hero: React.FC = () => {
             {/* Dynamic Interaction Hint */}
             <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 transition-all duration-1000 delay-[2s] ${mounted ? 'opacity-40' : 'opacity-0'}`}>
                 <div className="w-px h-16 bg-gradient-to-b from-current to-transparent" />
-                <span className="text-[8px] tracking-[1.5em] uppercase font-light">The Narrative Unfolds</span>
+                <span className="text-[12px] tracking-[1.5em] uppercase font-light">The Narrative Unfolds</span>
             </div>
 
             {/* Decorative Floating Glyph - Enhanced responsive depth */}
