@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                 clipPath: 'circle(0% at 100% 0%)',
                 duration: 0.8,
                 ease: 'power3.inOut',
-                onComplete: () => gsap.set(menuRef.current, { display: 'none' })
+                onComplete: () => { gsap.set(menuRef.current, { display: 'none' }); }
             });
         }
     }, { dependencies: [isMenuOpen] });
@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                     : 'mt-4 px-6 max-w-7xl'
                     }`}>
                     <div className={`flex items-center justify-between transition-all duration-700 ${isScrolled
-                        ? 'py-2.5 px-6 bg-[#1A1A1A]/95 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl shadow-black/20'
+                        ? 'py-2.5 px-6 bg-[#F9F8F4]/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-full shadow-2xl shadow-black/5 dark:shadow-black/20'
                         : 'py-3 px-0'
                         }`}>
                         {/* Logo */}
@@ -104,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 strokeWidth={1.5}
                             />
                             <span
-                                className={`font-serif tracking-[0.25em] uppercase transition-all duration-700 text-white font-light ${isScrolled ? 'text-sm' : 'text-lg'}`}
+                                className={`font-serif tracking-[0.25em] uppercase transition-all duration-700 text-[#1A1A1A] dark:text-white font-light ${isScrolled ? 'text-sm' : 'text-lg'}`}
                             >
                                 Maihan Group
                             </span>
@@ -120,7 +120,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                         href={item.path}
                                         className={`relative px-4 py-2 text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-500 ${isActivePage(item.path)
                                             ? 'text-[#b5a16d]'
-                                            : 'text-white/60 hover:text-white'
+                                            : 'text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white'
                                             }`}
                                     >
                                         {item.name}
@@ -131,12 +131,12 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                 ))}
                             </div>
 
-                            <div className="w-px h-4 bg-white/10" />
+                            <div className="w-px h-4 bg-black/10 dark:bg-white/10" />
 
                             {/* Theme Toggle */}
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 text-white/60 hover:text-white transition-all duration-500"
+                                className="p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-all duration-500"
                             >
                                 {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
                             </button>
@@ -150,8 +150,8 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                     Menu
                                 </span>
                                 <div className="flex flex-col gap-[3px] w-4">
-                                    <div className="h-[1.5px] w-full bg-[#b5a16d] group-hover:bg-[#1A1A1A] transition-colors duration-500" />
-                                    <div className="h-[1.5px] w-2/3 ml-auto bg-[#b5a16d] group-hover:bg-[#1A1A1A] transition-colors duration-500" />
+                                    <div className="h-[1.5px] w-full bg-[#b5a16d] group-hover:bg-[#1A1A1A] dark:group-hover:bg-[#F9F8F4] transition-colors duration-500" />
+                                    <div className="h-[1.5px] w-2/3 ml-auto bg-[#b5a16d] group-hover:bg-[#1A1A1A] dark:group-hover:bg-[#F9F8F4] transition-colors duration-500" />
                                 </div>
                             </button>
                         </div>
@@ -171,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
             <div ref={menuRef} className="fixed inset-0 z-[100] hidden">
                 <div
                     ref={menuBgRef}
-                    className="absolute inset-0 bg-[#0A0A0B]"
+                    className="absolute inset-0 bg-[#F4ECD8] dark:bg-[#0A0A0B]"
                     style={{ clipPath: 'circle(0% at 100% 0%)' }}
                 >
                     <div className="relative w-full h-screen flex flex-col lg:flex-row overflow-hidden">
@@ -183,7 +183,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             <div className="flex justify-between items-center">
                                 <Link href="/" className="flex items-center gap-3">
                                     <Diamond className="w-5 h-5" style={{ color: accentColor }} strokeWidth={1.5} />
-                                    <span className="font-serif text-base tracking-[0.25em] uppercase text-white font-light">
+                                    <span className="font-serif text-base tracking-[0.25em] uppercase text-[#1A1A1A] dark:text-white font-light">
                                         Maihan Group
                                     </span>
                                 </Link>
@@ -193,7 +193,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                     className="group flex items-center gap-3 text-white/60 hover:text-white transition-all duration-500"
                                 >
                                     <span className="text-[9px] uppercase tracking-[0.2em] font-medium">Close</span>
-                                    <div className="w-8 h-8 flex items-center justify-center border border-white/20 rounded-full group-hover:border-[#b5a16d] group-hover:bg-[#b5a16d]/10 transition-all duration-500">
+                                    <div className="w-8 h-8 flex items-center justify-center border border-black/10 dark:border-white/20 rounded-full group-hover:border-[#b5a16d] group-hover:bg-[#b5a16d]/10 transition-all duration-500">
                                         <X size={14} />
                                     </div>
                                 </button>
@@ -218,7 +218,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                                             {/* Link Name */}
                                             <h2 className={`font-serif text-4xl md:text-5xl lg:text-6xl font-light leading-none uppercase tracking-tight transition-all duration-500 ${isActivePage(item.path)
                                                 ? 'text-[#b5a16d]'
-                                                : 'text-white/50 group-hover:text-white group-hover:translate-x-4'
+                                                : 'text-black/50 dark:text-white/50 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-4'
                                                 }`}>
                                                 {item.name}
                                             </h2>
@@ -236,25 +236,25 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
                             </div>
 
                             {/* Footer Row - Compact */}
-                            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
+                            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-black/5 dark:border-white/5">
                                 <div className="flex items-center gap-6">
                                     <button
                                         onClick={() => setLocale(locale === 'EN' ? 'FR' : 'EN')}
-                                        className="flex items-center gap-2 text-[9px] font-medium text-white/40 hover:text-[#b5a16d] uppercase tracking-[0.15em] transition-all duration-500"
+                                        className="flex items-center gap-2 text-[9px] font-medium text-black/40 dark:text-white/40 hover:text-[#b5a16d] uppercase tracking-[0.15em] transition-all duration-500"
                                     >
                                         <Languages size={12} /> {locale}
                                     </button>
-                                    <span className="text-white/20">|</span>
-                                    <span className="text-[9px] text-white/30 tracking-[0.1em]">rare@maihangroup.com</span>
+                                    <span className="text-black/20 dark:text-white/20">|</span>
+                                    <span className="text-[9px] text-black/30 dark:text-white/30 tracking-[0.1em]">rare@maihangroup.com</span>
                                 </div>
-                                <div className="text-[8px] text-white/20 tracking-[0.2em] uppercase">
+                                <div className="text-[8px] text-black/20 dark:text-white/20 tracking-[0.2em] uppercase">
                                     Est. 2001 • London
                                 </div>
                             </div>
                         </div>
 
                         {/* RIGHT SIDE - Dynamic Image */}
-                        <div className="hidden lg:flex w-2/5 h-full items-center justify-center p-10 border-l border-white/5 bg-black/30">
+                        <div className="hidden lg:flex w-2/5 h-full items-center justify-center p-10 border-l border-black/5 dark:border-white/5 bg-white/20 dark:bg-black/30">
                             <div className="relative w-full h-[70vh] max-h-[600px] overflow-hidden rounded-2xl">
                                 {/* Base Image */}
                                 <img
@@ -286,7 +286,7 @@ const Navbar: React.FC<NavbarProps> = ({ themeOverride = 'auto' }) => {
 
                                 {/* Bottom Text */}
                                 <div className="absolute bottom-8 left-0 right-0 text-center">
-                                    <p className="text-[10px] tracking-[0.4em] uppercase text-white/40">Rare by Nature</p>
+                                    <p className="text-[10px] tracking-[0.4em] uppercase text-black/40 dark:text-white/40">Rare by Nature</p>
                                 </div>
                             </div>
                         </div>
