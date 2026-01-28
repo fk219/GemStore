@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,7 +14,6 @@ const CollectionSection: React.FC = () => {
     const triggerRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Updated text color class for theme compatibility: Charcoal on Light, White on Dark
     const textColorClass = "text-[#1A1A1A] dark:text-[#FBFBF9]";
 
     const collectionItems = [
@@ -86,8 +85,8 @@ const CollectionSection: React.FC = () => {
 
     return (
         <section ref={containerRef} className="overflow-hidden">
-            {/* Trigger / Pin Wrapper - Added bg-secondary for Light Mode */}
-            <div ref={triggerRef} className="relative h-screen bg-secondary dark:bg-[#0C0C0C] transition-colors duration-500">
+            {/* Trigger / Pin Wrapper */}
+            <div ref={triggerRef} className="relative h-screen"> {/* Height matches pinned height */}
                 <div
                     ref={sectionRef}
                     className="flex h-full items-center px-6 md:px-24 gap-24 flex-nowrap"
@@ -96,7 +95,6 @@ const CollectionSection: React.FC = () => {
                     {/* Section Introduction Card */}
                     <div className={`w-[85vw] md:w-[600px] flex-shrink-0 ${textColorClass}`}>
                         <span className="text-[10px] tracking-[0.5em] uppercase opacity-40 block mb-8 font-sans font-light">Selected Pieces</span>
-                        {/* Gold text handled by global CSS h2 rule, but verified here */}
                         <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private <span className="italic">Collection</span></h2>
                         <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md font-sans">
                             A rotating selection of our most exceptional acquisitions. Available exclusively for private viewing.
@@ -119,8 +117,7 @@ const CollectionSection: React.FC = () => {
 
                             <div className="relative group/card overflow-hidden">
                                 <div className="h-px w-full bg-current opacity-0 group-hover:opacity-10 mb-8 transition-opacity duration-1000" />
-                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-opacity duration-700 font-light !text-current">
-                                    {/* Override global gold for card internals to match card aesthetic */}
+                                <h3 className="text-3xl md:text-5xl serif mb-4 leading-tight transition-opacity duration-700 font-light">
                                     {item.name.split(' ').slice(0, -1).join(' ')} <span className="italic">{item.name.split(' ').pop()}</span>
                                 </h3>
                                 <p className={`text-[10px] tracking-[0.6em] uppercase transition-all duration-1000 opacity-80 group-hover:opacity-100 ${item.subText} font-sans font-light`}>Inquire for price</p>
@@ -131,10 +128,7 @@ const CollectionSection: React.FC = () => {
                     {/* Closing Card / Call to Action Transition */}
                     <div className={`w-[60vw] md:w-[500px] flex-shrink-0 flex flex-col items-center justify-center text-center px-12 ${textColorClass}`}>
                         <p className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-8 font-sans font-light">End of Current Archive</p>
-                        <h3 className="text-3xl md:text-4xl serif italic mb-12 opacity-80 leading-relaxed !text-current">
-                            {/* Override global gold, keep body text color for this quote */}
-                            Each piece is a single iteration of nature’s patience.
-                        </h3>
+                        <h3 className="text-3xl md:text-4xl serif italic mb-12 opacity-80 leading-relaxed">Each piece is a single iteration of nature’s patience.</h3>
                         <div className="w-16 h-[1px] bg-current opacity-20" />
                     </div>
                 </div>

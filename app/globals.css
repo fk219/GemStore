@@ -63,8 +63,6 @@ h3,
 h4,
 .serif {
     @apply font-serif;
-    color: var(--accent-gold);
-    /* Enforce Gold Headings Global-wide */
 }
 
 input,
