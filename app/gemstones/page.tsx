@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import GemstonesHero from '@/components/Gemstones/GemstonesHero';
 import GemstonesGrid from '@/components/Gemstones/GemstonesGrid';
+import CTA from '@/components/CTA';
 
 export default function GemstonesPage() {
     return (
@@ -12,6 +13,7 @@ export default function GemstonesPage() {
             <Navbar themeOverride="dark" />
             <GemstonesHero />
             <GemstonesGrid />
+            <CTA />
             <Footer />
         </main>
     );

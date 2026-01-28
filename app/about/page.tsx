@@ -13,6 +13,7 @@ import OriginSection from '@/components/About/OriginSection';
 import AtelierSection from '@/components/About/AtelierSection';
 import Timeline from '@/components/About/Timeline';
 import FounderSignoff from '@/components/About/FounderSignoff';
+import CTA from '@/components/CTA';
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -79,6 +80,8 @@ export default function About() {
             <Timeline />
 
             <FounderSignoff />
+
+            <CTA />
 
             <Footer />
         </main>

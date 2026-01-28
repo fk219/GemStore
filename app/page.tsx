@@ -14,7 +14,7 @@ import SoulOfRarity from '@/components/Home/SoulOfRarity';
 import CollectionSection from '@/components/Home/CollectionSection';
 import ArtOfRefraction from '@/components/Home/ArtOfRefraction';
 import BentoGrid from '@/components/Home/BentoGrid';
-import Epilogue from '@/components/Home/Epilogue';
+import CTA from '@/components/CTA';
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -96,8 +96,8 @@ export default function Home() {
                 <BentoGrid />
             </section>
 
-            {/* 6. Epilogue */}
-            <Epilogue />
+            {/* 6. CTA */}
+            <CTA />
 
             <Footer />
             <FloatingActions />
