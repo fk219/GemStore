@@ -4,7 +4,7 @@ import React from 'react';
 
 const ArtOfRefraction: React.FC = () => {
     return (
-        <section className="min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative bg-[#141414] text-[#FBFBF9] dark:bg-[#FBFBF9] dark:text-[#141414] shadow-2xl transition-colors duration-1000">
+        <section className="min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative bg-[#F9F8F4] dark:bg-[#141414] text-[#1A1A1A] dark:text-[#FBFBF9] shadow-2xl transition-colors duration-1000">
             <div className="absolute inset-0 opacity-10 pointer-events-none">
                 <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <path d="M0,50 C20,40 40,60 60,50 S80,40 100,50" fill="none" className="stroke-current" strokeWidth="0.05" />

@@ -12,7 +12,7 @@ const OriginsHero: React.FC = () => {
 
     return (
         <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#0A0A0B] to-[#0A0A0B] opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F9F8F4] via-[#F9F8F4] to-[#EAE8E3] dark:from-[#1A1A1A] dark:via-[#0A0A0B] dark:to-[#0A0A0B] opacity-90" />
 
             {/* Subtle World Map Background */}
             <div className="absolute inset-0 opacity-[0.03]">

@@ -43,7 +43,7 @@ const GemstonesGrid: React.FC = () => {
                             onMouseLeave={() => setHoveredGem(null)}
                         >
                             <div
-                                className={`relative p-12 rounded-xl border border-white/5 bg-gradient-to-br from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-white/10 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                                className={`relative p-12 rounded-xl border border-black/5 dark:border-white/5 bg-gradient-to-br from-black/[0.02] dark:from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-black/10 dark:hover:border-white/10 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                                 style={{
                                     transitionDelay: `${index * 0.08}s`,
                                     boxShadow: hoveredGem === gem.name ? `0 0 60px ${gem.color}15` : 'none'
@@ -70,7 +70,7 @@ const GemstonesGrid: React.FC = () => {
                                 <h3
                                     className="font-serif text-3xl md:text-4xl font-light text-center mb-4 transition-all duration-700 group-hover:tracking-wider"
                                     style={{
-                                        color: hoveredGem === gem.name ? gem.color : '#FBFBF9'
+                                        color: hoveredGem === gem.name ? gem.color : '#b5a16d'
                                     }}
                                 >
                                     {gem.name}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 const OriginSection: React.FC = () => {
     return (
         <section className="chapter-1 py-24 px-6 md:px-24">
-            <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center text-[#FBFBF9]">
+            <div className="grid md:grid-cols-2 gap-12 md:gap-32 items-center">
                 {/* Image */}
                 <div data-speed="0.8" className="relative aspect-[3/4] md:aspect-[4/5] reveal overflow-hidden rounded-md group cursor-pointer">
                     <Image

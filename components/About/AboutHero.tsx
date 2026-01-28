@@ -37,7 +37,7 @@ const AboutHero: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#FBFBF9] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
+        <section ref={containerRef} className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-[#F9F8F4] dark:bg-[#0A0A0A] text-[#1A1A1A] dark:text-[#FBFBF9]">
 
             {/* Background Image - Subtle & Dark */}
             <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40">
@@ -53,7 +53,7 @@ const AboutHero: React.FC = () => {
 
             <div className="relative z-10 text-center px-6">
                 <span className="block text-[10px] tracking-[0.6em] uppercase opacity-40 mb-8">Est. 1982 — Geneva</span>
-                <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif tracking-tighter mix-blend-exclusion dark:text-white">
+                <h1 ref={titleRef} className="text-[15vw] leading-[0.8] font-serif tracking-tighter text-[#D4AF37]">
                     ORIGIN
                 </h1>
 

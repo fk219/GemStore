@@ -68,7 +68,7 @@ const OriginsGrid: React.FC = () => {
                             onMouseLeave={() => setHoveredOrigin(null)}
                         >
                             <div
-                                className={`relative p-12 md:p-16 rounded-xl border border-white/5 bg-gradient-to-br from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-[#b5a16d]/20 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                                className={`relative p-12 md:p-16 rounded-xl border border-black/5 dark:border-white/5 bg-gradient-to-br from-black/[0.02] dark:from-white/[0.02] to-transparent backdrop-blur-sm transition-all duration-1000 hover:border-[#b5a16d]/20 hover:shadow-2xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                                 style={{
                                     transitionDelay: `${index * 0.1}s`,
                                     boxShadow: hoveredOrigin === origin.name ? '0 0 80px rgba(181, 161, 109, 0.1)' : 'none'
@@ -83,7 +83,7 @@ const OriginsGrid: React.FC = () => {
                                 </div>
 
                                 {/* Origin Name */}
-                                <h2 className="font-serif text-5xl md:text-6xl font-light mb-6 transition-all duration-700 group-hover:text-[#b5a16d]">
+                                <h2 className="font-serif text-5xl md:text-6xl font-light mb-6 transition-all duration-700 text-[#b5a16d]">
                                     {origin.name}
                                 </h2>
 
@@ -101,7 +101,7 @@ const OriginsGrid: React.FC = () => {
                                         {origin.gems.map((gem) => (
                                             <span
                                                 key={gem}
-                                                className="px-4 py-2 text-[10px] tracking-[0.3em] uppercase border border-white/10 rounded-full bg-white/[0.02] transition-all duration-700 hover:border-[#b5a16d]/40 hover:bg-[#b5a16d]/5"
+                                                className="px-4 py-2 text-[10px] tracking-[0.3em] uppercase border border-black/10 dark:border-white/10 rounded-full bg-black/[0.02] dark:bg-white/[0.02] transition-all duration-700 hover:border-[#b5a16d]/40 hover:bg-[#b5a16d]/5"
                                             >
                                                 {gem}
                                             </span>
