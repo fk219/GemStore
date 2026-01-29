@@ -27,6 +27,7 @@ const CTA: React.FC<CTAProps> = ({
     const sectionRef = useRef<HTMLElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLAnchorElement>(null);
+    const underlineRef = useRef<SVGPathElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -46,6 +47,13 @@ const CTA: React.FC<CTAProps> = ({
                 { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
                 "-=1"
             );
+
+        // Animate Underline
+        if (underlineRef.current) {
+            const length = underlineRef.current.getTotalLength();
+            gsap.set(underlineRef.current, { strokeDasharray: length, strokeDashoffset: length });
+            tl.to(underlineRef.current, { strokeDashoffset: 0, duration: 2, ease: "power2.out" }, "-=1.2");
+        }
 
         // Parallax for Background Image
         gsap.to(".cta-bg-image", {
@@ -102,7 +110,15 @@ const CTA: React.FC<CTAProps> = ({
                         <span className="italic text-[#b5a16d] relative inline-block">
                             Exceptional
                             {/* Hand-drawn underline effect could go here */}
-                            <svg className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-3 md:h-6 text-[#b5a16d]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7499 7.0003 40.5441 3.51813 65.518 2.50285C95.2754 1.29304 125.109 4.39768 154.675 3.50456C169.519 3.05607 190.536 2.00003 198.001 2.00003" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></svg>
+                            <svg className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-3 md:h-6 text-[#b5a16d]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    ref={underlineRef}
+                                    d="M2.00025 6.99997C25.7499 7.0003 40.5441 3.51813 65.518 2.50285C95.2754 1.29304 125.109 4.39768 154.675 3.50456C169.519 3.05607 190.536 2.00003 198.001 2.00003"
+                                    stroke="currentColor"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
                         </span>
                     </h2>
 
