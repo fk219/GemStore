@@ -10,13 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import Home Components
 import Hero from '@/components/Home/Hero';
-import NarrativeSection from '@/components/Home/NarrativeSection';
-import FeaturedHighlights from '@/components/Home/FeaturedHighlights';
-import SoulOfRarity from '@/components/Home/SoulOfRarity';
-import CollectionSection from '@/components/Home/CollectionSection';
-import ArtOfRefraction from '@/components/Home/ArtOfRefraction';
-import BentoGrid from '@/components/Home/BentoGrid';
-import TrustSection from '@/components/Home/TrustSection';
+import CinematicStory from '@/components/Home/CinematicStory';
 import CTA from '@/components/CTA';
 
 if (typeof window !== "undefined") {
@@ -83,32 +77,10 @@ export default function Home() {
             {/* 1. Hero (PRESERVED) */}
             <Hero />
 
-            {/* 2. The Narrative (NEW) */}
-            <NarrativeSection />
+            {/* 2. The Cinematic Story (Scrollytelling) */}
+            <CinematicStory />
 
-            {/* 3. Featured Collection (NEW) */}
-            <FeaturedHighlights />
-
-            {/* 4. Soul of Rarity (Existing) */}
-            <SoulOfRarity />
-
-            {/* 5. Collection Section (Horizontal Scroll - Existing) */}
-            <section className={bgAlt}>
-                <CollectionSection />
-            </section>
-
-            {/* 6. Art of Refraction (Existing) */}
-            <ArtOfRefraction />
-
-            {/* 7. Bento Grid (Existing) */}
-            <section className={bgAlt}>
-                <BentoGrid />
-            </section>
-
-            {/* 8. Trust & Authority (NEW) */}
-            <TrustSection />
-
-            {/* 9. CTA (Existing) */}
+            {/* 3. CTA (Existing) */}
             <CTA />
 
             <Footer />
