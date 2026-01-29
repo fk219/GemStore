@@ -12,6 +12,8 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const lastScrollY = useRef(0);
 
     const pathname = usePathname();
     const themeCtx = useContext(ThemeContext);
@@ -28,12 +30,29 @@ const Navbar = () => {
         { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1549887552-93f8efb0815e?auto=format&fit=crop&q=80&w=1920' }
     ];
 
-    // Scroll Listener for Sticky State
+    // Scroll Listener for Sticky State & Vanish Logic
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            const currentScrollY = window.scrollY;
+
+            // Sticky State
+            setIsScrolled(currentScrollY > 50);
+
+            // Vanish Logic (Hide on scroll down, show on scroll up)
+            if (currentScrollY > 100) {
+                if (currentScrollY > lastScrollY.current) {
+                    setIsVisible(false); // Scrolling DOWN
+                } else {
+                    setIsVisible(true);  // Scrolling UP
+                }
+            } else {
+                setIsVisible(true); // Always show at top
+            }
+
+            lastScrollY.current = currentScrollY;
         };
-        window.addEventListener('scroll', handleScroll);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -93,7 +112,10 @@ const Navbar = () => {
     return (
         <>
             {/* --- STICKY NAV (80% Width, Centered) --- */}
-            <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[80%] z-[60] pointer-events-none">
+            <nav
+                className={`fixed top-6 left-1/2 -translate-x-1/2 w-[80%] z-[60] pointer-events-none transition-transform duration-500 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-[200%]'
+                    }`}
+            >
                 <div
                     className={`
                         relative w-full flex items-center justify-between pointer-events-auto
