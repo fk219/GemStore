@@ -1,0 +1,264 @@
+"use client";
+
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, X, Diamond, Sun, Moon, ArrowRight, Search } from 'lucide-react';
+import { ThemeContext, LanguageContext } from '@/app/providers';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pathname = usePathname();
+    const themeCtx = useContext(ThemeContext);
+    const menuRef = useRef<HTMLDivElement>(null);
+    const menuBgRef = useRef<HTMLDivElement>(null);
+    const previewRef = useRef<HTMLImageElement>(null);
+
+    // Dynamic Navigation Data
+    const navItems = [
+        { name: 'Home', path: '/', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=1920' },
+        { name: 'Gemstones', path: '/gemstones', img: 'https://images.unsplash.com/photo-1623861214379-37f00030da4f?auto=format&fit=crop&q=80&w=1920' },
+        { name: 'Origins', path: '/origins', img: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&q=80&w=1920' },
+        { name: 'Maison', path: '/about', img: 'https://images.unsplash.com/photo-1547376044-c71c0800d115?auto=format&fit=crop&q=80&w=1920' },
+        { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1549887552-93f8efb0815e?auto=format&fit=crop&q=80&w=1920' }
+    ];
+
+    // Scroll Listener for Sticky State
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Menu Animation (Cinematic Reveal)
+    useGSAP(() => {
+        if (isMenuOpen) {
+            const tl = gsap.timeline();
+
+            // 1. Reveal Container
+            tl.set(menuRef.current, { display: 'flex' })
+                .to(menuBgRef.current, {
+                    clipPath: 'inset(0% 0% 0% 0%)',
+                    duration: 1.2,
+                    ease: 'expo.inOut'
+                })
+                // 2. Cascade Links
+                .from('.nav-link-item', {
+                    y: 100,
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: 'power4.out'
+                }, "-=0.8")
+                // 3. Reveal Meta Info (Footer/Line)
+                .from('.menu-meta', {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                }, "-=0.6");
+
+        } else {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    gsap.set(menuRef.current, { display: 'none' });
+                    setHoveredLink(null); // Reset image
+                }
+            });
+
+            tl.to(menuBgRef.current, {
+                clipPath: 'inset(0% 0% 100% 0%)',
+                duration: 1,
+                ease: 'expo.inOut'
+            });
+        }
+    }, { dependencies: [isMenuOpen] });
+
+    // Close menu on route change
+    useEffect(() => { setIsMenuOpen(false); }, [pathname]);
+
+    if (!themeCtx) return null;
+    const { theme, toggleTheme } = themeCtx;
+
+    // Active Highlight Logic
+    const currentImg = hoveredLink || navItems.find(i => i.path === pathname)?.img || navItems[0].img;
+
+    return (
+        <>
+            {/* --- STICKY NAV (80% Width, Centered) --- */}
+            <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[80%] z-[60] pointer-events-none">
+                <div
+                    className={`
+                        relative w-full flex items-center justify-between pointer-events-auto
+                        px-8 py-4 rounded-full transition-all duration-700
+                        ${isScrolled
+                            ? 'bg-[#F9F8F4]/80 dark:bg-[#1A1A1A]/80 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-2xl'
+                            : 'bg-transparent border border-transparent'
+                        }
+                    `}
+                >
+                    {/* 1. LOGO */}
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="p-2 rounded-full bg-[#b5a16d] text-white">
+                            <Diamond size={18} fill="currentColor" />
+                        </div>
+                        <span className={`font-serif tracking-[0.2em] uppercase font-light text-sm hidden md:block ${isScrolled ? 'text-[#1A1A1A] dark:text-white' : 'text-[#1A1A1A] dark:text-white mix-blend-difference'}`}>
+                            Maihan
+                        </span>
+                    </Link>
+
+                    {/* 2. ACTIONS (Only 3 Buttons) */}
+                    <div className="flex items-center gap-2 md:gap-4">
+
+                        {/* Action 1: Theme */}
+                        <button
+                            onClick={toggleTheme}
+                            className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${isScrolled ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white' : 'bg-white/10 backdrop-blur-md text-black dark:text-white'}`}
+                        >
+                            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
+
+                        {/* Action 2: Contact (Concierge) */}
+                        <Link
+                            href="/contact"
+                            className={`hidden md:flex items-center justify-center p-3 px-6 rounded-full transition-all duration-300 hover:scale-105 ${isScrolled ? 'bg-[#1A1A1A] text-[#b5a16d] dark:bg-white dark:text-[#1A1A1A]' : 'bg-[#1A1A1A] text-[#b5a16d] shadow-lg'}`}
+                        >
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Concierge</span>
+                        </Link>
+
+                        {/* Action 3: Menu Toggle */}
+                        <button
+                            onClick={() => setIsMenuOpen(true)}
+                            className={`flex items-center gap-3 p-3 pl-5 rounded-full transition-all duration-300 hover:scale-105 cursor-pointer ${isScrolled ? 'bg-[#b5a16d] text-white' : 'bg-[#b5a16d] text-white shadow-lg'}`}
+                        >
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-medium hidden md:block">Menu</span>
+                            <Menu size={18} />
+                        </button>
+
+                    </div>
+                </div>
+            </nav>
+
+
+            {/* --- CINEMATIC FULL SCREEN MENU --- */}
+            <div ref={menuRef} className="fixed inset-0 z-[100] hidden">
+                <div ref={menuBgRef} className="absolute inset-0 bg-[#0A0A0B] overflow-hidden" style={{ clipPath: 'inset(100% 0% 0% 0%)' }}>
+
+                    {/* BACKGROUND LAYER (Visuals) */}
+                    <div className="absolute inset-0 opacity-40">
+                        {navItems.map((item) => (
+                            <div
+                                key={item.path}
+                                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${currentImg === item.img ? 'opacity-100' : 'opacity-0'}`}
+                            >
+                                <img
+                                    src={item.img}
+                                    alt="Menu Background"
+                                    className="w-full h-full object-cover scale-105 brightness-50 blur-[2px]"
+                                />
+                            </div>
+                        ))}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/50 to-transparent" />
+                    </div>
+
+                    {/* CONTENT LAYER */}
+                    <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
+
+                        {/* LEFT: Navigation Links */}
+                        <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-24 pt-20">
+
+                            <div className="flex flex-col gap-2">
+                                {/* Header / Close for Mobile */}
+                                <div className="md:hidden flex justify-between items-center mb-12 menu-meta">
+                                    <span className="font-serif text-white tracking-widest uppercase">Maihan</span>
+                                    <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-white/10 rounded-full text-white">
+                                        <X size={20} />
+                                    </button>
+                                </div>
+
+                                {navItems.map((item, index) => (
+                                    <Link
+                                        key={index}
+                                        href={item.path}
+                                        className="nav-link-item group relative py-4 lg:py-6 flex items-center justify-between border-b border-white/10"
+                                        onMouseEnter={() => setHoveredLink(item.img)}
+                                        onMouseLeave={() => setHoveredLink(null)}
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        <div className="flex items-baseline gap-6 transition-transform duration-500 group-hover:translate-x-4">
+                                            <span className="font-mono text-xs text-[#b5a16d]">0{index + 1}</span>
+                                            <span className={`font-serif text-4xl md:text-6xl text-white transition-colors duration-300 ${hoveredLink === item.img ? 'text-[#b5a16d] italic' : ''}`}>
+                                                {item.name}
+                                            </span>
+                                        </div>
+                                        <ArrowRight className={`text-[#b5a16d] opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0`} />
+                                    </Link>
+                                ))}
+                            </div>
+
+                            {/* Footer Meta */}
+                            <div className="menu-meta mt-16 flex justify-between items-end text-white/40">
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-[10px] uppercase tracking-widest">Contact</span>
+                                    <span className="font-serif text-lg text-white">rare@maihangroup.com</span>
+                                </div>
+                                <div className="hidden md:flex flex-col gap-2">
+                                    <span className="text-[10px] uppercase tracking-widest">Follow Us</span>
+                                    <div className="flex gap-4 text-white text-xs">
+                                        <span>IG</span>
+                                        <span>LI</span>
+                                        <span>TW</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* RIGHT: Visual Preview (Desktop) & Close Button */}
+                        <div className="hidden md:flex w-1/2 h-full flex-col justify-between p-12 lg:p-16 border-l border-white/5 bg-white/[0.02] backdrop-blur-sm">
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="menu-button-close group flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 hover:bg-[#b5a16d] transition-all duration-300"
+                                >
+                                    <span className="text-[10px] tracking-widest uppercase text-white font-medium">Close</span>
+                                    <X size={16} className="text-white" />
+                                </button>
+                            </div>
+
+                            {/* Floating Card Preview */}
+                            <div className="menu-meta relative w-full aspect-[4/5] max-w-md mx-auto hidden lg:block overflow-hidden rounded-sm border border-white/10">
+                                {navItems.map((item) => (
+                                    <img
+                                        key={item.path}
+                                        src={item.img}
+                                        alt={item.name}
+                                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${currentImg === item.img ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
+                                    />
+                                ))}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                                    <span className="text-[#b5a16d] font-mono text-xs mb-2">Featured Collection</span>
+                                    <h3 className="text-white font-serif text-3xl italic">
+                                        {hoveredLink
+                                            ? navItems.find(n => n.img === hoveredLink)?.name
+                                            : "The Collection"}
+                                    </h3>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default Navbar;
