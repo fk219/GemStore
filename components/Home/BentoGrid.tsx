@@ -78,252 +78,148 @@ const BentoGrid: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Bento Grid Layout */}
-                <div className="grid grid-cols-12 gap-4 md:gap-5">
+                {/* Bento Grid Layout - Masonry Style */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 auto-rows-[300px]">
 
-                    {/* Typography Card - Large */}
+                    {/* 1. TAL LEFT (Vertical Video/Image) - Row Span 2 */}
                     <div
                         data-bento-tile
-                        className="col-span-12 md:col-span-5 row-span-2 min-h-[400px] md:min-h-[500px]"
-                        onMouseEnter={() => setHoveredCard('typography')}
+                        className="col-span-1 row-span-2 relative rounded-2xl overflow-hidden group cursor-pointer"
+                        onMouseEnter={() => setHoveredCard('craft')}
                         onMouseLeave={() => setHoveredCard(null)}
                     >
-                        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#EDE9E3] dark:bg-[#1A1A1A] p-8 md:p-12 flex flex-col justify-between group cursor-pointer transition-all duration-700 hover:shadow-2xl hover:shadow-[#b5a16d]/20 hover:-translate-y-1">
-                            {/* Background Pattern */}
-                            <div className="absolute inset-0 opacity-[0.03]">
-                                <svg width="100%" height="100%" className="absolute inset-0">
-                                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
-                                    </pattern>
-                                    <rect width="100%" height="100%" fill="url(#grid)" />
-                                </svg>
+                        <Image
+                            src="https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=800"
+                            alt="The Art of Cutting"
+                            fill
+                            className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
+
+                        {/* Play Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                                <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
+                        </div>
 
-                            {/* Brand Typography */}
-                            <div className="relative z-10">
-                                <h3 className="text-6xl md:text-8xl lg:text-9xl font-serif font-light text-[#1A1A1A] dark:text-white tracking-[-0.02em] leading-[0.85]">
-                                    TIMELESS
-                                </h3>
-                                <p className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#b5a16d] mt-2 tracking-normal">
-                                    Craft
-                                </p>
-                            </div>
+                        <div className="absolute bottom-6 left-6 right-6">
+                            <span className="text-[10px] tracking-[0.2em] uppercase text-white/80 bg-black/50 backdrop-blur-md px-2 py-1 rounded-sm">
+                                Behind the Scenes
+                            </span>
+                            <h3 className="text-2xl font-serif text-white mt-3 leading-tight">
+                                Master <br /> <span className="italic text-[#b5a16d]">Atelier</span>
+                            </h3>
+                        </div>
+                    </div>
 
-                            {/* Feature Image */}
-                            <div className="relative z-10 flex items-end justify-between mt-8">
-                                <div className="w-32 h-40 md:w-40 md:h-52 rounded-xl overflow-hidden relative group-hover:scale-105 transition-transform duration-700">
-                                    <Image
-                                        src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
-                                        alt="Gemstone Collection"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <div className="absolute bottom-4 left-4 right-4">
-                                        <p className="text-[9px] tracking-[0.2em] uppercase text-white/80 font-medium">
-                                            New Limited
-                                        </p>
-                                        <p className="text-[11px] tracking-[0.15em] uppercase text-white font-semibold">
-                                            Summer Collection
-                                        </p>
-                                    </div>
-                                    {/* Arrow */}
-                                    <div className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#b5a16d] transition-colors duration-500">
-                                        <svg className="w-3 h-3 text-white -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-                                        </svg>
-                                    </div>
-                                </div>
+                    {/* 2. TOP MIDDLE (Wide) - Col Span 2 */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 md:col-span-2 relative rounded-2xl overflow-hidden group"
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
+                            alt="Team Collaboration"
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 right-4 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/10 group-hover:bg-[#b5a16d] group-hover:text-white transition-all duration-300">
+                            <svg className="w-4 h-4 text-white -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                        <div className="absolute bottom-6 left-6">
+                            <h3 className="text-xl font-serif text-white">Global Expeditions</h3>
+                            <p className="text-xs text-white/70 mt-1 uppercase tracking-widest">Sourcing Rare Gems</p>
+                        </div>
+                    </div>
 
-                                {/* Second Small Card */}
-                                <div className="w-28 h-36 md:w-36 md:h-44 rounded-xl overflow-hidden relative ml-4 group-hover:scale-105 transition-transform duration-700 delay-75">
-                                    <Image
-                                        src="https://images.unsplash.com/photo-1617058866388-7509f9a74797?auto=format&fit=crop&q=80&w=600"
-                                        alt="Earrings Collection"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <div className="absolute bottom-4 left-4 right-4">
-                                        <p className="text-[9px] tracking-[0.15em] uppercase text-white/80">
-                                            Gemstones
-                                        </p>
-                                        <p className="text-[10px] tracking-[0.1em] uppercase text-white font-medium">
-                                            New Arrivals
-                                        </p>
-                                    </div>
-                                    <div className="absolute bottom-4 right-4 w-5 h-5 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                        <svg className="w-2.5 h-2.5 text-white -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-                                        </svg>
-                                    </div>
-                                </div>
+                    {/* 3. TOP RIGHT (Square) */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden group bg-[#E5E5E5] dark:bg-[#1A1A1A]"
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800"
+                            alt="Founder"
+                            fill
+                            className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
+                            <svg className="w-3 h-3 text-white -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                        <div className="absolute bottom-4 left-4">
+                            <h3 className="text-lg font-mono text-white">Visionary</h3>
+                        </div>
+                    </div>
+
+                    {/* 4. BOTTOM LEFT MIDDLE (Orange/Info) */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden bg-[#D4AF37] group flex flex-col justify-end p-6"
+                    >
+                        {/* Grid Pattern overlay */}
+                        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+
+                        <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                            <h2 className="text-6xl font-serif text-white leading-none">50+</h2>
+                            <p className="text-2xl font-serif text-white/90 mt-2 leading-tight">
+                                Rare <br /> Origins
+                            </p>
+                            <p className="text-[10px] tracking-widest uppercase text-white/60 mt-4 border-t border-white/20 pt-4">
+                                Curated Globally
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* 5. BOTTOM RIGHT MIDDLE (Square) */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden group"
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1620215175664-cb4a14c67bc7?auto=format&fit=crop&q=80&w=800"
+                            alt="Workshop"
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute top-4 right-4 w-8 h-8 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+
+                        <div className="absolute bottom-4 left-4">
+                            <p className="text-xs font-mono text-white/90">Est. 1990</p>
+                        </div>
+                    </div>
+
+                    {/* 6. FAR RIGHT (Tall/Vertical) - Row Span 1 (actually user image shows Row 2 Col 4 is tall? No, lets make it 1x1 or tall if grid allows. The grid is 4x2. Col 4 Row 2 is the last spot. 
+                       Wait, in a 4 col grid:
+                       R1: [1][2][2][3]
+                       R2: [1][4][5][?]
+                       Item 6 goes to R2 C4. It should conform to row-span-1 to fit 2 rows total, OR row-span-2 if we want it to hang down (masonry). 
+                       Let's make it row-span-1 (Square) so the grid is clean 4x2 rectangle, or 2 if we want overflow.
+                       User ref has varying heights. Let's start with a clean 4x2 blocks with Card 1 spanning 2 rows.
+                       So Card 6 is just standard. 
+                    */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-[#0A0A0B]">
+                            {/* Video Placeholder */}
+                            <Image
+                                src="https://images.unsplash.com/photo-1600003014605-4c07d391aa57?auto=format&fit=crop&q=80&w=800"
+                                alt="Founder Story"
+                                fill
+                                className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Play Button */}
+                            <div className="absolute bottom-6 left-6 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[#b5a16d] group-hover:border-[#b5a16d] transition-all duration-300">
+                                <svg className="w-3 h-3 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
                         </div>
                     </div>
 
-                    {/* Hero Image Card - Large */}
-                    <div
-                        data-bento-tile
-                        className="col-span-12 md:col-span-7 row-span-2 min-h-[400px] md:min-h-[500px]"
-                        onMouseEnter={() => setHoveredCard('hero')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <div className="relative w-full h-full rounded-2xl overflow-hidden group cursor-pointer">
-                            <Image
-                                src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1200"
-                                alt="Featured Gemstone"
-                                fill
-                                className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                            {/* Promo Badge */}
-                            <div className="absolute bottom-8 right-8 text-right">
-                                <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-white font-light">
-                                    GET <span className="text-[#b5a16d]">20%</span> OFF THE
-                                </p>
-                                <p className="text-3xl md:text-4xl lg:text-5xl font-serif text-white font-semibold tracking-wide flex items-center justify-end gap-4 mt-2">
-                                    SPRING SALE!
-                                    <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#b5a16d] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                                        <svg className="w-5 h-5 md:w-6 md:h-6 text-white -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-                                        </svg>
-                                    </span>
-                                </p>
-                            </div>
-
-                            {/* Floating Label */}
-                            <div className="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                                <span className="text-[10px] tracking-[0.3em] uppercase text-white font-medium">Featured</span>
-                            </div>
-
-                            {/* Hover Overlay */}
-                            <div className={`absolute inset-0 bg-[#b5a16d]/0 transition-colors duration-500 ${hoveredCard === 'hero' ? 'bg-[#b5a16d]/10' : ''}`} />
-                        </div>
-                    </div>
-
-                    {/* Collection Cards Row */}
-                    <div
-                        data-bento-tile
-                        className="col-span-6 md:col-span-4 min-h-[280px] md:min-h-[320px]"
-                        onMouseEnter={() => setHoveredCard('ruby')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <Link href="/gemstones" className="relative w-full h-full rounded-2xl overflow-hidden group cursor-pointer block">
-                            <Image
-                                src="https://images.unsplash.com/photo-1615486511484-92e57bb6eb64?auto=format&fit=crop&q=80&w=800"
-                                alt="Ruby Collection"
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                            <div className="absolute bottom-6 left-6 right-6">
-                                <span className="text-[9px] tracking-[0.3em] uppercase text-[#b5a16d] font-medium block mb-2">
-                                    Premium
-                                </span>
-                                <h4 className="text-xl md:text-2xl font-serif text-white italic">
-                                    The Midnight <br />
-                                    <span className="not-italic font-medium">Sapphire</span>
-                                </h4>
-                                <p className="text-[10px] tracking-[0.2em] uppercase text-white/60 mt-3">
-                                    Inquire for Price
-                                </p>
-                            </div>
-                            <div className={`absolute inset-0 border-2 border-[#b5a16d]/0 rounded-2xl transition-all duration-500 ${hoveredCard === 'ruby' ? 'border-[#b5a16d]/40' : ''}`} />
-                        </Link>
-                    </div>
-
-                    <div
-                        data-bento-tile
-                        className="col-span-6 md:col-span-4 min-h-[280px] md:min-h-[320px]"
-                        onMouseEnter={() => setHoveredCard('diamond')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <Link href="/gemstones" className="relative w-full h-full rounded-2xl overflow-hidden group cursor-pointer block bg-[#F5E6B8] dark:bg-[#2A2520]">
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=800"
-                                    alt="Diamond"
-                                    fill
-                                    className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
-                                />
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#F5E6B8]/90 dark:from-[#2A2520]/90 via-transparent to-[#F5E6B8]/40 dark:to-[#2A2520]/40" />
-                            <div className="absolute bottom-6 left-6 right-6">
-                                <h4 className="text-xl md:text-2xl font-serif text-[#1A1A1A] dark:text-white">
-                                    The Solar <br />
-                                    <span className="italic text-[#8B7355] dark:text-[#b5a16d]">Diamond</span>
-                                </h4>
-                                <p className="text-[10px] tracking-[0.2em] uppercase text-[#1A1A1A]/50 dark:text-white/50 mt-3">
-                                    Inquire for Price
-                                </p>
-                            </div>
-                            <div className={`absolute inset-0 border-2 border-[#b5a16d]/0 rounded-2xl transition-all duration-500 ${hoveredCard === 'diamond' ? 'border-[#b5a16d]/40' : ''}`} />
-                        </Link>
-                    </div>
-
-                    <div
-                        data-bento-tile
-                        className="col-span-12 md:col-span-4 min-h-[280px] md:min-h-[320px]"
-                        onMouseEnter={() => setHoveredCard('emerald')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <Link href="/gemstones" className="relative w-full h-full rounded-2xl overflow-hidden group cursor-pointer block bg-[#8B4D5C] dark:bg-[#5C1A2A]">
-                            <Image
-                                src="https://images.unsplash.com/photo-1551122087-f99a0442bcf8?auto=format&fit=crop&q=80&w=800"
-                                alt="Ruby"
-                                fill
-                                className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#8B4D5C]/90 dark:from-[#5C1A2A]/90 via-transparent to-transparent" />
-                            <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                                <div>
-                                    <h4 className="text-xl md:text-2xl font-serif text-white">
-                                        The Crimson <br />
-                                        <span className="italic">Ruby</span>
-                                    </h4>
-                                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/50 mt-3">
-                                        Inquire for Price
-                                    </p>
-                                </div>
-                                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#b5a16d] transition-all duration-500 group-hover:scale-110">
-                                    <svg className="w-4 h-4 text-white -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className={`absolute inset-0 border-2 border-[#b5a16d]/0 rounded-2xl transition-all duration-500 ${hoveredCard === 'emerald' ? 'border-[#b5a16d]/40' : ''}`} />
-                        </Link>
-                    </div>
-
-                    {/* CTA Row */}
-                    <div
-                        data-bento-tile
-                        className="col-span-12 min-h-[100px]"
-                    >
-                        <Link
-                            href="/gemstones"
-                            className="w-full h-full rounded-2xl bg-[#1A1A1A] dark:bg-[#b5a16d] flex items-center justify-between px-8 md:px-12 group hover:bg-[#2A2A2A] dark:hover:bg-[#a08b5a] transition-all duration-500"
-                        >
-                            <div className="flex items-center gap-4">
-                                <span className="w-2 h-2 rounded-full bg-[#b5a16d] dark:bg-[#1A1A1A] animate-pulse" />
-                                <span className="text-sm md:text-base tracking-[0.3em] uppercase text-white dark:text-[#1A1A1A] font-medium">
-                                    Explore the Full Collection
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <span className="text-xs tracking-[0.2em] uppercase text-white/50 dark:text-[#1A1A1A]/50 hidden md:block">
-                                    15+ Rare Pieces
-                                </span>
-                                <div className="w-12 h-12 rounded-full border border-white/20 dark:border-[#1A1A1A]/20 flex items-center justify-center group-hover:bg-white/10 dark:group-hover:bg-[#1A1A1A]/10 transition-all duration-500">
-                                    <svg className="w-5 h-5 text-white dark:text-[#1A1A1A] group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
                 </div>
             </div>
         </section>
