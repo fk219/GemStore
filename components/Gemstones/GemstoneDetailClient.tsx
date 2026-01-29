@@ -9,6 +9,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowLeft, Diamond } from 'lucide-react';
 import { gemstones } from '@/lib/data';
 import CTA from '@/components/CTA';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -33,6 +35,7 @@ export default function GemstoneDetailClient({ stone }: { stone: typeof gemstone
 
     return (
         <main ref={containerRef} className="bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9] min-h-screen">
+            <Navbar />
 
             {/* HERO */}
             <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
@@ -119,6 +122,8 @@ export default function GemstoneDetailClient({ stone }: { stone: typeof gemstone
                 href="/contact"
                 buttonText="Inquire Now"
             />
+
+            <Footer />
         </main>
     );
 }
