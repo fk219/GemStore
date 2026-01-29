@@ -59,6 +59,20 @@ const FeaturedHighlights: React.FC = () => {
             description: "One-of-a-kind creations for the discerning.",
             image: "https://images.unsplash.com/photo-1609159981885-f5f242049d56?auto=format&fit=crop&q=80&w=800",
             link: "/gemstones/maison"
+        },
+        {
+            title: "Heritage",
+            subtitle: "Timeless",
+            description: "Celebrating decades of excellence.",
+            image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800",
+            link: "/about"
+        },
+        {
+            title: "Bridal",
+            subtitle: "Forever",
+            description: "Symbols of eternal commitment.",
+            image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800",
+            link: "/gemstones/diamond"
         }
     ];
 
@@ -71,15 +85,15 @@ const FeaturedHighlights: React.FC = () => {
         const viewportWidth = window.innerWidth;
         const items = gsap.utils.toArray('.highlight-card');
 
-        // Horizontal Scroll Setup
+        // Horizontal Scroll Setup (Unpinned, natural scroll)
         gsap.to(slider, {
-            x: () => -(totalWidth - viewportWidth),
+            x: () => -(totalWidth - viewportWidth + 300), // Move comfortably past the end
             ease: "none",
             scrollTrigger: {
                 trigger: sectionRef.current,
-                pin: true,
-                scrub: 1,
-                end: () => `+=${totalWidth - viewportWidth}`,
+                start: "top bottom", // Start when section enters view
+                end: "bottom top",   // End when section leaves view
+                scrub: 1.5,          // Smooth scrubbing
                 invalidateOnRefresh: true,
             }
         });
@@ -93,7 +107,7 @@ const FeaturedHighlights: React.FC = () => {
                     scale: 1,
                     scrollTrigger: {
                         trigger: item,
-                        containerAnimation: gsap.getById('horizontal-scroll'), // Link to the horizontal tween if named
+                        containerAnimation: gsap.getById('horizontal-scroll'),
                         horizontal: true,
                         start: "left right",
                         end: "right left",
