@@ -145,15 +145,10 @@ const Footer: React.FC = () => {
                 <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12">
                     <div className="relative flex justify-center py-12 md:py-24 overflow-hidden">
                         <motion.h2
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="text-[16vw] font-serif font-light tracking-[-0.04em] leading-none text-transparent select-none whitespace-nowrap"
-                            style={{
-                                WebkitTextStroke: '1px rgba(212, 175, 55, 0.2)', // Refined Gold opacity
-                                backgroundImage: 'linear-gradient(to bottom, rgba(249, 248, 244, 0.1), transparent)',
-                                WebkitBackgroundClip: 'text',
-                            }}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="text-[14vw] md:text-[12vw] font-serif tracking-[0.05em] leading-none text-[#D4AF37]/20 select-none whitespace-nowrap blur-[1px] mix-blend-screen"
                         >
                             MAIHAN GROUP
                         </motion.h2>
