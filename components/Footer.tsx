@@ -67,8 +67,8 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Main Content Section */}
-            <div className="relative max-w-[1700px] mx-auto px-8 md:px-16 lg:px-24 py-24 md:py-32 z-10">
-                <div className="flex flex-col lg:flex-row justify-between gap-20 lg:gap-32">
+            <div className="relative max-w-[1700px] mx-auto px-8 md:px-16 lg:px-24 py-16 md:py-24 z-10">
+                <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-32">
 
                     {/* Left Column: Private Conversation CTA */}
                     <div className="flex-1 max-w-2xl">
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, ease: 'easeOut' }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-[1.1] mb-16 tracking-tight text-[#F9F8F4]"
+                            className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-[1.1] mb-12 tracking-tight text-[#F9F8F4]"
                         >
                             A private <br />
                             conversation <br />
@@ -142,15 +142,19 @@ const Footer: React.FC = () => {
             <div className="relative border-t border-[#F9F8F4]/5 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/5 to-transparent opacity-30" />
 
-                <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12">
-                    <div className="relative flex justify-center py-12 md:py-24 overflow-hidden">
+                <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12 md:pb-24">
+                    <div className="relative flex flex-col items-center justify-center pt-8 overflow-hidden">
+
+                        {/* Creative Separator: A fine golden line with a diamond/gem in center */}
+                        <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent mb-8" />
+
                         <motion.h2
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1.2, ease: "easeOut" }}
-                            className="text-[14vw] md:text-[12vw] font-serif tracking-[0.05em] leading-none text-[#D4AF37]/20 select-none whitespace-nowrap blur-[1px] mix-blend-screen"
+                            className="text-[18vw] md:text-[15vw] font-serif tracking-[-0.02em] leading-none text-[#D4AF37]/20 select-none whitespace-nowrap blur-[0.5px] mix-blend-screen"
                         >
-                            MAIHAN GROUP
+                            MAIHAN
                         </motion.h2>
 
                         <motion.div
@@ -168,7 +172,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     {/* Centered Credits */}
-                    <div className="flex flex-col items-center justify-center pt-8 gap-4 border-t border-[#F9F8F4]/5 relative z-10 text-center">
+                    <div className="flex flex-col items-center justify-center pt-4 gap-4 relative z-10 text-center">
                         <p className="text-[10px] text-[#F9F8F4]/30 tracking-widest uppercase">
                             Designed and Developed by{' '}
                             <a
