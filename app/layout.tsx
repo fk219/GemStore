@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import IntroSequence from "@/components/IntroSequence";
 import FloatingActions from "@/components/FloatingActions";
+import GlobalPrisms from "@/components/GlobalPrisms";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -35,6 +36,7 @@ export default function RootLayout({
                 <body className="antialiased font-sans transition-colors duration-700">
                     <SmoothScroll />
                     <CustomCursor />
+                    <GlobalPrisms />
                     <IntroSequence />
 
                     {children}
