@@ -220,6 +220,64 @@ const BentoGrid: React.FC = () => {
                         </div>
                     </div>
 
+                    {/* --- ROW 3: Abstract Extension --- */}
+
+                    {/* 7. WIDE ABSTRACT (Bespoke) - Col Span 2 */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 md:col-span-2 relative rounded-2xl overflow-hidden group bg-[#111]"
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1531995811006-35cb42e1a022?auto=format&fit=crop&q=80&w=1200"
+                            alt="Bespoke Design"
+                            fill
+                            className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
+                        <div className="absolute top-8 left-8 max-w-sm">
+                            <span className="text-[10px] tracking-[0.3em] uppercase text-[#b5a16d] block mb-3">Private Commissions</span>
+                            <h3 className="text-3xl font-serif text-white italic">The Art of <br /> Personalization</h3>
+                        </div>
+                        <div className="absolute bottom-8 right-8 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </div>
+
+                    {/* 8. SQUARE (Minimal Text) - Col Span 1 */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden group bg-[#F5F5F0] dark:bg-[#1A1A1A] p-8 flex flex-col justify-between"
+                    >
+                        <div className="w-10 h-10 rounded-full bg-[#b5a16d]/10 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-[#b5a16d]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" /></svg>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-serif text-[#1A1A1A] dark:text-white">Ethical <br /> Guardianship</h4>
+                            <p className="text-xs text-[#666] dark:text-gray-400 mt-2 leading-relaxed">
+                                Committed to responsible sourcing and environmental stewardship.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* 9. SQUARE (Visual) - Col Span 1 */}
+                    <div
+                        data-bento-tile
+                        className="col-span-1 relative rounded-2xl overflow-hidden group"
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1549887552-93f8efb0815e?auto=format&fit=crop&q=80&w=800"
+                            alt="Gallery"
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="px-6 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-[10px] tracking-[0.2em] uppercase border border-white/20 group-hover:bg-white group-hover:text-black transition-all duration-300">
+                                View Gallery
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
