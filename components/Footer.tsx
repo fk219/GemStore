@@ -148,14 +148,39 @@ const Footer: React.FC = () => {
                         {/* Creative Separator: A fine golden line with a diamond/gem in center */}
                         <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent mb-8" />
 
-                        <motion.h2
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                            className="text-[18vw] md:text-[15vw] font-serif tracking-[-0.02em] leading-none text-[#D4AF37]/20 select-none whitespace-nowrap blur-[0.5px] mix-blend-screen"
+                        <motion.div
+                            initial="initial"
+                            whileInView="visible"
+                            whileHover="hover"
+                            viewport={{ once: true }}
+                            className="flex items-center justify-center cursor-default z-20"
                         >
-                            MAIHAN
-                        </motion.h2>
+                            {"MAIHAN".split('').map((char, i) => (
+                                <motion.span
+                                    key={i}
+                                    variants={{
+                                        initial: { y: 100, opacity: 0, filter: "blur(20px)" },
+                                        visible: {
+                                            y: 0,
+                                            opacity: 1,
+                                            filter: "blur(0.5px)",
+                                            transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.05 }
+                                        },
+                                        hover: {
+                                            y: -20,
+                                            scale: 1.05,
+                                            color: "rgba(212, 175, 55, 0.8)", // Brighter Gold
+                                            filter: "blur(0px)",
+                                            textShadow: "0 0 50px rgba(212, 175, 55, 0.5)",
+                                            transition: { duration: 0.4, ease: "backOut", delay: i * 0.02 }
+                                        }
+                                    }}
+                                    className="text-[18vw] md:text-[15vw] font-serif tracking-[-0.02em] leading-none text-[#D4AF37]/20 select-none inline-block origin-bottom"
+                                >
+                                    {char}
+                                </motion.span>
+                            ))}
+                        </motion.div>
 
                         <motion.div
                             animate={{
