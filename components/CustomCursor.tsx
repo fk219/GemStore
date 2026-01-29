@@ -1,125 +1,74 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React, { useEffect, useState } from 'react';
 
 const CustomCursor: React.FC = () => {
-    const cursorRef = useRef<HTMLDivElement>(null);
-    const dotRef = useRef<HTMLDivElement>(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isHovering, setIsHovering] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
-    // GSAP QuickTo for maximum performance (bypassing React state for mouse moves)
-    const xTo = useRef<gsap.QuickToFunc>();
-    const yTo = useRef<gsap.QuickToFunc>();
-
     useEffect(() => {
-        // Feature detection
+        // Feature detection for touch capability
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        const checkActive = () => !isTouchDevice && window.matchMedia("(min-width: 1024px)").matches;
 
-        setIsActive(checkActive());
+        // Only activate if strictly non-touch and large screen
+        const shouldActivate = !isTouchDevice && window.matchMedia("(min-width: 1024px)").matches;
 
-        const handleResize = () => setIsActive(checkActive());
-        window.addEventListener('resize', handleResize);
+        setIsActive(shouldActivate);
 
-        if (checkActive()) {
+        if (shouldActivate) {
             document.body.classList.add('custom-cursor-active');
+        } else {
+            document.body.classList.remove('custom-cursor-active');
+            return;
         }
 
-        return () => {
-            document.body.classList.remove('custom-cursor-active');
-            window.removeEventListener('resize', handleResize);
+        const handleResize = () => {
+            const stillShouldActivate = !isTouchDevice && window.matchMedia("(min-width: 1024px)").matches;
+            setIsActive(stillShouldActivate);
+            if (stillShouldActivate) {
+                document.body.classList.add('custom-cursor-active');
+            } else {
+                document.body.classList.remove('custom-cursor-active');
+            }
         };
-    }, []);
 
-    useGSAP(() => {
-        if (!isActive || !cursorRef.current) return;
-
-        // Setup QuickTo
-        xTo.current = gsap.quickTo(cursorRef.current, "x", { duration: 0.2, ease: "power3.out" });
-        yTo.current = gsap.quickTo(cursorRef.current, "y", { duration: 0.2, ease: "power3.out" });
-
-        // Initial Center
-        xTo.current(window.innerWidth / 2);
-        yTo.current(window.innerHeight / 2);
+        window.addEventListener('resize', handleResize);
 
         const handleMouseMove = (e: MouseEvent) => {
-            xTo.current!(e.clientX);
-            yTo.current!(e.clientY);
+            // Use requestAnimationFrame for smoother performance if needed, 
+            // but React state updates are often batched enough.
+            // For ultra-performance, use a ref and direct DOM manipulation or GSAP.
+            setPosition({ x: e.clientX, y: e.clientY });
         };
 
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            const isClickable = target.closest('button, a, input, select, [role="button"], .clickable');
-
-            if (isClickable) {
-                // Hover Enter State
-                gsap.to(cursorRef.current, {
-                    scale: 3,
-                    borderWidth: '0.5px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Subtle fill
-                    duration: 0.4,
-                    ease: "elastic.out(1, 0.5)"
-                });
-                gsap.to(dotRef.current, {
-                    scale: 0, // Dot disappears/shrinks
-                    opacity: 0,
-                    duration: 0.2
-                });
-            } else {
-                // Hover Leave (Default) State
-                gsap.to(cursorRef.current, {
-                    scale: 1,
-                    borderWidth: '1px',
-                    backgroundColor: 'transparent',
-                    duration: 0.4,
-                    ease: "power3.out"
-                });
-                gsap.to(dotRef.current, {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.2
-                });
-            }
-        };
-
-        // Add click feedback
-        const handleMouseDown = () => {
-            gsap.to(cursorRef.current, { scale: 0.8, duration: 0.1 });
-        };
-
-        const handleMouseUp = () => {
-            // Reset scale is handled by mouseover logic usually, but we can force it
-            // Let the mouseover logic handle standard state, just quick bounce here
-            gsap.to(cursorRef.current, { scale: 3, duration: 0.3, ease: "back.out(1.7)" }); // Assume hovering usually
+            const isClickable = target.closest('button, a, input, select, [role="button"]');
+            setIsHovering(!!isClickable);
         };
 
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseover', handleMouseOver);
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mouseup', handleMouseUp);
 
         return () => {
+            document.body.classList.remove('custom-cursor-active');
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseover', handleMouseOver);
-            window.removeEventListener('mousedown', handleMouseDown);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('resize', handleResize);
         };
-
-    }, { dependencies: [isActive] });
+    }, []);
 
     if (!isActive) return null;
 
     return (
         <div
-            ref={cursorRef}
-            className="fixed top-0 left-0 w-4 h-4 rounded-full border border-[#D4AF37] pointer-events-none z-[99999] flex items-center justify-center -translate-x-1/2 -translate-y-1/2 bg-transparent mix-blend-difference"
+            className="fixed top-0 left-0 w-8 h-8 rounded-full border border-gray-400 pointer-events-none z-[99999] transition-transform duration-300 ease-out flex items-center justify-center mix-blend-difference"
+            style={{
+                transform: `translate3d(${position.x - 16}px, ${position.y - 16}px, 0) scale(${isHovering ? 2.5 : 1})`,
+            }}
         >
-            <div
-                ref={dotRef}
-                className="w-1 h-1 rounded-full bg-[#D4AF37]"
-            />
+            <div className={`w-1 h-1 rounded-full bg-white transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`} />
         </div>
     );
 };
