@@ -192,11 +192,16 @@ const Navbar = () => {
                                         onMouseLeave={() => setHoveredLink(null)}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
-                                        <div className="flex items-baseline gap-6 transition-transform duration-500 group-hover:translate-x-4">
+                                        <div className="relative flex items-baseline gap-6 transition-transform duration-500 group-hover:translate-x-4">
                                             <span className="font-mono text-xs text-[#b5a16d]">0{index + 1}</span>
-                                            <span className={`font-serif text-4xl md:text-6xl text-white transition-colors duration-300 ${hoveredLink === item.img ? 'text-[#b5a16d] italic' : ''}`}>
+                                            <span
+                                                className={`font-serif text-4xl md:text-6xl text-white transition-all duration-300 ${hoveredLink === item.img ? 'text-[#b5a16d] italic drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]' : ''}`}
+                                            >
                                                 {item.name}
                                             </span>
+
+                                            {/* Center-Outwards Underline */}
+                                            <span className="absolute -bottom-2 left-0 w-full h-[1px] bg-[#b5a16d] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" />
                                         </div>
                                         <ArrowRight className={`text-[#b5a16d] opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0`} />
                                     </Link>

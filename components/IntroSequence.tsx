@@ -53,9 +53,14 @@ const IntroSequence = () => {
             ease: "power2.out"
         }, "-=1");
 
-        // 4. Light Flash Reveal
-        tl.to(".intro-flash", { opacity: 1, duration: 0.1, ease: "power4.in" }) // Flash White
-            .to(containerRef.current, { opacity: 0, duration: 1, ease: "power2.out", pointerEvents: "none" }, "+=0.1"); // Fade out container
+        // 4. Light Flash Reveal (Spectral Pulse)
+        tl.to(".intro-flash", {
+            opacity: 1,
+            backgroundPosition: "100% 100%", // Shift the gradient for dynamic shimmer
+            duration: 0.15,
+            ease: "power4.in"
+        })
+            .to(containerRef.current, { opacity: 0, duration: 1.2, ease: "power2.out", pointerEvents: "none" }, "+=0.1"); // Fade out container
 
     }, { scope: containerRef, dependencies: [showIntro] });
 
@@ -93,7 +98,14 @@ const IntroSequence = () => {
             </div>
 
             {/* The Flash Overlay */}
-            <div className="intro-flash absolute inset-0 bg-white opacity-0 pointer-events-none z-50"></div>
+            {/* The Flash Overlay - Spectral Refraction */}
+            <div
+                className="intro-flash absolute inset-0 opacity-0 pointer-events-none z-50 mix-blend-screen"
+                style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(212,175,55,0.4) 30%, rgba(15,82,186,0.3) 50%, rgba(224,17,95,0.3) 70%, rgba(255,255,255,0.8) 100%)',
+                    backgroundSize: '200% 200%'
+                }}
+            />
         </div>
     );
 };

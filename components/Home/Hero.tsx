@@ -15,6 +15,7 @@ const Hero: React.FC = () => {
 
     useGSAP(() => {
         // Background parallax effect (From CTA)
+        // Background parallax
         gsap.to(".bg-parallax", {
             yPercent: 30,
             ease: "none",
@@ -24,6 +25,20 @@ const Hero: React.FC = () => {
                 end: "bottom top",
                 scrub: true
             }
+        });
+
+        // Prisms Parallax (Reverse Drift)
+        gsap.utils.toArray('.prism-floating').forEach((el: any, i) => {
+            gsap.to(el, {
+                yPercent: -15 * (i + 1), // Varied depth
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top", // Start immediately
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
         });
     }, { scope: containerRef });
 
@@ -99,23 +114,47 @@ const Hero: React.FC = () => {
 
             {/* Floating Refraction Prisms - Enhanced with Parallax and Secondary Layers */}
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-                {/* Prism Alpha */}
+                {/* Prism Alpha (Top Left) */}
                 <div
-                    className={`absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-black/5 dark:border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[2s] ${mounted ? 'opacity-20 scale-100' : 'opacity-0 scale-95'}`}
-                    style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * -30}px, ${(smoothMousePos.y - 0.5) * -30}px, 0)` }}
+                    className="prism-floating absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-black/5 dark:border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[3s] cubic-bezier(0.19,1,0.22,1)"
+                    style={{
+                        opacity: mounted ? 0.2 : 0,
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -40}px, ${(smoothMousePos.y - 0.5) * -40}px, 0) rotate(${(smoothMousePos.x - 0.5) * 5}deg)`
+                    }}
                 >
-                    {/* Inner ghost glow */}
                     <div className="absolute inset-4 border border-black/5 dark:border-white/2 rounded-inherit blur-sm" />
                 </div>
 
-                {/* Prism Beta (Golden) */}
+                {/* Prism Beta (Bottom Right - Golden) */}
                 <div
-                    className={`absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-[#b5a16d]/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[2.5s] delay-500 ${mounted ? 'opacity-10 scale-100' : 'opacity-0 scale-90'}`}
-                    style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 50}px, ${(smoothMousePos.y - 0.5) * 50}px, 0)` }}
+                    className="prism-floating absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-[#b5a16d]/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[3s] delay-300 cubic-bezier(0.19,1,0.22,1)"
+                    style={{
+                        opacity: mounted ? 1 : 0,
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 60}px, ${(smoothMousePos.y - 0.5) * 60}px, 0) rotate(${(smoothMousePos.y - 0.5) * -5}deg)`
+                    }}
                 >
-                    {/* Inner refraction line */}
                     <div className="absolute inset-0 border-l border-t border-[#b5a16d]/5 rounded-inherit animate-pulse" />
                 </div>
+
+                {/* Prism Gamma (Mid Right - Soft) */}
+                <div
+                    className="prism-floating absolute top-1/3 right-[10%] w-[25vw] h-[25vw] border border-black/5 dark:border-white/5 rounded-[50%_50%_40%_60%/60%_40%_60%_40%] animate-[morph_18s_infinite_linear] transition-all duration-[3s] delay-500 cubic-bezier(0.19,1,0.22,1)"
+                    style={{
+                        opacity: mounted ? 0.15 : 0,
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -20}px, ${(smoothMousePos.y - 0.5) * -20}px, 0) rotate(${(smoothMousePos.x - 0.5) * 10}deg)`
+                    }}
+                >
+                    <div className="absolute inset-8 border border-black/5 dark:border-white/5 rounded-inherit blur-[2px]" />
+                </div>
+
+                {/* Prism Delta (Bottom Left - Wide) */}
+                <div
+                    className="prism-floating absolute bottom-[15%] left-[5%] w-[35vw] h-[20vw] border border-[#b5a16d]/5 rounded-[30%_70%_70%_30%/40%_60%_40%_60%] animate-[morph_25s_infinite_linear_reverse] transition-all duration-[3s] delay-200 cubic-bezier(0.19,1,0.22,1)"
+                    style={{
+                        opacity: mounted ? 0.3 : 0,
+                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 30}px, ${(smoothMousePos.y - 0.5) * 30}px, 0) rotate(${(smoothMousePos.y - 0.5) * 5}deg)`
+                    }}
+                />
             </div>
 
             {/* Architectural Typography - The Core Narrative */}
