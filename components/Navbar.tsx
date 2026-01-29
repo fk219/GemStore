@@ -27,6 +27,7 @@ const Navbar = () => {
         { name: 'Gemstones', path: '/gemstones', img: 'https://images.unsplash.com/photo-1623861214379-37f00030da4f?auto=format&fit=crop&q=80&w=1920' },
         { name: 'Origins', path: '/origins', img: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&q=80&w=1920' },
         { name: 'Maison', path: '/about', img: 'https://images.unsplash.com/photo-1547376044-c71c0800d115?auto=format&fit=crop&q=80&w=1920' },
+        { name: 'Journal', path: '/blog', img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1920' },
         { name: 'Contact', path: '/contact', img: 'https://images.unsplash.com/photo-1549887552-93f8efb0815e?auto=format&fit=crop&q=80&w=1920' }
     ];
 
@@ -171,10 +172,10 @@ const Navbar = () => {
 
             {/* --- CINEMATIC FULL SCREEN MENU --- */}
             <div ref={menuRef} className="fixed inset-0 z-[100] hidden">
-                <div ref={menuBgRef} className="absolute inset-0 bg-[#0A0A0B] overflow-hidden" style={{ clipPath: 'inset(100% 0% 0% 0%)' }}>
+                <div ref={menuBgRef} className="absolute inset-0 bg-[#F4F1EA] dark:bg-[#0A0A0B] overflow-hidden transition-colors duration-700" style={{ clipPath: 'inset(100% 0% 0% 0%)' }}>
 
                     {/* BACKGROUND LAYER (Visuals) */}
-                    <div className="absolute inset-0 opacity-40">
+                    <div className="absolute inset-0 opacity-10 dark:opacity-40 pointer-events-none">
                         {navItems.map((item) => (
                             <div
                                 key={item.path}
@@ -183,11 +184,11 @@ const Navbar = () => {
                                 <img
                                     src={item.img}
                                     alt="Menu Background"
-                                    className="w-full h-full object-cover scale-105 brightness-50 blur-[2px]"
+                                    className="w-full h-full object-cover scale-105 brightness-50 blur-[2px] grayscale dark:grayscale-0"
                                 />
                             </div>
                         ))}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#F4F1EA] dark:from-[#0A0A0B] via-[#F4F1EA]/80 dark:via-[#0A0A0B]/50 to-transparent" />
                     </div>
 
                     {/* CONTENT LAYER */}
@@ -199,46 +200,58 @@ const Navbar = () => {
                             <div className="flex flex-col gap-2">
                                 {/* Header / Close for Mobile */}
                                 <div className="md:hidden flex justify-between items-center mb-12 menu-meta">
-                                    <span className="font-serif text-white tracking-widest uppercase">Maihan</span>
-                                    <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-white/10 rounded-full text-white">
+                                    <span className="font-serif text-[#1A1A1A] dark:text-white tracking-widest uppercase">Maihan</span>
+                                    <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-black/5 dark:bg-white/10 rounded-full text-[#1A1A1A] dark:text-white">
                                         <X size={20} />
                                     </button>
                                 </div>
 
-                                {navItems.map((item, index) => (
-                                    <Link
-                                        key={index}
-                                        href={item.path}
-                                        className="nav-link-item group relative py-4 lg:py-6 flex items-center justify-between border-b border-white/10"
-                                        onMouseEnter={() => setHoveredLink(item.img)}
-                                        onMouseLeave={() => setHoveredLink(null)}
-                                        onClick={() => setIsMenuOpen(false)}
-                                    >
-                                        <div className="relative flex items-baseline gap-6 transition-transform duration-500 group-hover:translate-x-4">
-                                            <span className="font-mono text-xs text-[#b5a16d]">0{index + 1}</span>
-                                            <span
-                                                className={`font-serif text-4xl md:text-6xl text-white transition-all duration-300 ${hoveredLink === item.img ? 'text-[#b5a16d] italic drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]' : ''}`}
-                                            >
-                                                {item.name}
-                                            </span>
+                                {navItems.map((item, index) => {
+                                    const isActive = pathname === item.path;
+                                    return (
+                                        <Link
+                                            key={index}
+                                            href={item.path}
+                                            className="nav-link-item group relative py-4 lg:py-6 flex items-center justify-between border-b border-[#1A1A1A]/10 dark:border-white/10"
+                                            onMouseEnter={() => setHoveredLink(item.img)}
+                                            onMouseLeave={() => setHoveredLink(null)}
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            <div className="relative flex items-baseline gap-6 transition-transform duration-500 group-hover:translate-x-4">
+                                                <span className={`font-mono text-xs transition-colors duration-300 ${isActive ? 'text-[#b5a16d]' : 'text-[#b5a16d]/70 dark:text-[#b5a16d]'}`}>
+                                                    0{index + 1}
+                                                </span>
+                                                <span
+                                                    className={`font-serif text-4xl md:text-6xl transition-all duration-300 ${isActive
+                                                            ? 'text-[#b5a16d] italic'
+                                                            : 'text-[#1A1A1A] dark:text-white group-hover:text-[#b5a16d] group-hover:italic'
+                                                        } ${hoveredLink === item.img ? 'text-[#b5a16d] italic drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]' : ''}`}
+                                                >
+                                                    {item.name}
+                                                </span>
 
-                                            {/* Center-Outwards Underline */}
-                                            <span className="absolute -bottom-2 left-0 w-full h-[1px] bg-[#b5a16d] origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-                                        </div>
-                                        <ArrowRight className={`text-[#b5a16d] opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0`} />
-                                    </Link>
-                                ))}
+                                                {/* Center-Outwards Underline: Visible if Active OR Hovered */}
+                                                <span
+                                                    className={`absolute -bottom-2 left-0 w-full h-[1px] bg-[#b5a16d] origin-center transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+                                                />
+                                            </div>
+
+                                            {/* Arrow Indicator */}
+                                            <ArrowRight className={`text-[#b5a16d] transition-all duration-500 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}`} />
+                                        </Link>
+                                    );
+                                })}
                             </div>
 
                             {/* Footer Meta */}
-                            <div className="menu-meta mt-16 flex justify-between items-end text-white/40">
+                            <div className="menu-meta mt-16 flex justify-between items-end text-[#1A1A1A]/60 dark:text-white/40">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-[10px] uppercase tracking-widest">Contact</span>
-                                    <span className="font-serif text-lg text-white">rare@maihangroup.com</span>
+                                    <span className="font-serif text-lg text-[#1A1A1A] dark:text-white">rare@maihangroup.com</span>
                                 </div>
                                 <div className="hidden md:flex flex-col gap-2">
                                     <span className="text-[10px] uppercase tracking-widest">Follow Us</span>
-                                    <div className="flex gap-4 text-white text-xs">
+                                    <div className="flex gap-4 text-xs font-medium text-[#1A1A1A] dark:text-white">
                                         <span>IG</span>
                                         <span>LI</span>
                                         <span>TW</span>
@@ -247,20 +260,28 @@ const Navbar = () => {
                             </div>
                         </div>
 
-                        {/* RIGHT: Visual Preview (Desktop) & Close Button */}
-                        <div className="hidden md:flex w-1/2 h-full flex-col justify-between p-12 lg:p-16 border-l border-white/5 bg-white/[0.02] backdrop-blur-sm">
-                            <div className="flex justify-end">
+                        {/* RIGHT: Visual Preview (Desktop) & Close/Theme Buttons */}
+                        <div className="hidden md:flex w-1/2 h-full flex-col justify-center items-center relative p-12 lg:p-16 border-l border-[#1A1A1A]/5 dark:border-white/5 bg-[#F9F8F4]/50 dark:bg-white/[0.02] backdrop-blur-sm">
+
+                            {/* Top Right Actions: Theme & Close */}
+                            <div className="absolute top-12 right-12 flex items-center gap-4">
+                                <button
+                                    onClick={toggleTheme}
+                                    className="menu-button-close p-3 rounded-full bg-[#1A1A1A]/5 dark:bg-white/5 hover:bg-[#b5a16d] hover:text-white transition-all duration-300 text-[#1A1A1A] dark:text-white"
+                                >
+                                    {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                                </button>
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="menu-button-close group flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 hover:bg-[#b5a16d] transition-all duration-300"
+                                    className="menu-button-close group flex items-center gap-3 px-6 py-3 rounded-full bg-[#1A1A1A]/5 dark:bg-white/5 hover:bg-[#b5a16d] transition-all duration-300"
                                 >
-                                    <span className="text-[10px] tracking-widest uppercase text-white font-medium">Close</span>
-                                    <X size={16} className="text-white" />
+                                    <span className="text-[10px] tracking-widest uppercase text-[#1A1A1A] dark:text-white group-hover:text-white font-medium">Close</span>
+                                    <X size={16} className="text-[#1A1A1A] dark:text-white group-hover:text-white" />
                                 </button>
                             </div>
 
-                            {/* Floating Card Preview */}
-                            <div className="menu-meta relative w-full aspect-[4/5] max-w-md mx-auto hidden lg:block overflow-hidden rounded-sm border border-white/10">
+                            {/* Floating Card Preview - Center Vertically */}
+                            <div className="menu-meta relative w-full aspect-[4/5] max-w-md hidden lg:block overflow-hidden rounded-sm border border-[#1A1A1A]/10 dark:border-white/10 shadow-2xl">
                                 {navItems.map((item) => (
                                     <img
                                         key={item.path}
@@ -269,8 +290,9 @@ const Navbar = () => {
                                         className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${currentImg === item.img ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
                                     />
                                 ))}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                                    <span className="text-[#b5a16d] font-mono text-xs mb-2">Featured Collection</span>
+                                {/* Overlay Gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
+                                    <span className="text-[#b5a16d] font-mono text-xs mb-2 tracking-widest uppercase">Featured Collection</span>
                                     <h3 className="text-white font-serif text-3xl italic">
                                         {hoveredLink
                                             ? navItems.find(n => n.img === hoveredLink)?.name
