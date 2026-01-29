@@ -37,37 +37,37 @@ const GlobalPrisms = () => {
     return (
         <div
             ref={containerRef}
-            className="fixed inset-0 z-[40] pointer-events-none overflow-hidden mix-blend-overlay"
+            className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
         >
             {/* PRISM 1: Large Top Right - Sharp Triangle */}
             <div
-                className="prism-shape absolute -top-[10%] right-[3%] w-[45vw] h-[45vw] opacity-[0.4] dark:opacity-[0.3]"
+                className="prism-shape absolute -top-[10%] right-[5%] w-[40vw] h-[40vw] opacity-[0.03] dark:opacity-[0.05]"
                 style={{
                     background: 'linear-gradient(135deg, #D4AF37, transparent)',
                     clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
-                    filter: 'blur(60px)'
+                    filter: 'blur(80px)'
                 }}
             />
 
             {/* PRISM 2: Mid Left - Diamond Shape */}
             <div
-                className="prism-shape absolute top-[40%] -left-[10%] w-[30vw] h-[30vw] opacity-[0.3] dark:opacity-[0.25]"
+                className="prism-shape absolute top-[40%] -left-[10%] w-[30vw] h-[30vw] opacity-[0.04] dark:opacity-[0.06]"
                 style={{
                     background: 'radial-gradient(circle, #F9F8F4 0%, transparent 70%)', // White glow
                     clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
-                    filter: 'blur(50px)',
+                    filter: 'blur(60px)',
                     mixBlendMode: 'overlay'
                 }}
             />
 
             {/* PRISM 3: Bottom Right - Angular Shard */}
             <div
-                className="prism-shape absolute bottom-[10%] right-[15%] w-[25vw] h-[50vw] opacity-[0.35] dark:opacity-[0.25]"
+                className="prism-shape absolute bottom-[10%] right-[15%] w-[25vw] h-[50vw] opacity-[0.03] dark:opacity-[0.05]"
                 style={{
                     background: 'linear-gradient(to bottom, #D4AF37, transparent)',
                     clipPath: 'polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)',
                     transform: 'rotate(-15deg)',
-                    filter: 'blur(40px)'
+                    filter: 'blur(50px)'
                 }}
             />
 

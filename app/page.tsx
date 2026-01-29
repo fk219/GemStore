@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import Home Components
 import Hero from '@/components/Home/Hero';
-import ScrollyStory from '@/components/Home/ScrollyStory';
+import NarrativeSection from '@/components/Home/NarrativeSection';
 import FeaturedHighlights from '@/components/Home/FeaturedHighlights';
 import SoulOfRarity from '@/components/Home/SoulOfRarity';
 import CollectionSection from '@/components/Home/CollectionSection';
@@ -83,8 +83,8 @@ export default function Home() {
             {/* 1. Hero (PRESERVED) */}
             <Hero />
 
-            {/* 2. The Narrative (Scrollytelling Replacement) */}
-            <ScrollyStory />
+            {/* 2. The Narrative (NEW) */}
+            <NarrativeSection />
 
             {/* 3. Featured Collection (NEW) */}
             <FeaturedHighlights />
