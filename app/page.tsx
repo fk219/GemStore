@@ -80,14 +80,13 @@ export default function Home() {
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
             <Navbar />
 
-            {/* 1. Hero & Narrative Transition Wrapper */}
-            <div id="narrative-transition-wrapper" className="relative h-[250vh]">
-                <div className="sticky top-0 h-screen w-full overflow-hidden">
+            {/* 1. Hero & Narrative Wrapper (Scoped Sticky Context) */}
+            <div className="relative w-full">
+                <div className="sticky top-0 h-screen w-full z-0">
                     <Hero />
-                    <div className="absolute inset-0 z-10">
-                        <NarrativeSection />
-                    </div>
                 </div>
+                {/* Narrative sits on top (z-10) and scrolls over fixed Hero */}
+                <NarrativeSection />
             </div>
 
             {/* 3. Featured Collection (NEW) */}
