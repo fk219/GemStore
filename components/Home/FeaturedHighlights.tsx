@@ -85,17 +85,17 @@ const FeaturedHighlights: React.FC = () => {
         const viewportWidth = window.innerWidth;
         const items = gsap.utils.toArray('.highlight-card');
 
-        // Horizontal Scroll Setup (Pinned, Premium Slow Scroll)
+        // Horizontal Scroll Setup (Unpinned, natural scroll)
+        // Horizontal Scroll Setup (Unpinned, slow premium drift)
         gsap.to(slider, {
-            id: 'horizontal-scroll',
-            x: () => -(totalWidth - viewportWidth),
+            id: "horizontal-scroll",
+            x: () => -((totalWidth - viewportWidth) * 0.45), // Moves slower, drifting through the collection
             ease: "none",
             scrollTrigger: {
                 trigger: sectionRef.current,
-                pin: true,
-                start: "top top",
-                end: "+=300%",     // Extends scroll distance to 3x height (Slower speed)
-                scrub: 1,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 2.5,          // Heavy, luxurious momentum
                 invalidateOnRefresh: true,
             }
         });
