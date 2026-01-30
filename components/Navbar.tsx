@@ -119,23 +119,24 @@ const Navbar = () => {
                     }`}
             >
                 <div
-                    className={`
-                        relative w-full flex items-center justify-between pointer-events-auto
-                        px-8 py-4 rounded-full transition-all duration-700
-                        ${isScrolled
-                            ? 'bg-[#F9F8F4]/80 dark:bg-[#1A1A1A]/80 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-2xl'
-                            : 'bg-transparent border border-transparent'
-                        }
-                    `}
+                    className="relative w-full flex items-center justify-between pointer-events-auto px-8 py-4 transition-all duration-700 bg-transparent"
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative w-32 h-10 md:w-40 md:h-12">
+                        <div className="relative w-16 h-10 md:w-20 md:h-12 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
                             <Image
                                 src="/images/logo.webp"
+                                alt="Maihan Logo"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                        <div className="relative w-32 h-8 md:w-40 md:h-10 hidden md:block drop-shadow-2xl transition-transform duration-500 hover:scale-110 delay-75">
+                            <Image
+                                src="/images/fullName.webp"
                                 alt="Maihan"
                                 fill
-                                className={`object-contain ${isScrolled ? 'dark:invert' : 'dark:invert'}`}
+                                className="object-contain"
                             />
                         </div>
                     </Link>
@@ -146,7 +147,7 @@ const Navbar = () => {
                         {/* Action 1: Theme */}
                         <button
                             onClick={toggleTheme}
-                            className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${isScrolled ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white' : 'bg-white/10 backdrop-blur-md text-black dark:text-white'}`}
+                            className={`p-3 rounded-full transition-all duration-500 hover:scale-125 shadow-2xl ${isScrolled ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white' : 'bg-white/10 backdrop-blur-md text-black dark:text-white'}`}
                         >
                             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                         </button>
@@ -154,7 +155,7 @@ const Navbar = () => {
                         {/* Action 2: Contact (Concierge) */}
                         <Link
                             href="/contact"
-                            className={`hidden md:flex items-center justify-center p-3 px-6 rounded-full transition-all duration-300 hover:scale-105 ${isScrolled ? 'bg-[#1A1A1A] text-[#b5a16d] dark:bg-white dark:text-[#1A1A1A]' : 'bg-[#1A1A1A] text-[#b5a16d] shadow-lg'}`}
+                            className={`hidden md:flex items-center justify-center p-3 px-6 rounded-full transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-black/20 ${isScrolled ? 'bg-[#1A1A1A] text-[#b5a16d] dark:bg-white dark:text-[#1A1A1A]' : 'bg-[#1A1A1A] text-[#b5a16d]'}`}
                         >
                             <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Concierge</span>
                         </Link>
@@ -162,7 +163,7 @@ const Navbar = () => {
                         {/* Action 3: Menu Toggle */}
                         <button
                             onClick={() => setIsMenuOpen(true)}
-                            className={`flex items-center gap-3 p-3 pl-5 rounded-full transition-all duration-300 hover:scale-105 cursor-pointer ${isScrolled ? 'bg-[#b5a16d] text-white' : 'bg-[#b5a16d] text-white shadow-lg'}`}
+                            className={`flex items-center gap-3 p-3 pl-5 rounded-full transition-all duration-500 hover:scale-110 cursor-pointer shadow-2xl ${isScrolled ? 'bg-[#b5a16d] text-white' : 'bg-[#b5a16d] text-white'}`}
                         >
                             <span className="text-[10px] uppercase tracking-[0.2em] font-medium hidden md:block">Menu</span>
                             <Menu size={18} />

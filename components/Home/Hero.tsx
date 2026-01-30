@@ -170,14 +170,14 @@ const Hero: React.FC = () => {
                     </div>
 
                     {/* Row 2: The Vision */}
-                    <div className="relative flex items-center justify-center py-6">
+                    <div className="relative flex items-center justify-center py-6 group">
                         {/* Central Bespoke Visual - Abstract Gemstone Focus */}
                         <div
                             className="absolute inset-0 flex items-center justify-center pointer-events-none"
                             style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0)` }}
                         >
                             <div
-                                className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] pointer-events-auto cursor-pointer group ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
+                                className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] pointer-events-auto cursor-pointer ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
                                 <div className="w-[85%] h-[85%] rounded-full overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center bg-black/5">
                                     <img
