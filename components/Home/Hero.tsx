@@ -276,13 +276,6 @@ const Hero: React.FC = () => {
             --hero-gradient-1-end: #0A0A0B;
         }
       `}</style>
-            {/* Scroll Indicator */}
-            <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#F9F8F4] dark:text-[#F3F3F3] mix-blend-difference font-light">
-                    Scroll to Explore
-                </span>
-                <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#F9F8F4] to-transparent opacity-50 dark:via-[#F3F3F3] animate-pulse" />
-            </div>
         </section>
     );
 };

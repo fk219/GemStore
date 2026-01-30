@@ -18,7 +18,7 @@ const NarrativeSection: React.FC = () => {
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: "+=100%", // Accelerated timeline
+                end: "+=150%",
                 pin: true,
                 scrub: 1,
             }
@@ -55,9 +55,9 @@ const NarrativeSection: React.FC = () => {
     const phrase = "At Maihan Group, we don't just sell stones. We curate legacies. From the mines of the East to your personal collection, every gem tells a story of ";
 
     return (
-        <section ref={containerRef} className="relative h-screen w-full bg-transparent overflow-hidden -mt-[100vh] z-10 pointer-events-none">
+        <section ref={containerRef} className="relative h-screen w-full bg-transparent overflow-hidden">
             <div
-                className="narrative-content absolute inset-0 flex flex-col items-center justify-center bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9] px-6 md:px-24 text-center pointer-events-auto"
+                className="narrative-content absolute inset-0 flex flex-col items-center justify-center bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9] px-6 md:px-24 text-center"
                 style={{ clipPath: "polygon(48% 48%, 52% 48%, 52% 52%, 48% 52%)" }} // Starts as a tiny central window
             >
                 <div className="max-w-4xl mx-auto relative">
