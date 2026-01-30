@@ -144,9 +144,9 @@ const Hero: React.FC = () => {
                             style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0)` }}
                         >
                             <div
-                                className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
+                                className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] pointer-events-auto cursor-pointer group ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
-                                <div className="w-[85%] h-[85%] rounded-full overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 group shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center bg-black/5">
+                                <div className="w-[85%] h-[85%] rounded-full overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center bg-black/5">
                                     <img
                                         src="/images/home/hero/3dLogo.webp"
                                         className="w-full h-full object-contain transition-transform duration-[12s] group-hover:scale-110"
