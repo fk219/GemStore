@@ -123,20 +123,12 @@ const Navbar = () => {
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-0 group">
-                        <div className="relative w-20 h-12 md:w-28 md:h-16 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
+                        <div className="relative w-24 h-12 md:w-40 md:h-20 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
                             <Image
                                 src="/images/logo.webp"
                                 alt="Maihan Logo"
                                 fill
                                 className="object-contain"
-                            />
-                        </div>
-                        <div className="relative w-40 h-12 md:w-80 md:h-20 hidden md:block drop-shadow-2xl transition-transform duration-500 hover:scale-110 delay-75 -ml-3">
-                            <Image
-                                src="/images/fullName.webp"
-                                alt="Maihan"
-                                fill
-                                className="object-contain object-left"
                             />
                         </div>
                     </Link>
