@@ -125,8 +125,8 @@ const FeaturedHighlights: React.FC = () => {
             {/* Header / Context - Fixed on specific mobile, or moving? Let's keep it clean. */}
             <div className="absolute top-12 left-6 md:left-12 z-10 mix-blend-difference text-white dark:text-gray-200">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-px bg-[#b5a16d] opacity-50" />
-                    <span className="text-xs uppercase tracking-[0.3em] font-medium text-[#b5a16d]">Volume 03 / Collections</span>
+                    <div className="w-12 h-px bg-[#9F8236] opacity-50" />
+                    <span className="text-xs uppercase tracking-[0.3em] font-medium text-[#9F8236]">Volume 03 / Collections</span>
                 </div>
             </div>
 

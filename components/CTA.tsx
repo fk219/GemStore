@@ -98,7 +98,7 @@ const CTA: React.FC<CTAProps> = ({
                 <div ref={textRef} className="flex flex-col items-center gap-8">
                     {/* Decorative Top */}
                     <div className="flex flex-col items-center gap-4">
-                        <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#b5a16d] font-medium">
+                        <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#9F8236] font-medium">
                             Volume 09 / Inquiries
                         </span>
                     </div>
@@ -106,7 +106,7 @@ const CTA: React.FC<CTAProps> = ({
                     {/* Main Title */}
                     <h2 className="font-serif text-6xl md:text-8xl lg:text-9xl text-white leading-[0.9] tracking-tight">
                         Acquire the <br />
-                        <span className="italic text-[#b5a16d] relative inline-block">
+                        <span className="italic text-[#9F8236] relative inline-block">
                             Exceptional
                             {/* Hand-drawn underline effect could go here */}
                             <svg className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-3 md:h-6 text-[#b5a16d]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">

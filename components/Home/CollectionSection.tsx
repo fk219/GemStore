@@ -94,8 +94,8 @@ const CollectionSection: React.FC = () => {
                 >
                     {/* Section Introduction Card */}
                     <div className={`w-[85vw] md:w-[600px] flex-shrink-0 ${textColorClass}`}>
-                        <span className="text-[10px] tracking-[0.5em] uppercase text-[#b5a16d] block mb-8 font-sans font-medium">Volume 05 / Selected Pieces</span>
-                        <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private <span className="italic text-[#b5a16d]">Collection</span></h2>
+                        <span className="text-[10px] tracking-[0.5em] uppercase text-[#9F8236] block mb-8 font-sans font-medium">Volume 05 / Selected Pieces</span>
+                        <h2 className="text-5xl md:text-8xl font-light serif mb-12">The Private <span className="italic text-[#9F8236]">Collection</span></h2>
                         <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed italic max-w-md font-sans">
                             A rotating selection of our most exceptional acquisitions. Available exclusively for private viewing.
                         </p>
@@ -125,11 +125,14 @@ const CollectionSection: React.FC = () => {
                         </div>
                     ))}
 
-                    {/* Closing Card / Call to Action Transition */}
                     <div className={`w-[60vw] md:w-[500px] flex-shrink-0 flex flex-col items-center justify-center text-center px-12 ${textColorClass}`}>
-                        <p className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-8 font-sans font-light">End of Current Archive</p>
-                        <h3 className="text-3xl md:text-4xl serif italic mb-12 opacity-80 leading-relaxed">Each piece is a single iteration of nature’s patience.</h3>
-                        <div className="w-16 h-[1px] bg-current opacity-20" />
+                        <p className="text-[10px] tracking-[0.4em] uppercase text-[#9F8236] mb-8 font-sans font-medium">End of Current Archive</p>
+                        <h3 className="text-3xl md:text-4xl serif italic mb-12 opacity-80 leading-relaxed">
+                            Each piece is a single iteration of <span className="text-[#9F8236]">nature’s patience.</span>
+                        </h3>
+                        <div className="w-16 h-16 rounded-full border border-current/20 flex items-center justify-center">
+                            <div className="w-1 h-1 bg-current rounded-full" />
+                        </div>
                     </div>
                 </div>
             </div>

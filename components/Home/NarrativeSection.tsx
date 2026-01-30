@@ -33,7 +33,7 @@ const NarrativeSection: React.FC = () => {
     return (
         <section ref={containerRef} className="py-32 md:py-48 px-6 md:px-24 bg-[#F9F8F4] dark:bg-[#0A0A0B] text-[#1A1A1A] dark:text-[#FBFBF9] flex flex-col items-center text-center">
             <div className="max-w-4xl mx-auto">
-                <span className="block text-[10px] tracking-[0.4em] uppercase text-[#b5a16d] mb-12 font-sans font-medium">Volume 02 / The Philosophy</span>
+                <span className="block text-[10px] tracking-[0.4em] uppercase text-[#9F8236] mb-12 font-sans font-medium">Volume 02 / The Philosophy</span>
                 <p
                     ref={textRef}
                     className="text-2xl md:text-4xl lg:text-5xl font-serif font-light leading-relaxed opacity-0"

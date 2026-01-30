@@ -14,7 +14,7 @@ const ArtOfRefraction: React.FC = () => {
 
             <div className="container mx-auto px-6 relative z-10 py-12 md:py-24">
                 <div className="flex flex-col items-center text-center">
-                    <span className="text-[10px] tracking-[0.8em] uppercase mb-12 text-[#b5a16d] reveal-text font-sans font-medium">Volume 06 / The Journey</span>
+                    <span className="text-[10px] tracking-[0.8em] uppercase mb-12 text-[#9F8236] reveal-text font-sans font-medium">Volume 06 / The Journey</span>
 
                     <div className="relative mb-24 reveal-image">
                         {/* Abstract Glow - Adaptive */}
@@ -22,7 +22,7 @@ const ArtOfRefraction: React.FC = () => {
                         <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] reveal-text">
                             Refined
                         </h2>
-                        <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text text-[#b5a16d]">
+                        <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text text-[#9F8236]">
                             Patience
                         </h2>
                     </div>
@@ -49,9 +49,9 @@ const ArtOfRefraction: React.FC = () => {
                                 text: "Architecture that holds light. Minimal metal, maximum exposure. The stone must appear to float."
                             }
                         ].map((item, i) => (
-                            <div key={i} className="reveal-text group">
-                                <h3 className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-6 font-sans font-light group-hover:text-amber-500 transition-colors">{item.label}</h3>
-                                <p className="text-3xl serif mb-4 italic">{item.head}</p>
+                            <div key={i} className="reveal-text group cursor-default">
+                                <h3 className="text-[10px] tracking-[0.4em] uppercase opacity-40 mb-6 font-sans font-light group-hover:text-[#9F8236] group-hover:opacity-100 transition-all duration-500">{item.label}</h3>
+                                <p className="text-3xl serif mb-4 italic group-hover:text-[#9F8236] transition-colors duration-500">{item.head}</p>
                                 <p className="text-sm opacity-60 leading-relaxed font-sans max-w-xs">{item.text}</p>
                             </div>
                         ))}

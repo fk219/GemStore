@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
                             <span className={`transition-all duration-[2s] cubic-bezier(0.19,1,0.22,1) ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
                                 Ra
                             </span>
-                            <span className={`italic text-[#b5a16d] transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-100 ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+                            <span className={`italic text-[#9F8236] transition-all duration-[2.2s] cubic-bezier(0.19,1,0.22,1) delay-100 ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
                                 re
                             </span>
                         </h1>
