@@ -123,7 +123,7 @@ const Navbar = () => {
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-0 group">
-                        <div className="relative w-16 h-10 md:w-20 md:h-12 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
+                        <div className="relative w-20 h-12 md:w-28 md:h-16 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
                             <Image
                                 src="/images/logo.webp"
                                 alt="Maihan Logo"
