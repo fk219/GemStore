@@ -123,7 +123,8 @@ const Navbar = () => {
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-0 group">
-                        <div className="relative w-24 h-12 md:w-40 md:h-20 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
+                        {/* Target for Flying Logo */}
+                        <div id="nav-logo-target" className="relative w-24 h-12 md:w-40 md:h-20 drop-shadow-2xl transition-transform duration-500 hover:scale-110 opacity-0">
                             <Image
                                 src="/images/logo.webp"
                                 alt="Maihan Logo"
@@ -134,7 +135,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* 2. ACTIONS (Only 3 Buttons) */}
-                    <div className="flex items-center gap-2 md:gap-4">
+                    <div className="flex items-center gap-2 md:gap-4 nav-link-reveal opacity-0 -translate-y-4">
 
                         {/* Action 1: Theme */}
                         <button
