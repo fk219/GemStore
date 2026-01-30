@@ -151,7 +151,7 @@ const Hero: React.FC = () => {
                 <div className="flex flex-col gap-0 select-none">
 
                     {/* Row 1: Rarity Concept */}
-                    <div className="flex items-end justify-between mb-[-2vh] relative hero-content-reveal opacity-0">
+                    <div className="flex items-end justify-between mb-[-2vh] relative">
                         <h1 className="text-[14vw] md:text-[12vw] font-light serif leading-[0.75] tracking-tight uppercase flex items-baseline">
                             <span className={`transition-all duration-[2s] cubic-bezier(0.19,1,0.22,1) ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
                                 Ra
@@ -170,10 +170,10 @@ const Hero: React.FC = () => {
                     </div>
 
                     {/* Row 2: The Vision */}
-                    <div className="relative flex items-center justify-center py-6 group hero-content-reveal opacity-0">
-                        {/* Central Bespoke Visual - REPLACED by IntroAnimation (Flying Logo) */}
+                    <div className="relative flex items-center justify-center py-6 group">
+                        {/* Central Bespoke Visual - Abstract Gemstone Focus */}
                         <div
-                            className="hidden absolute inset-0 flex items-center justify-center pointer-events-none"
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
                             style={{ transform: `translate3d(${(smoothMousePos.x - 0.5) * 20}px, ${(smoothMousePos.y - 0.5) * 20}px, 0)` }}
                         >
                             <div

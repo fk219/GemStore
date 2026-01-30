@@ -18,7 +18,6 @@ import ArtOfRefraction from '@/components/Home/ArtOfRefraction';
 import BentoGrid from '@/components/Home/BentoGrid';
 import TrustSection from '@/components/Home/TrustSection';
 import CTA from '@/components/CTA';
-import IntroAnimation from '@/components/IntroAnimation';
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -79,7 +78,6 @@ export default function Home() {
 
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
-            <IntroAnimation />
             <Navbar />
 
             {/* 1. Hero & Narrative Wrapper (Scoped Sticky Context) */}
