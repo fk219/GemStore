@@ -27,7 +27,7 @@ const ArtOfRefraction: React.FC = () => {
     ];
 
     return (
-        <section className="min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative bg-secondary dark:bg-[#141414] transition-colors duration-1000 group/section">
+        <section className="min-h-screen py-32 rounded-[40px] md:rounded-[100px] mx-2 md:mx-8 my-12 overflow-hidden relative bg-[#050505] dark:bg-[#F9F8F4] transition-colors duration-1000 group/section">
 
             {/* Dynamic Background Layer */}
             <div className="absolute inset-0 z-0">
@@ -65,7 +65,7 @@ const ArtOfRefraction: React.FC = () => {
                 ))}
             </div>
 
-            <div className={`container mx-auto px-6 relative z-10 py-12 md:py-24 transition-colors duration-700 ${activeStep !== null ? 'text-[#FBFBF9]' : 'text-[#1A1A1A] dark:text-[#FBFBF9]'}`}>
+            <div className={`container mx-auto px-6 relative z-10 py-12 md:py-24 transition-colors duration-700 ${activeStep !== null ? 'text-[#FBFBF9]' : 'text-[#FBFBF9] dark:text-[#1A1A1A]'}`}>
                 <div className="flex flex-col items-center text-center">
                     <span className="text-[10px] tracking-[0.8em] uppercase mb-12 text-[#9F8236] reveal-text font-sans font-medium">Volume 06 / The Journey</span>
 
