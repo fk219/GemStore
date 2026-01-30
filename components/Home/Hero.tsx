@@ -146,12 +146,15 @@ const Hero: React.FC = () => {
                             <div
                                 className={`w-[26vw] aspect-square rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-[2.5s] ${mounted ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
                             >
-                                <div className="w-[82%] h-[82%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_80px_rgba(0,0,0,0.5)]">
+                                <div className="w-[85%] h-[85%] rounded-full overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 group shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center bg-black/5">
                                     <img
                                         src="/images/home/hero/3dLogo.webp"
-                                        className="w-full h-full object-cover transition-transform duration-[12s] group-hover:scale-110"
+                                        className="w-full h-full object-contain transition-transform duration-[12s] group-hover:scale-110"
                                         alt="Maihan 3D Emblem"
                                     />
+                                    {/* Golden Spark Overlay */}
+                                    <div className="absolute inset-0 bg-[#b5a16d] mix-blend-overlay opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0A0B]/80 via-transparent to-[#b5a16d]/20 mix-blend-overlay" />
                                     {/* Dynamic Light sweep */}
                                     <div
@@ -172,7 +175,7 @@ const Hero: React.FC = () => {
                             </div>
                         </div>
 
-                        <h2 className={`text-[12vw] md:text-[15vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className={`text-[12vw] md:text-[15vw] font-light serif uppercase tracking-tighter mix-blend-exclusion text-[#F9F8F4] dark:mix-blend-difference dark:text-inherit transition-all duration-[2s] delay-300 drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                             Nature
                         </h2>
                     </div>

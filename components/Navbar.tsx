@@ -130,7 +130,7 @@ const Navbar = () => {
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative w-28 h-8 md:w-32 md:h-10">
+                        <div className="relative w-32 h-10 md:w-40 md:h-12">
                             <Image
                                 src="/images/logo.webp"
                                 alt="Maihan"
@@ -203,7 +203,7 @@ const Navbar = () => {
                             <div className="flex flex-col gap-2">
                                 {/* Header / Close for Mobile */}
                                 <div className="md:hidden flex justify-between items-center mb-12 menu-meta">
-                                    <div className="relative w-24 h-8">
+                                    <div className="relative w-32 h-10">
                                         <Image src="/images/logo.webp" alt="Maihan" fill className="object-contain dark:invert" />
                                     </div>
                                     <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-black/5 dark:bg-white/10 rounded-full text-[#1A1A1A] dark:text-white">

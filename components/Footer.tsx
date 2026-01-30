@@ -156,7 +156,7 @@ const Footer: React.FC = () => {
                             viewport={{ once: true }}
                             className="flex items-center justify-center cursor-default z-20"
                         >
-                            <div className="relative w-64 h-24 md:w-96 md:h-32 opacity-30 hover:opacity-100 transition-opacity duration-500">
+                            <div className="relative w-80 h-32 md:w-[600px] md:h-48 opacity-30 hover:opacity-100 transition-opacity duration-500">
                                 <Image
                                     src="/images/logo.webp"
                                     alt="Maihan"
