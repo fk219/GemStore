@@ -148,9 +148,9 @@ const Hero: React.FC = () => {
                             >
                                 <div className="w-[82%] h-[82%] rounded-full overflow-hidden relative grayscale group shadow-[0_0_80px_rgba(0,0,0,0.5)]">
                                     <img
-                                        src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
+                                        src="/images/home/hero/3dLogo.webp"
                                         className="w-full h-full object-cover transition-transform duration-[12s] group-hover:scale-110"
-                                        alt="Refraction Focus"
+                                        alt="Maihan 3D Emblem"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0A0B]/80 via-transparent to-[#b5a16d]/20 mix-blend-overlay" />
                                     {/* Dynamic Light sweep */}
