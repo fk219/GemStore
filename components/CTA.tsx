@@ -72,7 +72,7 @@ const CTA: React.FC<CTAProps> = ({
     return (
         <section
             ref={sectionRef}
-            className="relative h-[80vh] md:h-[90vh] overflow-hidden flex flex-col items-center justify-center text-center px-6"
+            className="relative h-[80vh] md:h-[90vh] overflow-hidden flex flex-col items-center justify-center text-center px-6 mx-2 md:mx-8 my-12 rounded-[40px] md:rounded-[80px] shadow-2xl shadow-black/50"
         >
             {/* 1. Cinematic Background Layer */}
             <div className="absolute inset-0 z-0">
