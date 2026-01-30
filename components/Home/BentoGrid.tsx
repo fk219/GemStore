@@ -67,7 +67,7 @@ const BentoGrid: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
                     <div>
                         <span className="text-[10px] tracking-[0.5em] uppercase text-[#b5a16d] block mb-4 font-medium">
-                            Curated Selection
+                            Volume 07 / Curated Selection
                         </span>
                         <h2 className="text-5xl md:text-7xl lg:text-8xl font-light font-serif text-[#1A1A1A] dark:text-white">
                             The <span className="italic">Collection</span>

@@ -27,20 +27,10 @@ const Hero: React.FC = () => {
             }
         });
 
-        // Prisms Parallax (Reverse Drift)
-        gsap.utils.toArray('.prism-floating').forEach((el: any, i) => {
-            gsap.to(el, {
-                yPercent: -15 * (i + 1), // Varied depth
-                ease: "none",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top", // Start immediately
-                    end: "bottom top",
-                    scrub: 1
-                }
-            });
-        });
+        // Prisms Parallax - REMOVED
+
     }, { scope: containerRef });
+
 
     useEffect(() => {
         setMounted(true);
@@ -86,10 +76,19 @@ const Hero: React.FC = () => {
                     }}
                 />
 
-                {/* Golden Blob Parallax (CTA Clone) */}
-                <div className="absolute inset-0 opacity-20 pointer-events-none">
-                    <div className="bg-parallax absolute top-[-50%] left-[20%] w-[600px] h-[600px] bg-[#D4AF37] rounded-full blur-[120px] mix-blend-soft-light" />
-                    <div className="bg-parallax absolute bottom-[-20%] right-[10%] w-[400px] h-[400px] bg-[#997B28] rounded-full blur-[100px] mix-blend-soft-light" />
+                {/* Golden Blob Parallax (Enhanced Coverage) */}
+                <div className="absolute inset-0 opacity-30 pointer-events-none">
+                    {/* Primary Top-Left Swath */}
+                    <div className="bg-parallax absolute top-[-40%] left-[-10%] w-[1000px] h-[1000px] bg-[#D4AF37] rounded-full blur-[140px] mix-blend-soft-light" />
+
+                    {/* Deep Right Anchor */}
+                    <div className="bg-parallax absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#997B28] rounded-full blur-[120px] mix-blend-soft-light" />
+
+                    {/* Top Right Highlight */}
+                    <div className="bg-parallax absolute top-[-20%] right-[10%] w-[600px] h-[600px] bg-[#F4E285] rounded-full blur-[100px] mix-blend-soft-light opacity-60" />
+
+                    {/* Bottom Left Fill */}
+                    <div className="bg-parallax absolute bottom-[10%] left-[-20%] w-[700px] h-[700px] bg-[#D4AF37] rounded-full blur-[130px] mix-blend-soft-light opacity-50" />
                 </div>
 
                 {/* Layer 2: Subtle Golden Shift (Refraction) */}
@@ -112,50 +111,7 @@ const Hero: React.FC = () => {
                 </div>
             </div>
 
-            {/* Floating Refraction Prisms - Enhanced with Parallax and Secondary Layers */}
-            <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-                {/* Prism Alpha (Top Left) */}
-                <div
-                    className="prism-floating absolute top-1/4 left-1/4 w-[45vw] h-[45vw] border border-black/5 dark:border-white/5 rounded-[40%_60%_70%_30%/40%_40%_60%_60%] animate-[morph_20s_infinite_linear] transition-all duration-[3s] cubic-bezier(0.19,1,0.22,1)"
-                    style={{
-                        opacity: mounted ? 0.2 : 0,
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -40}px, ${(smoothMousePos.y - 0.5) * -40}px, 0) rotate(${(smoothMousePos.x - 0.5) * 5}deg)`
-                    }}
-                >
-                    <div className="absolute inset-4 border border-black/5 dark:border-white/2 rounded-inherit blur-sm" />
-                </div>
-
-                {/* Prism Beta (Bottom Right - Golden) */}
-                <div
-                    className="prism-floating absolute bottom-1/4 right-1/4 w-[38vw] h-[38vw] border border-[#b5a16d]/10 rounded-[60%_40%_30%_70%/70%_70%_30%_30%] animate-[morph_15s_infinite_linear_reverse] transition-all duration-[3s] delay-300 cubic-bezier(0.19,1,0.22,1)"
-                    style={{
-                        opacity: mounted ? 1 : 0,
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 60}px, ${(smoothMousePos.y - 0.5) * 60}px, 0) rotate(${(smoothMousePos.y - 0.5) * -5}deg)`
-                    }}
-                >
-                    <div className="absolute inset-0 border-l border-t border-[#b5a16d]/5 rounded-inherit animate-pulse" />
-                </div>
-
-                {/* Prism Gamma (Mid Right - Soft) */}
-                <div
-                    className="prism-floating absolute top-1/3 right-[10%] w-[25vw] h-[25vw] border border-black/5 dark:border-white/5 rounded-[50%_50%_40%_60%/60%_40%_60%_40%] animate-[morph_18s_infinite_linear] transition-all duration-[3s] delay-500 cubic-bezier(0.19,1,0.22,1)"
-                    style={{
-                        opacity: mounted ? 0.15 : 0,
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * -20}px, ${(smoothMousePos.y - 0.5) * -20}px, 0) rotate(${(smoothMousePos.x - 0.5) * 10}deg)`
-                    }}
-                >
-                    <div className="absolute inset-8 border border-black/5 dark:border-white/5 rounded-inherit blur-[2px]" />
-                </div>
-
-                {/* Prism Delta (Bottom Left - Wide) */}
-                <div
-                    className="prism-floating absolute bottom-[15%] left-[5%] w-[35vw] h-[20vw] border border-[#b5a16d]/5 rounded-[30%_70%_70%_30%/40%_60%_40%_60%] animate-[morph_25s_infinite_linear_reverse] transition-all duration-[3s] delay-200 cubic-bezier(0.19,1,0.22,1)"
-                    style={{
-                        opacity: mounted ? 0.3 : 0,
-                        transform: `translate3d(${(smoothMousePos.x - 0.5) * 30}px, ${(smoothMousePos.y - 0.5) * 30}px, 0) rotate(${(smoothMousePos.y - 0.5) * 5}deg)`
-                    }}
-                />
-            </div>
+            {/* Floating Refraction Prisms - REMOVED */}
 
             {/* Architectural Typography - The Core Narrative */}
             <div className="relative z-20 w-full max-w-[1600px] px-10 md:px-24">
@@ -171,7 +127,10 @@ const Hero: React.FC = () => {
                                 re
                             </span>
                         </h1>
-                        <div className={`hidden lg:block w-px h-32 bg-current opacity-10 mb-8 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
+
+                        {/* Centered Vertical Line (Absolute) */}
+                        <div className={`hidden lg:block absolute left-1/2 -translate-x-1/2 bottom-8 w-px h-32 bg-current opacity-10 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
+
                         <div className={`hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-20 mb-8 transition-opacity duration-[2s] delay-700 ${mounted ? 'opacity-20' : 'opacity-0'}`}>
                             Volume 01 / Archive
                         </div>
@@ -256,12 +215,7 @@ const Hero: React.FC = () => {
             </div>
 
             <style>{`
-        @keyframes morph {
-          0%, 100% { border-radius: 35% 65% 70% 30% / 30% 30% 70% 70%; }
-          25% { border-radius: 50% 50% 30% 70% / 70% 30% 70% 30%; }
-          50% { border-radius: 65% 35% 30% 70% / 70% 70% 30% 30%; }
-          75% { border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%; }
-        }
+        /* morph keyframes removed */
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }

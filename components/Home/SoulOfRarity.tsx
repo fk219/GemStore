@@ -35,8 +35,8 @@ const SoulOfRarity: React.FC = () => {
                     {/* Editorial Text */}
                     <div className="w-full md:w-1/2 flex flex-col justify-center">
                         <div className="flex items-center gap-6 mb-12 opacity-40">
-                            <span className="text-[10px] tracking-[0.4em] uppercase font-sans font-light">Part I — The Raw</span>
-                            <div className="w-20 h-px bg-current" />
+                            <span className="text-[10px] tracking-[0.4em] uppercase font-sans font-medium text-[#b5a16d]">Volume 04 / The Raw</span>
+                            <div className="w-20 h-px bg-[#b5a16d]/30" />
                         </div>
 
                         <h2 className="text-5xl md:text-8xl font-light serif mb-12 leading-[0.9] reveal-text">

@@ -98,9 +98,8 @@ const CTA: React.FC<CTAProps> = ({
                 <div ref={textRef} className="flex flex-col items-center gap-8">
                     {/* Decorative Top */}
                     <div className="flex flex-col items-center gap-4">
-                        <Diamond className="w-6 h-6 text-[#D4AF37] opacity-80" strokeWidth={1} />
-                        <span className="font-sans text-xs tracking-[0.4em] uppercase text-[#D4AF37]/80">
-                            {subtitle}
+                        <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#b5a16d] font-medium">
+                            Volume 09 / Inquiries
                         </span>
                     </div>
 

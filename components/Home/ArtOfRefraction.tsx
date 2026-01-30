@@ -14,7 +14,7 @@ const ArtOfRefraction: React.FC = () => {
 
             <div className="container mx-auto px-6 relative z-10 py-12 md:py-24">
                 <div className="flex flex-col items-center text-center">
-                    <span className="text-[10px] tracking-[0.8em] uppercase mb-12 opacity-30 reveal-text font-sans font-light border px-4 py-2 rounded-full border-current">The Journey of Light</span>
+                    <span className="text-[10px] tracking-[0.8em] uppercase mb-12 text-[#b5a16d] reveal-text font-sans font-medium">Volume 06 / The Journey</span>
 
                     <div className="relative mb-24 reveal-image">
                         {/* Abstract Glow - Adaptive */}
