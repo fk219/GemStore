@@ -99,6 +99,39 @@ const Hero: React.FC = () => {
                     }}
                 />
 
+                {/* Minimalist Professional Stars */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[
+                        { top: '18%', left: '12%', size: 16, delay: 0, opacity: 0.6 },
+                        { top: '25%', left: '88%', size: 24, delay: 1.2, opacity: 0.4 },
+                        { top: '45%', left: '8%', size: 12, delay: 2.5, opacity: 0.5 },
+                        { top: '55%', left: '92%', size: 20, delay: 0.5, opacity: 0.3 },
+                        { top: '72%', left: '18%', size: 18, delay: 3.1, opacity: 0.5 },
+                        { top: '12%', left: '48%', size: 14, delay: 1.8, opacity: 0.4 },
+                        { top: '82%', left: '75%', size: 22, delay: 2.2, opacity: 0.6 },
+                        { top: '35%', left: '75%', size: 10, delay: 4.0, opacity: 0.3 },
+                        { top: '65%', left: '25%', size: 12, delay: 1.5, opacity: 0.4 },
+                    ].map((star, i) => (
+                        <div
+                            key={i}
+                            className="absolute text-[#b5a16d]"
+                            style={{
+                                top: star.top,
+                                left: star.left,
+                                width: star.size,
+                                height: star.size,
+                                opacity: star.opacity,
+                                animation: `twinkle 4s ease-in-out infinite ${star.delay}s`
+                            }}
+                        >
+                            <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full drop-shadow-[0_0_2px_rgba(181,161,109,0.8)]">
+                                {/* Thin, elegant 4-point star path */}
+                                <path d="M50 0 C55 35 65 45 100 50 C 65 55 55 65 50 100 C 45 65 35 55 0 50 C 35 45 45 35 50 0 Z" />
+                            </svg>
+                        </div>
+                    ))}
+                </div>
+
                 {/* Shimmering Grain Overlay */}
                 <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
                     <svg width="100%" height="100%">
@@ -227,6 +260,10 @@ const Hero: React.FC = () => {
           0% { transform: translateX(-150%) skewX(-25deg); }
           50% { transform: translateX(150%) skewX(-25deg); }
           100% { transform: translateX(150%) skewX(-25deg); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
         
         /* Theme Variables */
