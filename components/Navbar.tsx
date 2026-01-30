@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Diamond, Sun, Moon, ArrowRight, Search } from 'lucide-react';
 import { ThemeContext, LanguageContext } from '@/app/providers';
@@ -129,12 +130,14 @@ const Navbar = () => {
                 >
                     {/* 1. LOGO */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="p-2 rounded-full bg-[#b5a16d] text-white">
-                            <Diamond size={18} fill="currentColor" />
+                        <div className="relative w-28 h-8 md:w-32 md:h-10">
+                            <Image
+                                src="/images/logo.webp"
+                                alt="Maihan"
+                                fill
+                                className={`object-contain ${isScrolled ? 'dark:invert' : 'dark:invert'}`}
+                            />
                         </div>
-                        <span className={`font-serif tracking-[0.2em] uppercase font-light text-sm hidden md:block ${isScrolled ? 'text-[#1A1A1A] dark:text-white' : 'text-[#1A1A1A] dark:text-white mix-blend-difference'}`}>
-                            Maihan
-                        </span>
                     </Link>
 
                     {/* 2. ACTIONS (Only 3 Buttons) */}
@@ -200,7 +203,9 @@ const Navbar = () => {
                             <div className="flex flex-col gap-2">
                                 {/* Header / Close for Mobile */}
                                 <div className="md:hidden flex justify-between items-center mb-12 menu-meta">
-                                    <span className="font-serif text-[#1A1A1A] dark:text-white tracking-widest uppercase">Maihan</span>
+                                    <div className="relative w-24 h-8">
+                                        <Image src="/images/logo.webp" alt="Maihan" fill className="object-contain dark:invert" />
+                                    </div>
                                     <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-black/5 dark:bg-white/10 rounded-full text-[#1A1A1A] dark:text-white">
                                         <X size={20} />
                                     </button>
@@ -223,8 +228,8 @@ const Navbar = () => {
                                                 </span>
                                                 <span
                                                     className={`font-serif text-4xl md:text-6xl transition-all duration-300 ${isActive
-                                                            ? 'text-[#b5a16d] italic'
-                                                            : 'text-[#1A1A1A] dark:text-white group-hover:text-[#b5a16d] group-hover:italic'
+                                                        ? 'text-[#b5a16d] italic'
+                                                        : 'text-[#1A1A1A] dark:text-white group-hover:text-[#b5a16d] group-hover:italic'
                                                         } ${hoveredLink === item.img ? 'text-[#b5a16d] italic drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]' : ''}`}
                                                 >
                                                     {item.name}

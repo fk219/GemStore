@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useContext, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { LanguageContext } from '@/app/providers';
 import { motion, useMotionValue } from 'motion/react';
@@ -155,31 +156,14 @@ const Footer: React.FC = () => {
                             viewport={{ once: true }}
                             className="flex items-center justify-center cursor-default z-20"
                         >
-                            {"MAIHAN".split('').map((char, i) => (
-                                <motion.span
-                                    key={i}
-                                    variants={{
-                                        initial: { y: 100, opacity: 0, filter: "blur(20px)" },
-                                        visible: {
-                                            y: 0,
-                                            opacity: 1,
-                                            filter: "blur(0.5px)",
-                                            transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.05 }
-                                        },
-                                        hover: {
-                                            y: -20,
-                                            scale: 1.05,
-                                            color: "rgba(212, 175, 55, 0.8)", // Brighter Gold
-                                            filter: "blur(0px)",
-                                            textShadow: "0 0 50px rgba(212, 175, 55, 0.5)",
-                                            transition: { duration: 0.4, ease: "backOut", delay: i * 0.02 }
-                                        }
-                                    }}
-                                    className="text-[18vw] md:text-[15vw] font-serif tracking-[-0.02em] leading-none text-[#D4AF37]/20 select-none inline-block origin-bottom"
-                                >
-                                    {char}
-                                </motion.span>
-                            ))}
+                            <div className="relative w-64 h-24 md:w-96 md:h-32 opacity-30 hover:opacity-100 transition-opacity duration-500">
+                                <Image
+                                    src="/images/logo.webp"
+                                    alt="Maihan"
+                                    fill
+                                    className="object-contain invert"
+                                />
+                            </div>
                         </motion.div>
 
                         <motion.div
