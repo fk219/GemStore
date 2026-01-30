@@ -76,19 +76,19 @@ const Hero: React.FC = () => {
                     }}
                 />
 
-                {/* Golden Blob Parallax (Enhanced Coverage) */}
+                {/* Golden Blob Parallax (Enhanced Coverage - Refined Size) */}
                 <div className="absolute inset-0 opacity-30 pointer-events-none">
                     {/* Primary Top-Left Swath */}
-                    <div className="bg-parallax absolute top-[-40%] left-[-10%] w-[1000px] h-[1000px] bg-[#D4AF37] rounded-full blur-[140px] mix-blend-soft-light" />
+                    <div className="bg-parallax absolute top-[-40%] left-[-10%] w-[700px] h-[700px] bg-[#D4AF37] rounded-full blur-[140px] mix-blend-soft-light" />
 
                     {/* Deep Right Anchor */}
-                    <div className="bg-parallax absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#997B28] rounded-full blur-[120px] mix-blend-soft-light" />
+                    <div className="bg-parallax absolute bottom-[-30%] right-[-10%] w-[500px] h-[500px] bg-[#997B28] rounded-full blur-[120px] mix-blend-soft-light" />
 
                     {/* Top Right Highlight */}
-                    <div className="bg-parallax absolute top-[-20%] right-[10%] w-[600px] h-[600px] bg-[#F4E285] rounded-full blur-[100px] mix-blend-soft-light opacity-60" />
+                    <div className="bg-parallax absolute top-[-20%] right-[10%] w-[400px] h-[400px] bg-[#F4E285] rounded-full blur-[100px] mix-blend-soft-light opacity-60" />
 
                     {/* Bottom Left Fill */}
-                    <div className="bg-parallax absolute bottom-[10%] left-[-20%] w-[700px] h-[700px] bg-[#D4AF37] rounded-full blur-[130px] mix-blend-soft-light opacity-50" />
+                    <div className="bg-parallax absolute bottom-[10%] left-[-20%] w-[500px] h-[500px] bg-[#D4AF37] rounded-full blur-[130px] mix-blend-soft-light opacity-50" />
                 </div>
 
                 {/* Layer 2: Subtle Golden Shift (Refraction) */}

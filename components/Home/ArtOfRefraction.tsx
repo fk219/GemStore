@@ -22,7 +22,7 @@ const ArtOfRefraction: React.FC = () => {
                         <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] reveal-text">
                             Refined
                         </h2>
-                        <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text opacity-50">
+                        <h2 className="text-6xl md:text-[11rem] font-light serif leading-[0.85] italic reveal-text text-[#b5a16d]">
                             Patience
                         </h2>
                     </div>

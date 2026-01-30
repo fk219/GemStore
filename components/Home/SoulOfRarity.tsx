@@ -42,7 +42,7 @@ const SoulOfRarity: React.FC = () => {
                         <h2 className="text-5xl md:text-8xl font-light serif mb-12 leading-[0.9] reveal-text">
                             Silence <br />
                             <span className="italic ml-12 opacity-50">in the</span> <br />
-                            Stone.
+                            <span className="text-[#b5a16d]">Stone.</span>
                         </h2>
 
                         <p className="text-lg md:text-xl font-light opacity-70 leading-relaxed max-w-md ml-auto reveal-text serif border-l border-current pl-8">

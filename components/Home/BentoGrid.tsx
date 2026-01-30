@@ -70,7 +70,7 @@ const BentoGrid: React.FC = () => {
                             Volume 07 / Curated Selection
                         </span>
                         <h2 className="text-5xl md:text-7xl lg:text-8xl font-light font-serif text-[#1A1A1A] dark:text-white">
-                            The <span className="italic">Collection</span>
+                            The <span className="italic text-[#b5a16d]">Collection</span>
                         </h2>
                     </div>
                     <p className="text-sm text-[#666] dark:text-white/50 max-w-xs mt-6 md:mt-0 tracking-wide leading-relaxed">
