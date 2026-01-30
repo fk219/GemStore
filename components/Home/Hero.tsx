@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
     return (
         <section
             ref={containerRef}
-            className="sticky top-0 z-0 h-screen w-full overflow-hidden flex flex-col justify-center items-center bg-[#F9F8F4] dark:bg-[#0A0A0B] transition-colors duration-1000"
+            className="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center bg-[#F9F8F4] dark:bg-[#0A0A0B] transition-colors duration-1000"
         >
             {/* The Refractive Void - Multi-layered Dynamic Background */}
             <div className="absolute inset-0 z-0">

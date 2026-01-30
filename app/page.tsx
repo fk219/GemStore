@@ -78,13 +78,16 @@ export default function Home() {
 
     return (
         <main className="w-full selection:bg-[#b5a16d] selection:text-white">
-            <Navbar themeOverride="dark" />
+            <Navbar />
 
-            {/* 1. Hero (PRESERVED) */}
-            <Hero />
-
-            {/* 2. The Narrative (NEW) */}
-            <NarrativeSection />
+            {/* 1. Hero & Narrative Wrapper (Scoped Sticky Context) */}
+            <div className="relative w-full">
+                <div className="sticky top-0 h-screen w-full z-0">
+                    <Hero />
+                </div>
+                {/* Narrative sits on top (z-10) and scrolls over fixed Hero */}
+                <NarrativeSection />
+            </div>
 
             {/* 3. Featured Collection (NEW) */}
             <FeaturedHighlights />
