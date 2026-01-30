@@ -122,7 +122,7 @@ const Navbar = () => {
                     className="relative w-full flex items-center justify-between pointer-events-auto px-8 py-4 transition-all duration-700 bg-transparent"
                 >
                     {/* 1. LOGO */}
-                    <Link href="/" className="flex items-center gap-1 group">
+                    <Link href="/" className="flex items-center gap-0 group">
                         <div className="relative w-16 h-10 md:w-20 md:h-12 drop-shadow-2xl transition-transform duration-500 hover:scale-110">
                             <Image
                                 src="/images/logo.webp"
@@ -131,7 +131,7 @@ const Navbar = () => {
                                 className="object-contain"
                             />
                         </div>
-                        <div className="relative w-32 h-8 md:w-64 md:h-10 hidden md:block drop-shadow-2xl transition-transform duration-500 hover:scale-110 delay-75">
+                        <div className="relative w-40 h-12 md:w-80 md:h-20 hidden md:block drop-shadow-2xl transition-transform duration-500 hover:scale-110 delay-75 -ml-3">
                             <Image
                                 src="/images/fullName.webp"
                                 alt="Maihan"
