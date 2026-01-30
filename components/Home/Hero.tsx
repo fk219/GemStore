@@ -131,7 +131,7 @@ const Hero: React.FC = () => {
                         {/* Centered Vertical Line (Absolute) */}
                         <div className={`hidden lg:block absolute left-1/2 -translate-x-1/2 bottom-8 w-px h-32 bg-current opacity-10 origin-bottom transition-all duration-[2s] delay-500 ${mounted ? 'scale-y-100' : 'scale-y-0'}`} />
 
-                        <div className={`hidden lg:block text-[9px] tracking-[1.2em] uppercase opacity-20 mb-8 transition-opacity duration-[2s] delay-700 ${mounted ? 'opacity-20' : 'opacity-0'}`}>
+                        <div className={`hidden lg:block text-[9px] tracking-[1.2em] uppercase text-[#9F8236] mb-8 transition-opacity duration-[2s] delay-700 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                             Volume 01 / Archive
                         </div>
                     </div>
