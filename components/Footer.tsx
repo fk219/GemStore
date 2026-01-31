@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LanguageContext } from '@/app/providers';
 import { motion, useMotionValue } from 'motion/react';
+import ElasticLine from './ElasticLine';
 
 const Footer: React.FC = () => {
     const langCtx = useContext(LanguageContext);
@@ -55,6 +56,8 @@ const Footer: React.FC = () => {
             className="relative bg-[#080808] text-[#F9F8F4] overflow-hidden"
             onMouseMove={handleMouseMove}
         >
+            <ElasticLine />
+
             {/* Ambient Background Effects - REFACTORED COLORS */}
             <div className="absolute inset-0 pointer-events-none">
                 {/* Gold Glow */}

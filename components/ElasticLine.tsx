@@ -4,154 +4,140 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 const ElasticLine = () => {
+    const svgRef = useRef<SVGSVGElement>(null);
     const pathRef = useRef<SVGPathElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
+    const hitRef = useRef<SVGPathElement>(null);
 
     useEffect(() => {
-        if (!pathRef.current || !containerRef.current) return;
+        if (!pathRef.current || !svgRef.current || !hitRef.current) return;
 
-        const path = pathRef.current;
-        const container = containerRef.current;
+        const svg = svgRef.current;
+        const mainPath = pathRef.current;
+        const hitPath = hitRef.current;
 
-        // Configuration
-        const startY = 50; // Vertical center of the SVG (h-100px -> 50)
-        let progress = 0;
-        let diff = 0;
-        let x = 0.5; // Normalized x (0 to 1)
-        let reqId: number | null = null;
+        let connected = false;
+        // Center vertically in the container (h-48 = 192px/2 approx 100)
+        const startY = 100;
 
-        // Reset state
-        const resetAnimation = () => {
-            progress = 0;
-            diff = 0;
-            x = 0.5;
+        // Physics Points
+        const p0 = { x: 0, y: startY };
+        const p1 = { x: 400, y: startY };
+        const p2 = { x: 800, y: startY };
+
+        // Keep points scalable width-wise
+        const updateWidth = () => {
+            const width = svg.getBoundingClientRect().width;
+            p1.x = width / 2;
+            p2.x = width;
+            p0.x = 0;
+
+            // Set static hit path once (or on resize)
+            const d = `M${p0.x},${p0.y} Q${p1.x},${startY} ${p2.x},${p2.y}`;
+            hitPath.setAttribute("d", d);
+            // Main path reset
+            mainPath.setAttribute("d", d);
         };
 
-        const manageMouseMove = (e: MouseEvent) => {
-            const { clientY, clientX } = e;
-            const { top, height, left, width } = container.getBoundingClientRect();
+        const observer = new ResizeObserver(updateWidth);
+        observer.observe(svg);
+        updateWidth();
 
-            // Enter/Leave detection is handled by the container's mouseenter/leave, 
-            // but we track movement here.
-
-            // Calculate distance from center line
-            // Only react if we are relatively close or "holding" the string
-            // The user's snippet uses a "hit" path. We can just use the container height.
-
-            x = (clientX - left) / width;
-            progress = (clientY - top) / height; // 0 to 1
-
-            // Map progress to displacement
-            // Center is 0.5. 
-            // We want the line to follow the mouse Y relative to the center.
-            // Target Y = clientY - top. 
-            // Snippet logic: p1.y = y * 2...
-
-            diff = (progress - 0.5) * height * 2; // Stretch factor
+        // Animation Loop
+        const render = () => {
+            // Update observable path
+            const d = `M${p0.x},${p0.y} Q${p1.x},${p1.y} ${p2.x},${p2.y}`;
+            mainPath.setAttribute("d", d);
         };
 
-        const manageMouseLeave = () => {
-            gsap.to(state, {
-                diff: 0,
-                duration: 1.5,
-                ease: "elastic.out(1, 0.3)"
-            });
-        };
+        gsap.ticker.add(render);
 
-        // We need an object to tween for GSAP if we want to use its elastic ease comfortably,
-        // or we use the snippet's logic: 
-        // Snippet: 
-        /*
-          if (connected) p1.y = ...
-          pointerleave: gsap.to(p1, { y: startY, ease: "elastic..." })
-        */
+        // Interaction
+        const onMove = (e: PointerEvent) => {
+            const rect = svg.getBoundingClientRect();
+            const y = e.clientY - rect.top;
+            const x = e.clientX - rect.left;
 
-        const state = { diff: 0 }; // Difference from center (0)
+            // "Hit" zone: Only grab if mouse is over the invisible thick path
+            if (e.target === hitPath) {
+                if (!connected) {
+                    connected = true;
+                    gsap.killTweensOf(p1);
+                }
+            }
 
-        const setPath = (currentDiff: number) => {
-            const width = container.getBoundingClientRect().width;
-            // Quadratic Bezier: M0,50 Q{width*x},{50 + diff} {width},50
-            // We interpolate the control point x based on mouse x for better feel
-            // or keep it simple in center? User snippet moves p1.x?
-            // User snippet: "p1 = { x: 400 ... }". It stays in center X?
-            // "p1.y = y*2...". 
-            // Actually, usually string follows Mouse X too.
-            // Let's keep X dynamic.
-
-            const px = width * x;
-            const py = startY + currentDiff;
-
-            path.setAttribute("d", `M0,${startY} Q${px},${py} ${width},${startY}`);
-        };
-
-        // Loop
-        const loop = () => {
-            setPath(state.diff);
-            reqId = requestAnimationFrame(loop);
-        };
-        loop();
-
-        // Event Listeners
-        const onMove = (e: MouseEvent) => {
-            // Update state.diff directly when active
-            const { top, height, left, width } = container.getBoundingClientRect();
-            const yRel = e.clientY - top;
-
-            x = (e.clientX - left) / width;
-            state.diff = yRel - startY;
+            if (connected) {
+                // Follow mouse elastically
+                // y * 2 - ... creates the pull
+                p1.y = y * 2 - (p0.y + p2.y) / 2;
+                p1.x = x; // Follow horizontal too
+            }
         };
 
         const onLeave = () => {
             // Snap back
-            gsap.to(state, {
-                diff: 0,
-                duration: 1.2,
-                ease: "elastic.out(1, 0.3)"
+            connected = false;
+            gsap.to(p1, {
+                duration: 2.0,
+                y: startY,
+                x: svg.getBoundingClientRect().width / 2,
+                ease: "elastic.out(1, 0.2)"
             });
-            // Reset x to center slowly? Or just keep it.
-            // Keeping last X is fine for the plucked effect.
         };
 
-        container.addEventListener("mousemove", onMove);
-        container.addEventListener("mouseleave", onLeave);
+        const onPointerUp = () => {
+            if (connected) onLeave();
+        };
+
+        svg.addEventListener("pointermove", onMove);
+        svg.addEventListener("pointerleave", onLeave);
+        window.addEventListener("pointerup", onPointerUp);
 
         return () => {
-            container.removeEventListener("mousemove", onMove);
-            container.removeEventListener("mouseleave", onLeave);
-            if (reqId) cancelAnimationFrame(reqId);
+            gsap.ticker.remove(render);
+            observer.disconnect();
+            svg.removeEventListener("pointermove", onMove);
+            svg.removeEventListener("pointerleave", onLeave);
+            window.removeEventListener("pointerup", onPointerUp);
         };
     }, []);
 
     return (
-        <div ref={containerRef} className="w-full h-24 relative flex items-center justify-center my-12 group cursor-crosshair">
-            {/* The SVG Container */}
-            <svg className="w-full h-full absolute inset-0 overflow-visible">
-                {/* Gradient Definition */}
+        <div className="w-full h-48 relative flex items-center justify-center -mb-24 z-50 pointer-events-none">
+            {/* -mb-24 allows it to sit on top of the footer content slightly or just be a nice header */}
+            <svg
+                ref={svgRef}
+                className="w-full h-full pointer-events-auto cursor-crosshair overflow-visible"
+            >
                 <defs>
-                    <linearGradient id="gold-shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#9CA3AF" stopOpacity="0.2" />
-                        <stop offset="25%" stopColor="#D4AF37" stopOpacity="0.8" />
+                    <linearGradient id="gold-string" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#9CA3AF" stopOpacity="0" />
+                        <stop offset="20%" stopColor="#D4AF37" stopOpacity="0.3" />
                         <stop offset="50%" stopColor="#F4E285" stopOpacity="1" />
-                        <stop offset="75%" stopColor="#D4AF37" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#9CA3AF" stopOpacity="0.2" />
+                        <stop offset="80%" stopColor="#D4AF37" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#9CA3AF" stopOpacity="0" />
                     </linearGradient>
                 </defs>
 
-                {/* The String */}
+                {/* Visible Path */}
                 <path
                     ref={pathRef}
-                    d="M0,50 Q500,50 1000,50"
-                    stroke="url(#gold-shimmer)"
-                    strokeWidth="1.5"
+                    d=""
+                    stroke="url(#gold-string)"
+                    strokeWidth="2"
                     fill="none"
-                    className="drop-shadow-[0_0_8px_rgba(212,175,55,0.4)] transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]"
+                    className="drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]"
+                />
+
+                {/* Invisible Hit Path (Static Horizontal) */}
+                <path
+                    ref={hitRef}
+                    d=""
+                    stroke="transparent"
+                    strokeWidth="100" // Wide hit area
+                    fill="none"
+                    style={{ pointerEvents: 'stroke' }}
                 />
             </svg>
-
-            {/* Optional Hint Text */}
-            <span className="relative z-10 text-[10px] tracking-[0.5em] uppercase text-[#D4AF37]/40 pointer-events-none group-hover:opacity-0 transition-opacity duration-500 font-sans">
-                Interaction
-            </span>
         </div>
     );
 };

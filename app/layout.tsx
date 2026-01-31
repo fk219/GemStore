@@ -6,7 +6,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import FloatingActions from "@/components/FloatingActions";
 import GlobalPrisms from "@/components/GlobalPrisms";
-import ElasticLine from "@/components/ElasticLine";
 
 const playfair = Playfair_Display({
     variable: "--font-playfair",
@@ -40,7 +39,6 @@ export default function RootLayout({
 
                     {children}
 
-                    <ElasticLine />
                     <FloatingActions />
                 </body>
             </Providers>
