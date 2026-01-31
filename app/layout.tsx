@@ -4,7 +4,6 @@ import "./globals.css";
 import { Providers } from "./providers";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
-import IntroSequence from "@/components/IntroSequence";
 import FloatingActions from "@/components/FloatingActions";
 import GlobalPrisms from "@/components/GlobalPrisms";
 
@@ -37,7 +36,6 @@ export default function RootLayout({
                     <SmoothScroll />
                     <CustomCursor />
                     <GlobalPrisms />
-                    <IntroSequence />
 
                     {children}
 
