@@ -56,8 +56,6 @@ const Footer: React.FC = () => {
             className="relative bg-[#080808] text-[#F9F8F4] overflow-hidden"
             onMouseMove={handleMouseMove}
         >
-            <ElasticLine />
-
             {/* Ambient Background Effects - REFACTORED COLORS */}
             <div className="absolute inset-0 pointer-events-none">
                 {/* Gold Glow */}
@@ -149,9 +147,6 @@ const Footer: React.FC = () => {
                 <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12 md:pb-24">
                     <div className="relative flex flex-col items-center justify-center pt-8 overflow-hidden">
 
-                        {/* Creative Separator: A fine golden line with a diamond/gem in center */}
-                        <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent mb-8" />
-
                         <motion.div
                             initial="initial"
                             whileInView="visible"
@@ -168,6 +163,10 @@ const Footer: React.FC = () => {
                                 />
                             </div>
                         </motion.div>
+
+                        <div className="w-full max-w-4xl mx-auto my-8">
+                            <ElasticLine />
+                        </div>
 
                         <motion.div
                             animate={{

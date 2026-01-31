@@ -16,8 +16,8 @@ const ElasticLine = () => {
         const hitPath = hitRef.current;
 
         let connected = false;
-        // Center vertically in the container (h-48 = 192px/2 approx 100)
-        const startY = 100;
+        // Center vertically in the container (h-32 = 128px, center 64)
+        const startY = 64;
 
         // Physics Points
         const p0 = { x: 0, y: startY };
@@ -28,8 +28,8 @@ const ElasticLine = () => {
         const updateWidth = () => {
             const width = svg.getBoundingClientRect().width;
             p1.x = width / 2;
-            p2.x = width;
-            p0.x = 0;
+            p2.x = width; // Endpoint
+            p0.x = 0;     // Startpoint
 
             // Set static hit path once (or on resize)
             const d = `M${p0.x},${p0.y} Q${p1.x},${startY} ${p2.x},${p2.y}`;
@@ -102,19 +102,16 @@ const ElasticLine = () => {
     }, []);
 
     return (
-        <div className="w-full h-48 relative flex items-center justify-center -mb-24 z-50 pointer-events-none">
-            {/* -mb-24 allows it to sit on top of the footer content slightly or just be a nice header */}
+        <div className="w-full h-32 relative flex items-center justify-center z-50 pointer-events-none">
             <svg
                 ref={svgRef}
                 className="w-full h-full pointer-events-auto cursor-crosshair overflow-visible"
             >
                 <defs>
                     <linearGradient id="gold-string" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#9CA3AF" stopOpacity="0" />
-                        <stop offset="20%" stopColor="#D4AF37" stopOpacity="0.3" />
+                        <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8" />
                         <stop offset="50%" stopColor="#F4E285" stopOpacity="1" />
-                        <stop offset="80%" stopColor="#D4AF37" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#9CA3AF" stopOpacity="0" />
+                        <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.8" />
                     </linearGradient>
                 </defs>
 
