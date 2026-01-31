@@ -16,20 +16,21 @@ const ElasticLine = () => {
         const hitPath = hitRef.current;
 
         let connected = false;
-        // Center vertically in the container (h-32 = 128px, center 64)
+        // Center vertically in the container (h-32 = 128px / 2 = 64)
         const startY = 64;
 
         // Physics Points
         const p0 = { x: 0, y: startY };
-        const p1 = { x: 400, y: startY };
-        const p2 = { x: 800, y: startY };
+        const p1 = { x: 400, y: startY }; // dynamic center
+        const p2 = { x: 800, y: startY }; // dynamic end
 
         // Keep points scalable width-wise
         const updateWidth = () => {
+            if (!svg) return;
             const width = svg.getBoundingClientRect().width;
             p1.x = width / 2;
-            p2.x = width; // Endpoint
-            p0.x = 0;     // Startpoint
+            p2.x = width;
+            p0.x = 0;
 
             // Set static hit path once (or on resize)
             const d = `M${p0.x},${p0.y} Q${p1.x},${startY} ${p2.x},${p2.y}`;
@@ -40,11 +41,12 @@ const ElasticLine = () => {
 
         const observer = new ResizeObserver(updateWidth);
         observer.observe(svg);
-        updateWidth();
+        // Delay initial update slightly to ensure layout readiness
+        requestAnimationFrame(updateWidth);
 
         // Animation Loop
         const render = () => {
-            // Update observable path
+            // Update visible path
             const d = `M${p0.x},${p0.y} Q${p1.x},${p1.y} ${p2.x},${p2.y}`;
             mainPath.setAttribute("d", d);
         };
@@ -69,7 +71,7 @@ const ElasticLine = () => {
                 // Follow mouse elastically
                 // y * 2 - ... creates the pull
                 p1.y = y * 2 - (p0.y + p2.y) / 2;
-                p1.x = x; // Follow horizontal too
+                p1.x = x;
             }
         };
 
@@ -77,7 +79,7 @@ const ElasticLine = () => {
             // Snap back
             connected = false;
             gsap.to(p1, {
-                duration: 2.0,
+                duration: 2.5,
                 y: startY,
                 x: svg.getBoundingClientRect().width / 2,
                 ease: "elastic.out(1, 0.2)"
@@ -95,34 +97,38 @@ const ElasticLine = () => {
         return () => {
             gsap.ticker.remove(render);
             observer.disconnect();
-            svg.removeEventListener("pointermove", onMove);
-            svg.removeEventListener("pointerleave", onLeave);
+            if (svg) {
+                svg.removeEventListener("pointermove", onMove);
+                svg.removeEventListener("pointerleave", onLeave);
+            }
             window.removeEventListener("pointerup", onPointerUp);
         };
     }, []);
 
     return (
-        <div className="w-full h-32 relative flex items-center justify-center z-50 pointer-events-none">
+        <div className="w-full h-32 relative flex items-center justify-center pointer-events-none z-10">
             <svg
                 ref={svgRef}
                 className="w-full h-full pointer-events-auto cursor-crosshair overflow-visible"
             >
                 <defs>
-                    <linearGradient id="gold-string" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8" />
+                    <linearGradient id="gold-string-visible" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.1" />
+                        <stop offset="10%" stopColor="#D4AF37" stopOpacity="0.8" />
                         <stop offset="50%" stopColor="#F4E285" stopOpacity="1" />
-                        <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.8" />
+                        <stop offset="90%" stopColor="#D4AF37" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.1" />
                     </linearGradient>
                 </defs>
 
-                {/* Visible Path */}
+                {/* Visible Path - Always Visible */}
                 <path
                     ref={pathRef}
                     d=""
-                    stroke="url(#gold-string)"
+                    stroke="url(#gold-string-visible)"
                     strokeWidth="2"
                     fill="none"
-                    className="drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]"
+                    className="drop-shadow-[0_0_12px_rgba(212,175,55,0.8)]"
                 />
 
                 {/* Invisible Hit Path (Static Horizontal) */}
@@ -130,7 +136,7 @@ const ElasticLine = () => {
                     ref={hitRef}
                     d=""
                     stroke="transparent"
-                    strokeWidth="100" // Wide hit area
+                    strokeWidth="80"
                     fill="none"
                     style={{ pointerEvents: 'stroke' }}
                 />

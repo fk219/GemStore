@@ -147,6 +147,9 @@ const Footer: React.FC = () => {
                 <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12 md:pb-24">
                     <div className="relative flex flex-col items-center justify-center pt-8 overflow-hidden">
 
+                        {/* Creative Interactive Separator */}
+                        <ElasticLine />
+
                         <motion.div
                             initial="initial"
                             whileInView="visible"
@@ -163,10 +166,6 @@ const Footer: React.FC = () => {
                                 />
                             </div>
                         </motion.div>
-
-                        <div className="w-full max-w-4xl mx-auto my-8">
-                            <ElasticLine />
-                        </div>
 
                         <motion.div
                             animate={{
